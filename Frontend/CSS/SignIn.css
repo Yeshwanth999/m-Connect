@@ -14,11 +14,10 @@ body {
     margin-left: 1000px;
     margin-top: 200px;
     background-color: rgb(228, 225, 225);
-    height: 200px;
+    height: 250px;
     width: 350px;
     padding: 30px 50px;
 }
-
 .admin {
     display: flex;
     align-items: center;
