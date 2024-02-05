@@ -6,28 +6,34 @@
     <title>Sign In Page</title>
 
     <link rel="stylesheet" href="/Frontend/CSS/SignIn.css">
+
+   
+    
 </head>
 <body>
     <div class="formBox">
         <h1>Sign In</h1>
-        <form>   
+        <form id="myForm">   
             <div class="input-field">
-                <input type="text" placeholder="User Name">
+                <input type="text" id="username" placeholder="User Name" required>
+                <div id="username-error" class="error-message"></div>
             </div>
             <div class="input-field">
-                <input type="password" placeholder="Password">
+                <input type="password" id="password" placeholder="Password" required>
+                <div id="password-error" class="error-message"></div>
+            </div>
+            <div class="admin">
+                <input type="checkbox" id="adminCheckbox">   <p>Admin</p>
+            </div>
+            <div class="btn-field">
+                <button type="button" id="signinBtn" onclick="validateForm()">Sign In</button>
             </div>
         </form>
 
-        <div class="admin">
-            <input type="checkbox">   <p>Admin</p>
-        </div>
-
-        <div class="btn-field">
-            <button type="button" id="signinBtn">Sign In</button>
-        </div>
-
         <p>Forget password &emsp;<a href="ForgetPwd.html">Click Here</a></p>
     </div>
+
+
+    <script src="/Frontend/Js/SignIn.js"></script>
 </body>
 </html>
