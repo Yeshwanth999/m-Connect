@@ -1,23 +1,26 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
-    background-image: url('/Frontend/MICRODEN.png');
+
+body {
+    background-image: url('/MICRODEN.png');
     background-size: cover;
     background-repeat: no-repeat;
 }
-.formBox{
+
+#formBox {
     margin-left: 1000px;
     margin-top: 200px;
     background-color: rgb(228, 225, 225);
     height: 200px;
     width: 350px;
-    padding: 30px 50px; 
+    padding: 30px 50px;
 }
+
 .admin {
     display: flex;
     align-items: center;
     gap: 10px;
-  }
+}
