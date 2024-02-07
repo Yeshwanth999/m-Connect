@@ -47,9 +47,8 @@ function myFunction() {
 myFunction();
 
 
-function loadPage(url) {
-  document.getElementById('iframe-content').src = url;
+function loadPage(pageUrl) {
+  document.getElementById('iframe-content').src = pageUrl;
 }
 
-  
   

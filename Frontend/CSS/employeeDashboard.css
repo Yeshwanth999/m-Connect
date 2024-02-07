@@ -1,34 +1,43 @@
-
+body {
+  margin: 0;
+  padding: 0;
+}
 
 .navbar{
   height: 100px;
   display: flex;
   align-items: end;
 }
+.logo{
+  margin-left: 10px;
+}
 .sidebar {
-    position: fixed; /* Fix the position */
-    top: 0; /* Align to the top of the viewport */
-    bottom: 0; /* Extend to the bottom of the viewport */
-    left: 0; /* Align to the left of the viewport */
-    z-index: 1000; /* Set the stacking order */
-    overflow-y: auto; /* Enable vertical scrolling if content overflows */
-    width: 240px; /* Set the width of the sidebar */
-    background-color: #343a40; /* Background color */
-    padding-top: 48px; /* Add padding at the top to avoid overlapping with navbar */
-    border-right: 1px solid #dee2e6; /* Add a border */
+    position: fixed;
+    top: 0; 
+    bottom: 0; 
+    left: 0; 
+    z-index: 1000;
+    overflow-y: auto;
+    width: 240px;
+    background-color: #343a40;
+    padding-top: 48px;
+    border-right: 1px solid #dee2e6; 
 }
 
 /* Custom CSS for position-sticky class */
 .position-sticky {
-    position: -webkit-sticky; /* For Safari */
-    position: sticky; /* For other browsers */
-    top: 0; /* Stick to the top */
-    z-index: 1020; /* Ensure it's above the main content */
+    position: -webkit-sticky; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1020; 
 }
 .personalDetails{
   margin-top: 300px;
-    margin-left: 350px;
+    margin-left: 330px;
     margin-right: 100px;
+}
+.custom-gap{
+  margin-right: 70px;
 }
 .personalDetails-inner{
     margin-top: 50px;
@@ -91,6 +100,11 @@
     align-items: start;
     justify-content: start;
     background-color: red;
+  }
+  .personal-details-main{
+    height: 200px;
+    overflow-y: scroll;
+
   }
   .calender {
     width: 100%;
@@ -187,6 +201,10 @@
     justify-content: start;
     background-color: red;
   }
-
+  #iframe-content {
+    width: 100%;
+    height: calc(100vh - 50px); /* Subtracting 50px for the header/navbar */
+    border: none;
+  }
   
 
