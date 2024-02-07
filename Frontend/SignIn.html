@@ -11,13 +11,22 @@
 
 </head>
 <body>
-    <div id="formBox">
-        <h1>Sign In</h1>
-        <form id ="loginForm">   
             <div class="input-field">
                 <input type="text" id="gmail" name="gmail" placeholder="gmail" required>
             </div>
             <div class="input-field">
+                <input type="password" id="password" placeholder="Password" required>
+                <div id="password-error" class="error-message"></div>
+            </div>
+            <div class="admin">
+                <input type="checkbox" id="adminCheckbox">   <p>Admin</p>
+            </div>
+            <div class="btn-field">
+                <button type="button" id="signinBtn" onclick="validateForm()">Login</button>
+            </div>
+        </form>
+
+        <p class="ForgetPwd"><a href="ForgetPwd.html">Forget password ?</a></p>
                 <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
         </form>
