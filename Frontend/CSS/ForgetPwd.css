@@ -24,4 +24,8 @@ body{
     display: flex;
     align-items: center;
     gap: 10px;
-  }
+}
+
+.otp-cont{
+    display: none;
+}
