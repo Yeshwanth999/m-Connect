@@ -8,7 +8,6 @@ function validateForm() {
     // Get values from the form
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
-    var isAdmin = document.getElementById('adminCheckbox').checked;
 
     //pattern for the username
     var usernamePattern = /^SP\d{7}-M\d{4}$/;
@@ -28,14 +27,6 @@ function validateForm() {
         document.getElementById('password-error').textContent = 'Password is required';
     } else if (!passwordPattern.test(password)) {
         document.getElementById('password-error').textContent = 'Invalid password format';     
-    }
-
-
-    //Redirectin to admin page
-    if (isAdmin) {
-        window.location.href = 'adminPage.html'; // Replace 'adminPage.html' with the actual URL of your admin page
-    } else {
-        
     }
 
     
