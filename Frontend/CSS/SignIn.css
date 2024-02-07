@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,14 +14,8 @@ body{
     color: black;
     margin-bottom: 10px;
 }
-.formBox{
-    margin-left: 1000px;
-    margin-top: 200px;
-    background-color: rgb(247, 244, 244);
-    height: 250px;
-    width: 350px;
-    padding: 20px 35px; 
-}
+
+
 /*#myForm .input-field{
     display: flex;
     flex-direction: row;
@@ -34,12 +28,14 @@ body{
 .error-message {
     color: red;
     margin-top: 5px;
+    padding: 30px 50px;
 }
 .admin {
     font-size: 14px;
     display: flex;
     align-items: center;
     gap: 10px;
+
     margin: 4px 0px;
 }
 .formBox .ForgetPwd {
@@ -66,3 +62,4 @@ body{
   .formBox .forgetPwd{
     margin-top: 50px;
   }
+

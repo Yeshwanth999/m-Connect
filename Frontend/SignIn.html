@@ -1,22 +1,18 @@
-<!DOCTYPE html>
+ 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In Page</title>
 
-    <link rel="stylesheet" href="/Frontend/CSS/SignIn.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/SignIn.css">
 
-   
-    
+
+
 </head>
 <body>
-    <div class="formBox">
-        <h1 class="title">Sign In</h1>
-        <form id="myForm">   
             <div class="input-field">
-                <input type="text" id="username" placeholder="User Name" required>
-                <div id="username-error" class="error-message"></div>
+                <input type="text" id="gmail" name="gmail" placeholder="gmail" required>
             </div>
             <div class="input-field">
                 <input type="password" id="password" placeholder="Password" required>
@@ -31,9 +27,28 @@
         </form>
 
         <p class="ForgetPwd"><a href="ForgetPwd.html">Forget password ?</a></p>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+        </form>
+
+        <div class="admin">
+            <input type="checkbox" id="adminCheckbox"> <p>Admin</p>
+        </div>
+
+        <div class="btn-field">
+            <button type="button" id="signinBtn">Sign In</button>
+        </div>
+
+        <p>Forget password &emsp;<a href="ForgetPwd.html">Click Here</a></p>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="./Js/connect.js" defer></script>
+    <script>
+      
+    </script>
 
-    <script src="/Frontend/Js/SignIn.js"></script>
+
 </body>
+
 </html>
