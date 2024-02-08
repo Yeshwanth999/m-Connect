@@ -1,0 +1,58 @@
+.education-entire{
+    max-width: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.education-div{
+    width: 45%;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(50, 50, 50, 0.3);
+}
+.hea-ico{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.education-h{
+    font-family: sans-serif;
+    font-size: 18px;
+}
+.edit-icon{
+    padding-right: 13px;
+}
+.qualification-section {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+}
+
+.qualification-dropdown {
+    width: 100%;
+}
+
+.qualification-section select {
+    width: 98%;
+    margin-top: 3px;
+    margin-bottom: 13px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+}
+.under-div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+label {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 5px;
+}
+.form-group input{
+    display: flex;
+    justify-content: start;
+}
