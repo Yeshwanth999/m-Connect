@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forget Password Page</title>
-
     <link rel="stylesheet" href="/Frontend/CSS/ForgetPwd.css">
+    <script src="./Js/connect.js"></script> 
+    <script src="./Js/ForgetPwd.js"></script>
+
 </head>
 <body>
     
-    <div class="formBox">
+    <div id="formBox2" class="formBox">
         <h1 class="title">Reset Password</h1>
         <form id="myForm">   
             <div class="input-field">
-                <input type="text" id="email" placeholder="Email Address" required>
-                <div id="email-error" class="error-message"></div>
+                <input type="text" id="gmail" placeholder="Email Address" required>
+                <div id="gmail-error" class="error-message"></div>
             </div>
 
             <div class="btn-field">
-                <button type="button" id="verify" onclick="validateForm()">Verify</button>
+                <button type="button"  onclick="validateForm()" >Verify</button>
             </div>
 
             <!-- OTP Form -->
@@ -30,13 +32,16 @@
                         <div id="otp-error" class="error-message"></div>
                     </div>
                     <div class="btn-field">
-                        <button type="button" id="submitOTP" onclick="validateOTP()">Submit</button>
+                        <button type="submit" onclick="validateOTP()">Submit</button>
                     </div>
                 </form>
             </div>
         </form>
     </div>
 
-    <script src="/Frontend/Js/ForgetPwd.js"></script>
+    <script src="./Js/ForgetPwd.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </body>
 </html>

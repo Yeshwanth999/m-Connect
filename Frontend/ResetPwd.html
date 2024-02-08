@@ -6,6 +6,9 @@
     <title>Set Password Page</title>
 
     <link rel="stylesheet" href="/Frontend/CSS/ResetPwd.css">
+    <script src="./Js/ResetPwd.js"></script>
+    <script src="./Js/connect.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <div class="formBox">
@@ -24,7 +27,23 @@
             </div>
         </form>
     </div>
-
-    <script src="/Frontend/Js/ResetPwd.js"></script>
+    <script>
+        $('#submit').on('click', function () {
+            const password = $('#password').val();        
+            const formData = {
+                password: password,    
+            };
+            console.log(password);
+    
+            const type= 'POST';
+    
+            // Call the updated function for AJAX communication
+            sendFormData('http://localhost:8081/setpassword',type, formData, 'formBox2');
+        });
+    </script>
+        <script>
+          var  nextPageLink= 'http://127.0.0.1:5502/Frontend/employeeDashboard.html';
+        </script>
+    
 </body>
 </html>
