@@ -26,8 +26,9 @@ function validateForm() {
 
         document.querySelector('.otp-form').style.display = 'block';
     }
+    
+    return true; // Return true to indicate validation success
 }
-
 function validateOTP() {
     // Reset previous error messages
 
