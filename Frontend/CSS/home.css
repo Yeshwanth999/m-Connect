@@ -38,6 +38,8 @@ header {
     font-size: 30px;
     margin-left: 20px;
     color: white;
+    display: flex;
+    gap: 50px;
 }
 .notification a i{
     color: white;
@@ -46,7 +48,8 @@ header {
 .dropdown {
     position: relative;
     display: inline-block;
-    padding-right: 60px;
+    padding-right: 20px;
+   
 }
 
 .dropbtn {
@@ -66,6 +69,7 @@ header {
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
+    right: 0;
 }
 
 .dropdown-content a {
@@ -97,7 +101,7 @@ header {
     background-color:#1a1a18;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    text-align: center;
+    text-align: left;
     border-radius: 8px;
     height: 80%;
     width: 20%;
@@ -135,7 +139,7 @@ header {
 
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     padding: 20px;
-    text-align: center;
+    text-align: right;
     border-radius: 8px;
     height: 100px;
     width: 80%;
@@ -145,11 +149,11 @@ header {
     display: flex;
     /* grid-template-columns: repeat(4, 1fr); */
     gap: 40px;
-    max-width: 1000px;
+    /* max-width: 1000px; */
     justify-content: center;
     align-items: center;
-    margin: 50px;
-    margin-left: 200px;
+    margin: 0 auto;
+    /* margin-left: 200px; */
 }
 
 .dashboard-icon1 a i:hover{
