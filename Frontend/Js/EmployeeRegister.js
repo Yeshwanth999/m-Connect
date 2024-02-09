@@ -1,37 +1,75 @@
-// Function to show input fields for editing
-function editSection(sectionId) {
-    // Hide display area
-    document.getElementById(sectionId + "Display").style.display = "none";
-    // Show input fields for editing
-    document.getElementById(sectionId + "Fields").style.display = "block";
-  }
-  
-  // Function to save changes
-  function saveSection(sectionId) {
-    // Get input values
-    var inputs = document.getElementById(sectionId + "Fields").querySelectorAll("input, select, textarea");
-    var displayContent = "";
-    // Update display content
-    inputs.forEach(function(input) {
-      if (input.type !== "button") {
-        displayContent += "<p><strong>" + input.previousElementSibling.textContent.replace(":", "") + ":</strong> " + input.value + "</p>";
+// Function to validate the form
+function validateForm() {
+  var form = document.getElementById("registrationForm");
+  var inputs = form.querySelectorAll("input, select, textarea");
+  var isValid = true;
+
+  inputs.forEach(function(input) {
+      if (!input.validity.valid) {
+          isValid = false;
+          if (input.id !== "") {
+              var label = document.querySelector("label[for='" + input.id + "']");
+              label.innerHTML += " <span class='error'></span>";
+          }
       }
-    });
-    // Update display area with edited content
-    document.getElementById(sectionId + "Display").innerHTML = displayContent;
-    // Hide input fields
-    document.getElementById(sectionId + "Fields").style.display = "none";
-    // Show updated display area
-    document.getElementById(sectionId + "Display").style.display = "block";
+  });
+
+  return isValid;
+}
+
+document.getElementById("registrationForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  // Validate the form
+  var isValidForm = validateForm();
+
+  if (isValidForm) {
+      // Form is valid, proceed with form submission
+      var formData = {
+          personalInformation: {
+              name: $('#name').val(),
+              dob: $('#dob').val(),
+              gender: $('#gender').val(),
+              bloodGroup: $('#bloodGroup').val(),
+              maritalStatus: $('#maritalStatus').val()
+          },
+          contactInformation: {
+              officialEmail: $('#officialEmail').val(),
+              personalEmail: $('#personalEmail').val(),
+              phoneNumber: $('#phoneNumber').val(),
+              alternatePhoneNumber: $('#alternatePhoneNumber').val()
+          },
+          address: {
+              currentAddress: $('#currentAddress').val(),
+              permanentAddress: $('#permanentAddress').val(),
+              houseType: $('#houseType').val(),
+              stayingSince: $('#stayingSince').val(),
+              citySince: $('#citySince').val()
+          }
+      };
+
+      var jsonData = JSON.stringify(formData);
+
+      console.log(jsonData);
+
+      // Process the form submission
+      submitForm(jsonData);
   }
+});
+
+// Function to handle form submission
+function submitForm(data) {
+  const MySwal = Swal.mixin({
+    scrollbarPadding: false
+  });
   
-  // Function to cancel editing
-  function cancelEdit(sectionId) {
-    // Hide input fields
-    document.getElementById(sectionId + "Fields").style.display = "none";
-    // Show display area without changes
-    document.getElementById(sectionId + "Display").style.display = "block";
-  }
-  
-  // You can add event listeners and additional logic as needed
-  
+  console.log('Form data:', data);
+  MySwal.fire({
+    title: 'Success',
+    text: 'Form submitted successfully!',
+    icon: 'success',
+  }).then(() => {
+      // Reset the form after successful submission
+      document.getElementById("registrationForm").reset();
+  });
+}

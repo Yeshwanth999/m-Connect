@@ -1,0 +1,3 @@
+[submodule "m-Connect"]
+	path = m-Connect
+	url = https://github.com/SandeepArukala/m-Connect.git

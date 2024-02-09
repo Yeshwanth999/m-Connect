@@ -40,6 +40,11 @@ body{
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.otp-cont{
+    display: none;
+}
     margin: 4px 0px;
 }
 .myForm #verify {
@@ -62,8 +67,6 @@ body{
 #verify:hover{
     background-color: #2318f9;
 }
-
-
 
 /* OTP Form Styles  */
 #myForm h2{
@@ -88,3 +91,4 @@ body{
 #submitOTP:hover{
     background-color: #2318f9;
 }
+
