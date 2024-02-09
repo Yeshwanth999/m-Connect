@@ -57,9 +57,9 @@ function sendFormData(url, type, data, elementId) {
 
 
 function sendFormData1(url, type, data, elementId) {
-
-    console.log('Sending request to :', url)
-    console.log('Request body  :', JSON.stringify(data))
+    console.log("Flow ok");
+    // console.log('Sending request to :', url)
+    // console.log('Request body  :', JSON.stringify(data))
 
     $.ajax({
         type: type,
@@ -71,16 +71,15 @@ function sendFormData1(url, type, data, elementId) {
 
             console.log('Response received:', responseData);
 
-            document.getElementById(elementId).innerHTML = responseData;
+            document.getElementById(elementId).innerHTML = responseData.message;
 
             // Assuming the responseData is a URL for redirection
 
-            if (xhr.status === 200) {
+            if (xhr.status == 200) {
                 console.log('Redirecting to success page');
+                localStorage.setItem("gmail", data.gmail);
 
                 // let otpNumber = document.getElementById(elementId).innerHTML = responseData;
-
-                validateOTP();
             } else {
                 // Handle other cases if needed
                 console.log('Response data --else method:', responseData);
@@ -108,13 +107,13 @@ function verifyOtp(url, type, data, elementId) {
 
             // console.log('Response received:', responseData);
 
-            document.getElementById(elementId).innerHTML = responseData;
+            document.getElementById(elementId).innerHTML = responseData.message;
 
             // Assuming the responseData is a URL for redirection
 
             if (xhr.status === 200) {
                 console.log('Redirecting to success page');
-                window.location.href = 'http://127.0.0.1:5502/Frontend/ResetPwd.html';
+                window.location.href = 'ResetPwd.html';
             } else {
                 // Handle other cases if needed
                 console.log('Response data:', responseData);
