@@ -26,6 +26,22 @@ function validatePasswords() {
     // If both passwords match, you can redirect to another page
     if (password === confirmPassword && passwordPattern.test(password)) {
         // Redirect to another page
-        window.location.href = 'success.html';
+        // window.location.href = 'success.html'
+
+
+        var gmail = localStorage.getItem("gmail");
+        const formData = {
+            password: password,
+        };
+        console.log(password);
+
+        const type = 'POST';
+
+        // Call the updated function for AJAX communication
+        ResetPwd('http://localhost:8081/setPassword?gmail=' + gmail + '&password=' + password + '', type, formData, 'formBox2');
+
+
+
+        var nextPageLink = 'home.html';
     }
 }

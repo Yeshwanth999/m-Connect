@@ -18,7 +18,7 @@
         <form id ="loginForm">   
 
             <div class="input-field">
-                <input type="text" id="gmail" name="gmail" placeholder="gmail" required>
+                <input type="text" id="gmail" name="gmail" placeholder="Gmail" required>
                 <div id="gmail" class="error-message"></div>
             </div>
             <div class="input-field">
@@ -57,7 +57,7 @@
         const type= 'POST';
 
         // Call the updated function for AJAX communication
-        sendFormData1('http://localhost:8081/login',type, formData, 'formBox2');
+        sendFormData('http://localhost:8081/login',type, formData, 'formBox2');
     });
 </script>
     <script>
