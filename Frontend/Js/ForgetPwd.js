@@ -43,7 +43,7 @@ function validateOTP() {
     };
     console.log(otp);
 
-    const type = 'POST'
+    const type = "POST"
 
     verifyOtp('http://localhost:8081/verifyOtp?gmail=' + gmail + '&otp=' + otp + '', type, formData, 'formBox2');
 
