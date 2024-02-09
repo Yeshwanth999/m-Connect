@@ -19,7 +19,7 @@
 
             <div class="input-field">
                 <input type="text" id="gmail" name="gmail" placeholder="gmail" required>
-                <div id="gmail" class="error-message"></div>
+                <div id="username-error" class="error-message"></div>
             </div>
             <div class="input-field">
                 <input type="password" id="password" name="password" placeholder="Password" required>
@@ -28,10 +28,11 @@
             <div class="admin">
                 <input type="checkbox" id="adminCheckbox">   <p>Admin</p>
             </div>
-        </form>
             <div class="btn-field">
-                <button type="button" id="signinBtn">Sign In</button>
+                <button type="button" id="signinBtn" onclick="validateForm()">Sign In</button>
             </div>
+        </form>
+            
     
 
         <p class="ForgetPwd"><a href="ForgetPwd.html">Forget password ?</a></p>
