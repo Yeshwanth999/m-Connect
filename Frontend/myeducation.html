@@ -11,11 +11,16 @@
         <div class="education-div">
             <div class="hea-ico">
                 <h2 class="education-h">EDUCATIONAL INFO</h2>
-                <i class="fa fa-pencil edit-icon" style="font-size:22px" onclick="toggleEditMode()"></i>
             </div>
-            <div class="qualification-section">
-                <label for="qualification-type">Qualification Type:</label>
-                <select id="qualification-type" class="qualification-dropdown">
+            <div class="circle-icon" id="circle-icon" onclick="addMode()">
+            <i class="fa fa-plus-circle plus" ></i>
+            <h class="add" id="add" >Add</h>
+            </div>
+            <form class="form" id="qualification-form" style="display: none;">
+            <div class="qualification-section" style="padding-left: 10px;">
+                <label for="qualification-type" style="font-family: sans-serif;">Qualification Type:</label>
+                <select id="qualification_type" class="qualification-dropdown">
+                    <option value="select">select</option>
                     <option value="high-school">High School</option>
                     <option value="bachelors">Bachelor's Degree</option>
                     <option value="masters">Master's Degree</option>
@@ -23,41 +28,48 @@
                 </select>
             </div>
             <div class="under-div">
-                <div class="form-group">
-                    <label for="course-type">Course Name:</label>
-                    <input type="text" id="course-type" name="course-type" placeholder="Enter course type">
+                <div class="course-name">
+                    <label for="course-type" style="font-family: sans-serif;">Course Name:</label>
+                    <input type="text" id="course_name" name="course-type" required>
                 </div>
                 <div class="course-type">
-                <label for="qualification-type">Course Type:</label>
-                <select id="qualification-type" class="qualification-dropdown">
-                    <option value="high-school">High School</option>
-                    <option value="bachelors">Bachelor's Degree</option>
-                    <option value="masters">Master's Degree</option>
-                    <option value="phd">Ph.D.</option>
+                <label for="course-type" style="font-family: sans-serif;">Course Type:</label>
+                <select id="course_type" class="qualification-dropdown">
+                    <option value="select">select</option>
+                    <option value="technical">Technical</option>
+                    <option value="management">Management</option>
+                    <option value="language">Language</option>
                 </select>
                 </div>
                 <div class="form-group">
-                    <label for="course-type">Course Stream</label>
-                    <input type="text" id="course-type" name="course-type">
+                    <label for="course-type" style="font-family: sans-serif; padding-top: 15px;">Stream</label>
+                    <input type="text" id="Stream" name="course-type" required>
                 </div>
                 <div class="course-start-date">
-                    <label for="course-start-date">Course Starting Date:</label>
-                    <input type="date" id="course-start-date" name="course-start-date">
+                    <label for="course-start-date" style="font-family: sans-serif; padding-top: 15px;">Course Starting Date:</label>
+                    <input type="date" id="course_start" name="course-start-date" placeholder="" required>
                 </div>
                 <div class="course-end-date">
-                    <label for="course-start-date">Course End Date:</label>
-                    <input type="date" id="course-start-date" name="course-start-date">
+                    <label for="course-start-date" style="font-family: sans-serif; padding-top: 15px;">Course End Date:</label>
+                    <input type="date" id="course_end" name="course-start-date" placeholder="" required>
                 </div>
-                <div class="course-end-date">
-                    <label for="course-start-date">College Name</label>
-                    <input type="date" id="course-start-date" name="course-start-date">
+                <div class="college-name">
+                    <label for="course-start-date" style="font-family: sans-serif; padding-top: 15px;">College Name</label>
+                    <input type="" id="college_name" name="course-start-date" required>
                 </div>
-                <div class="course-end-date">
-                    <label for="course-start-date">University Name</label>
-                    <input type="date" id="course-start-date" name="course-start-date">
+                <div class="University-name">
+                    <label for="course-start-date" style="font-family: sans-serif; padding-top: 15px;">University Name</label>
+                    <input type="" id="University_name" name="course-start-date" required>
                 </div>
             </div>
+        <div class="button-container" >
+            <button class="btn" onclick="cancelEdit()"><span>✕</span> Cancel</button>
+            <button class="sbtn" id="saveEdit" ><span>✔︎</span> Save</button>
         </div>
+    </form>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </section>
+    <script src="./Js/Myeducation.js"></script>
 </body>
 </html>
