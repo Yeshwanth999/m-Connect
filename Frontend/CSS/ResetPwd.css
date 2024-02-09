@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image: url('/Frontend/Assets/banner.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.formBox .title{
+    font-family: verdana;
+    font-size: 15px;
+    color: black;
+    margin-bottom: 10px;
+}
+.formBox{
+    margin-left: 1000px;
+    margin-top: 200px;
+    background-color: rgb(247, 244, 244);
+    height: 240px;
+    width: 350px;
+    padding: 20px 35px; 
+}
+#myForm .input-field input{
+    width: 100%;
+    height: 25px;
+    margin: 4px 0px;
+}
+.error-message {
+    color: red;
+    margin-top: 5px;
+}
+
+
+
+
+.submit{
+    padding: 3px 6px;
+    margin-left: 210px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: black;
+    border-color: #08026e;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+.submit:hover{
+    background-color: #2318f9;
+}

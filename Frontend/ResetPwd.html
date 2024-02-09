@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Password Page</title>
+
+    <link rel="stylesheet" href="/Frontend/CSS/ResetPwd.css">
+    <script src="./Js/ResetPwd.js"></script>
+    <script src="./Js/connect.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <div class="formBox">
+        <h1 class="title">Reset Password</h1>
+        <form id="myForm">   
+            <div class="input-field">
+                <input type="password" id="password" placeholder="Password" required>
+                <div id="password-error" class="error-message"></div>
+            </div>
+            <div class="input-field">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <div id="confirm-password-error" class="error-message"></div>
+            </div>
+            <div class="btn-field">
+                <button type="button" class="submit" onclick="validatePasswords()">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        $('#submit').on('click', function () {
+            const password = $('#password').val();        
+            const formData = {
+                password: password,    
+            };
+            console.log(password);
+    
+            const type= 'POST';
+    
+            // Call the updated function for AJAX communication
+            sendFormData('http://localhost:8081/setpassword',type, formData, 'formBox2');
+        });
+    </script>
+        <script>
+          var  nextPageLink= 'http://127.0.0.1:5502/Frontend/employeeDashboard.html';
+        </script>
+    
+</body>
+</html>
