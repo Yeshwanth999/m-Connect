@@ -201,6 +201,22 @@ body {
     justify-content: start;
     background-color: red;
   }
+
+  .space-1{
+    margin-left: 100px;
+  }
+  .space-2{
+    margin-left: 92px;
+  } 
+  .space-3{
+    margin-left: 100px;
+  } 
+  .space-4{
+    margin-left: 48px;
+  }
+
+
+
   #iframe-content {
     width: 100%;
     height: calc(100vh - 50px);
