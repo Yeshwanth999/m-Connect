@@ -20,6 +20,7 @@ import com.userservice.main.registration.dto.RegistrationDto;
 import com.userservice.main.repository.EmployeeRepo;
 import com.userservice.main.repository.UserRepository;
 
+import jakarta.persistence.NonUniqueResultException;
 import lombok.NoArgsConstructor;
 
 @Service
@@ -128,9 +129,11 @@ public class UserServiceimpl implements UserService {
 	@Override
 	public String forgotPassword(LoginForm loginform) {
 
+		UserEntity user = userrepo.findByGmail(loginform.getGmail());
+		
 		String temppwd = PasswordUtils.generateRandomPwd();
 		MessageDigest digest;
-
+		
 		try {
 			digest = MessageDigest.getInstance("SHA-256");
 			digest.reset();
@@ -138,13 +141,13 @@ public class UserServiceimpl implements UserService {
 			byte[] encryptedPwd = digest.digest();
 			String encodepwd = Base64.getEncoder().encodeToString(encryptedPwd);
 
-			UserEntity user = new UserEntity();
-			user.setGmail(loginform.getGmail());
+//			UserEntity user = new UserEntity();
+    		user.setGmail(user.getGmail());
 			user.setPassword(encodepwd);
 			user.setAccStatus("LOKED");
-
 			userrepo.save(user);
-
+			
+			
 			String to = loginform.getGmail();
 			String subject = "Verification Your Account";
 			StringBuffer body = new StringBuffer();
@@ -156,17 +159,17 @@ public class UserServiceimpl implements UserService {
 //			return true;
 			return temppwd;
 			
-				
 		} catch (Exception er) {
 			return er.toString();
 			
 		}
-		
-	
 	}
 
+	
 	@Override
-	public boolean getOtp(String gmail, String otp) {
+	public boolean getOtp(String gmail, String otp){
+		
+   try {
 		UserEntity user = userrepo.findByGmail(gmail);
 
 		if (user != null) {
@@ -191,10 +194,14 @@ public class UserServiceimpl implements UserService {
 				er.printStackTrace();
 			}
 		}
-		return false;
-
+	}catch (NonUniqueResultException e) {
+        // Handle multiple matching records
+        e.printStackTrace();
 	}
-
+   return false;
+	}
+	
+	
 	@Override
 	public String setpassword(String gmail, String password) {
 
@@ -228,7 +235,8 @@ public class UserServiceimpl implements UserService {
 
 	@Override
 	public String DeleteUserById(long id) {
-		userrepo.deleteById(id);
+//		userrepo.deleteById(id);
+		userrepo.deleteAll();
 		return "User Data Droped";
 	}
 	
