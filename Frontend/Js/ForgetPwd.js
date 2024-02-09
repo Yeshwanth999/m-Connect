@@ -1,15 +1,18 @@
 function validateForm() {
 
+    document.getElementById('gmail-error').textContent = '';
+
     let gmail = document.getElementById('gmail').value;
 
     var gmailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
 
 
-    if (gmail.trim() === " ") {
+    if (gmail.trim() === '') {
         document.getElementById('gmail-error').textContent = 'Email is required';
     } else if (!gmailPattern.test(gmail)) {
-        document.getElementById('mail-error').textContent = 'Invalid gmail format.';
-    } else {
+        document.getElementById('gmail-error').textContent = 'Invalid gmail format.';
+    }
+    else {
         const formData = {
             gmail: gmail
         };
@@ -20,7 +23,7 @@ function validateForm() {
         sendFormData1('http://localhost:8081/forgotPassword', type, formData, 'formBox2');
 
 
-        document.querySelector('.otp-form').style.display = 'block';
+        document.querySelector('#formBox3').style.display = 'block';
     }
 
     return true;
@@ -29,6 +32,9 @@ function validateForm() {
 
 
 function validateOTP() {
+
+    // Reset previous error messages
+    //document.getElementById('otp').textContent = '';
 
 
     var otp = document.getElementById('otp').value;
