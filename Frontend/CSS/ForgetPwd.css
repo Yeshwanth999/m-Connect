@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body{
-    background-image: url('/Frontend/Assets/banner.png');
+    background-image: url('/Frontend/Assets/Banner.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -14,11 +14,11 @@ body{
     color: black;
     margin-bottom: 10px;
 }
-.formBox{
+#myForm{
     margin-left: 1000px;
-    margin-top: 200px;
+    margin-top: 250px;
     background-color: rgb(247, 244, 244);
-    height: 210px;
+    height: auto;
     width: 350px;
     padding: 20px 35px; 
 }
@@ -35,17 +35,9 @@ body{
     color: red;
     margin-top: 5px;
 }
-.admin {
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
 .otp-cont{
     display: none;
-}
-    margin: 4px 0px;
 }
 .myForm #verify {
     margin-top: 20px;

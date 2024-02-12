@@ -29,7 +29,7 @@ function sendFormData(url, type, data, elementId) {
         contentType: 'application/json',
         data: JSON.stringify(data),
 
-        success: function (responseData) {
+        success: function (responseData, textStatus, xhr) {
 
             console.log('Response received:', responseData);
 
@@ -37,9 +37,11 @@ function sendFormData(url, type, data, elementId) {
 
             // Assuming the responseData is a URL for redirection
 
-            if (responseData === 'success') {
+            // if (responseData === 'success')
+            if (xhr.status == 200) {
                 console.log('Redirecting to success page');
-                window.location.href = nextPageLink;
+
+                window.location.href = 'home.html';
             } else {
                 // Handle other cases if needed
                 console.log('Response data:', responseData);
@@ -126,4 +128,41 @@ function verifyOtp(url, type, data, elementId) {
     });
 }
 
+function ResetPwd(url, type, data, elementId) {
+    // for login page
+    console.log('Sending request to :', url)
+    console.log('Rquest body  :', JSON.stringify(data))
+
+    $.ajax({
+        type: type,
+        url: url,  // Make sure the URL is correct
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+
+        success: function (responseData, textStatus, xhr) {
+
+            console.log('Response received:', responseData);
+
+            // document.getElementById(elementId).innerHTML = responseData.password;
+
+            // Assuming the responseData is a URL for redirection
+
+            // if (responseData === 'success')
+            if (xhr.status == 200) {
+                console.log('Redirecting to success page');
+                window.location.href = 'home.html';
+            } else {
+                // Handle other cases if needed
+                console.log('Response data:', responseData);
+                console.log('----Not Redirecting to success page----');
+
+            }
+            // window.location.href = 'http://127.0.0.1:5502/Frontend/employeeDashboard.html';
+        },
+        error: function (error) {
+            console.error('Error sending data:', error);
+        }
+
+    });
+}
 
