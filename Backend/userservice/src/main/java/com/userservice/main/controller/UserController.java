@@ -22,7 +22,7 @@ import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.RegistrationDto;
 import com.userservice.main.service.UserService;
 
-@CrossOrigin(origins = "http://127.0.0.1:5502" , methods = {RequestMethod.POST, RequestMethod.OPTIONS})
+@CrossOrigin(origins = "http://127.0.0.1:5503" , methods = {RequestMethod.POST, RequestMethod.OPTIONS})
 @RestController
 @JsonInclude(Include.NON_NULL)
 public class UserController {
@@ -36,7 +36,7 @@ public class UserController {
 	public RegistrationDto regitrationDto;
 
 //	@GetMapping
-//	public Stri	ng showRegistrationForm() {
+//	public String showRegistrationForm() {
 //		return "registration";
 //	}
 
@@ -70,17 +70,18 @@ public class UserController {
 //		msg1.setData(loginform);
 	    msg1.setMessage(msg);
 		return new ResponseEntity<>( msg1, HttpStatus.OK);
-		
 	}
+	
 	@PostMapping("/verifyOtp")
 	public ResponseEntity<String> VerifyOtp(@RequestParam("gmail") String gmail,@RequestParam("otp")String otp){
+		
 		
 		Boolean flag = userService.getOtp(gmail,otp);
 		
 		if(flag) {
 			return ResponseEntity.ok("OTP Verification is Succesfull..");
 		}else {
-			return ResponseEntity.badRequest().body("Invalid OTP");
+			return ResponseEntity.badRequest().body("Invalid OTP.");
 		}	
 	}
 	

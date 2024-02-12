@@ -1,5 +1,6 @@
 package com.userservice.main.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,8 +22,10 @@ public class UserEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String guid;
+    @Column(unique = true)
 	private String gmail;
 	private String password;
+//	private String otp;
 	private String role;
     private String accStatus;
 
