@@ -27,23 +27,7 @@
             </div>
         </form>
     </div>
-    <script>
-        $('#submit').on('click', function () {
-            const password = $('#password').val();        
-            const formData = {
-                password: password,    
-            };
-            console.log(password);
     
-            const type= 'POST';
-    
-            // Call the updated function for AJAX communication
-            sendFormData('http://localhost:8081/setpassword',type, formData, 'formBox2');
-        });
-    </script>
-        <script>
-          var  nextPageLink= 'http://127.0.0.1:5502/Frontend/employeeDashboard.html';
-        </script>
     
 </body>
 </html>

@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body{
-    background-image: url('/Frontend/Assets/banner.png');
+    background-image: url('/Frontend/Assets/Banner.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -18,7 +18,7 @@ body{
     margin-left: 1000px;
     margin-top: 200px;
     background-color: rgb(247, 244, 244);
-    height: 240px;
+    height: auto;
     width: 350px;
     padding: 20px 35px; 
 }

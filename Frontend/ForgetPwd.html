@@ -20,14 +20,14 @@
             </div>
 
             <div class="btn-field">
-                <button type="submit"  onclick= "validateForm()" >Verify</button>
+                <button type="submit" id="verify" onclick= "validateForm()" >Verify</button>
             </div>
     </div>
 
-    <div id="formBox3" class="formBox">
+    <div id="formBox3" class="formBox" style="display: none;">
 
             <!-- OTP Form -->
-            <div class="otp-form" style="display: none;">
+            <div class="otp-form">
                 <h2>Enter OTP</h2>
                 <!-- <form id="otpForm">    -->
                     <div class="input-field">
@@ -37,7 +37,7 @@
 
                     </div>
                     <div class="btn-field">
-                        <button type="button" onclick="validateOTP()">Submit</button>
+                        <button type="button" id="submitOTP" onclick="validateOTP()">Submit</button>
                     </div>
                 
             </div>
