@@ -13,62 +13,59 @@
 </head>
 <body>
 
-  <!--navbar start-->
-  <nav class="navbar navbar-expand-lg  navbar-dark fixed-top bg-dark mb-5">
-    <div class="container-fluid logo ml-3">
-      <a class="navbar-brand" href="#">
-        <img src="../Frontend/Assets/Microdenlogo.png" alt="logo" width="150" height="120" class="d-inline-block align-text-top">
-      </a>
+<!--navbar start-->
+ <nav class="navbar-main">
+  <div class="logo">
+    <img src="/Frontend/Assets/Microdenlogo.png" alt="logo">
+  </div>
+  <div class="navbar-items">
+    <div class="list-items">
+      <ul>
+        <li class="item">
+          <a  href="#" id="dasboard">Dashboard</a>
+        </li>
+        <li class="item">
+          <a  href="#" id="calender">Calendar</a>
+        </li>
+        <li class="item">
+          <a  href="#" id="leaves">Leaves</a>
+        </li>
+        <li class="item">
+          <a href="#" id="rewards">Rewards</a>
+        </li>
+        <li class="item">
+          <a href="#" id="attendence">Attendence</a>
+        </li>
+        <li class="item">
+          <a href="#" id="#">Any other</a>
+        </li>
+        <li class="item">
+          <a href="#" id="payroll">Payroll</a>
+        </li>
+        <li class="item">
+          <a href="#" id="slips">Slips</a>
+        </li>
+        <li class="item">
+          <a href="#" id="exit">Exit</a>
+        </li>
+        <li class="item">
+          <a href="#" id="icon"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+        </li>
+        <li class="item">
+          <a href="#" id="punchin">Login/Punchin</a>
+        </li>
+      </ul>
+
     </div>
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" onclick="loadPage('../Frontend/employeeDashboard.html')">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="calender" onclick="loadPage('/Frontend/calendar.html')">Calendar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="loadPage('leaves.html')">Leaves</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="loadPage('rewards.html')">Rewards</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="loadPage('attendence.html')">Attendence</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="loadPage('notifications.html')">Any other</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="loadPage('payroll.html')">Payroll</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="loadPage('slips.html')">Slips</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="loadPage('exit.html')">Exit</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="loadPage('#')"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" onclick="loadPage('/Frontend/ForgetPwd.html')">Login/Punchin</a>
-          </li>
-          
-        </ul>
-        
-      </div>
-    </div>
-  </nav>
-  
- <!--navbar end-->
+
+  </div>
+ </nav>
+ <!--navbar-end-->
 
  <!--Registration form Start-->
   
   <div class="container">
-    <h2 class="heading mt-3">Employee Registration Form</h2>
+    <h2 class="heading mt-2">Employee Registration Form</h2>
     <form id="registrationForm">
       <!-- Section 1: Personal Information -->
       <div class="section">
