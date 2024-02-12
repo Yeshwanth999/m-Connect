@@ -1,30 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forget Password Page</title>
-
-    <link rel="stylesheet" href="/Frontend/CSS/ForgetPwd.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Forget Password Page</title>
+        <link rel="stylesheet" href="/Frontend/CSS/ForgetPwd.css">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="./Js/connect.js"></script> 
+        <script src="./Js/ForgetPwd.js"></script>
+    </head>
 <body>
-    
-    <div class="formBox">
-        <h1>Reset Password</h1>
-        
-
-        <form id="myForm">   
+    <form id="myForm">  
+    <div id="formBox2" class="formBox">
+        <h1 class="title">Reset Password</h1>
+         
             <div class="input-field">
-                <input type="text" id="email" placeholder="Email Address" required>
-                <div id="email-error" class="error-message"></div>
+                <input type="text" id="gmail" placeholder="Gmail Address" required>
+                <div id="gmail-error" class="error-message"></div>
             </div>
-    
+
             <div class="btn-field">
-                <button type="button" id="signupBtn" onclick="validateForm()">Verify Account</button>
+                <button type="submit" id="verify" onclick= "validateForm()" >Verify</button>
             </div>
-        </form>
     </div>
 
-    <script src="/Frontend/Js/ForgetPwd.js"></script>
+    <div id="formBox3" class="formBox" style="display: none;">
+
+            <!-- OTP Form -->
+            <div class="otp-form">
+                <h2>Enter OTP</h2>
+                <!-- <form id="otpForm">    -->
+                    <div class="input-field">
+                        <input type="text" id="otp" placeholder="Enter OTP" required>
+
+                        <div id="otp-error" class="error-message"></div>
+
+                    </div>
+                    <div class="btn-field">
+                        <button type="button" id="submitOTP" onclick="validateOTP()">Submit</button>
+                    </div>
+                
+            </div>
+        
+    </div>
+</form>
 </body>
 </html>

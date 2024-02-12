@@ -1,0 +1,92 @@
+
+/* .navbar{
+    height: 100px;
+    display: flex;
+    align-items: center;
+} */
+/* .logo{
+    margin-left: 10px;
+} */
+header{
+    height: 10.7vh;
+}
+
+main{
+    height: 70vh;
+    /* margin-top: 100px; */
+
+}
+.main-row{
+    height: 100%;
+    --bs-gutter-x: 0;
+    justify-content: space-around;
+    gap: 10px;
+}
+.b-col{
+    height: 100%;
+    overflow: hidden;
+}
+.rules{
+    height: 100%;
+    overflow-y: scroll;
+}
+h3{
+    background-color: black;
+    color: white;
+}
+
+.actions{
+    text-align: center;
+}
+
+.action button{
+    width: 100%;
+    border: none;
+}
+.action:hover{
+    font-size: 18px;
+}
+
+.left-col{
+    flex-grow: 1;
+    height: 100%;
+}
+.right-col{
+    padding: 0;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.form-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 5px;
+}
+
+.apply-img img{
+    width: 100%;
+    max-height: 100%;
+}
+
+/* table grid */
+
+.grid-container {
+    width: 100%;
+  }
+  
+  .grid-view {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .grid-view th, .grid-view td {
+    
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .grid-view th {
+    
+  }
+/* table grid */

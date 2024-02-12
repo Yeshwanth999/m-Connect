@@ -1,0 +1,126 @@
+/* Basic info start */
+.basic-info-entire {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    margin-bottom: 23px;
+}
+.basic-h{
+    font-family: sans-serif;
+    font-size: 19px;
+    padding-left: 15px;
+    padding-bottom: 8px;
+}
+.basic-info-section {
+    width: 42%;
+    box-shadow: 0 0 5px rgba(50, 50, 50, 0.3);
+    border-radius: 7px;
+}
+
+.basic-info-section-1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    list-style-type: none;
+    padding: 0;
+    padding-left: 15px;
+}
+.basic-info-section-1 input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.basic-info-section-1 li {
+    margin-bottom: 10px;
+}
+
+.basic-info-section-1 label {
+    display: inline-block;
+    width: 150px;
+    font-family: sans-serif;
+}
+
+
+
+/* work info start */
+.work-info-entire {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    margin-bottom: 23px;
+}
+.work-h{
+    font-family: sans-serif;
+    font-size: 19px;
+    padding-left: 15px;
+    padding-bottom: 9px;
+}
+.work-info-section {
+    width: 42%;
+    box-shadow: 0 0 5px rgba(50, 50, 50, 0.3);
+    border-radius: 7px;
+}
+
+.work-info-section-1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    list-style-type: none;
+    padding: 0;
+    padding-left: 15px;
+}
+.work-info-section-1 input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.work-info-section-1 li {
+    margin-bottom: 10px;
+}
+
+.work-info-section-1 label {
+    display: inline-block;
+    width: 150px;
+    font-family: sans-serif;
+}
+
+/* workhistory info start */
+.wh-info-entire {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    margin-bottom: 23px;
+}
+.wh{
+    font-family: sans-serif;
+    font-size: 19px;
+    padding-left: 15px;
+    padding-bottom: 8px;
+}
+.wh-info-section {
+    width: 42%;
+    box-shadow: 0 0 5px rgba(50, 50, 50, 0.3);
+    border-radius: 7px;
+}
+.wh-info-section-1 {
+    list-style: none;
+    padding: 0;
+}
+.wh-info-section-1 input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding-bottom: 10px;
+}
+
+.input-row {
+    display: inline-block;
+    max-width: 137px;
+    padding-left: 15px;
+    padding-bottom: 14px;
+}
+
+.input-row label {
+    display: block;
+    margin-bottom: 5px; 
+    font-family: sans-serif;
+}
+

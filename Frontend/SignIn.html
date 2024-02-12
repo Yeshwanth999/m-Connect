@@ -1,45 +1,74 @@
- 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In Page</title>
 
-    <link rel="stylesheet" type="text/css" href="./CSS/SignIn.css">
+    <link rel="stylesheet" href="/Frontend/CSS/SignIn.css">
+    <script src="./Js/connect.js" defer></script>
+    <script src="./Js/SignIn.js" defer></script>
 
-
-
+   
 </head>
-<body>
-    <div id="formBox">
-        <h1>Sign In</h1>
+
+    <div class="formBox" id="formBox2">
+
+        <h1 class="title">Sign In</h1>
         <form id ="loginForm">   
+
             <div class="input-field">
-                <input type="text" id="gmail" name="gmail" placeholder="gmail" required>
+
+                <input type="text" id="gmail" name="gmail" placeholder="Gmail" required>
+                <div id="gmail" class="error-message"></div>
+              
             </div>
             <div class="input-field">
                 <input type="password" id="password" name="password" placeholder="Password" required>
+                <div id="password-error" class="error-message"></div>
+            </div>
+            <div class="admin">
+                <input type="checkbox" id="adminCheckbox">   <p>Admin</p>
+            </div>
+            <div class="btn-field">
+                <button type="button" id="signinBtn" onclick="validateForm()">Sign In</button>
             </div>
         </form>
+            
+    
 
-        <div class="admin">
-            <input type="checkbox" id="adminCheckbox"> <p>Admin</p>
-        </div>
+        <p class="ForgetPwd"><a href="ForgetPwd.html">Forget password ?</a></p>
 
-        <div class="btn-field">
-            <button type="button" id="signinBtn">Sign In</button>
-        </div>
-
-        <p>Forget password &emsp;<a href="ForgetPwd.html">Click Here</a></p>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="./Js/connect.js" defer></script>
+
+
+<script>
+    $('#signinBtn').on('click', function () {
+        const gmail = $('#gmail').val();
+        const password = $('#password').val();
+        const isAdmin = $('#adminCheckbox').is(':checked');
+    
+        const formData = {
+            gmail: gmail,
+            password: password,
+            isAdmin: isAdmin
+        };
+        console.log(gmail);
+        console.log(password);
+
+        const type= 'POST';
+
+        // Call the updated function for AJAX communication
+        sendFormData('http://localhost:8081/login',type, formData, 'formBox2');
+    });
+</script>
     <script>
-      
+      var  nextPageLink= 'http://127.0.0.1:5502/Frontend/employeeDashboard.html';
     </script>
 
+    <!--    <script src="./Js/connect.js"></script>
+    -->
 
 </body>
-
 </html>
