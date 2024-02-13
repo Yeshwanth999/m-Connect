@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,100;1,300;1,500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow-x: hidden;
+}
+html{
+    font-size: 62.5%;
+}
+.navbar{
+    height: 100px;
+    display: flex;
+    align-items: end;
+  }
+.m-logo{
+    width: 100px;
+    height: 100px;
+}
+.color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    border: 2px solid black;
+}
+.cirle-content{
+    font-weight: 700;
+}
+.red-circle {
+    background-color: red;
+}
+
+.blue-circle {
+    background-color: blue;
+}
+
+.yellow-circle {
+    background-color: yellow;
+}
+
+.green-circle {
+    background-color: green;
+}
+
+.purple-circle {
+    background-color: purple;
+}
+
+.orange-circle{
+    background-color: orange;
+}
+
+.timer{
+    text-align: center;
+}
+ 
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.container-fluid1{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+ }
+
+.container{
+    margin-top: 50px;
+    width: 100%;
+    color: #eee;
+    justify-content: center;
+    align-items: center;
+}
+.calendar{
+    width: 70rem;
+    height: 50rem;
+    color: #1a1a18;
+    background-color: white;
+
+    box-shadow: 0 0.5rem 3rem rgba(0,0,0,0.4);
+}
+
+.month{
+    width: 100%;
+    height: 12rem;
+    background-color:#e4000e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    text-align: center;
+}
+.month i{
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+.month h1{
+    font-size: 3rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    margin-bottom: 1rem;
+ }
+ 
+.month p{
+    font-size: 1.6rem;
+}
+
+.weekdays{
+    width: 100%;
+    height: 5rem;
+    padding: 0 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.weekdayss{
+    background-color: black;
+}
+.weekdays div{
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    width: calc(44.2rem/7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    color: white;
+    padding: 12px;
+    font-weight: 600;
+}
+
+
+.days div:hover:not(.today){
+    background-color: gainsboro;
+    border: 0.2rem solid black;
+    color: black;
+    cursor: pointer;
+}
+.prev-date,
+.next-date{
+    opacity: 0.5;
+}
+
+.today{
+    background-color:#f7323f;
+}
+
+.leave-button{
+    text-align: center;
+    padding: 20px;
+    color: black;
+}
+.leave-button button{
+    background-color: #e4000e;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 15px;
+    font-weight: 700;
+    border: 2px solid black;
+}
+.birthday-holiday{
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    margin-top: 30px;
+}
+.celebrations,
+.e-birthday{
+    background-color: #e4000e;
+    margin-top: 0;
+    line-height: 40px;
+    position: sticky;
+    top:0;
+
+}
+ .birthdays,
+ .holidays{
+    width: 100%;
+    height: 25rem;
+    box-shadow: 0 0.5rem 3rem transparent;
+    overflow-y: scroll;
+    padding: 0.5px;
+    margin-top: 30px;
+    line-height: 55px;
+    border: 2px solid black;
+
+ }
+.birthdays::-webkit-scrollbar{
+    display: none;
+}
+
+.holidays::-webkit-scrollbar{
+    display: none;
+}
+.b-date{
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(116, 114, 114, 0.5);
+}
+
+ 
+.days div {
+    border: 2px solid black;
+padding: 10px;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 10px;
+    column-gap: 10px;
+    margin-left: 15px;
+    padding: 10px;
+    text-align: center;
+}
+
+.day {
+    text-align: center;
+    padding-left: 10px;
+    align-items: center;
+    justify-content: center;
+   display: flex;
+    border: 1px solid #ccc;
+    border: 2px solid black;
+
+}
+
+.weekend {
+    background-color: brown;
+    color: white; 
+}
