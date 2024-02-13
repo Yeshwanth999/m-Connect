@@ -21,7 +21,7 @@ document.getElementById("registrationForm").addEventListener("submit", function(
   event.preventDefault();
 
   // Validate the form
-  var isValidForm = validateForm();
+  let isValidForm = validateForm();
 
   if (isValidForm) {
       // Form is valid, proceed with form submission
