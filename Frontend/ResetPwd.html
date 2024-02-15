@@ -1,33 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Set Password Page</title>
 
     <link rel="stylesheet" href="/Frontend/CSS/ResetPwd.css">
-    <script src="./Js/ResetPwd.js"></script>
+    <!--<script src="./Js/ResetPwd.js"></script>-->
     <script src="./Js/connect.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Google fonts link -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 </head>
+
 <body>
     <div class="formBox">
         <h1 class="title">Reset Password</h1>
-        <form id="myForm">   
+        <form id="myForm">
             <div class="input-field">
-                <input type="password" id="password" placeholder="Password" required>
+                <div>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <span class="material-symbols-outlined" id="password-done">check_circle</span>
+                </div>
                 <div id="password-error" class="error-message"></div>
             </div>
             <div class="input-field">
-                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <div>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    <span class="material-symbols-outlined" id="confirm-password-done">check_circle</span>
+                </div>
                 <div id="confirm-password-error" class="error-message"></div>
+                <div id="password-missmatch" class="error-message"></div>
             </div>
             <div class="btn-field">
-                <button type="button" class="submit" onclick="validatePasswords()">Submit</button>
+                <input type="button" class="submit" onclick="validatePasswords()" value="Submit">
             </div>
         </form>
     </div>
-    
-    
+
+    <script>
+        // Function to show success message
+        function showSuccessMessage(elementId) {
+            var element = document.getElementById(elementId);
+            element.style.display='block';
+        }
+
+        // Function to remove success message
+        function removeErrorMessage(elementId) {
+            var element = document.getElementById(elementId);
+            element.textContent = '';
+        }
+
+        // Function to validate password
+        var firstPassword;
+        //var seconPassword;
+        function validatePassword() {
+
+            //for displaying timark non
+            document.getElementById('password-done').style.display = 'none';
+
+            var password = document.getElementById('password').value.trim();
+            var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z0-9!@#$%^&*()_+]{8,}$/;
+            var isValid = true;
+
+            if (password === '') {
+                document.getElementById('password-error').textContent = 'Password is required';
+                isValid = false;
+            } else if (!passwordPattern.test(password)) {
+                document.getElementById('password-error').textContent = 'Invalid password format';
+                isValid = false;
+            } else {
+                removeErrorMessage('password-error');
+                showSuccessMessage('password-done');
+
+                firstPassword = password;
+            }
+
+            return isValid;
+        }
+
+        // Function to validate confirm password
+        function validateConfirmPassword() {
+            //for displaying timark non
+            document.getElementById('confirm-password-done').style.display = 'none';
+
+            var confirmPassword = document.getElementById('confirmPassword').value.trim();
+            var confirmPasswordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z0-9!@#$%^&*()_+]{8,}$/;
+            var isValid = true;
+
+            if (confirmPassword === '') {
+                document.getElementById('confirm-password-error').textContent = 'Confirm Password is required';
+                isValid = false;
+            } else if (!confirmPasswordPattern.test(confirmPassword)) {
+                //removeErrorMessage('password-missmatch');
+                document.getElementById('confirm-password-error').textContent = 'Invalid Confirm Password format';
+                isValid = false;
+            } else if (firstPassword !== confirmPassword) {
+                removeErrorMessage('confirm-password-error');
+                document.getElementById('password-missmatch').textContent = 'Passwords Do Not Match';
+                isValid = false;
+            } else {
+                removeErrorMessage('confirm-password-error');
+                removeErrorMessage('password-missmatch'); 
+                showSuccessMessage('confirm-password-done');
+
+                //seconPassword = confirmPassword
+            }
+
+            return isValid;
+        }
+
+
+        // Attach event listener to trigger validation on input/change
+        document.getElementById('password').addEventListener('input', validatePassword);
+        document.getElementById('confirmPassword').addEventListener('input', validateConfirmPassword);
+
+        function validatePasswords() {
+            // Reset previous error messages
+            document.getElementById('password-error').textContent = '';
+            document.getElementById('confirm-password-error').textContent = '';
+            // Reset previous success messages
+            document.getElementById('password-success').textContent = '';
+            document.getElementById('confirm-password-success').textContent = '';
+            document.getElementById('password-missmatch').textContent = '';
+
+            // Get password values from the form
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password == confirmPassword) {
+                const gmail = localStorage.getItem("gmail");
+                const formData = {
+                    password: password,
+                };
+                console.log(password);
+
+                const type = 'POST';
+
+                // Call the updated function for AJAX communication
+                ResetPwd('http://localhost:8081/setPassword?gmail=' + gmail + '&password=' + password + '', type, formData, 'formBox2');
+
+                var nextPageLink = 'home.html';
+
+                //window.location.href = 'home.html';
+
+            }
+        }
+
+        /*function validatePasswords() {
+            // Reset previous error messages
+            document.getElementById('password-error').textContent = '';
+            document.getElementById('confirm-password-error').textContent = '';
+            // Reset previous success messages
+            document.getElementById('password-success').textContent = '';
+            document.getElementById('confirm-password-success').textContent = '';
+
+            // Get password values from the form
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password == confirmPassword) {
+
+                var gmail = localStorage.getItem("gmail");
+                const formData = {
+                    password: password,
+                };
+                console.log(password);
+
+                const type = 'POST';
+
+                // Call the updated function for AJAX communication
+                ResetPwd('http://localhost:8081/setPassword?gmail=' + gmail + '&password=' + password + '', type, formData, 'formBox2');
+
+                var nextPageLink = 'home.html';
+            }
+            else{
+                document.getElementById('password-missmatch').textContent='Passwords Miss Match...'
+            }
+        }*/
+    </script>
+
+
 </body>
+
 </html>
