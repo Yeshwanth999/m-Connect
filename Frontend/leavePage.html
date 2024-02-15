@@ -202,5 +202,22 @@
 
 
     <script src="./Js/Leavepage.js"></script>
+    <!-- code for Reload direct to signin -->
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // var userId = "sp2515788-m1063";
+            // sessionStorage.setItem("userId", userId);
+            var user = sessionStorage.getItem("userId");
+            if (user !== null) {
+                var x = "hi";
+                console.log(x);
+            }
+            else {
+                alert("Please login first");
+                window.location.href = "SignIn.html";
+            }
+        });
+    </script>
 </body>
 </html>
