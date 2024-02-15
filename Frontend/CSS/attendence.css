@@ -7,6 +7,9 @@
 }
 body{
     overflow-x: hidden;
+    /* max-width: 1400px; */
+    width: 100%;
+    margin: auto;
 }
 html{
     font-size: 62.5%;
@@ -63,6 +66,7 @@ html{
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin-top: 30px;
 }
 .container-fluid1{
     margin-top: 20px;

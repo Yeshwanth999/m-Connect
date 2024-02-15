@@ -2,10 +2,6 @@
 
 const date = new Date();
 
-sessionStorage.setItem("userId",);
-
-
-
 const renderCalendar = () => {
     date.setDate(1);
 
