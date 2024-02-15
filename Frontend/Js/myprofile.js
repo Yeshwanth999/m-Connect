@@ -98,9 +98,9 @@ document.getElementById("permanentCountry").disabled=true;
 document.getElementById("permanentState").disabled=true;
 document.getElementById("permanentCity").disabled=true;
 document.getElementById("permanentPincode").disabled=true;
-document.getElementById("housetype").disabled=true
-document.getElementById("stayingsince").disabled=true
-document.getElementById("livingin").disabled=true
+// document.getElementById("housetype").disabled=true
+// document.getElementById("stayingsince").disabled=true
+// document.getElementById("livingin").disabled=true
 
 
 function addressOnclick() {
@@ -378,4 +378,122 @@ $('#savesocial').on('click', function (){
     document.write(str);
 
 });
+
+// input errors //
+// Function to validate first name input
+function validateFirstName() {
+    var firstNameInput = document.getElementById('firstname');
+    var firstNameError = document.getElementById('firstNameError');
+    var namePattern = /^[a-zA-Z\s.]{1,20}$/;
+
+    if (!namePattern.test(firstNameInput.value)) {
+        firstNameError.textContent = 'Please enter valid name';
+        firstNameError.style.color = 'red';
+    } else {
+        firstNameError.textContent = '';
+        return true;
+    }
+}
+
+
+// Function to validate last name input
+function validateLastName() {
+    var lastNameInput = document.getElementById('lastname');
+    var lastNameError = document.getElementById('lastNameError');
+    var namePattern = /^[a-zA-Z\s.]{1,20}$/;
+
+    if (!namePattern.test(lastNameInput.value)) {
+        lastNameError.textContent = 'Please enter valid name';
+        lastNameError.style.color = 'red';
+        return false;
+    } else {
+        lastNameError.textContent = '';
+        return true;
+    }
+}
+document.getElementById('firstname').addEventListener('input', validateFirstName);
+document.getElementById('lastname').addEventListener('input', validateLastName);
+
+
+// error message for official_mail
+function validateEmail() {
+    var emailInput = document.getElementById('email');
+    var emailError = document.getElementById('official_mail');
+    var emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+    if (!emailPattern.test(emailInput.value)) {
+        emailError.textContent = 'Please enter a valid Email address';
+        emailError.style.color = 'red';
+    } else {
+        emailError.textContent = '';
+        return true;
+    }
+}
+document.getElementById('email').addEventListener('input', function() {
+    validateEmail();
+});
+
+// error message for personal_mail
+function validateEmail() {
+    var emailInput = document.getElementById('email1');
+    var emailError = document.getElementById('personal_mail');
+    var emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+    if (!emailPattern.test(emailInput.value)) {
+        emailError.textContent = 'Please enter a valid Email address';
+        emailError.style.color = 'red';
+    } else {
+        emailError.textContent = '';
+        return true;
+    }
+}
+document.getElementById('email1').addEventListener('input', function() {
+    validateEmail();
+});
+
+
+// // error for phonenumber 
+// function validatePhoneNumber() {
+//     var phoneNumberInput = document.getElementById('phonenumber');
+//     var phoneError = document.getElementById('phonenumber_err');
+//     var phoneNumberPattern = /^\d{10}$/; // Regular expression to match 10-digit phone number
+    
+//     // If input does not match pattern, display error message
+//     if (!phoneNumberPattern.test(phoneNumberInput.value)) {
+//         phoneError.textContent = 'Please enter a 10-digit phone number';
+//         phoneError.style.display = 'block'; // Show error message
+//     } else {
+//         // If input matches pattern, clear error message
+//         phoneError.textContent = ''; // Clear error message
+//         phoneError.style.display = 'none'; // Hide error message
+//     }
+// }
+
+// // Add event listener for input event
+// document.getElementById('phonenumber').addEventListener('input', validatePhoneNumber);
+
+
+// error for alternate phone number
+// function validatePhoneNumber() {
+//     var phoneNumberInput = document.getElementById('phonenumber1');
+//     var phoneError = document.getElementById('alternate_phone_err');
+//     var phoneNumberPattern = /^\d{10}$/;
+    
+//     if (!phoneNumberInput.value) {
+//         phoneError.textContent = '';
+//         phoneError.style.display = 'none';
+//     } else if (!phoneNumberPattern.test(phoneNumberInput.value)) {
+//         phoneError.textContent = 'Please enter valid number';
+//         phoneError.style.color = 'red';
+//         phoneError.style.display = 'block';
+//     } else {
+//         phoneError.textContent = '';
+//         phoneError.style.display = 'none';
+//     }
+// }
+// document.getElementById('phonenumber1').addEventListener('input', function() {
+//     validatePhoneNumber();
+// });
+
+
 

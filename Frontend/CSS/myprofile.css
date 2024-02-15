@@ -93,6 +93,11 @@ body{
     display: flex;
     margin-bottom: 10px;
 }
+.form-container-1 {
+    display: flex;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+}
 .form-group-1 {
     flex: 1 0 29%;
     padding-right: 40px;
@@ -129,7 +134,10 @@ body{
     margin-right: 10px;
     margin-top: 25px;
 }
-.button-container button:hover {
+.button-container .btn:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.button-container .sbtn:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 .btn{
@@ -140,6 +148,7 @@ body{
     height: 30px;
     width: 80px;
     color: #000;
+    cursor: pointer;
 }
 .sbtn{
     background-color: #0093ff;
@@ -149,6 +158,7 @@ body{
     height: 30px;
     width: 80px;
     color: #f3eeee;
+    cursor: pointer;
 }
 
 /*contact details */
@@ -266,10 +276,12 @@ body{
     margin-right: 10px;
     margin-top: 25px;
 }
-.button-container2 button:hover {
+.button-container2 .address-info-btn:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
-
+.button-container2 .address-info-sbtn:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
 .address-info-btn{
     background-color: white;
     box-shadow: #000;
@@ -303,7 +315,6 @@ body{
 }
 
 .house-type-dd label {
-
     margin-bottom: 5px;
     padding-left: 13px;
     margin-top: 10px;
@@ -387,6 +398,8 @@ body{
     box-shadow: 0 0 5px rgba(50, 50, 50, 0.3);
     margin: 0 auto;
     margin-top: 35px;
+    margin-bottom: 30px;
+    padding-bottom: 25px;
 }
 .edit-icon-3{
     cursor: pointer;
@@ -452,6 +465,14 @@ body{
     margin-right: 10px;
     margin-top: 25px;
 }
-.button-container3 button:hover {
+.button-container3 .address-info-btn:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.button-container3 .address-info-sbtn:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+/* error message */ 
+.fne {
+    padding-left: 12px;
+    margin-top: -5px;
 }

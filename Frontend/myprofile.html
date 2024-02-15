@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,71 +8,74 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
+
 <body>
     <!-- personal info start -->
-    <section class="section">
-    <div id="form">
-        <div class="profile-con">
-            <!-- <div class="profile-div" style="width: 25%;">
-                <img src="">
-            </div> -->
 
+    <section class="section">
+        <div class="profile-con">
             <div class="personal-info-div">
                 <div class="per-icon">
                     <h2 class="personal-h">PERSONAL INFO</h2>
                     <i class="fa fa-pencil edit-icon" style="font-size:22px" onclick="toggleEditMode()"></i>
                 </div>
-                <span><hr></span> 
+                <span>
+                    <hr>
+                </span>
+                <form>
                     <div class="inputs-grid">
                         <div class="form-group-1">
-                            <label for="name" class="label">First Name</label>
-                            <input type="text" id="firstname" name="name" class="input-underlined disabled" required>
+                            <label for="firstname" class="label">First Name</label>
+                            <input type="text" id="firstname" name="firstname" class="input-underlined disabled" required>
+                            <div class="fne" id="firstNameError"></div>
                         </div>
                         <div class="form-group-1">
-                            <label for="name" class="label">Last Name</label>
-                            <input type="text" id="lastname" name="name" class="input-underlined disabled" required>
+                            <label for="lastname" class="label">Last Name</label>
+                            <input type="text" id="lastname" name="lastname" class="input-underlined disabled" required>
+                            <div class="fne" id="lastNameError"></div>
                         </div>
                         <div class="form-group-1">
                             <label for="dob" class="label">Date of Birth</label>
                             <input type="date" id="dob" name="dob" class="input-underlined disabled" required>
-                        </div> 
+                        </div>
                     </div>
-                <div class="form-container">
-                    <div class="form-group-1">
-                        <label for="gender" class="label">Gender</label>
-                        <select id="gender" name="gender" class="disabled" required>
-                            <option value="select">Select</option>
-                            <option value="single">Male</option>
-                            <option value="married">Female</option>
-                        </select>
+                    <div class="form-container">
+                        <div class="form-group-1">
+                            <label for="gender" class="label">Gender</label>
+                            <select id="gender" name="gender" class="disabled" required>
+                                <option value="select">Select</option>
+                                <option value="single">Male</option>
+                                <option value="married">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group-1">
+                            <label for="blood_group" class="label">Blood Group</label>
+                            <select id="blood_group" name="blood_group" class="disabled" required>
+                                <option value="select">Select</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                        <div class="form-group-1">
+                            <label for="marital_status" class="label">Marital Status</label>
+                            <select id="marital_status" name="marital_status" class="disabled" required>
+                                <option value="select">Select</option>
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group-1">
-                        <label for="blood_group" class="label">Blood Group</label>
-                        <select id="blood_group" name="blood_group" class="disabled" required>
-                            <option value="select">Select</option>
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="B-">B-</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
-                        </select>
+                    <div class="button-container" style="display: none;">
+                        <input type="button" class="btn" value="✕ Cancel" onclick="cancelEdit()">
+                        <input type="submit" class="sbtn" value="✔︎ Save" id="saveEdit">
                     </div>
-                    <div class="form-group-1">
-                        <label for="marital_status" class="label">Marital Status</label>
-                        <select id="marital_status" name="marital_status" class="disabled" required>
-                            <option value="select">Select</option> 
-                            <option value="single">Single</option>
-                            <option value="married">Married</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="button-container" style="display: none;">
-                    <button class="btn" onclick="cancelEdit()"><span>✕</span> Cancel</button>
-                    <button class="sbtn" id="saveEdit" ><span>✔︎</span> Save</button>
-                </div>
+                </form>
             </div>
         </div>
         <!-- personal info end -->
@@ -82,93 +86,111 @@
                 <h2 class="personal-h">CONTACT INFO</h2>
                 <i class="fa fa-pencil edit-icon-1" style="font-size:24px" onclick="contactOnclick()"></i>
             </div>
-                <hr> 
+            <hr>
+            <form>
                 <div class="contact-inner">
                     <div class="form-group-1">
-                        <label for="email" class="label">Official Email ID</label>
-                        <input type="mail" id="email" name="email" class="input-underlined1 disabled" required>
+                        <label for="email" class="label">Official Mail ID</label>
+                        <input type="email" id="email" name="email" class="input-underlined1 disabled" required>
+                        <div class="fne" id="official_mail"></div>
                     </div>
                     <div class="form-group-1">
-                        <label for="email" class="label">Personal Email ID</label>
-                        <input type="email" id="email1" name="email" class="input-underlined1 disabled" required>
+                        <label for="email1" class="label">Personal Mail ID</label>
+                        <input type="email" id="email1" name="email1" class="input-underlined1 disabled" required>
+                        <div class="fne" id="personal_mail"></div>
                     </div>
                 </div>
-                <div class="form-container">
+                <div class="form-container-1">
                     <div class="form-group-1">
                         <label for="phonenumber" class="label">Phone Number</label>
-                        <input type="phonenumber" id="phonenumber" name="phonenumber" class="input-underlined1 disabled" required>
+                        <input type="tel" id="phonenumber" name="phonenumber" class="input-underlined1 disabled" required>
+                        <div class="phone-error" id="phonenumber_err" style="color: red;"></div>
                     </div>
                     <div class="form-group-1">
-                        <label for="alternatephonenumber" class="label">Alternate Phone Number</label>
-                        <input type="phonenumber" id="phonenumber1" name="phonenumber" class="input-underlined1 disabled" required>
-                    </div> 
+                        <label for="phonenumber1" class="label">Alternate Phone Number</label>
+                        <input type="tel" id="phonenumber1" name="phonenumber1" class="input-underlined1 disabled" required>
+                        <div class="phone-error" id="alternate_phone_err" style="color: red;"></div>
+                    </div>
                 </div>
                 <div class="button-container1" style="display: none;">
-                    <button class="contact-info-btn" onclick="cancelContact()"><span>✕</span> Cancel</button>
-                    <button class="contact-info-sbtn" id="saveContact" onclick="saveContact()"><span>✔︎</span> Save</button>
+                    <input type="button" class="contact-info-btn" value="✕ Cancel" onclick="cancelContact()">
+                    <input type="submit" class="contact-info-sbtn" value="✔︎ Save" id="saveContact" onclick="saveContact()">
                 </div>
+            </form>
         </div>
         <!-- contact info end -->
 
         <!-- Address info start -->
         <div class="address-info-div">
-            <div class="per-icon">  
+            <div class="per-icon">
                 <h2 class="personal-h">ADDRESSES</h2>
-                <i class="fa fa-pencil edit-icon-2" style="font-size:22px" onclick="addressOnclick()" id="addressOnclick"></i>
+                <i class="fa fa-pencil edit-icon-2" style="font-size:22px" onclick="addressOnclick()"
+                    id="addressOnclick"></i>
             </div>
-                <hr>
+            <hr>
+            <form>
                 <div class="addressentire" id="addressentire">
-                <div class="address-inner-div">
-                    <div class="current-div">
-                        <h3 class="ca-heading">Current Address</h3>
+                    <div class="address-inner-div">
+                        <div class="current-div">
+                            <h3 class="ca-heading">Current Address</h3>
                             <div class="address-inputs">
-                                <label for="address-1" class="address-1">Address</label>
-                                <input type="address-1" id="currentAddress" name="address-2" class="input-underlined2 disabled currentaddress" required>
+                                <label for="currentAddress" class="address-1">Address</label>
+                                <input type="text" id="currentAddress" name="currentAddress"
+                                    class="input-underlined2 disabled currentaddress" required>
                             </div>
                             <div class="address-inputs">
-                                <label for="address-2" class="address-2">Country</label>
-                                <input type="address-2" id="currentCountry" name="address-2" class="input-underlined2 disabled currentaddress" required>
+                                <label for="currentCountry" class="address-2">Country</label>
+                                <input type="text" id="currentCountry" name="currentCountry"
+                                    class="input-underlined2 disabled currentaddress" required>
                             </div>
                             <div class="address-inputs">
-                                <label for="address-2" class="address-2">State</label>
-                                <input type="address-2" id="currentState" name="address-2" class="input-underlined2 disabled currentaddress" required>
+                                <label for="currentState" class="address-2">State</label>
+                                <input type="text" id="currentState" name="currentState"
+                                    class="input-underlined2 disabled currentaddress" required>
                             </div>
                             <div class="address-inputs">
-                                <label for="address-2" class="address-2">City</label>
-                                <input type="address-2" id="currentCity" name="address-2" class="input-underlined2 disabled currentaddress" required>
+                                <label for="currentCity" class="address-2">City</label>
+                                <input type="text" id="currentCity" name="currentCity"
+                                    class="input-underlined2 disabled currentaddress" required>
                             </div>
-                            <div class="address-inputs">    
-                                <label for="address-2" class="address-2">Pincode</label>
-                                <input type="address-2" id="currentPincode" name="address-2" class="input-underlined2 disabled currentaddress" required>
+                            <div class="address-inputs">
+                                <label for="currentPincode" class="address-2">Pincode</label>
+                                <input type="text" id="currentPincode" name="currentPincode"
+                                    class="input-underlined2 disabled currentaddress" required>
                                 <div class="error-message" id="pincode-error"></div>
                             </div>
+                        </div>
+                        <div class="permanent-div">
+                            <h3 class="pa-heading">Permanent Address</h3>
+                            <div class="address-inputs">
+                                <label for="permanentAddress" class="address-3">Address</label>
+                                <input type="text" id="permanentAddress" name="permanentAddress"
+                                    class="input-underlined2 disabled permanentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="permanentCountry" class="address-4">Country</label>
+                                <input type="text" id="permanentCountry" name="permanentCountry"
+                                    class="input-underlined2 disabled permanentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="permanentState" class="address-2">State</label>
+                                <input type="text" id="permanentState" name="permanentState"
+                                    class="input-underlined2 disabled permanentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="permanentCity" class="address-2">City</label>
+                                <input type="text" id="permanentCity" name="permanentCity"
+                                    class="input-underlined2 disabled permanentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="permanentPincode" class="address-2">Pincode</label>
+                                <input type="text" id="permanentPincode" name="permanentPincode"
+                                    class="input-underlined2 disabled permanentaddress" required>
+                                <div class="error-message" id="pincode-error"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="permanent-div">
-                        <h3 class="pa-heading">Permanent Address</h3>
-                        <div class="address-inputs">
-                            <label for="address-3" class="address-3">Address</label>
-                            <input type="address-3" id="permanentAddress" name="address-3" class="input-underlined2 disabled permanentaddress" required>
-                        </div>
-                        <div class="address-inputs">
-                            <label for="address-4" class="address-4">Country</label>
-                            <input type="address-4" id="permanentCountry" name="address-4" class="input-underlined2 disabled permanentaddress" required>
-                        </div>
-                        <div class="address-inputs">
-                            <label for="address-2" class="address-2">State</label>
-                            <input type="address-2" id="permanentState" name="address-2" class="input-underlined2 disabled permanentaddress" required>
-                        </div>
-                        <div class="address-inputs">
-                            <label for="address-2" class="address-2">City</label>
-                            <input type="address-2" id="permanentCity" name="address-2" class="input-underlined2 disabled permanentaddress" required>
-                        </div>
-                        <div class="address-inputs">    
-                            <label for="address-2" class="address-2">Pincode</label>
-                            <input type="address-2" id="permanentPincode" name="address-2" class="input-underlined2 disabled permanentaddress" required>
-                            <div class="error-message" id="pincode-error"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="house-type-dd">
+                    <!-- <div class="house-type-dd">
                     <div>
                     <label for="house-type">House Type</label>
                     <select id="housetype" name="house-type" class="input-underlined2 disabled" required>
@@ -189,62 +211,126 @@
                         <input type="date" id="stayingsince" name="dob" class="input-underlined2 disabled" required>
                     </div>
                 </div>
-
                 <div class="living-in-current">
                     <label for="dob" class="label">Living in Current City Since</label>
                     <input type="date" id="livingin" name="dob" class="input-underlined2 disabled" required>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="sameAddressCheckbox" name="permanent-address-checkbox" onchange="copyAddress()" disabled>
-                    <label for="permanent-address-checkbox">Permanent address is the same as current address</label>
-                </div>
-                <!-- <div id="emptyFieldError" style="display: none; color: red;">
-                    Please fill in all the fields for the permanent address.
                 </div> -->
-            
-            <div class="button-container2" style="display: none;">
-                <button class="address-info-btn" onclick="cancelAddress()"><span>✕</span> Cancel</button>
-                <button class="address-info-sbtn" id="saveAddress" onclick="saveAddress()"><span>✔︎</span> Save</button>
-            </div>
-        </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="sameAddressCheckbox" name="permanent-address-checkbox"
+                            onchange="copyAddress()" disabled>
+                        <label for="permanent-address-checkbox">Permanent address is the same as current address</label>
+                    </div>
+                    <div class="button-container2" style="display: none;">
+                        <input type="button" class="address-info-btn" value="✕ Cancel" onclick="cancelAddress()">
+                        <input type="button" class="address-info-sbtn" id="saveAddress" value="✔︎ Save" onclick="saveAddress()">
+                    </div>
+                </div>
+            </form>
         </div>
         <!-- Address info end -->
-        
+
         <!-- social info start -->
         <div class="social-info-div">
             <div class="per-icon">
                 <h2 class="personal-h">SOCIAL PROFILE</h2>
                 <i class="fa fa-pencil edit-icon-3" style="font-size: 25px;" onclick="socialOnclick()"></i>
             </div>
-                <hr> 
+            <hr>
+            <form>
                 <div class="input-with-icon">
                     <a href="https://www.linkedin.com/">
                         <i class="fa fa-linkedin"></i>
                     </a>
-                    <input type="text" id="linkedin" placeholder="www.linkedin.com/in/" class="input-underlined3 disabled" required>
+                    <input type="text" id="linkedin" name="linkedin" placeholder="www.linkedin.com/in/" class="input-underlined3 disabled"
+                        required>
                 </div>
                 <div class="input-with-icon">
                     <a href="https://www.twitter.com/">
                         <i class="fa fa-twitter"></i>
                     </a>
-                    <input type="text" id="twitter" placeholder="twitter.com/username." class="input-underlined3 disabled" required>
+                    <input type="text" id="twitter" name="twitter" placeholder="twitter.com/username." class="input-underlined3 disabled"
+                        required>
                 </div>
                 <div class="input-with-icon">
                     <a href="https://www.facebook.com/">
                         <i class="fa fa-facebook"></i>
                     </a>
-                    <input type="text" id="facebook" placeholder="www.facebook.com/" class="input-underlined3 disabled" required>
+                    <input type="text" id="facebook" name="facebook" placeholder="www.facebook.com/" class="input-underlined3 disabled"
+                        required>
                 </div>
-                
-            <div class="button-container3" style="display: none;">
-                <button class="contact-info-btn" onclick="cancelsocial()"><span>✕</span> Cancel</button>
-                <button class="contact-info-sbtn" id="savesocial" onclick="savesocial()"><span>✔︎</span> Save</button>
-            </div>
+
+                <div class="button-container3" style="display: none;">
+                    <input type="button" class="address-info-btn" onclick="cancelsocial()" value="✕ Cancel">
+                    <input type="button" class="address-info-sbtn" id="savesocial" value="✔︎ Save" onclick="savesocial()">
+                </div>
+            </form>
         </div>
         <!-- social info end -->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    </div>
     </section>
     <script src="./Js/myprofile.js"></script>
+
+    <!-- code for Reload direct to signin -->
+    <!-- <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // var userId = "sp2515788-m1063";
+            // sessionStorage.setItem("userId", userId);
+            var user = sessionStorage.getItem("userId");
+            if (user !== null) {
+                var x = "hi";
+                console.log(x);
+            }
+            else {
+                alert("Please login first");
+                window.location.href = "SignIn.html";
+            }
+        });
+    </script> -->
+    <script>
+        // error for alternate phone number
+function validatePhoneNumber() {
+    var phoneNumberInput = document.getElementById('phonenumber');
+    var phoneError = document.getElementById('phonenumber_err');
+    var phoneNumberPattern = /^\d{10}$/;
+    
+    if (!phoneNumberInput.value) {
+        phoneError.textContent = '';
+        phoneError.style.display = 'none';
+    } else if (!phoneNumberPattern.test(phoneNumberInput.value)) {
+        phoneError.textContent = 'Please enter valid number';
+        phoneError.style.color = 'red';
+        phoneError.style.display = 'block';
+    } else {
+        phoneError.textContent = '';
+        phoneError.style.display = 'none';
+    }
+}
+document.getElementById('phonenumber').addEventListener('input', function() {
+    validatePhoneNumber();
+});
+
+function validatePhoneNumber() {
+    var phoneNumberInput = document.getElementById('phonenumber1');
+    var phoneError = document.getElementById('alternate_phone_err');
+    var phoneNumberPattern = /^\d{10}$/;
+    
+    if (!phoneNumberInput.value) {
+        phoneError.textContent = '';
+        phoneError.style.display = 'none';
+    } else if (!phoneNumberPattern.test(phoneNumberInput.value)) {
+        phoneError.textContent = 'Please enter valid number';
+        phoneError.style.color = 'red';
+        phoneError.style.display = 'block';
+    } else {
+        phoneError.textContent = '';
+        phoneError.style.display = 'none';
+    }
+}
+document.getElementById('phonenumber1').addEventListener('input', function() {
+    validatePhoneNumber();
+});
+    </script>
 </body>
+
 </html>
