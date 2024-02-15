@@ -12,16 +12,16 @@
     <section class="section">
     <div id="form">
         <div class="profile-con">
-            <div class="profile-div" style="width: 25%;">
+            <!-- <div class="profile-div" style="width: 25%;">
                 <img src="">
-            </div>
+            </div> -->
 
             <div class="personal-info-div">
                 <div class="per-icon">
                     <h2 class="personal-h">PERSONAL INFO</h2>
                     <i class="fa fa-pencil edit-icon" style="font-size:22px" onclick="toggleEditMode()"></i>
                 </div>
-                    <hr> 
+                <span><hr></span> 
                     <div class="inputs-grid">
                         <div class="form-group-1">
                             <label for="name" class="label">First Name</label>
@@ -40,6 +40,7 @@
                     <div class="form-group-1">
                         <label for="gender" class="label">Gender</label>
                         <select id="gender" name="gender" class="disabled" required>
+                            <option value="select">Select</option>
                             <option value="single">Male</option>
                             <option value="married">Female</option>
                         </select>
@@ -47,6 +48,7 @@
                     <div class="form-group-1">
                         <label for="blood_group" class="label">Blood Group</label>
                         <select id="blood_group" name="blood_group" class="disabled" required>
+                            <option value="select">Select</option>
                             <option value="A+">A+</option>
                             <option value="A-">A-</option>
                             <option value="B+">B+</option>
@@ -59,7 +61,8 @@
                     </div>
                     <div class="form-group-1">
                         <label for="marital_status" class="label">Marital Status</label>
-                        <select id="marital_status" name="marital_status" class="disabled" required> 
+                        <select id="marital_status" name="marital_status" class="disabled" required>
+                            <option value="select">Select</option> 
                             <option value="single">Single</option>
                             <option value="married">Married</option>
                         </select>
@@ -169,6 +172,7 @@
                     <div>
                     <label for="house-type">House Type</label>
                     <select id="housetype" name="house-type" class="input-underlined2 disabled" required>
+                        <option value="select">Select</option>
                         <option value="detached">Owned by Self/Spouse</option>
                         <option value="semi-detached">Owned By Parent/Sibling</option>
                         <option value="townhouse">Rented With Family</option>
@@ -185,15 +189,16 @@
                         <input type="date" id="stayingsince" name="dob" class="input-underlined2 disabled" required>
                     </div>
                 </div>
+
                 <div class="living-in-current">
                     <label for="dob" class="label">Living in Current City Since</label>
                     <input type="date" id="livingin" name="dob" class="input-underlined2 disabled" required>
                 </div>
-                <!-- <div class="checkbox-container">
-                    <input type="checkbox" id="sameAddressCheckbox" name="permanent-address-checkbox" onchange="copyAddress()">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="sameAddressCheckbox" name="permanent-address-checkbox" onchange="copyAddress()" disabled>
                     <label for="permanent-address-checkbox">Permanent address is the same as current address</label>
                 </div>
-                <div id="emptyFieldError" style="display: none; color: red;">
+                <!-- <div id="emptyFieldError" style="display: none; color: red;">
                     Please fill in all the fields for the permanent address.
                 </div> -->
             
