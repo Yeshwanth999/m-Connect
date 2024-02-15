@@ -128,7 +128,25 @@
         </div>
     </div>
 
-
+    <script >
+        sessionStorage.setItem("key",);
+        
+        </script>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+          <script>
+            $(document).ready(function () {
+              var user = sessionStorage.getItem("key");
+              if(user !== null){
+                var x = "hi";
+                console.log(x);
+              }
+              else{
+                alert("please login first");
+                window.location.href = "SignIn.html";
+              }
+            });
+          </script>
+        
 
 </body>
 
