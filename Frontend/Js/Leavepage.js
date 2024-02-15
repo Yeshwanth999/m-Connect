@@ -8,6 +8,7 @@ const leaveHistory = document.getElementById('leaveHistory');
 const myRequests = document.getElementById('myRequests');
 const leaveBalance = document.getElementById('leaveBalance');
 
+// onclick display apply leave section and others none
 function apply(){
     applyLeave.style.display="block";
     leaveCancel.style.display="none";
@@ -15,13 +16,63 @@ function apply(){
     myRequests.style.display="none";
     leaveBalance.style.display="none";
 }
+// saving apply leave data into json object and sending it to db
+function sendLeaveData(){
+  const leaveData ={
+  }
 
+  const leaveType = document.getElementById('leave-type').value;
+  const fromShift = document.getElementById('from-shift').value;
+  const from = document.getElementById('from').value;
+  const toShift = document.getElementById('to-shift').value;
+  const to = document.getElementById('to').value;
+  const reasonFor = document.getElementById('reason-for').value;
+
+  leaveData.type = leaveType;
+  leaveData.fromShift = fromShift;
+  leaveData.fromDate = from;
+  leaveData.toShift = toShift;
+  leaveData.toDate = to;
+  leaveData.reasonFor = reasonFor;
+  console.log(leaveData);
+  let URL ;
+  let type ;
+}
+
+// onclick display cancel leave section and others none
 function cancel(){
     applyLeave.style.display="none";
     leaveCancel.style.display="block";
     leaveHistory.style.display="none";
     myRequests.style.display="none";
     leaveBalance.style.display="none";
+}
+
+// saving cancel leave data into json object and sending it to db
+function sendCancelLeaveData(){
+  const cancelLeaveData ={
+  }
+
+  const appliedLeaveType = document.getElementById('applied-leave-type').value;
+  const appliedOnDate =document.getElementById('applied-on')
+  const appliedFromShift = document.getElementById('applied-from-shift').value;
+  const appliedFrom = document.getElementById('applied-from').value;
+  const appliedToShift = document.getElementById('applied-to-shift').value;
+  const appliedTo = document.getElementById('applied-to').value;
+  const appliedReasonFor = document.getElementById('applied-reason-for').value;
+  const comments = document.getElementById('comments')
+
+  cancelLeaveData.appliedLeaveType = appliedLeaveType;
+  cancelLeaveData.appliedOnDate = appliedOnDate;
+  cancelLeaveData.appliedFromShift = appliedFromShift;
+  cancelLeaveData.appliedFromDate = appliedFrom;
+  cancelLeaveData.appliedToShift = appliedToShift;
+  cancelLeaveData.appliedToDate = appliedTo;
+  cancelLeaveData.appliedReasonFor = appliedReasonFor;
+  cancelLeaveData.comments = comments;
+  console.log(cancelLeaveData);
+  let URL ;
+  let type ;
 }
 
 function history(){
