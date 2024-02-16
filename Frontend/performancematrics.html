@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./CSS/performancematrics.css">
+</head>
+
+<body>
+  <div class="employee-card">
+    <div class="employee-details col-lg-2.5">
+      <img src="./Assets/Microdenlogo.png" height="100" width="100" alt="Employee Photo">
+      <div class="details">
+        <p>Name: John Doe</p>
+        <p>Designation: Software Engineer</p>
+      </div>
+    </div>
+    <div class="employee-table col-lg-7">
+      <table>
+        <tr>
+          <th>Employee ID</th>
+          <th>Performence Score</th>
+          <th>project completed</th>
+          <th>errors Count</th>
+        </tr>
+        <tr>
+          <td>EMP001</td>
+          <td>85</td>
+          <td>10</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>EMP002</td>
+          <td>95</td>
+          <td>20</td>
+          <td>2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="employee-actions">
+      <button id="changeEmployeeBtn" onclick="OpenEmployees()">Change Employee</button>
+      <div id="employeeList" class="hidden">
+        <!-- Employee list will be populated dynamically -->
+      </div>
+    </div>
+  </div>
+  <script src="./Js/performancematrics.js"></script>
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+           <script>
+                $(document).ready(function () {
+                  var user = sessionStorage.getItem("userId");
+                  if(user !== null){
+                    var x = "hi";
+                    console.log(x);
+                  }
+                  else{
+                    alert("please login ")
+                    window.location.href = "./SignIn.html";
+                  }
+                });
+          </script>
+    
+</body>
+
+</html>
