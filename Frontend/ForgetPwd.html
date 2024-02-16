@@ -1,48 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Forget Password Page</title>
-        <link rel="stylesheet" href="/Frontend/CSS/ForgetPwd.css">
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="./Js/connect.js"></script> 
-        <script src="./Js/ForgetPwd.js"></script>
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forget Password Page</title>
+    <link rel="stylesheet" href="/Frontend/CSS/ForgetPwd.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="./Js/connect.js"></script>
+    <!--<script src="./Js/ForgetPwd.js"></script>-->
+
+    <!-- Google fonts link -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+</head>
+
 <body>
-    <form id="myForm">  
-    <div id="formBox2" class="formBox">
-        <h1 class="title">Reset Password</h1>
-         
+    <form id="myForm">
+        <div id="formBox2" class="formBox">
+            <h1 class="title">Reset Password</h1>
             <div class="input-field">
-                <input type="text" id="gmail" placeholder="Gmail Address" required>
+                <div>
+                    <input type="text" id="gmail" placeholder="Gmail Address" required>
+                    <span class="material-symbols-outlined" id="gmail-done">check_circle</span>
+                </div>
                 <div id="gmail-error" class="error-message"></div>
             </div>
 
             <div class="btn-field">
-                <button type="submit" id="verify" onclick= "validateForm()" >Verify</button>
+                <input type="button" id="verify" onclick="validateForm()" value="Verify">
             </div>
-    </div>
+        </div>
 
-    <div id="formBox3" class="formBox" style="display: none;">
+        <div id="formBox3" class="formBox" style="display: none;">
 
             <!-- OTP Form -->
             <div class="otp-form">
                 <h2>Enter OTP</h2>
                 <!-- <form id="otpForm">    -->
-                    <div class="input-field">
-                        <input type="text" id="otp" placeholder="Enter OTP" required>
+                <div class="input-field">
+                    <input type="text" id="otp" placeholder="Enter OTP" required>
+                    <div id="otp-error" class="error-message"></div>
+                    <div id="otp-success" class="success-message"></div>
+                </div>
+                <div class="btn-field">
+                    <input type="button" id="submitOTP" onclick="validateOTP()" value="Submit">
 
-                        <div id="otp-error" class="error-message"></div>
+                </div>
 
-                    </div>
-                    <div class="btn-field">
-                        <button type="button" id="submitOTP" onclick="validateOTP()">Submit</button>
-                    </div>
-                
             </div>
-        
-    </div>
-</form>
+
+        </div>
+    </form>
+
+    <script>
+        // Function to show success message
+        function showSuccessMessage(elementId) {
+            var element = document.getElementById(elementId);
+            element.style.display='block';
+        }
+
+        // Function to remove success message
+        function removeErrorMessage(elementId) {
+            var element = document.getElementById(elementId);
+            element.textContent = '';
+        }
+
+        // Function to validate email
+        function validateEmail() {
+            //for displaying timark non
+            document.getElementById('gmail-done').style.display='none';
+
+            var username = document.getElementById('gmail').value.trim();
+            var gmailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+            //var isValid = true;
+
+            if (username === '') {
+                document.getElementById('gmail-error').textContent = 'Username is required';
+                //isValid = false;
+            } else if (!gmailPattern.test(username)) {
+                document.getElementById('gmail-error').textContent = 'Invalid Gmail format';
+                //isValid = false;
+            } else {
+                removeErrorMessage('gmail-error');
+                showSuccessMessage('gmail-done');
+            }
+            //return isValid;
+        }
+
+        // Attach event listeners to trigger validation on input/change
+        document.getElementById('gmail').addEventListener('input', validateEmail);
+
+        // function for anabling OTP box
+        function validateForm() {
+            let gmail = document.getElementById('gmail').value;
+            const formData = {
+                gmail: gmail
+            };
+            console.log(gmail);
+            const type = 'POST';
+            sendFormData1('http://localhost:8081/forgotPassword', type, formData, 'formBox2');
+            document.querySelector('#formBox3').style.display = 'block';
+
+        }
+
+        // function for validating OTP
+        function validateOTP() {
+            // Reset previous error messages
+            //document.getElementById('otp').textContent = '';
+
+            var otp = document.getElementById('otp').value;
+            var gmail = localStorage.getItem("gmail");
+            if (otp.trim() === '') {
+                document.getElementById('otp-error').textContent = 'OTP is required';
+            } else {
+            }
+            const formData = {
+                gmail: gmail,
+                otp: otp
+            };
+            console.log(otp);
+            const type = "POST"
+            verifyOtp('http://localhost:8081/verifyOtp?gmail=' + gmail + '&otp=' + otp + '', type, formData, 'formBox2');
+        }
+
+
+    </script>
+
 </body>
+
 </html>

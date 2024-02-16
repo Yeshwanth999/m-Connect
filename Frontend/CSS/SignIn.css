@@ -20,7 +20,7 @@ body {
     margin-top: 250px;
     background-color: rgb(247, 244, 244);
     height: auto;
-    width: 350px;
+    width: 360px;
     padding: 20px 35px; 
 }
 /*#myForm .input-field{
@@ -28,9 +28,19 @@ body {
     flex-direction: row;
 }*/
 #loginForm .input-field input{
-    width: 100%;
+    width: 90%;
     height: 25px;
     margin: 4px 0px;
+}
+#loginForm .input-field div{
+    display: flex;
+}
+#loginForm .input-field div span{
+    color: rgb(0, 255, 0);
+    font-size: 25px;
+    display: none;
+    margin-left: 5px;
+    margin-top: 3px;
 }
 .error-message {
     color: red;
