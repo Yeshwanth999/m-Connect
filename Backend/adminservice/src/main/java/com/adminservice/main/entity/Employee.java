@@ -1,5 +1,4 @@
-package com.userservice.main.entity;
-
+package com.adminservice.main.entity;
 
 import java.time.LocalDate;
 

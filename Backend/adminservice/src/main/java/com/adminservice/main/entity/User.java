@@ -1,5 +1,4 @@
-package com.userservice.main.entity;
-
+package com.adminservice.main.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class UserEntity {
+public class User {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,6 +31,6 @@ public class UserEntity {
 	private String guid;
     private String gmail;
 	private String password;
-	private String adminStatus;
+	private boolean adminStatus;
     private String accStatus;	
 }
