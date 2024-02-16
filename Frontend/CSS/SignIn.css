@@ -16,7 +16,8 @@ body {
     margin-bottom: 10px;
 }
 .formBox{
-    margin-left: 1000px;
+    margin-left: auto;
+    margin-right: 150px;
     margin-top: 250px;
     background-color: rgb(247, 244, 244);
     height: auto;
