@@ -1,16 +1,16 @@
 package com.userservice.main.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,31 +18,83 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "employee")
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 
 public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+//	@OneToOne(mappedBy = "employee",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//	private User user;
 
-	private String name;
-	private String fatherName;
-	private String dob;
+	private String guid;
+	@Column(unique = true, nullable = true, insertable = false, updatable = false, columnDefinition = "VARCHAR(65)")
+	private String gmail;
+
+	@Column(nullable = false, columnDefinition = "VARCHAR(40)")
+	private String firstname;
+
+	@Column(nullable = false, columnDefinition = "VARCHAR(40)")
+	private String lastname;
+
+	private String password;
+
+	@Column(name = "dateOfBirth")
+	private LocalDate dob;
+
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String role;
+
+	private boolean adminStatus;
+
+	@Column(columnDefinition = "VARCHAR(20)")
 	private String gender;
-	private String email;
-	private String phoneNumber;
-	private String presentAddress;
+
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String blood_group;
+
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String marital_status;
+
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String phonenumber;
+
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String currentAddress;
+
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String currentCountry;
+
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String currentState;
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String currentCity;
+	@Column(columnDefinition = "NUMERIC(6,0)")
+	private Long currentPincode;
+
+	@Column(columnDefinition = "VARCHAR(100)")
 	private String permanentAddress;
-	private String designation;
-	private int yearsOfExperience;
-	private String companyDetails;
-	private String employeeId;
-	private String profileImage;
-	
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name = "uid")
-	private UserEntity uid;
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String permanentCountry;
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String permanentState;
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String permanentCity;
+	@Column(columnDefinition = "NUMERIC(6,0)")
+	private Long permanentPincode;
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String stayingsince;
+	@Column(columnDefinition = "VARCHAR(50)")
+	private String livingincurrent;
+
+	private String imgName;
+	private String imgType;
+	private String imgPath;
+
+	@Lob
+	@Column(name = "profile_img", length = 1000)
+	private byte[] profileImage;
 
 }

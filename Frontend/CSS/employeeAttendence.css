@@ -1,13 +1,14 @@
     /* Styles for the table */
     body{
         overflow-x: hidden;
-        width: 1400px;
+        width: 100%;
         margin: auto;
     }
 #student-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 50px;
+  
 }
 
 #student-table th, #student-table td {

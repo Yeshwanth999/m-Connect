@@ -29,7 +29,6 @@ public interface UserService {
 
 	  String setpassword(String gmail, String password);
 
-	   String DeleteUserById(long id);
 
 
 	  

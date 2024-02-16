@@ -1,11 +1,17 @@
 package com.userservice.main.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +26,7 @@ import com.userservice.main.registration.dto.RegistrationDto;
 import com.userservice.main.repository.EmployeeRepo;
 import com.userservice.main.repository.UserRepository;
 
-import jakarta.persistence.NonUniqueResultException;
+import javax.persistence.NonUniqueResultException;
 import lombok.NoArgsConstructor;
 
 @Service
@@ -77,25 +83,57 @@ public class UserServiceimpl implements UserService {
 		}
 	}
 
+	private static final String FILENAME = "src/main/resources/static/counter.txt";
+	
+	 public static String generateID() {
+	        int counter = readCounterFromFile();
+	        StringBuilder idBuilder = new StringBuilder();
+	        idBuilder.append("SP2515788-M");
+	        idBuilder.append(String.format("%04d", counter)); // Ensures the numerical part has at least 4 digits
+	        updateCounterInFile(counter + 1);
+	        return idBuilder.toString();
+	    }
+
+	    private static int readCounterFromFile() {
+	        try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
+	            String line = br.readLine();
+	            if (line != null) {
+	                return Integer.parseInt(line.trim());
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        return 1; // Default value if file doesn't exist or couldn't be read
+	    }
+
+	    private static void updateCounterInFile(int counter) {
+	        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME))) {
+	            bw.write(Integer.toString(counter));
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	   
 	@Override
 	@Transactional
 	public String addUser(RegistrationDto user) {
+		
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-
-		System.out.println("----------------" + user.getPassword() + "----------------");
-
 		String encryptedPwd = bcrypt.encode(user.getPassword());
 		user.setPassword(encryptedPwd);
 
 		UserEntity usr = new UserEntity();
 		usr.setGmail(user.getGmail());
-		usr.setGuid(user.getGuid());
-		usr.setRole(user.getRole());
+		usr.setGuid(generateID());
+//		System.out.println("===================="+generateID()+"+++++++++++++++++++");
+		usr.setAdminStatus(user.getAdminStatus());
+		
 		usr.setPassword(encryptedPwd);
 
 		UserEntity saveUser = userrepo.save(usr);
 
-		System.out.println("----------------" + saveUser.getPassword() + "----------------");
+//		System.out.println("----------------" + saveUser.getPassword() + "----------------");
 
 		return saveUser.getGmail() + "Employee added successfully...";
 
@@ -141,7 +179,6 @@ public class UserServiceimpl implements UserService {
 			byte[] encryptedPwd = digest.digest();
 			String encodepwd = Base64.getEncoder().encodeToString(encryptedPwd);
 
-//			UserEntity user = new UserEntity();
     		user.setGmail(user.getGmail());
 			user.setPassword(encodepwd);
 			user.setAccStatus("LOKED");
@@ -233,12 +270,7 @@ public class UserServiceimpl implements UserService {
 		}
 	}
 
-	@Override
-	public String DeleteUserById(long id) {
-//		userrepo.deleteById(id);
-		userrepo.deleteAll();
-		return "User Data Droped";
-	}
+	
 	
 	
 	
