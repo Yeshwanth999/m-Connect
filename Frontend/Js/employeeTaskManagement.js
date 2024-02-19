@@ -1,5 +1,43 @@
 
 document.addEventListener("DOMContentLoaded", function() {
+
+  
+  var projectData = [
+    {
+      "deadline": "2024-02-28",
+      "team_name": "Team A",
+      "tl_name": "John Doe",
+      "emps_working": 5
+    },
+    {
+      "deadline":"",
+      "team_name":"",
+      "tl_name":"",
+      "emps_working":""
+    },
+    {
+      "deadline":"",
+      "team_name":"",
+      "tl_name":"",
+      "emps_working":""
+    },
+    {
+      "deadline":"",
+      "team_name":"",
+      "tl_name":"",
+      "emps_working":""
+    }
+  ];
+
+  var projectInfo = projectData[0];
+  $('#deadline').text("Deadline: " + projectInfo.deadline);
+  $('#team-name').text("Which team is working: " + projectInfo.team_name);
+  $('#tl-name').text("Team Leader Name: " + projectInfo.tl_name);
+  $('#emps-working').text("No.of employees working: " + projectInfo.emps_working);
+
+
+
+
   const employeesData = [
     {
       "name": "M-connect",
