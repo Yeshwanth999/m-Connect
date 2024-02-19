@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmployeeAttendence</title>
+    <link rel="stylesheet" href="./CSS/financial.css">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <!-- <h1>Financial Information</h1> -->
+    </div>
+        <div class="emp-table">
+            <table id="student-table">
+              <thead>
+                <tr>
+                    <th id="th-data">Emp ID</th>
+                    <th id="th-data">Joining Date</th>
+                    <th id="th-data">Bank Name</th>
+                    <th id="th-data">Annual CTC</th>
+                    <th id="th-data">Extra Perks/Over Time Hours</th>
+                    <th id="th-data">Deductions</th>
+                    <th id="th-data">With/without pf</th>
+                    <th id="th-data">Salary Date</th>
+                    
+                </tr>
+              </thead>
+                     <tbody id="table-body">
+                       <!-- Table body will be populated dynamically using JavaScript -->
+                     </tbody>
+            </table>
+        </div>
+
+        <script src="./Js/financial.js"></script>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script>
+             $(document).ready(function () {
+               var user = sessionStorage.getItem("userId");
+               if(user !== null){
+                 var x = "hi";
+                 console.log(x);
+               }
+               else{
+                 alert("please login ")
+                 window.location.href = "SignIn.html";
+               }
+             });
+       </script>
+</body>
+</html>

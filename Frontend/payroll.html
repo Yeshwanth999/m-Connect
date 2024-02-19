@@ -135,5 +135,24 @@
 
     </div>
     </div>
+
+    <script >
+      sessionStorage.setItem("key",);
+      </script>
+      <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  
     <script src="./Js/payroll.js"></script>
+    <script>
+      $(document).ready(function(){
+      var user = sessionStorage.getItem("key")
+      if (user!==null){
+        var x = "hai";
+        console.log(x);
+      }
+      else{
+        alert("please log in first");
+        window.location.href = "SignIn.html";
+      }
+      })
+    </script>
     </body>
