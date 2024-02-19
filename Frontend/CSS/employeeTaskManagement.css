@@ -1,0 +1,32 @@
+.container {
+    margin: 20px auto;
+    width: 80%;
+  }
+  #project-name{
+    text-align: center;
+    padding: 8px;
+    text-align: center;
+    font-size: 35px;
+    background-color: aquamarine;
+    margin: 0;
+    border: 2px solid black;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .table-one{
+    display: flex;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  font-size: 25px;
+  text-align: center;
+  border: 2px solid black;
+  height: 30px;
+}
