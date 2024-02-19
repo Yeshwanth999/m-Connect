@@ -79,7 +79,7 @@
             </div>
             <div class="col-5 middle-col b-col">
                 <div id="applyLeave" class="leave-form " style="display: block;"><!-- leave request start -->
-                    <form action="">
+                    <div class="form">
                         <div style="position: sticky;"> <h3 class="py-2 ps-2">Leave Request</h3></div>
                         <div class="form-grid">
                             <label for="leave-type">Leave Type</label>
@@ -110,9 +110,9 @@
                             <textarea name="reason" id="reason-for" cols="6" rows="4"></textarea>
                             <label for="file">File Name</label>
                             <input type="file" id="file">
-                            <button type="submit">Apply</button>
+                            <input type="button" value="Apply leave" onclick="sendLeaveData()">
                         </div>
-                    </form>
+                    </div>
                 </div><!-- leave request end -->
 
                 <div id="leaveHistory" class="leave-history" style="display:none;"> <!-- leave history starts -->
@@ -144,7 +144,7 @@
                 </div> <!-- my request ends -->
                 
                 <div id="leaveCancel" class="leave-form card" style="display: none;"><!-- leave cancellation starts -->
-                    <form action="">
+                    <div class="form">
                         <div style="position: sticky;"> <h3 class="py-2 ps-2">Leave cancellation</h3></div>
                         <div class="form-grid">
                             <label for="applied-leave-type">Leave Type</label>
@@ -177,9 +177,9 @@
                             <textarea name="reason" id="applied-reason-for" cols="6" rows="4"></textarea>
                             <label for="comments">Comments</label>
                             <textarea name="comments" id="comments" cols="6" rows="2"></textarea>
-                            <button type="submit">Apply for cancellation</button>
+                            <input type="button" value="Cancel Leave" onclick="sendCancelLeaveData()">
                         </div>
-                    </form>
+                    </div>
                 </div> <!--leave cancellation ends-->
 
 
@@ -202,5 +202,22 @@
 
 
     <script src="./Js/Leavepage.js"></script>
+    <!-- code for Reload direct to signin -->
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // var userId = "sp2515788-m1063";
+            // sessionStorage.setItem("userId", userId);
+            var user = sessionStorage.getItem("userId");
+            if (user !== null) {
+                var x = "hi";
+                console.log(x);
+            }
+            else {
+                alert("Please login first");
+                window.location.href = "SignIn.html";
+            }
+        });
+    </script>
 </body>
 </html>

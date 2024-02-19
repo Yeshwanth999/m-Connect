@@ -5,33 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In Page</title>
 
-    <link rel="stylesheet" href="/Frontend/CSS/SignIn.css">
-    <script src="./Js/connect.js" defer></script>
-    <script src="./Js/SignIn.js" defer></script>
+    <link rel="stylesheet" href="../Frontend/CSS/SignIn.css">
+    <script src="../Frontend/Js/connect.js" defer></script>
+    <script src="../Frontend/Js/SignIn.js" defer></script>
+
+    
+    <!-- Google fonts link -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
    
 </head>
 
+    <!--  Sign in form start  -->
     <div class="formBox" id="formBox2">
 
         <h1 class="title">Sign In</h1>
         <form id ="loginForm">   
 
             <div class="input-field">
-
-                <input type="text" id="gmail" name="gmail" placeholder="Gmail" required>
-                <div id="gmail" class="error-message"></div>
-              
+                <div>
+                    <input type="text" id="gmail" name="gmail" placeholder="Gmail" required>
+                    <span class="material-symbols-outlined" id="gmail-done">check_circle</span>
+                </div>
+                <div id="gmail-error" class="error-message"></div>
             </div>
             <div class="input-field">
-                <input type="password" id="password" name="password" placeholder="Password" required>
+                <div>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <span class="material-symbols-outlined" id="password-done">check_circle</span>
+                </div>
                 <div id="password-error" class="error-message"></div>
+                
             </div>
             <div class="admin">
-                <input type="checkbox" id="adminCheckbox">   <p>Adm innnn</p>
+                <input type="checkbox" id="adminCheckbox">   <p>Admin</p>
             </div>
             <div class="btn-field">
-                <button type="button" id="signinBtn" onclick="validateForm()">Sign In</button>
+                <input type="button" id="signinBtn" onclick="validateForm()" value="Sign In">
             </div>
         </form>
             
@@ -40,6 +50,9 @@
         <p class="ForgetPwd"><a href="ForgetPwd.html">Forget password ?</a></p>
 
     </div>
+    <!-- Sign in form End-->
+
+    <!-- Script form jquery-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 

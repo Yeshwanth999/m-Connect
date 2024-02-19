@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  /* Navbar styles */
+  .navbar-main {
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  .logo img {
+    width: 150px;
+    height: auto;
+  }
+  
+  .navbar-items .list-items ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .item {
+    margin-right: 20px;
+  }
+  
+  .item a {
+    color: #000;
+    text-decoration: none;
+    position: relative;
+  }
+  
+  .item a:hover {
+    color: #ff0000;
+  }
+  .item a:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 3px;
+    background-color: #ff0000;
+  }
+  
+  .sidebar {
+    position: fixed;
+    margin-top: 150px;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color:#f8f9fa;
+    padding: 20px;
+    color: #000;
+  }
+  
+  .profile-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+  }
+  
+  .default-profile-image {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .user-profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .profile-details {
+    flex-grow: 1;
+  }
+  
+  .profile-name {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .profile-role {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-menu li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar-menu a {
+    color: #000;
+    text-decoration: none;
+  }
+  
+  .sidebar-menu a:hover {
+    text-decoration: underline;
+  }
+  
+    #iframe-content {
+      width: 100%;
+      height: calc(100vh - 50px);
+      border: none;
+    }
+    
+  
+  

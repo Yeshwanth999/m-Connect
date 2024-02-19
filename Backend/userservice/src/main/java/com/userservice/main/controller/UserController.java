@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +23,10 @@ import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.RegistrationDto;
 import com.userservice.main.service.UserService;
 
-@CrossOrigin(origins = "http://127.0.0.1:5503" , methods = {RequestMethod.POST, RequestMethod.OPTIONS})
+
+@CrossOrigin(origins = "http://127.0.0.1:5504" , methods = {RequestMethod.POST, RequestMethod.OPTIONS})
 @RestController
-@JsonInclude(Include.NON_NULL)
+@RequestMapping("/user")
 public class UserController {
 	
 	private final UserService userService;
@@ -46,14 +48,13 @@ public class UserController {
 //		return ResponseEntity.ok("User Created Succesfully.");
 //	}
 
-	@PostMapping("adduser")
+    @PostMapping("adduser")
 	public ResponseEntity<String> addUser(@RequestBody RegistrationDto user){
 		userService.addUser(user);
 		
 		return ResponseEntity.ok("Employee added Succesfully");
 	   }
 
-	
 	@PostMapping("/login")
 	public String userlogin(@RequestBody LoginForm loginform) {
 		return userService.userLogin(loginform);
@@ -125,14 +126,7 @@ public class UserController {
     	
     }
     
-    @DeleteMapping("DropBy/{id}")
-    public String DropUserById(@PathVariable("id") long id){
-		
-    	String data = userService.DeleteUserById(id);
-    	
-    	return data;
-    }
-    
+   
   
     
 }

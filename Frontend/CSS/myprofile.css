@@ -11,11 +11,14 @@ body{
     flex-direction: row;
 }
 .personal-info-div{
-    margin-top: 10px;
     background-color: transparent;
     width: 50%;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(50, 50, 50, 0.3);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 10px;
 }
 .per-icon{
     display: flex;
@@ -24,16 +27,15 @@ body{
     margin-bottom: -15px;
 }
 .hr{
-    border: none;
     height: 2px;
     background-color: #000;
-    margin: 20px 0;
+    flex-grow: 1;
 }
 
 .personal-h{
     font-family: sans-serif;
     font-size: 16px;
-    padding-left: 14px;
+    padding: 12px;
 }
 .edit-icon{
     padding: 13px;
@@ -92,7 +94,7 @@ body{
     margin-bottom: 10px;
 }
 .form-group-1 {
-    flex: 0 0 29%;
+    flex: 1 0 29%;
     padding-right: 40px;
 }
 .form-group-1:last-child {
@@ -248,13 +250,13 @@ body{
     font-size: 16px;
     padding-bottom: 3px;
     width: 150%;
-    background-color: transparent;
+    background-color: transparent !important;
 }
 
 .edit-icon-2{
-    padding: 13px;
     cursor: pointer;
     visibility: hidden;
+    padding: 13px;
 }
 .address-info-div:hover .edit-icon-2 {
     visibility: visible;
@@ -309,15 +311,16 @@ body{
 }
 
 .house-type-dd select, .house-type-dd input {
-    width: 83%;
+    width: 79%;
     border: none;
-    border-bottom: 2px solid #000000;
+    border-bottom: 1px solid #000000;
     padding: 5px 0;
     font-size: 16px;
     box-sizing: border-box;
     outline: none;
     padding-left: 0px;
     margin-left: 10px;
+    background-color: transparent;
 }
 
 .staying-since {
@@ -337,6 +340,7 @@ body{
     padding-left: 0px;
     margin-left: 12px;
     outline: none;
+    background-color: transparent;
 }
 .input-underlined2 {
     border: none;
@@ -358,21 +362,21 @@ body{
     display: none;
 } */
 
-/* .checkbox-container {
+.checkbox-container {
     display: flex;
     align-items: center; 
     margin-top: 20px;
     padding-left: 15px;
 }
 .checkbox-container input[type="checkbox"] {
-    width: 20px; 
-    height: 18px;
+    width: 15px;
+    height: 14px 
 }
 .checkbox-container label {
-    margin-left: 10px; 
-    font-size: 20px;
+    margin-left: 0px; 
+    font-size: 17px;
     font-family: sans-serif;
-} */
+}
 
 
 /* social profiles */

@@ -1,41 +1,37 @@
 package com.userservice.main.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name="usersdata")
+@Table(name="users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class UserEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+//	@OneToOne
+//    @JoinColumn(name="gmail", referencedColumnName="emp_gmail")
+//    @JoinColumn(name="guid", referencedColumnName="emp_guid")
+//	@JoinColumn(name = "gmail")
+//    private Employee employee;
+	
 	private String guid;
-    @Column(unique = true)
-	private String gmail;
+    private String gmail;
 	private String password;
-//	private String otp;
-	private String role;
-    private String accStatus;
-
-	
-//	public String setPassword1() {
-//		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//		return "passwordEncoder.encode(Password1)";
-//
-//	}
-	
-    
-	
+	private String adminStatus;
+    private String accStatus;	
 }

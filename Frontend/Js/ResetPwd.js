@@ -1,4 +1,4 @@
-function validatePasswords() {
+/*function validatePasswords() {
     // Reset previous error messages
     document.getElementById('password-error').textContent = '';
     document.getElementById('confirm-password-error').textContent = '';
@@ -44,4 +44,47 @@ function validatePasswords() {
 
         var nextPageLink = 'home.html';
     }
-}
+}*/
+
+// // Function to show success message
+// function showSuccessMessage(elementId) {
+//     var element = document.getElementById(elementId);
+//     element.textContent = '✓';
+//     element.style.color = 'green';
+//     element.style.fontWeight = 'bold';
+// }
+
+// // Function to remove success message
+// function removeErrorMessage(elementId) {
+//     var element = document.getElementById(elementId);
+//     element.textContent = '';
+// }
+
+// // Function to validate email
+// function validatePassword() {
+    
+//     //for displaying timark non
+//     document.getElementById('password-success').textContent ='';
+
+//     var password = document.getElementById('password').value.trim();
+//     var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z0-9!@#$%^&*()_+]{8,}$/;
+//     var isValid = true;
+
+//     if (password === '') {
+//         document.getElementById('password-error').textContent = 'password is required';
+//         isValid = false;
+//     } else if (!passwordPattern.test(password)) {
+//         document.getElementById('password-error').textContent = 'Invalid password format';
+//         isValid = false;
+//     } else {
+//         removeErrorMessage('password-error');
+//         showSuccessMessage('password-success');
+//     }
+
+//     return isValid;
+// }
+
+
+// // Attach event listeners to trigger validation on input/change
+// document.getElementById('password').addEventListener('input', validatePassword);
+// document.getElementById('confirmPassword').addEventListener('input', validatePassword);

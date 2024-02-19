@@ -185,22 +185,22 @@ document.getElementById('permanentPincode').addEventListener('blur', function() 
 // }
 
 
-// on change current address to permanent address after clicking in check box //
-function copyAddress() {
-    var checkbox = document.getElementById("sameAddressCheckbox");
-    var currentAddressFields = document.querySelectorAll(".currentaddress");
-    var permanentAddressFields = document.querySelectorAll(".permanentaddress");
+// // on change current address to permanent address after clicking in check box //
+// function copyAddress() {
+//     var checkbox = document.getElementById("sameAddressCheckbox");
+//     var currentAddressFields = document.querySelectorAll(".currentaddress");
+//     var permanentAddressFields = document.querySelectorAll(".permanentaddress");
 
-    if (checkbox.checked) {
-        permanentAddressFields.forEach(function(permanentField, index) {
-            permanentField.value = currentAddressFields[index].value;
-        });
-    } else {
-        permanentAddressFields.forEach(function(permanentField) {
-            permanentField.value = "";
-        });
-    }
-}
+//     if (checkbox.checked) {
+//         permanentAddressFields.forEach(function(permanentField, index) {
+//             permanentField.value = currentAddressFields[index].value;
+//         });
+//     } else {
+//         permanentAddressFields.forEach(function(permanentField) {
+//             permanentField.value = "";
+//         });
+//     }
+// }
 
 function socialOnclick() {
     var inputs = document.querySelectorAll('.input-underlined3');
@@ -229,42 +229,48 @@ function savesocial() {
     cancelsocial();
 }
 
-// error message //
+// Enable checkbox after entering current address inputs //
 function copyAddress() {
-    var sameAddressCheckbox = document.getElementById("sameAddressCheckbox");
-    var currentAddress = document.getElementById("currentAddress");
-    var permanentAddress = document.querySelectorAll(".permanentaddress");
-    var errorMessage = document.getElementById("emptyFieldError");
+    var checkbox = document.getElementById("sameAddressCheckbox");
+    var currentAddress = document.getElementById("currentAddress").value;
+    var currentCountry = document.getElementById("currentCountry").value;
+    var currentState = document.getElementById("currentState").value;
+    var currentCity = document.getElementById("currentCity").value;
+    var currentPincode = document.getElementById("currentPincode").value;
 
-    if (sameAddressCheckbox.checked) {
-  
-        currentAddress.forEach(function(input) {
-            
-            if (input.value.trim() === "") {
-                
-                errorMessage.style.display = "block";
-            }
-        });
+    if (checkbox.checked) {
+        document.getElementById("permanentAddress").value = currentAddress;
+        document.getElementById("permanentCountry").value = currentCountry;
+        document.getElementById("permanentState").value = currentState;
+        document.getElementById("permanentCity").value = currentCity;
+        document.getElementById("permanentPincode").value = currentPincode;
+    } else {
+        document.getElementById("permanentAddress").value = "";
+        document.getElementById("permanentCountry").value = "";
+        document.getElementById("permanentState").value = "";
+        document.getElementById("permanentCity").value = "";
+        document.getElementById("permanentPincode").value = "";
     }
-    
+}
 
-    if (sameAddressCheckbox.checked) {
-        
-        permanentAddress.forEach(function(input) {
-           
-            if (input.value.trim() === "") {
-                
-                errorMessage.style.display = "block";
+// Enable checkbox if all current address inputs are filled
+document.querySelectorAll('.currentaddress').forEach(function(input) {
+    input.addEventListener('input', function() {
+        var allInputsFilled = true;
+        document.querySelectorAll('.currentaddress').forEach(function(input) {
+            if (input.value.trim() === '') {
+                allInputsFilled = false;
             }
         });
-    } 
-}
+        document.getElementById("sameAddressCheckbox").disabled = !allInputsFilled;
+    });
+});
 
 
 // tranfering data using json// 
 $('#saveEdit').on('click', function (){
     var firstname = $('#firstname').val();
-    var secondname = $('#secondname').val();
+    var secondname = $('#secondname').val();    
     var dob = $('#dob').val();
     var gender = $('#gender').val();
     var blood_group = $('#blood_group').val();

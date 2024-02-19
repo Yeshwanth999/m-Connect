@@ -6,18 +6,54 @@ body {
    Helvetica, Arial, sans-serif;
 }
 
-.swal2-confirm {
-  padding: 13px 50px 15px 25px; /* adjust the values as you like */
+/* Navbar styles */
+.navbar-main {
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
 }
-.navbar{
-  height: 100px;
+
+.logo img {
+  width: 150px;
+  height: auto;
 }
+
+.navbar-items .list-items ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.item {
+  margin-right: 20px;
+}
+
+.item a {
+  color: #000;
+  text-decoration: none;
+  position: relative;
+}
+
+.item a:hover {
+  color: #ff0000;
+}
+.item a:hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 3px;
+  background-color: #ff0000;
+}
+
 
 .container {
   max-width: 600px;
-  margin-top: 100px;
-  margin: 50px auto;
-  margin-top: 150px;
+  margin-top: 50px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
