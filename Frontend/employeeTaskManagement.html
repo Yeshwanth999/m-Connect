@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Management</title>
+  <link rel="stylesheet" href="/CSS/employeeTaskManagement.css">
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <h1 id="project-name">Name of the project</h1>
+    <div class="table-one">
+    <table>
+        <tr>
+            <td id="deadline">Deadline</td>
+        </tr>
+    </table>
+   <table id="first-table">
+    <tr>
+        <td id="team-name">Which team is working</td>
+    </tr>
+    <tr>
+        <td id="tl-name">Team Leader Name</td>
+    </tr>
+    <tr>
+        <td id="emps-working">No.of employees working</td>
+    </tr>
+   </table>
+</div>
+    <table id="task-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name of Task</th>
+          <th>Assigned To</th>
+          <th>Due Date</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Submitted Date</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <script src="/Js/employeeTaskManagement.js"></script>
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    var user=sessionStorage.getItem("userId");
+    if(user!==null){
+      var msg="Hello Everyone";
+      console.log(msg);
+    }
+    else{
+      alert("please Login First");
+      window.location.href="SignIn.html";
+    }
+  })
+  </script>
+</body>
+</html>
