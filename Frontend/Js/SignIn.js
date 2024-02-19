@@ -1,7 +1,7 @@
 // Function to show success message
 function showSuccessMessage(elementId) {
     var element = document.getElementById(elementId);
-    element.style.display='block';
+    element.style.display = 'block';
 }
 
 // Function to remove success message
@@ -12,9 +12,9 @@ function removeErrorMessage(elementId) {
 
 // Function to validate email
 function validateEmail() {
-    
+
     //for displaying timark non
-    document.getElementById('gmail-done').style.display='none';
+    document.getElementById('gmail-done').style.display = 'none';
 
     var username = document.getElementById('gmail').value.trim();
     var gmailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
@@ -29,30 +29,6 @@ function validateEmail() {
     } else {
         removeErrorMessage('gmail-error');
         showSuccessMessage('gmail-done');
-    }
-
-    return isValid;
-}
-
-// Function to validate password
-function validatePassword() {
-
-    //for displaying timark non
-    document.getElementById('password-done').style.display ='none';
-
-    var password = document.getElementById('password').value.trim();
-    var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    var isValid = true;
-
-    if (password === '') {
-        document.getElementById('password-error').textContent = 'Password is required';
-        isValid = false;
-    } else if (!passwordPattern.test(password)) {
-        document.getElementById('password-error').textContent = 'Invalid password format';
-        isValid = false;
-    } else {
-        removeErrorMessage('password-error');
-        showSuccessMessage('password-done');
     }
 
     return isValid;

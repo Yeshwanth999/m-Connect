@@ -44,15 +44,9 @@
                 <input type="button" id="signinBtn" onclick="validateForm()" value="Sign In">
             </div>
         </form>
-            
-    
-
         <p class="ForgetPwd"><a href="ForgetPwd.html">Forget password ?</a></p>
 
-    </div>
-    <!-- Sign in form End-->
-
-    <!-- Script form jquery-->
+  
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
@@ -73,7 +67,7 @@
         const type= 'POST';
 
         // Call the updated function for AJAX communication
-        sendFormData('http://localhost:8081/login',type, formData, 'formBox2');
+        sendFormData('http://localhost:8081/user/login',type, formData, 'formBox2');
     });
 </script>
     <script>
