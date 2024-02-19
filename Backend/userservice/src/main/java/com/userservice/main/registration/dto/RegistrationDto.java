@@ -12,5 +12,8 @@ public class RegistrationDto {
 	private String guid;
 	private String gmail;
 	private String password;
-	private String role;
+	private String adminStatus;
+    private String accStatus;
+
+
 }

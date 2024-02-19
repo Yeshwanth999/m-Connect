@@ -1,16 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EmployeeAttendence</title>
-    <link rel="stylesheet" href="/Frontend/CSS/employeeAttendence.css">
+    <link rel="stylesheet" href="./CSS/employeeattendence.css">
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 </head>
 <body>
     
         <div class="emp-table">
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date">
+            <button id="submitBtn">Submit</button>
             <table id="student-table">
               <thead>
                 <tr>
@@ -32,9 +36,9 @@
             </table>
         </div>
 
-        <script src="/Frontend/Js/employeeAttendence.js"></script>
-            <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-          <script>
+        <script src="./Js/employeeattendence.js"></script>
+        <!--     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script> -->
+          <!-- <script>
                 $(document).ready(function () {
                   var user = sessionStorage.getItem("userId");
                   if(user !== null){
@@ -46,6 +50,6 @@
                     window.location.href = "SignIn.html";
                   }
                 });
-          </script>
+          </script> -->
 </body>
 </html>
