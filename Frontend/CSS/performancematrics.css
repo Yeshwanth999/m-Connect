@@ -1,0 +1,56 @@
+.employee-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+  .employee-details {
+    display: flex;
+    align-items: center;
+  }
+
+  .details {
+    margin-left: 10px;
+  }
+
+  .employee-table {
+    flex-grow: 1;
+  }
+
+  .employee-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .employee-actions {
+    flex-shrink: 0;
+    margin: 20px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  #employeeList {
+    overflow-y: auto;
+    max-height: 200px;
+    position: absolute;
+    left: 0;
+    top:200px;
+    width:100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    align-items: center;
+    max-width: 100%;
+  }
