@@ -99,22 +99,39 @@
   <section class="sec2">
 
     <div>
-      <img src="/Frontend/Assets/blog1.png" alt="Error">
-      <a href="https://time.com/"><input type="button" value="Open" class="btn"></a>
-      
+      <div class="blog1" onclick="times()">
+        <h2 class="imgH1"><b>Click for More</b></h2>
+      </div>
+      <h4 style="margin-top: 20px; margin-left: 70px;">How to Manage Time</h4>
     </div>
 
     <div>
-      <img src="/Frontend/Assets/blog2.png" alt="Error">
-      <a href="https://www.health.harvard.edu/blog"><input type="button" value="Open" class="btn"></a>
+      <div class="blog2" onclick="health()">
+        <h2 class="imgH1"><b>Click for More</b></h2>
+      </div>
+      <h4 style="margin-top: 20px; margin-left: 70px;">Articles Regarding Health</h4>
     </div>
 
     <div>
-      <img src="/Frontend/Assets/blog3.png" alt="Error">
-      <a href="https://parade.com/966564/parade/fun-facts/"><input type="button" value="Open" class="btn"></a>
+      <div class="blog3" onclick="funFacts()">
+        <h2 class="imgH1"><b>Click for More</b></h2>
+      </div>
+      <h4 style="margin-top: 20px; margin-left: 120px;">Fun Facts</h4>
     </div>
     
   </section>
+
+  <script>https:
+    function times(){
+      window.open('https://time.com/', '_blank');
+    }
+    function health(){
+      window.open('//www.health.harvard.edu/blog', '_blank');
+    }
+    function funFacts(){
+      window.open('https://parade.com/966564/parade/fun-facts/', '_blank');
+    }
+  </script>
 
 
   <!-- code for Reload direct to signin -->
