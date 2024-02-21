@@ -49,20 +49,59 @@ body {
     width: 90%;
     margin-left: 100px;
     margin-top: 150px;
-    gap: 55px;
+    gap: 60px;
+    margin-bottom: 150px;
 }
-td {
-    border: 2px solid black;
-    width: 500px;
-}
-
-
-.sec2 div img{
+.sec2 .blog1 {
+    background-image: url("/Frontend/Assets/blog1.png");
+    background-size: cover;
     width: 400px;
     height: 250px;
     border-radius: 10px;
+    transition: filter 0.3s ease; 
+    position: relative;
 }
-.sec2 div .btn{
+.sec2 .blog2 {
+    background-image: url("/Frontend/Assets/blog2.png");
+    background-size: cover;
+    width: 400px;
+    height: 250px;
+    border-radius: 10px;
+    transition: filter 0.3s ease; 
+    position: relative;
+}
+.sec2 .blog3 {
+    background-image: url("/Frontend/Assets/blog3.png");
+    background-size: cover;
+    width: 400px;
+    height: 250px;
+    border-radius: 10px;
+    transition: filter 0.3s ease; 
+    position: relative;
+}
+.imgH1 {
+    position: absolute;
+    top: 50%;
+    left: 46%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 1;
+    color: rgb(255, 255, 255);
+}
+.sec2 .blog1:hover h2 {
+    display: block; 
+}
+.sec2 .blog2:hover h2 {
+    display: block; 
+}
+.sec2 .blog3:hover h2 {
+    display: block; 
+}
+
+/*.sec2 .blog1:hover {
+    filter: blur(1px); 
+}*/
+/*.sec2 div .btn{
     background-color: #2489f5;
         color: #fff;
         border: none;
@@ -76,5 +115,5 @@ td {
 }
 .sec2 div .btn:hover {
     background-color: #fffb00; 
-}
+}*/
 

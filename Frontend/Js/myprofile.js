@@ -38,6 +38,12 @@ function cancelEdit() {
     });
 
     buttons.style.display = 'none';
+
+    //document.getElementById("firstname").value = "";
+    /*inputs.forEach(function(input) {
+        input.value = "";
+      });*/
+    
 }
 
 function saveEdit() {
@@ -267,108 +273,7 @@ document.querySelectorAll('.currentaddress').forEach(function (input) {
 });
 
 
-// tranfering data using json// 
-/***********$('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function (){
-    // personal info start
-    var firstname = $('#firstname').val();
-    var lastname = $('#lastname').val();    
-    var dob = $('#dob').val();
-    var gender = $('#gender').val();
-    var blood_group = $('#blood_group').val();
-    var isAdmin = $('#adminCheckbox').is(':checked');
-
-    // contact info start
-    var email = $('#email').val();
-    var password = $('#password').val();
-    var phonenumber = $('#phonenumber').val();
-    var phonenumber1 = $('#phonenumber1').val();
-
-    // Address info start
-    var currentAddress = $('#currentAddress').val();
-    var currentCountry = $('#currentCountry').val();
-    var currentState = $('#currentState').val();
-    var currentCity = $('#currentCity').val();
-    var currentPincode = $('#currentPincode').val();
-
-    var permanentAddress = $('#permanentAddress').val();
-    var permanentCountry = $('#permanentCountry').val();
-    var permanentState = $('#permanentState').val();
-    var permanentCity = $('#permanentCity').val();
-    var permanentPincode = $('#permanentPincode').val();
-
-    // social info start
-    var linkedin = $('#linkedin').val();
-    var twitter = $('#twitter').val();
-    var facebook = $('#facebook').val();
-
-    jsonObject = {
-        // personal info start
-        "firstname":"",
-        "lastname":"",
-        "dob":"",
-        "gender":"",
-        "blood_group":"",
-        "isAdmin":"",
-
-        // contact info start
-        "email":"",
-        "password":"",
-        "phonenumber":"",
-        "phonenumber1":"",
-
-        // Address info start
-        "currentAddress":"",
-        "currentCountry":"",
-        "currentState":"",
-        "currentCity":"",
-        "currentPincode":"",
-        "permanentAddress":"",
-        "permanentCountry":"",
-        "permanentState":"",
-        "permanentCity":"",
-        "permanentPincode":"",
-
-        // social info start
-        "linkedin":"",
-        "twitter":"",
-        "facebook":"",
-    }
-    // personal info start
-    jsonObject.firstname=firstname
-    jsonObject.lastname=lastname
-    jsonObject.dob=dob
-    jsonObject.gender=gender
-    jsonObject.blood_group=blood_group
-    jsonObject.isAdmin=isAdmin
-
-    // contact info start
-    jsonObject.email=email
-    jsonObject.password=password
-    jsonObject.phonenumber=phonenumber
-    jsonObject.phonenumber1=phonenumber1
-
-    // Address info start
-    jsonObject.currentAddress=currentAddress
-    jsonObject.currentCountry=currentCountry
-    jsonObject.currentState=currentState
-    jsonObject.currentCity=currentCity
-    jsonObject.currentPincode=currentPincode
-    jsonObject.permanentAddress=permanentAddress
-    jsonObject.permanentCountry=permanentCountry
-    jsonObject.permanentState=permanentState
-    jsonObject.permanentCity=permanentCity
-    jsonObject.permanentPincode=permanentPincode
-
-    // social info start
-    jsonObject.linkedin=linkedin
-    jsonObject.twitter=twitter
-    jsonObject.facebook=facebook
-
-    var str = JSON.stringify(jsonObject);
-    document.write(str);
-
-});     ********************/
-
+// tranfering data using json
 $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () {
     // personal info start
     var firstname = $('#firstname').val();
@@ -376,7 +281,7 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
     var dob = $('#dob').val();
     var gender = $('#gender').val();
     var blood_group = $('#blood_group').val();
-    var isAdmin = $('#adminCheckbox').is(':checked');
+    //var isAdmin = $('#adminCheckbox').is(':checked');
 
     // contact info start
     var email = $('#email').val();
@@ -409,7 +314,7 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
         dob: dob,
         gender: gender,
         blood_group: blood_group,
-        isAdmin: isAdmin,
+        //isAdmin: isAdmin,
         // personal info start
         email: email,
         password: password,
@@ -437,7 +342,7 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
     console.log(dob);
     console.log(gender);
     console.log(blood_group);
-    console.log(isAdmin);
+    //console.log(isAdmin);
     // personal info start
     console.log(email);
     console.log(password);
