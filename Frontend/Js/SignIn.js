@@ -34,26 +34,4 @@ function validateEmail() {
     return isValid;
 }
 
-// Attach event listeners to trigger validation on input/change
 document.getElementById('gmail').addEventListener('input', validateEmail);
-document.getElementById('password').addEventListener('input', validatePassword);
-
-// Function to validate form
-function validateForm() {
-    var isValid = true;
-
-    // Validate email
-    isValid = validateEmail() && isValid;
-
-    // Validate password
-    isValid = validatePassword() && isValid;
-
-    var isAdmin = document.getElementById('adminCheckbox').checked;
-
-    // Redirect only if the form is valid and isAdmin is checked
-    if (isValid && isAdmin) {
-        window.location.href = 'AdminPage.html';
-    } else if (isValid) {
-        window.location.href = 'employeeDashboard.html';
-    }
-}
