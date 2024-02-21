@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/adminMyProfile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <!-- personal info start -->
+    <section class="section">
+        <div class="profile">
+            <h2>This is Planning for profile content</h2>
+        </div>
+        <div id="form" class="form">
+            <!-- <div class="profile-con">
+                <div class="profile-div" style="width: 25%;">
+                <img src="">
+                 </div> 
+            </div> -->
+            <div class="personal-info-div">
+                <div class="per-icon">
+                    <h2 class="personal-h">PERSONAL INFO</h2>
+                    <i class="fa fa-pencil edit-icon" style="font-size:22px" onclick="toggleEditMode()"></i>
+                </div>
+                <span>
+                    <hr>
+                </span>
+                <div class="inputs-grid">
+                    <div class="form-group-1">
+                        <label for="name" class="label">First Name</label>
+                        <input type="text" id="firstname" name="name" class="input-underlined disabled" required>
+                    </div>
+                    <div class="form-group-1">
+                        <label for="name" class="label">Last Name</label>
+                        <input type="text" id="lastname" name="name" class="input-underlined disabled" required>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <div class="form-group-1">
+                        <label for="email" class="label">Official Email ID</label>
+                        <input type="mail" id="email" name="email" class="input-underlined disabled" required>
+                    </div>
+                    <div class="form-group-1">
+                        <label for="password" class="label">Password</label>
+                        <input type="password" id="password" name="password" class="input-underlined disabled"
+                            required>
+                    </div>
+                    
+                </div>
+                <div class="form-container" style="margin-left: 30px;">
+                    <input type="checkbox" id="adminCheckbox" class="adminCheckbox">
+                    <p>&nbsp; Is Admin</p>
+                </div>
+                <div class="button-container" style="display: none;">
+                    <button class="btn" onclick="cancelEdit()"><span>✕</span> Cancel</button>
+                    <button class="sbtn" id="saveEdit" onclick="saveEdit()"><span>✔︎</span> Save</button>
+                </div>
+            </div>
+            <!-- personal info end -->
+
+            <!-- contact info start -->
+            <!-- <div class="contact-info-div">
+                <div class="per-icon">
+                    <h2 class="personal-h">CONTACT INFO</h2>
+                    <i class="fa fa-pencil edit-icon-1" style="font-size:24px" onclick="contactOnclick()"></i>
+                </div>
+                <hr>
+                <div class="contact-inner">
+                    <div class="form-group-1">
+                        <label for="email" class="label">Official Email ID</label>
+                        <input type="mail" id="email" name="email" class="input-underlined1 disabled" required>
+                    </div>
+                    <div class="form-group-1">
+                        <label for="password" class="label">Password</label>
+                        <input type="password" id="password" name="password" class="input-underlined1 disabled"
+                            required>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <div class="form-group-1">
+                        <label for="phonenumber" class="label">Phone Number</label>
+                        <input type="phonenumber" id="phonenumber" name="phonenumber" class="input-underlined1 disabled"
+                            required>
+                    </div>
+                    <div class="form-group-1">
+                        <label for="alternatephonenumber" class="label">Alternate Phone Number</label>
+                        <input type="phonenumber" id="phonenumber1" name="phonenumber"
+                            class="input-underlined1 disabled" required>
+                    </div>
+                </div>
+                <div class="button-container1" style="display: none;">
+                    <button class="contact-info-btn" onclick="cancelContact()"><span>✕</span> Cancel</button>
+                    <button class="contact-info-sbtn" id="saveContact" onclick="saveContact()"><span>✔︎</span>
+                        Save</button>
+                </div>
+            </div> -->
+            <!-- contact info end -->
+
+            <!-- Address info start -->
+            <!-- <div class="address-info-div">
+                <div class="per-icon">
+                    <h2 class="personal-h">ADDRESSES</h2>
+                    <i class="fa fa-pencil edit-icon-2" style="font-size:22px" onclick="addressOnclick()"
+                        id="addressOnclick"></i>
+                </div>
+                <hr>
+                <div class="addressentire" id="addressentire">
+                    <div class="address-inner-div">
+                        <div class="current-div">
+                            <h3 class="ca-heading">Current Address</h3>
+                            <div class="address-inputs">
+                                <label for="address-1" class="address-1">Address</label>
+                                <input type="address-1" id="currentAddress" name="address-2"
+                                    class="input-underlined2 disabled currentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="address-2" class="address-2">Country</label>
+                                <input type="address-2" id="currentCountry" name="address-2"
+                                    class="input-underlined2 disabled currentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="address-2" class="address-2">State</label>
+                                <input type="address-2" id="currentState" name="address-2"
+                                    class="input-underlined2 disabled currentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="address-2" class="address-2">City</label>
+                                <input type="address-2" id="currentCity" name="address-2"
+                                    class="input-underlined2 disabled currentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="address-2" class="address-2">Pincode</label>
+                                <input type="address-2" id="currentPincode" name="address-2"
+                                    class="input-underlined2 disabled currentaddress" required>
+                                <div class="error-message" id="pincode-error"></div>
+                            </div>
+                        </div>
+                        <div class="permanent-div">
+                            <h3 class="pa-heading">Permanent Address</h3>
+                            <div class="address-inputs">
+                                <label for="address-3" class="address-3">Address</label>
+                                <input type="address-3" id="permanentAddress" name="address-3"
+                                    class="input-underlined2 disabled permanentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="address-4" class="address-4">Country</label>
+                                <input type="address-4" id="permanentCountry" name="address-4"
+                                    class="input-underlined2 disabled permanentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="address-2" class="address-2">State</label>
+                                <input type="address-2" id="permanentState" name="address-2"
+                                    class="input-underlined2 disabled permanentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="address-2" class="address-2">City</label>
+                                <input type="address-2" id="permanentCity" name="address-2"
+                                    class="input-underlined2 disabled permanentaddress" required>
+                            </div>
+                            <div class="address-inputs">
+                                <label for="address-2" class="address-2">Pincode</label>
+                                <input type="address-2" id="permanentPincode" name="address-2"
+                                    class="input-underlined2 disabled permanentaddress" required>
+                                <div class="error-message" id="pincode-error"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="house-type-dd">
+                        <div>
+                            <label for="house-type">House Type</label>
+                            <select id="housetype" name="house-type" class="input-underlined2 disabled" required>
+                                <option value="select">Select</option>
+                                <option value="detached">Owned by Self/Spouse</option>
+                                <option value="semi-detached">Owned By Parent/Sibling</option>
+                                <option value="townhouse">Rented With Family</option>
+                                <option value="apartment">Rented With Friends</option>
+                                <option value="condo">Rented Staying Alone</option>
+                                <option value="condo">Paying Guest</option>
+                                <option value="condo">Hotel</option>
+                                <option value="condo">Company Provided</option>
+                                <option value="condo">Other</option>
+                            </select>
+                        </div>
+                        <div class="staying-since">
+                            <label for="dob" class="label">Staying Since</label>
+                            <input type="date" id="stayingsince" name="dob" class="input-underlined2 disabled" required>
+                        </div>
+                    </div>
+
+                    <div class="living-in-current">
+                        <label for="dob" class="label">Living in Current City Since</label>
+                        <input type="date" id="livingin" name="dob" class="input-underlined2 disabled" required>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="sameAddressCheckbox" name="permanent-address-checkbox"
+                            onchange="copyAddress()" disabled>
+                        <label for="permanent-address-checkbox">Permanent address is the same as current address</label>
+                    </div> -->
+                    <!-- <div id="emptyFieldError" style="display: none; color: red;">
+                    Please fill in all the fields for the permanent address.
+                </div> -->
+
+                    <!-- <div class="button-container2" style="display: none;">
+                        <button class="address-info-btn" onclick="cancelAddress()"><span>✕</span> Cancel</button>
+                        <button class="address-info-sbtn" id="saveAddress" onclick="saveAddress()"><span>✔︎</span>
+                            Save</button>
+                    </div>
+                </div>
+            </div> -->
+            <!-- Address info end -->
+
+            <!-- social info start -->
+            <!-- <div class="social-info-div">
+                <div class="per-icon">
+                    <h2 class="personal-h">SOCIAL PROFILE</h2>
+                    <i class="fa fa-pencil edit-icon-3" style="font-size: 25px;" onclick="socialOnclick()"></i>
+                </div>
+                <hr>
+                <div class="input-with-icon">
+                    <a href="https://www.linkedin.com/">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                    <input type="text" id="linkedin" placeholder="www.linkedin.com/in/"
+                        class="input-underlined3 disabled" required>
+                </div>
+                <div class="input-with-icon">
+                    <a href="https://www.twitter.com/">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <input type="text" id="twitter" placeholder="twitter.com/username."
+                        class="input-underlined3 disabled" required>
+                </div>
+                <div class="input-with-icon">
+                    <a href="https://www.facebook.com/">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <input type="text" id="facebook" placeholder="www.facebook.com/" class="input-underlined3 disabled"
+                        required>
+                </div>
+
+                <div class="button-container3" style="display: none;">
+                    <button class="contact-info-btn" onclick="cancelsocial()"><span>✕</span> Cancel</button>
+                    <button class="contact-info-sbtn" id="savesocial" onclick="savesocial()"><span>✔︎</span>
+                        Save</button>
+                </div>
+            </div> -->
+            <!-- social info end -->
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        </div>
+    </section>
+    <script src="./Js/adminMyProfile.js"></script>
+    <script src="./Js/connect.js"></script>
+
+    <!-- code for Reload direct to signin -->
+    <!-- <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+             //var userId = "SP2515788-M1029";
+             //sessionStorage.setItem("userId", userId);
+            var user = sessionStorage.getItem("userId");
+            if (user !== null) {
+                var x = "hi";
+                console.log(x);
+                console.log(user);
+            }
+            else {
+                alert("Please login first");
+                window.location.href = "SignIn.html";
+            }
+        });
+    </script> -->
+    
+</body>
+
+</html>
