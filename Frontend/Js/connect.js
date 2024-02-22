@@ -168,49 +168,28 @@ function sendEmpData(url, type, data, elementID) {
     });
 
 }
-
-
-function sendEmpData(url, type, data, elementID) {
+function fetchLogout(url, type) {
 
     $.ajax({
-        url: 'http://localhost:8082/admin/register',
-        method: 'POST',
-        data: data,
-        success: function (adminResponse, textStatus, xhr) {
-            // Registration successful
-            if (textStatus == 'success') {
-                console.log("Successfully registered: ", adminResponse);
-            }
-            else {
-                console.log("something error is occures in adminside.")
-            }
+        type: type,
+        url: url,  // Make sure the URL is correct
+        contentType: 'application/json',
+        // data: JSON.stringify(),
 
-            // Now make AJAX request to employee service for update
-            $.ajax({
-                url: 'http://localhost:8081/user/update',
-                method: 'POST',
-                data: JSON.stringify(data),
-                success: function (employeeResponse, textStatus, xhr) {
-                    // Update successful
-
-                    if (textStatus == 'success') {
-                        console.log("User updated successfully:", employeeResponse);
-                    }
-                    else {
-                        console.log("something error is occures in userside.")
-                    }
-                },
-                error: function (employeeError) {
-                    // Handle error from employee service.
-                    console.error("Error updating user:", employeeError);
-                }
-            });
+        success: function (response, textStatus, xhr) {
+            if (xhr.status == 200) {
+                console.log('Logout successful');
+                window.location.href = 'SignIn.html'; // Redirect to login page // Parse response JSON (if any)
+            } else {
+                throw new Error('Logout request failed');
+            }
         },
-        error: function (adminError) {
-            // Handle error from admin service
-            console.error("Error registering user:", adminError);
+        error: function (error) {
+            console.log(xhr.status);
+            console.log(textStatus);
+            console.error('Logout request failed:', error);
         }
     });
-
 }
+
 
