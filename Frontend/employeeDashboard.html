@@ -1,179 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>employeeDashbord</title>
-    <link href="css/employeeDashboard.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.css' rel='stylesheet' />
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.js'></script>
-    <script src="https://kit.fontawesome.com/fae9f5ea2f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/Frontend/CSS/home.css">
+    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css />
+
+    <title>Header Section</title>
 </head>
+
 <body>
- 
-      <div class="container-fluid">
-        <div class="row">
-
-          <!---sidebar start-->
-          <nav id="sidebarMenu" class="col-md-6 col-lg-2 d-md-block bg-light sidebar collapse pt-5">
-            <div class="position-sticky pt-5">
-              <ul class="nav flex-column p-2 pt-3">
-                <li class="profile-upload">
-                  <label for="profileImageInput" class="profile-upload-label">
-                    <img src="#" alt="Profile Image" id="profileImage" class="profile-image">
-                    <span class="upload-icon">+</span>
-                    <input type="file" id="profileImageInput" style="display: none;">
-                  </label>
-                </li>
-                
-                <li class="nav-item pt-3 px-5">
-                  <p class="text-light">Full Name</p>
-                </li> 
-              </ul>
-              <div class="container-fluid mb-5 mt-5">
-                <div class="main-div">
-                  <div class="sub-div">
-                    <div class="year-div">
-                      <div id="month"></div>
-                      <div id="year"></div>
+    <header>
+        <div class="logo">
+            <img src="/Frontend/Assets/Microden (1) (1).png" alt="">
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Search ">
+        </div>
+        <div class="notification">
+            <a href=""><i class="fas fa-bell"></i>
+            </a>
+            <div class="dropdown">
+                <!-- <button class="dropbtn">User</button> -->
+                <div class="profile-icon">
+                    <i class="fas fa-user"></i>
+                    <div class="dropdown-content">
+                        <a href="#">Profile</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Logout</a>
                     </div>
-                  </div>
-                  <div class="date-div">
-                    <p id="date">
-                    </p>
-                    <p id="day">aaaa</p>
-                  </div>
                 </div>
-              </div>
             </div>
-          </nav>
-          <!--sidebar end-->
-          
+        </div>
+    </header>
+    <div class="container">
+        <div class="employee-card">
+            <img src="/Frontend/Assets/WhatsApp Image 2024-02-05 at 16.43.50.jpeg" alt="Employee Photo">
+            <h3>nagaraju</h3>
+        </div>
+        <div class="employee-card1">
+            <h3 class="heading">WELCOME BACK</h3>
+        </div>
 
-          <!--personal details form start-->
-          <div class="col-md-10 personalDetails mt-2">
-            <div class="row">
-            <div class="col-md-6 mt-2 my-2 custom-gap">
-              <div class="shadow  bg-body rounded mb-3 ">
-                <div class="personal-details rounded "><h3 class=" px-1 py-1">Personal Details</h3></div>
-                  <div class="p-3 personal-details-main">
-                    <p>Name:<span></span></p>
-                    <p>Father Name:<span></span></p>
-                    <p>DOB:<span></span></p>
-                    <p>Gender:<span></span></p>
-                    <p>Email:<span></span></p>
-                    <p>Phone Number:<span></span></p>
-                    <Address>Present Address:<span></span></Address>
-                    <Address>Permanent Address:<span></span></Address>
-                  </div>
-                  
-              </div>
-              <div class="shadow  mb-2 bg-body rounded">
-                <div>
-                  <div class="company-details rounded "><h3 class=" px-1 py-1">Company Details</h3></div>
-                  <div>
-                    <div class="p-2">
-                      <p>Designation<span class="space-1">:</span><span></span></p>
-                      <p>Employee ID <span class="space-2">:</span><span></span></p>
-                      <p>Department<span class="space-3">:</span><span></span></p>
-                      <p>Reporting Manager<span class="space-4">:</span><span></span></p>
-                    </div>
-                  </div>
+    </div>
+    <div class="card-container">
+        <div class="card-container1">
+            <div class="card">
+                <div class="dashboard-icon1">
+                    <a href="" target="_blank"> <i class="fas fa-tachometer-alt"></i></a>
                 </div>
-                  
-              </div>
-
-             
+                <h3 class="head">Dashboard</h3>
             </div>
-            
-            <div class="col-md-4">
-              <div class="shadow p-1 pt-0 px-0 py-0 mt-3 mb-5 bg-body rounded">
-                <div class="notification-card rounded pt-1 pb-5 px-1 py-5"><h3>Notifications</h3></div>
-                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                  <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                  </div>
-                  <div class="carousel-inner">
-                    <div class="carousel-item active" data-bs-interval="10000">
-                      <img src="../Frontend/Assets/MICRODEN.png" class="d-block notify-img" alt="...">
-                      <div class="carousel-caption d-none d-md-block">
-                        <h5>Notifications</h5>
-                        <p>Some representative placeholder content for the first slide.
-                          Lorem ipsum dolor sit amet consectetur.
-                        </p>
-                      </div>
-                    </div>
-                    <div class="carousel-item" data-bs-interval="2000">
-                      <img src="../Frontend/Assets/MICRODEN.png" class="d-block notify-img" alt="...">
-                      <div class="carousel-caption d-none d-md-block">
-                        <h5>Notifications</h5>
-                        <p>Some representative placeholder content for the first slide.
-                          Lorem ipsum dolor sit amet consectetur.
-                        </p>
-                      </div>
-                    </div>
-                    <div class="carousel-item">
-                      <img src="../Frontend/Assets/MICRODEN.png" class="d-block notify-img" alt="...">
-                      <div class="carousel-caption d-none d-md-block">
-                        <h5>Notifications</h5>
-                        <p>Some representative placeholder content for the first slide.
-                          Lorem ipsum dolor sit amet consectetur.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-                </div> 
-              </div>
-              <div class="shadow p-3 pt-0 px-0 py-0 mt-3 mb-3 bg-body rounded">
-                <div class="notification-card rounded pt-1 pb-5 px-1 py-5"><h3>Upcoming Holidays</h3></div>
-                <p class="p-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                  Dolore vitae facilis soluta perspiciatis laudantium quos .</p>
-              </div>
+            <div class="card">
+                <div class="dashboard-icon2">
+                    <a href="myprofile.html"><i class="fas fa-user"></i></a>
+                </div>
+                <h3 class="head">My Profile</h3>
             </div>
+            <div class="card">
+                <div class="dashboard-icon3">
+                    <a href="./leavePage.html"><i class="fas fa-calendar-times"></i></a>
+                </div>
+                <h3 class="head">Leaves</h3>
             </div>
+            <div class="card">
+                <div class="dashboard-icon4">
+                    <a href=""><i class="fas fa-calendar-check"></i></a>
+                </div>
+                <h3 class="head">Attendance</h3>
+            </div>
+        </div>
+        <div class="card-container1">
+            <div class="card">
+                <div class="dashboard-icon5">
+                    <a href=""><i class="fas fa-money-check-alt"></i></a>
+                </div>
+                <h3 class="head">Payroll</h3>
+            </div>
+            <div class="card">
+                <div class="dashboard-icon6">
+                    <a href=""><i class="far fa-id-card"></i></a>
+                </div>
 
+                <h3 class="head">ID Card</h3>
 
+            </div>
+            <div class="card">
+                <div class="dashboard-icon7">
+                    <a href=""> <i class="fas fa-receipt"></i></a>
+                </div>
+                <h3 class="head">Slips</h3>
+            </div>
+            <div class="card">
+                <div class="dashboard-icon8">
+                    <a href=""><i class="fas fa-trophy"></i></a>
+                </div>
+                <h3 class="head">Rewards</h3>
+            </div>
+        </div>
+        <div class="card-container1">
+            <div class="card">
+                <div class="dashboard-icon9">
+                    <a href=""> <i class="fas fa-bell"></i></a>
+                </div>
+                <h3 class="head">Notifications</h3>
+            </div>
+            <div class="card">
+                <div class="dashboard-icon10">
+                    <a href=""><i class="fas fa-tachometer-alt"></i></a>
+                </div>
+                <h3 class="head">Any Other Option</h3>
+            </div>
+            <div class="card">
+                <div class="dashboard-icon11">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3 class="head">Any Other Option</h3>
 
-          </div>
-        <!--personal details form end-->
-        </div> 
-      </div> 
-      <iframe class="i-frame" id="iframe-content"  src=" " title="description"></iframe>
-  <script src="../Frontend/Js/employeeDashboard.js"></script>    
-    
-  <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+            </div>
+            <div class="card">
+                <div class="dashboard-icon12">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3 class="head">Any Other Option</h3>
+            </div>
+        </div>
+    </div>
 
+    <!-- <script >
+        sessionStorage.setItem("key",);
+        
+        </script>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+          <script>
+            $(document).ready(function () {
+              var user = sessionStorage.getItem("key");
+              if(user !== null){
+                var x = "hi";
+                console.log(x);
+              }
+              else{
+                alert("please login first");
+                window.location.href = "SignIn.html";
+            }
+            });
+          </script>
+         -->
 
-  <!-- code for Reload direct to signin -->
-  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script>
-      $(document).ready(function () {
-           //var userId = "SP2515788-M1029";
-           //sessionStorage.setItem("userId", userId);
-          var user = sessionStorage.getItem("userId");
-          if (user !== null) {
-              var x = "hi";
-              console.log(x);
-              console.log(user);
-          }
-          else {
-              alert("Please login first");
-              window.location.href = "SignIn.html";
-          }
-      });
-  </script>
-  
 </body>
+
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./CSS/myprofile.css">
+    <script src="../Frontend/Js/connect.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
@@ -15,7 +16,6 @@
             <!-- <div class="profile-div" style="width: 25%;">
                 <img src="">
             </div> -->
-
             <div class="personal-info-div">
                 <div class="per-icon">
                     <h2 class="personal-h">PERSONAL INFO</h2>
@@ -68,6 +68,9 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-container" style="margin-left: 30px;">
+                    <input type="checkbox" id="adminCheckbox">   <p>&emsp; Admin</p>
+                </div>
                 <div class="button-container" style="display: none;">
                     <button class="btn" onclick="cancelEdit()"><span>✕</span> Cancel</button>
                     <button class="sbtn" id="saveEdit" ><span>✔︎</span> Save</button>
@@ -89,8 +92,8 @@
                         <input type="mail" id="email" name="email" class="input-underlined1 disabled" required>
                     </div>
                     <div class="form-group-1">
-                        <label for="email" class="label">Personal Email ID</label>
-                        <input type="email" id="email1" name="email" class="input-underlined1 disabled" required>
+                        <label for="password" class="label">Password</label>
+                        <input type="password" id="password" name="password" class="input-underlined1 disabled" required>
                     </div>
                 </div>
                 <div class="form-container">
@@ -109,7 +112,6 @@
                 </div>
         </div>
         <!-- contact info end -->
-
         <!-- Address info start -->
         <div class="address-info-div">
             <div class="per-icon">  
@@ -198,9 +200,7 @@
                     <input type="checkbox" id="sameAddressCheckbox" name="permanent-address-checkbox" onchange="copyAddress()" disabled>
                     <label for="permanent-address-checkbox">Permanent address is the same as current address</label>
                 </div>
-                <!-- <div id="emptyFieldError" style="display: none; color: red;">
-                    Please fill in all the fields for the permanent address.
-                </div> -->
+                
             
             <div class="button-container2" style="display: none;">
                 <button class="address-info-btn" onclick="cancelAddress()"><span>✕</span> Cancel</button>
@@ -208,7 +208,6 @@
             </div>
         </div>
         </div>
-        <!-- Address info end -->
         
         <!-- social info start -->
         <div class="social-info-div">
@@ -221,7 +220,7 @@
                     <a href="https://www.linkedin.com/">
                         <i class="fa fa-linkedin"></i>
                     </a>
-                    <input type="text" id="linkedin" placeholder="www.linkedin.com/in/" class="input-underlined3 disabled" required>
+                    <input type="text" id="linkedin" placeholder="https://www.linkedin.com/in/" class="input-underlined3 disabled" required>
                 </div>
                 <div class="input-with-icon">
                     <a href="https://www.twitter.com/">
@@ -233,7 +232,7 @@
                     <a href="https://www.facebook.com/">
                         <i class="fa fa-facebook"></i>
                     </a>
-                    <input type="text" id="facebook" placeholder="www.facebook.com/" class="input-underlined3 disabled" required>
+                    <input type="text" id="facebook" placeholder="https://www.facebook.com/" class="input-underlined3 disabled" required>
                 </div>
                 
             <div class="button-container3" style="display: none;">
@@ -245,6 +244,7 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </div>
     </section>
+
     <script src="./Js/myprofile.js"></script>
 </body>
 </html>
