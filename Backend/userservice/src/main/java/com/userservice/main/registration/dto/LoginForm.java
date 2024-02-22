@@ -11,5 +11,13 @@ public class LoginForm {
 	
 	private String gmail;
 	private String password;
-	private boolean isAdmin;
+	private boolean adminStatus;
+
+	 public boolean isAdminStatus() {
+	        return adminStatus;
+	    }
+
+	    public void setAdminStatus(boolean adminStatus) {
+	        this.adminStatus = adminStatus;
+	    }
 }

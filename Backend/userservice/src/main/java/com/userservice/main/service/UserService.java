@@ -2,11 +2,11 @@ package com.userservice.main.service;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
 import com.userservice.main.entity.Employee;
+import com.userservice.main.entity.EmployeeLeave;
 import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.RegistrationDto;
+import com.userservice.main.registration.dto.ResponseMsg;
 
 
 public interface UserService {
@@ -15,7 +15,7 @@ public interface UserService {
 
 	   String userLogin(LoginForm loginForm);
       
-	   String addUser(RegistrationDto user);
+//	   String addUser(RegistrationDto user);
 
 	   Employee saveEmployee(Employee employee);
 
@@ -28,6 +28,11 @@ public interface UserService {
 	  boolean getOtp(String gmail, String otp);
 
 	  String setpassword(String gmail, String password);
+
+	  EmployeeLeave applyLeave(EmployeeLeave employeeLeave);
+	  
+		ResponseMsg updateEmp(String Guid, RegistrationDto registrationDTO);
+
 
 
 
