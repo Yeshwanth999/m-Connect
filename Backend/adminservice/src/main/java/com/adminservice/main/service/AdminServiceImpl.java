@@ -5,12 +5,13 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.adminservice.main.dto.RegistrationdDTO;
 import com.adminservice.main.entity.Employee;
 import com.adminservice.main.entity.User;
@@ -22,10 +23,10 @@ import com.adminservice.main.repository.UserRepo;
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired
-	private AdminRepository adminrepo;
+	private AdminRepository adminrepo;    //Employee data
 
 	@Autowired
-	private UserRepo emprepo;
+	private UserRepo emprepo;           //Employee login data
 
 	public AdminServiceImpl(AdminRepository adminrepo) {
 		this.adminrepo = adminrepo;
@@ -34,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	private static final String FILENAME = "src/main/resources/static/counter.txt";
 	
-	 public static String generateID() {
+	public static String generateID() {
 	        int counter = readCounterFromFile();
 	        StringBuilder idBuilder = new StringBuilder();
 	        idBuilder.append("SP2515788-M");
@@ -72,7 +73,7 @@ public class AdminServiceImpl implements AdminService {
 		registerEmp.setPassword(encrypetedPwd);
 
 		Employee emp = new Employee();
-		emp.setGuid(registerEmp.getGuid());
+		emp.setGuid(generateID());
 		emp.setGmail(registerEmp.getGmail());
 		emp.setPassword(encrypetedPwd);
 		emp.setBlood_group(registerEmp.getBlood_group());
@@ -107,7 +108,26 @@ public class AdminServiceImpl implements AdminService {
 
 		return new ResponseMsg(true, emp.getFirstname(), "Employee Added Succesfully.");
 	}
-	
+	    
+	    
+	    @Override
+		public List<Employee> getAllEmployees() {    	
+			List<Employee> emp = adminrepo.findAll();
+			return emp;
+		}
+
+		@Override
+		public Employee getEmployeeById(Long id) {
+
+			Optional<Employee> emp = adminrepo.findById(id);
+
+			if (emp.isPresent()) {
+				return emp.get();
+			} else {
+				return null;
+			}
+		}
+		
 	@Override
 	public String DeleteUserById(long id) {
        	adminrepo.deleteById(id);
@@ -115,8 +135,4 @@ public class AdminServiceImpl implements AdminService {
 		return "User Data Droped";
 	}
 	
-	
-	
-	
-
 }

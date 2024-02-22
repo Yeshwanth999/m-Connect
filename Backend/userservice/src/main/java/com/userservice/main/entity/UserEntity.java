@@ -32,6 +32,7 @@ public class UserEntity {
 	private String guid;
     private String gmail;
 	private String password;
-	private String adminStatus;
-    private String accStatus;	
+	private boolean adminStatus;
+    private String accStatus;
+	
 }

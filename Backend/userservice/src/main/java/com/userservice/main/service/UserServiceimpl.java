@@ -10,23 +10,25 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.NonUniqueResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.userservice.main.entity.Employee;
+import com.userservice.main.entity.EmployeeLeave;
 import com.userservice.main.entity.UserEntity;
 import com.userservice.main.registration.dto.EmailUtils;
 import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.PasswordUtils;
 import com.userservice.main.registration.dto.RegistrationDto;
+import com.userservice.main.registration.dto.ResponseMsg;
+import com.userservice.main.repository.EmployeeLeaveRepository;
 import com.userservice.main.repository.EmployeeRepo;
 import com.userservice.main.repository.UserRepository;
 
-import javax.persistence.NonUniqueResultException;
 import lombok.NoArgsConstructor;
 
 @Service
@@ -38,6 +40,10 @@ public class UserServiceimpl implements UserService {
 
 	@Autowired
 	private EmployeeRepo emprepo;
+	
+	@Autowired
+	private EmployeeLeaveRepository empleaverepo;
+
 
 	@Autowired
 	private EmailUtils emailutils;
@@ -59,86 +65,21 @@ public class UserServiceimpl implements UserService {
 
 	@Override
 	public String userLogin(LoginForm loginform) {
-
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 
 		UserEntity user = userrepo.findByGmail(loginform.getGmail());
 
-		if (user != null) {
-
-			String Password1 = loginform.getPassword();
-
-			String hashedPassword = user.getPassword();
-
-			// Compare the provided password with the stored hashed password
-			if (bcrypt.matches(Password1, hashedPassword)) {
-				
-				return "success";
-				
+		if (user != null && bcrypt.matches(loginform.getPassword(), user.getPassword())) {
+			if (user.isAdminStatus() == true) {
+				return "Admin";
 			} else {
-				return "Incorrect password";
+				return "Employee";
 			}
 		} else {
-			return "User not found";
+			return "Incorrect username or password";
 		}
 	}
-
-	private static final String FILENAME = "src/main/resources/static/counter.txt";
 	
-	 public static String generateID() {
-	        int counter = readCounterFromFile();
-	        StringBuilder idBuilder = new StringBuilder();
-	        idBuilder.append("SP2515788-M");
-	        idBuilder.append(String.format("%04d", counter)); // Ensures the numerical part has at least 4 digits
-	        updateCounterInFile(counter + 1);
-	        return idBuilder.toString();
-	    }
-
-	    private static int readCounterFromFile() {
-	        try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
-	            String line = br.readLine();
-	            if (line != null) {
-	                return Integer.parseInt(line.trim());
-	            }
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	        return 1; // Default value if file doesn't exist or couldn't be read
-	    }
-
-	    private static void updateCounterInFile(int counter) {
-	        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME))) {
-	            bw.write(Integer.toString(counter));
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	    
-	   
-	@Override
-	@Transactional
-	public String addUser(RegistrationDto user) {
-		
-		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-		String encryptedPwd = bcrypt.encode(user.getPassword());
-		user.setPassword(encryptedPwd);
-
-		UserEntity usr = new UserEntity();
-		usr.setGmail(user.getGmail());
-		usr.setGuid(generateID());
-//		System.out.println("===================="+generateID()+"+++++++++++++++++++");
-		usr.setAdminStatus(user.getAdminStatus());
-		
-		usr.setPassword(encryptedPwd);
-
-		UserEntity saveUser = userrepo.save(usr);
-
-//		System.out.println("----------------" + saveUser.getPassword() + "----------------");
-
-		return saveUser.getGmail() + "Employee added successfully...";
-
-	}
-
 	@Override
 	public Employee saveEmployee(Employee employee) {
 		return emprepo.save(employee);
@@ -270,6 +211,53 @@ public class UserServiceimpl implements UserService {
 		}
 	}
 
+	@Override
+	public ResponseMsg updateEmp(String guid, RegistrationDto registerEmp) {
+
+		Optional<Employee> empOptional = emprepo.findByGuid(guid);
+		
+		System.out.println("method checking:--------->" + empOptional != null);
+		if (empOptional.isPresent()){
+			
+	        Employee emp = empOptional.get();
+			
+			BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+			String encryptedPwd = bcrypt.encode(registerEmp.getPassword());
+			
+			emp.setPassword(encryptedPwd);
+			emp.setBlood_group(registerEmp.getBlood_group());
+			emp.setCurrentPincode(registerEmp.getCurrentPincode());
+			emp.setCurrentAddress(registerEmp.getCurrentAddress());
+			emp.setCurrentCity(registerEmp.getCurrentCity());
+			emp.setCurrentCountry(registerEmp.getCurrentCountry());
+			emp.setCurrentState(registerEmp.getCurrentState());
+			emp.setDob(registerEmp.getDob());
+			emp.setFirstname(registerEmp.getFirstname());
+			emp.setLastname(registerEmp.getLastname());
+			emp.setGender(registerEmp.getGender());
+			emp.setLivingincurrent(registerEmp.getLivingincurrent());
+			emp.setMarital_status(registerEmp.getMarital_status());
+			emp.setStayingsince(registerEmp.getStayingsince());
+			emp.setPermanentAddress(registerEmp.getPermanentAddress());
+			emp.setPermanentCity(registerEmp.getPermanentCity());
+			emp.setPermanentCountry(registerEmp.getPermanentCountry());
+			emp.setPermanentPincode(registerEmp.getPermanentPincode());
+			emp.setPermanentState(registerEmp.getPermanentState());
+			emp.setPhonenumber(registerEmp.getPhonenumber());
+			emp.setRole(registerEmp.getRole());
+
+			emprepo.save(emp);
+
+			return new ResponseMsg(true, emp.getFirstname(), "Employee updated successfully.");
+		} else {
+			return new ResponseMsg(false, "", "Employee with"+ guid +"ID not found.");
+		}
+	}
+
+	@Override
+	public EmployeeLeave applyLeave(EmployeeLeave employeeLeave) {
+		return empleaverepo.save(employeeLeave);
+	}
 	
 	
 	

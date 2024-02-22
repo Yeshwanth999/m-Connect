@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -28,10 +29,12 @@ public class Employee {
 	private Long id;
 //	@OneToOne(mappedBy = "employee",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 //	private User user;
-
+   
+	@Column(length = 36) 
 	private String guid;
-	@Column(unique = true, nullable = true, insertable = false, updatable = false, columnDefinition = "VARCHAR(65)")
+	@Column(unique = true, nullable = true, columnDefinition = "VARCHAR(65)")
 	private String gmail;
+
 
 	@Column(nullable = false, columnDefinition = "VARCHAR(40)")
 	private String firstname;
@@ -64,14 +67,14 @@ public class Employee {
 	@Column(columnDefinition = "VARCHAR(40)")
 	private String currentAddress;
 
-	@Column(columnDefinition = "VARCHAR(40)")
+	@Column(length = 36) 
 	private String currentCountry;
 
 	@Column(columnDefinition = "VARCHAR(40)")
 	private String currentState;
 	@Column(columnDefinition = "VARCHAR(40)")
 	private String currentCity;
-	@Column(columnDefinition = "NUMERIC(6,0)")
+	@Column(columnDefinition = "NUMERIC(8,0)")
 	private Long currentPincode;
 
 	@Column(columnDefinition = "VARCHAR(100)")
@@ -82,7 +85,7 @@ public class Employee {
 	private String permanentState;
 	@Column(columnDefinition = "VARCHAR(40)")
 	private String permanentCity;
-	@Column(columnDefinition = "NUMERIC(6,0)")
+	@Column(columnDefinition = "NUMERIC(8,0)")
 	private Long permanentPincode;
 	@Column(columnDefinition = "VARCHAR(40)")
 	private String stayingsince;
@@ -94,7 +97,7 @@ public class Employee {
 	private String imgPath;
 
 	@Lob
-	@Column(name = "profile_img", length = 1000)
+	@Column(name = "profile_img")
 	private byte[] profileImage;
 
 }
