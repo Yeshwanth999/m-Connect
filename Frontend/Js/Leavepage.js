@@ -17,7 +17,7 @@ function apply(){
     leaveBalance.style.display="none";
 }
 // saving apply leave data into json object and sending it to db
-function sendLeaveData(){
+function applyLeaveData(){
   const leaveData ={
   }
 
@@ -37,6 +37,9 @@ function sendLeaveData(){
   console.log(leaveData);
   let URL ;
   let type ;
+  let data = leaveData;
+  sendApplyLeaveData(URL, type, data)
+  
 }
 
 // onclick display cancel leave section and others none
@@ -49,7 +52,7 @@ function cancel(){
 }
 
 // saving cancel leave data into json object and sending it to db
-function sendCancelLeaveData(){
+function cancelLeaveData(){
   const cancelLeaveData ={
   }
 
@@ -73,6 +76,8 @@ function sendCancelLeaveData(){
   console.log(cancelLeaveData);
   let URL ;
   let type ;
+  let data = cancelLeaveData;
+  sendCancelLeaveData(URL, type, data);
 }
 
 function history(){
@@ -84,78 +89,43 @@ function history(){
     myRequests.style.display="none";
     leaveBalance.style.display="none";
 
-    // history table data from json
-    const data = [
-        
+    let url;
+    let type;
+    let data;
+    sendLeaveHistoryData(url, type, data);
 
-        {
-          "id" : 1 ,
-          "leave_date": "2024-02-01",
-          "status": "Approved",
-          "leave_type": "Annual",
-          "no_of_days": 1
-        },
-        {
-          "id" : 2,
-          "leave_date": "2024-02-05",
-          "status": "Pending",
-          "leave_type": "Sick",
-          "no_of_days": 3
-        },
-        {
-          "id" : 3,
-          "leave_date": "2024-02-10",
-          "status": "Rejected",
-          "leave_type": "Personal",
-          "no_of_days": 2
-        },
-        {
-          "id" : 4,
-          "leave_date": "2024-02-15",
-          "status": "Approved",
-          "leave_type": "Annual",
-          "no_of_days": 1
-        },
-        {
-          "id" : 5 ,
-          "leave_date": "2024-02-20",
-          "status": "Approved",
-          "leave_type": "Maternity",
-          "no_of_days": 90
+    // rendering leave history data from conect.js response
+
+    function historyData(data){
+
+      const gridView = document.getElementById('grid-view');
+  
+      function renderGridView(data) {
+        // Clear existing rows
+        gridView.innerHTML = '';
+  
+        // Create header row
+        const headerRow = document.createElement('tr');
+        for (const key in data[0]) {
+          const th = document.createElement('th');
+          th.textContent = key.toUpperCase();
+          headerRow.appendChild(th);
         }
-];  
-
-const gridView = document.getElementById('grid-view');
-const searchInput = document.getElementById('search-input');
-
-function renderGridView(data) {
-// Clear existing rows
-gridView.innerHTML = '';
-
-// Create header row
-const headerRow = document.createElement('tr');
-for (const key in data[0]) {
-  const th = document.createElement('th');
-  th.textContent = key.toUpperCase();
-  headerRow.appendChild(th);
-}
-gridView.appendChild(headerRow);
-
-// Create data rows
-data.forEach(item => {
-  const row = document.createElement('tr');
-  for (const key in item) {
-    const td = document.createElement('td');
-    td.textContent = item[key];
-    row.appendChild(td);
-  }
-  gridView.appendChild(row);
-});
-}
-
-renderGridView(data);
-
-
+        gridView.appendChild(headerRow);
+  
+        // Create data rows
+        data.forEach(item => {
+          const row = document.createElement('tr');
+          for (const key in item) {
+            const td = document.createElement('td');
+            d.textContent = item[key];
+            row.appendChild(td);
+          }
+          gridView.appendChild(row);
+        });
+      }
+      renderGridView(data);
+    }
 }
 
 function request(){
@@ -164,51 +134,14 @@ function request(){
   leaveHistory.style.display="none";
   myRequests.style.display="block";
   leaveBalance.style.display="none";
-  //rendering leave balance data from json
-  const data = [
-    {
-      "s.no" : 1,
-      "leave type": "sick leave",
-      "start date": "1/2/2024",
-      "end date": "2/2/2024",
-      "reason": "health issue",
-      "status": "Approved",
-    },
-    {
-      "s.no" : 2,
-      "leave type": "emergency",
-      "start date": "1/2/2024",
-      "end date": "2/2/2024",
-      "reason": "health issue",
-      "status": "Approved",
-    },
-    {
-      "s.no" : 3,
-      "leave type": "paid",
-      "start date": "1/2/2024",
-      "end date": "2/2/2024",
-      "reason": "health issue",
-      "status": "Approved",
-    },
-    {
-      "s.no" : 4,
-      "leave type": "casual",
-      "start date": "1/2/2024",
-      "end date": "2/2/2024",
-      "reason": "health issue",
-      "status": "Approved",
-    },
-    {
-      "s.no" : 5,
-      "leave type": "meternity",
-      "start date": "1/2/2024",
-      "end date": "2/2/2024",
-      "reason": "health issue",
-      "status": "Approved",
-    }
-];  
-  const gridView = document.getElementById('request-grid-view');
-  function renderGridView(data) {
+  let url;
+  let type;
+  let data;
+  sendLeaveRequestsData(url, type, data);
+  // rendering leave request data from conect.js response
+  function requestsData(data){
+    const gridView = document.getElementById('request-grid-view');
+    function renderGridView(data) {
       // Clear existing rows
       gridView.innerHTML = '';
 
@@ -223,16 +156,17 @@ function request(){
 
       // Create data rows
       data.forEach(item => {
-      const row = document.createElement('tr');
-      for (const key in item) {
-        const td = document.createElement('td');
-        td.textContent = item[key];
-        row.appendChild(td);
-      }
-      gridView.appendChild(row);
-    });
-  }
+        const row = document.createElement('tr');
+        for (const key in item) {
+          const td = document.createElement('td');
+          td.textContent = item[key];
+          row.appendChild(td);
+        }
+        gridView.appendChild(row);
+      });
+    }
   renderGridView(data);
+  } 
 }
 
 function balance(){
@@ -242,65 +176,40 @@ function balance(){
   leaveHistory.style.display="none";
   myRequests.style.display="none";
   leaveBalance.style.display="block";
-  
-  //rendering leave balance data from json
-  const data = [
-      {
-        "Leave Type" : "Sick",
-        "Credited": 20,
-        "Used": 1,
-        "Balance": 19,
-      },
-      {
-          "Leave Type" : "paid",
-          "Credited": 24,
-          "Used": 5,
-          "Balance": 19,
-      },
-      {
-          "Leave Type" : "Sick",
-          "Credited": 10,
-          "Used": 1,
-          "Balance": 9,
-      },
-      {
-          "Leave Type" : "casual",
-          "Credited": 12,
-          "Used": 1,
-          "Balance": 11,
-      },
-      {
-          "Leave Type" : "emergency",
-          "Credited": 20,
-          "Used": 1,
-          "Balance": 19,
+
+  let url;
+  let type;
+  let data;
+  sendLeaveBalanceData(url, type, data);
+
+  // rendering leave history data from conect.js response
+  function leavebalanceData(data){
+    const gridView = document.getElementById('balance-grid-view');
+    function renderGridView(data) {
+      // Clear existing rows
+      gridView.innerHTML = '';
+
+      // Create header row
+      const headerRow = document.createElement('tr');
+      for (const key in data[0]) {
+        const th = document.createElement('th');
+        th.textContent = key.toUpperCase();
+        headerRow.appendChild(th);
       }
-  ];  
-  const gridView = document.getElementById('balance-grid-view');
-  function renderGridView(data) {
-    // Clear existing rows
-    gridView.innerHTML = '';
+      gridView.appendChild(headerRow);
 
-    // Create header row
-    const headerRow = document.createElement('tr');
-    for (const key in data[0]) {
-    const th = document.createElement('th');
-    th.textContent = key.toUpperCase();
-    headerRow.appendChild(th);
+      // Create data rows
+      data.forEach(item => {
+        const row = document.createElement('tr');
+        for (const key in item) {
+          const td = document.createElement('td');
+          td.textContent = item[key];
+          row.appendChild(td);
+        }
+        gridView.appendChild(row);
+      });
     }
-    gridView.appendChild(headerRow);
 
-    // Create data rows
-    data.forEach(item => {
-    const row = document.createElement('tr');
-    for (const key in item) {
-    const td = document.createElement('td');
-    td.textContent = item[key];
-    row.appendChild(td);
-    }
-    gridView.appendChild(row);
-    });
+    renderGridView(data);
   }
-
-  renderGridView(data);
 }

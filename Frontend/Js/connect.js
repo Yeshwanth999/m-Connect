@@ -1,3 +1,5 @@
+const { json } = require("stream/consumers");
+
 function sendFormData(url, type, data, elementId) {
     // for login page
     console.log('Sending request to :', url)
@@ -169,6 +171,100 @@ function sendEmpData(url, type, data, elementID) {
 
 }
 
+function sendApplyLeaveData(url, type, data){
+    $.ajax({
+        type: type,
+        url: url,
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function( responseData, textStatus, xhr){
+            if(xhr.status === 200){
+                alert('Request sucessfully sent')
+            }else{
+                console.log('response: ', responseData);
+            }
+        },
+        error: function (error){
+            console.error("error sending data: ",error);
+        }
+    });
+}
+
+function sendCancelLeaveData(url, type, data){
+    $.ajax({
+        type: type,
+        url: url,
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function( responseData, textStatus, xhr){
+            if(xhr.status === 200){
+                alert('Request sucessfully sent')
+            }else{
+                console.log('response: ', responseData);
+            }
+        },
+        error: function (error){
+            console.error("error sending data: ",error);
+        }
+    });
+}
+
+function sendLeaveHistoryData(url, type, data){
+    $.ajax({
+        type: type,
+        url: url,
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(responseData, textStatus, xhr){
+            if(xhr.status === 200){
+                historyData(responseData);
+            }else{
+                console.log("response data: ", responseData);
+            }
+        },
+        error: function(error){
+            console.error("error: ", error);
+        }
+    })
+}
+
+function sendLeaveBalanceData(url, type, data){
+    $.ajax({
+        type: type,
+        url: url,
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(responseData, textStatus, xhr){
+            if(xhr.status === 200){
+                leavebalanceData(responseData);
+            }else{
+                console.log("response data: ", responseData);
+            }
+        },
+        error: function(error){
+            console.error("error: ", error);
+        }
+    })
+}
+
+function sendLeaveRequestsData(url, type, data){
+    $.ajax({
+        type: type,
+        url: url,
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(responseData, textStatus, xhr){
+            if(xhr.status === 200){
+                requestsData(responseData);
+            }else{
+                console.log("response data: ", responseData);
+            }
+        },
+        error: function(error){
+            console.error("error: ", error);
+        }
+    })
+}
 
 function sendEmpData(url, type, data, elementID) {
 
