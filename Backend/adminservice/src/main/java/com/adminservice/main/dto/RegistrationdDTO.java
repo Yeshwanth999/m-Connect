@@ -19,9 +19,7 @@ public class RegistrationdDTO {
 	private String firstname;
 	private String lastname;
 	private String password;
-
 	private boolean adminStatus;
-
 	private String accStatus;
 	private LocalDate dob;
 	private String role;

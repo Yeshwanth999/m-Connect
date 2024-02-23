@@ -29,7 +29,7 @@ public class Employee {
 //	private User user;
 
 	private String guid;
-	@Column(unique = true, nullable = true, insertable = false, updatable = false, columnDefinition = "VARCHAR(65)")
+	@Column(unique = true, nullable = true, columnDefinition = "VARCHAR(65)")
 	private String gmail;
 
 	@Column(nullable = false, columnDefinition = "VARCHAR(40)")
