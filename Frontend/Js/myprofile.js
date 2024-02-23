@@ -43,7 +43,7 @@ function cancelEdit() {
     /*inputs.forEach(function(input) {
         input.value = "";
       });*/
-    
+
 }
 
 function saveEdit() {
@@ -55,7 +55,7 @@ function saveEdit() {
 
 
 // contact info start //
-document.getElementById("email").disabled = true;
+// document.getElementById("gmail").disabled = true;
 document.getElementById("password").disabled = true;
 document.getElementById("phonenumber").disabled = true;
 document.getElementById("phonenumber1").disabled = true;
@@ -281,10 +281,10 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
     var dob = $('#dob').val();
     var gender = $('#gender').val();
     var blood_group = $('#blood_group').val();
-    //var isAdmin = $('#adminCheckbox').is(':checked');
+    //var isAdmin = $('#adminStatus').is(':checked');
 
     // contact info start
-    var email = $('#email').val();
+    // var email = $('#gmail').val();
     var password = $('#password').val();
     var phonenumber = $('#phonenumber').val();
     var phonenumber1 = $('#phonenumber1').val();
@@ -314,9 +314,9 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
         dob: dob,
         gender: gender,
         blood_group: blood_group,
-        //isAdmin: isAdmin,
+        //adminStatus: adminStatus,
         // personal info start
-        email: email,
+        // email: gmail,
         password: password,
         phonenumber: phonenumber,
         phonenumber1: phonenumber1,
@@ -344,7 +344,7 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
     console.log(blood_group);
     //console.log(isAdmin);
     // personal info start
-    console.log(email);
+    // console.log(gmail);
     console.log(password);
     console.log(phonenumber);
     console.log(phonenumber1);
@@ -368,6 +368,6 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
     const type = 'POST';
 
     // Call the updated function for AJAX communication
-    sendEmpData(type, empObject, 'form');
+    sendEmpData('http://localhost:8081/user/update', type, empObject, 'form');
 
 });
