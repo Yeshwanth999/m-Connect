@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.userservice.main.registration.dto.EmployeeLeaveDto;
+import com.userservice.main.registration.dto.ResponseMsg;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,14 +28,13 @@ public class  EmployeeLeave{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//	private String giud;
+	private String giud;
     private String type;
     private LocalDate fromDate;
+    private String fromShift;
     private LocalDate toDate;
-    private String shift;
-   
-    @OneToOne
-    @JoinColumn(name = "guid", referencedColumnName = "guid")
-    private Employee employee;
-    
-  	}
+    private String toShift;
+    private String reasonFor;
+	
+ 
+ }

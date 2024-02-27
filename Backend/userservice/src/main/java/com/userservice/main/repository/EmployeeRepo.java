@@ -11,6 +11,7 @@ import com.userservice.main.entity.Employee;
 public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 
       	Optional<Employee> findByGuid(String guid);
- 
+
+		 
 
 }

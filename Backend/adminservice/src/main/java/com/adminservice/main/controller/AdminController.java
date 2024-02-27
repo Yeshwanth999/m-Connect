@@ -27,7 +27,6 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
-
 	
 	@PostMapping("/register")
 	public ResponseEntity<ResponseMsg> registerUserAccount(@RequestBody RegistrationdDTO registrationDTO) {

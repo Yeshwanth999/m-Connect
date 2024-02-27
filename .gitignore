@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+Frontend/adminleavepage.html
+Frontend/myprofile.html
+Frontend/leavePage.html
+Frontend/Js/myprofile.js
+*.js
+*.html
+*.png
+Frontend/adminMyProfile.html
+*.js

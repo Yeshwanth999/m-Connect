@@ -14,10 +14,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="users")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Data
 public class UserEntity {
 	
 	@Id
@@ -34,5 +33,12 @@ public class UserEntity {
 	private String password;
 	private boolean adminStatus;
     private String accStatus;
+    private String role;
+    
+    
+    public String[] getRolesArray() {
+        return role.split(",");
+    }
+	
 	
 }
