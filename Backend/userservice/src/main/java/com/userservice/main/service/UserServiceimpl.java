@@ -1,26 +1,25 @@
 package com.userservice.main.service;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.NonUniqueResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.userservice.main.entity.Employee;
 import com.userservice.main.entity.EmployeeLeave;
 import com.userservice.main.entity.UserEntity;
 import com.userservice.main.registration.dto.EmailUtils;
+import com.userservice.main.registration.dto.EmployeeLeaveDto;
 import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.PasswordUtils;
 import com.userservice.main.registration.dto.RegistrationDto;
@@ -29,11 +28,14 @@ import com.userservice.main.repository.EmployeeLeaveRepository;
 import com.userservice.main.repository.EmployeeRepo;
 import com.userservice.main.repository.UserRepository;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+
 
 @Service
 @NoArgsConstructor
-public class UserServiceimpl implements UserService {
+@AllArgsConstructor
+public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private UserRepository userrepo;
@@ -62,7 +64,21 @@ public class UserServiceimpl implements UserService {
 //				return userrepo.save(userEntity);
 //		
 //	}
+	
+	@Override
+    public UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException {
+        UserEntity user = userrepo.findByGmail(gmail);
+        if (user == null){
+            throw new UsernameNotFoundException("User not found with gmail: " + gmail);
+        }
+        return new org.springframework.security.core.userdetails.User(
+            user.getGmail(), user.getPassword(), Collections.emptyList());
+    }
 
+    // Your other service methods here..
+
+	
+	
 	@Override
 	public String userLogin(LoginForm loginform) {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
@@ -124,8 +140,6 @@ public class UserServiceimpl implements UserService {
 			user.setPassword(encodepwd);
 			user.setAccStatus("LOKED");
 			userrepo.save(user);
-			
-			
 			String to = loginform.getGmail();
 			String subject = "Verification Your Account";
 			StringBuffer body = new StringBuffer();
@@ -258,8 +272,44 @@ public class UserServiceimpl implements UserService {
 	public EmployeeLeave applyLeave(EmployeeLeave employeeLeave) {
 		return empleaverepo.save(employeeLeave);
 	}
+
+//	@Override
+//	public String deleteemp(String guid) {
+//	     
+//		return emprepo.delete(guid);
+//	}
+//	
+	@Override
+	public String DeleteUserById(long id) {
+       	emprepo.deleteById(id);
+//		userrepo.deleteAll();
+		return "User Data Droped";
+	}
 	
-	
+	@Override
+	public ResponseMsg saveLeaveDetails(Long id, EmployeeLeaveDto empDto) {
+//	    ResponseMsg response = new ResponseMsg();
+
+	    Optional<EmployeeLeave> employeeLeaveData = empleaverepo.findById(id);
+
+	    if (employeeLeaveData.isPresent()) {
+	        EmployeeLeave employeeLeave = new EmployeeLeave();
+	        employeeLeave.setType(empDto.getType());
+	        employeeLeave.setFromDate(empDto.getFromDate());
+	        employeeLeave.setFromShift(empDto.getFromShift());
+	        employeeLeave.setToDate(empDto.getToDate());
+	        employeeLeave.setToShift(empDto.getToShift());
+	        employeeLeave.setReasonFor(empDto.getReasonFor());
+
+	        employeeLeave = empleaverepo.save(employeeLeave);
+
+	        // adminService.notifyAdmin(employeeLeave);
+    
+    return new ResponseMsg(true, employeeLeave.getGiud(), "Leave request submitted successfully");
+	} else {
+		return new ResponseMsg(false," ", "Employee leave data not found for the provided "+id);
+	}
+}
 	
 	
 }

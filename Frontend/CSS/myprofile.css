@@ -1,26 +1,10 @@
 body{
     margin: 0px;
-    padding: 0;
-    box-sizing: border-box;
-    width: 100vw;
-    background-color: #ffff;
 }
 
 .section{
-    background-color: #ffff;
-    width: 100%;
-    display: flex;
-    margin-top: 50px;
-}
-.profile{
-    width: 25%;
-    height: 700px;
-    background-color: #0093ff;
-    margin: 20px;
-}
-.form{
-    width: 50%;
-    height: auto;
+    background-color: rgb(247, 244, 244);
+    max-width: 1500px;
 }
 .profile-con{
     display: flex;
@@ -28,12 +12,12 @@ body{
 }
 .personal-info-div{
     background-color: transparent;
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(27, 27, 27, 35%);
+    width: 50%;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(50, 50, 50, 0.3);
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 0 auto;
     margin-top: 10px;
 }
 .per-icon{
@@ -170,10 +154,10 @@ body{
 /*contact details */
 .contact-info-div{
     background-color: transparent;
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(27, 27, 27, 35%);
-    margin: 20px;
+    width: 50%;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(50, 50, 50, 0.3);
+    margin: 0 auto;
     margin-top: 35px;
 }
 .contact-inner{
@@ -230,13 +214,12 @@ body{
 
 .address-info-div{
     background-color: transparent;
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(27, 27, 27, 35%);
+    width: 50%;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(50, 50, 50, 0.3);
     margin: 0 auto;
     margin-bottom: 50px;
     padding-bottom: 30px;
-    margin: 20px;
     margin-top: 45px;
 }
 .current-div{
@@ -399,11 +382,10 @@ body{
 /* social profiles */
 .social-info-div{
     background-color: transparent;
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(27, 27, 27, 35%);
+    width: 50%;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(50, 50, 50, 0.3);
     margin: 0 auto;
-    margin: 20px;
     margin-top: 35px;
 }
 .edit-icon-3{

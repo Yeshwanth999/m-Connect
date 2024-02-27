@@ -33,14 +33,14 @@
                     <div class="dropdown-content">
                         <a href="#">Profile</a>
                         <a href="#">Settings</a>
-                         <!-- <form action="/logout" method="post">
+                       <!-- <a href="#">Logout</a>
+                          <form action="/logout" method="post">
                             <button type="submit">Logout</button>
                         </form> 
                         <button id="logoutButton">Logout</button> -->
                         <div class="btn-field">
                             <input type="button" id="logoutButton" value="Logout">
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -138,22 +138,20 @@
                 <h3 class="head">Any Other Option</h3>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        
     </div>
 
-    <script>
+	<script>
+		$('#logoutButton').on('click', function() {
 
-        $('#logoutButton').on('click',function(){
-           
-          const  type = 'GET';
-        const  url = 'http://localhost:8081/user/logout';
-            
-            fetchLogout(url,type); 
-    }); 
-    </script>
+			const type = 'GET';
+			const url = 'http://localhost:8081/user/logout';
 
-    <!-- <script >
+			fetchLogout(url, type);
+		});
+	</script>
+	<!-- <script >
         sessionStorage.setItem("key",);
         
         </script>
