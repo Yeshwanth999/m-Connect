@@ -31,7 +31,6 @@ import com.userservice.main.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-
 @Service
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,10 +41,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private EmployeeRepo emprepo;
-	
+
 	@Autowired
 	private EmployeeLeaveRepository empleaverepo;
-
 
 	@Autowired
 	private EmailUtils emailutils;
@@ -64,21 +62,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //				return userrepo.save(userEntity);
 //		
 //	}
-	
+
 	@Override
-    public UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException {
-        UserEntity user = userrepo.findByGmail(gmail);
-        if (user == null){
-            throw new UsernameNotFoundException("User not found with gmail: " + gmail);
-        }
-        return new org.springframework.security.core.userdetails.User(
-            user.getGmail(), user.getPassword(), Collections.emptyList());
-    }
+	public UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException {
+		UserEntity user = userrepo.findByGmail(gmail);
+		if (user == null) {
+			throw new UsernameNotFoundException("User not found with gmail: " + gmail);
+		}
+		return new org.springframework.security.core.userdetails.User(user.getGmail(), user.getPassword(),
+				Collections.emptyList());
+	}
 
-    // Your other service methods here..
+	// Your other service methods here..
 
-	
-	
 	@Override
 	public String userLogin(LoginForm loginform) {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
@@ -95,7 +91,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			return "Incorrect username or password";
 		}
 	}
-	
+
 	@Override
 	public Employee saveEmployee(Employee employee) {
 		return emprepo.save(employee);
@@ -125,10 +121,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public String forgotPassword(LoginForm loginform) {
 
 		UserEntity user = userrepo.findByGmail(loginform.getGmail());
-		
+
 		String temppwd = PasswordUtils.generateRandomPwd();
 		MessageDigest digest;
-		
+
 		try {
 			digest = MessageDigest.getInstance("SHA-256");
 			digest.reset();
@@ -136,7 +132,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			byte[] encryptedPwd = digest.digest();
 			String encodepwd = Base64.getEncoder().encodeToString(encryptedPwd);
 
-    		user.setGmail(user.getGmail());
+			user.setGmail(user.getGmail());
 			user.setPassword(encodepwd);
 			user.setAccStatus("LOKED");
 			userrepo.save(user);
@@ -144,56 +140,54 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			String subject = "Verification Your Account";
 			StringBuffer body = new StringBuffer();
 			body.append("<h1>'Otp For Verifying Your Account.</h1>' ");
-			
+
 			body.append("<h3>" + temppwd + "</h3>");
 
 			emailutils.sendmail(to, subject, body.toString());
 //			return true;
 			return temppwd;
-			
+
 		} catch (Exception er) {
 			return er.toString();
-			
+
 		}
 	}
 
-	
 	@Override
-	public boolean getOtp(String gmail, String otp){
-		
-   try {
-		UserEntity user = userrepo.findByGmail(gmail);
+	public boolean getOtp(String gmail, String otp) {
 
-		if (user != null) {
+		try {
+			UserEntity user = userrepo.findByGmail(gmail);
 
-			String pwd = user.getPassword();
-			MessageDigest digest;
+			if (user != null) {
 
-			try {
-				digest = MessageDigest.getInstance("SHA-256");
-				digest.reset();
-				digest.update(otp.getBytes());
+				String pwd = user.getPassword();
+				MessageDigest digest;
 
-				byte[] encryptpwd = digest.digest();
-				String encodedpwd = Base64.getEncoder().encodeToString(encryptpwd);
+				try {
+					digest = MessageDigest.getInstance("SHA-256");
+					digest.reset();
+					digest.update(otp.getBytes());
 
-				if (encodedpwd.equals(pwd) && !"".equals(encodedpwd)) {
-					user.setAccStatus("UNLOKED");
-					userrepo.save(user);
-					return true;
+					byte[] encryptpwd = digest.digest();
+					String encodedpwd = Base64.getEncoder().encodeToString(encryptpwd);
+
+					if (encodedpwd.equals(pwd) && !"".equals(encodedpwd)) {
+						user.setAccStatus("UNLOKED");
+						userrepo.save(user);
+						return true;
+					}
+				} catch (Exception er) {
+					er.printStackTrace();
 				}
-			} catch (Exception er) {
-				er.printStackTrace();
 			}
+		} catch (NonUniqueResultException e) {
+			// Handle multiple matching records
+			e.printStackTrace();
 		}
-	}catch (NonUniqueResultException e) {
-        // Handle multiple matching records
-        e.printStackTrace();
+		return false;
 	}
-   return false;
-	}
-	
-	
+
 	@Override
 	public String setpassword(String gmail, String password) {
 
@@ -229,15 +223,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public ResponseMsg updateEmp(String guid, RegistrationDto registerEmp) {
 
 		Optional<Employee> empOptional = emprepo.findByGuid(guid);
-		
+
 		System.out.println("method checking:--------->" + empOptional != null);
-		if (empOptional.isPresent()){
-			
-	        Employee emp = empOptional.get();
-			
+		if (empOptional.isPresent()) {
+
+			Employee emp = empOptional.get();
+
 			BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 			String encryptedPwd = bcrypt.encode(registerEmp.getPassword());
-			
+
 			emp.setPassword(encryptedPwd);
 			emp.setBlood_group(registerEmp.getBlood_group());
 			emp.setCurrentPincode(registerEmp.getCurrentPincode());
@@ -264,7 +258,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			return new ResponseMsg(true, emp.getFirstname(), "Employee updated successfully.");
 		} else {
-			return new ResponseMsg(false, "", "Employee with"+ guid +"ID not found.");
+			return new ResponseMsg(false, "", "Employee with" + guid + "ID not found.");
 		}
 	}
 
@@ -274,42 +268,40 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 //	@Override
-//	public String deleteemp(String guid) {
-//	     
+//	public String deleteemp(String guid) {	     
 //		return emprepo.delete(guid);
 //	}
 //	
 	@Override
 	public String DeleteUserById(long id) {
-       	emprepo.deleteById(id);
+		emprepo.deleteById(id);
 //		userrepo.deleteAll();
 		return "User Data Droped";
 	}
-	
+
 	@Override
 	public ResponseMsg saveLeaveDetails(Long id, EmployeeLeaveDto empDto) {
 //	    ResponseMsg response = new ResponseMsg();
 
-	    Optional<EmployeeLeave> employeeLeaveData = empleaverepo.findById(id);
+		Optional<EmployeeLeave> employeeLeaveData = empleaverepo.findById(id);
 
-	    if (employeeLeaveData.isPresent()) {
-	        EmployeeLeave employeeLeave = new EmployeeLeave();
-	        employeeLeave.setType(empDto.getType());
-	        employeeLeave.setFromDate(empDto.getFromDate());
-	        employeeLeave.setFromShift(empDto.getFromShift());
-	        employeeLeave.setToDate(empDto.getToDate());
-	        employeeLeave.setToShift(empDto.getToShift());
-	        employeeLeave.setReasonFor(empDto.getReasonFor());
+		if (employeeLeaveData.isPresent()) {
+			EmployeeLeave employeeLeave = new EmployeeLeave();
+			employeeLeave.setType(empDto.getType());
+			employeeLeave.setFromDate(empDto.getFromDate());
+			employeeLeave.setFromShift(empDto.getFromShift());
+			employeeLeave.setToDate(empDto.getToDate());
+			employeeLeave.setToShift(empDto.getToShift());
+			employeeLeave.setReasonFor(empDto.getReasonFor());
 
-	        employeeLeave = empleaverepo.save(employeeLeave);
+			employeeLeave = empleaverepo.save(employeeLeave);
 
-	        // adminService.notifyAdmin(employeeLeave);
-    
-    return new ResponseMsg(true, employeeLeave.getGiud(), "Leave request submitted successfully");
-	} else {
-		return new ResponseMsg(false," ", "Employee leave data not found for the provided "+id);
+			// adminService.notifyAdmin(employeeLeave);
+
+			return new ResponseMsg(true, employeeLeave.getGiud(), "Leave request submitted successfully");
+		} else {
+			return new ResponseMsg(false, " ", "Employee leave data not found for the provided " + id);
+		}
 	}
-}
-	
-	
+
 }
