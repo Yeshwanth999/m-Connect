@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmployeeAttendence</title>
+    <link rel="stylesheet" href="/CSS/employeeAttendence.css">
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+</head>
+<body>
+    
+        <div class="emp-table">
+            <table id="student-table">
+              <thead>
+                <tr>
+                    <th id="th-data">Date</th>
+                    <th id="th-data">ID</th>
+                    <th id="th-data">Name</th>
+                    <th id="th-data">In Time</th>
+                    <th id="th-data">Out Time</th>
+                    <th id="th-data">Working Hours</th>
+                    <th id="th-data">Status</th>
+                    <th id="th-data">Late Anomolies</th>
+                    <th id="aprove">Approve</th>
+                    <th id="reject">Reject</th>
+                </tr>
+              </thead>
+                     <tbody id="table-body">
+                       <!-- Table body will be populated dynamically using JavaScript -->
+                     </tbody>
+            </table>
+        </div>
+
+        <script src="../Js/employeeAttendence.js"></script>
+            <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script> 
+           <script>
+                $(document).ready(function () {
+                  var user = sessionStorage.getItem("userId");
+                  if(user !== null){
+                    var x = "hi";
+                    console.log(x);
+                  }
+                  else{
+                    alert("please login ")
+                    window.location.href = "SignIn.html";
+                  }
+                });
+          </script>
+</body>
+</html>
