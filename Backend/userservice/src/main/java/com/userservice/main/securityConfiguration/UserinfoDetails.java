@@ -1,4 +1,4 @@
-package com.userservice.main.service;
+package com.userservice.main.securityConfiguration;
 
 import java.util.Arrays;
 import java.util.Collection;

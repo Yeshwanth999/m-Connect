@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.userservice.main.entity.Employee;
 import com.userservice.main.entity.EmployeeLeave;
@@ -12,47 +13,37 @@ import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.RegistrationDto;
 import com.userservice.main.registration.dto.ResponseMsg;
 
-
+@Service
 public interface UserService {
-	
+
 //      UserEntity save(RegistrationDto registrationDTO);
 
-	   String userLogin(LoginForm loginForm);
-      
+	String userLogin(LoginForm loginForm);
+
 //	   String addUser(RegistrationDto user);
 
-	   Employee saveEmployee(Employee employee);
+	Employee saveEmployee(Employee employee);
 
-	   List<Employee> getAllEmployees();
+	List<Employee> getAllEmployees();
 
-	   Employee getEmployeeById(Long id);
+	Employee getEmployeeById(Long id);
 
-	  String forgotPassword(LoginForm loginform);
+	String forgotPassword(LoginForm loginform);
 
-	  boolean getOtp(String gmail, String otp);
+	boolean getOtp(String gmail, String otp);
 
-	  String setpassword(String gmail, String password);
+	String setpassword(String gmail, String password);
 
-	  EmployeeLeave applyLeave(EmployeeLeave employeeLeave);
-	  
-		ResponseMsg updateEmp(String Guid, RegistrationDto registrationDTO);
+	EmployeeLeave applyLeave(EmployeeLeave employeeLeave);
 
-		UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException;
+	ResponseMsg updateEmp(String gmail, RegistrationDto registrationDTO);
+
+	UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException;
 
 //		String deleteemp(String guid);
 
-		String DeleteUserById(long id);
-
-		ResponseMsg saveLeaveDetails(Long id, EmployeeLeaveDto empDto);
-
-
-
-
-	  
-
-	  
-      
-	   
-      
+	String DeleteUserById(long id);
+	
+	ResponseMsg saveLeaveDetails(String guid,String admingmail,EmployeeLeaveDto empDto);
 
 }

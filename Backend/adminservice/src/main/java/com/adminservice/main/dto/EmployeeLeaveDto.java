@@ -1,33 +1,34 @@
-package com.userservice.main.registration.dto;
+package com.adminservice.main.dto;
 
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class EmployeeLeaveDto {
-	
-    private String type;
-    private String guid;
-    private String admingmail;
-    private LocalDate fromDate;
-    private String fromShift;
-    private LocalDate toDate;
-    private String toShift;
-    private String reasonFor;
+
+	private String type;
+	private String guid;
 	private int no_of_days_approved;
+	private String admingmail;
+	private LocalDate fromDate;
+	private String fromShift;
+	private LocalDate toDate;
+	private String toShift;
+	private String reasonFor;
 	private int annual_leave_balance;
 	private int annual_leaves_used;
 	private int monthly_leave_balance;
 	private int monthly_leaves_used;
 	private String leaveStatus;
-
-   
-  }
-
-
+	
+	
+	
+}
