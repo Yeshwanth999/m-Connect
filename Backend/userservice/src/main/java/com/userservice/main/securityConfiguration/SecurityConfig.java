@@ -1,5 +1,6 @@
 package com.userservice.main.securityConfiguration;
 
+import static org.springframework.security.config.Customizer.withDefaults;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,88 +13,49 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.userservice.main.service.UserServiceImpl;
-
-
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class SecurityConfig {
-	
-@Bean 
-public UserDetailsService userDetailsService() {
-	
-	return new UserServiceImpl();
-}
-	
-@Bean 
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-	
-	return http.csrf().disable()
-			.authorizeHttpRequests()
-			.requestMatchers("/user/login","/user/applyLeave/{id}","/user/getemployee/{id}")
-			.permitAll()
-			.and()
-			.authorizeHttpRequests()
-			.requestMatchers("/user/**")
-			.authenticated()
-			.and()
-			.formLogin()
-			.and()
-			.build();
-}
+public class SecurityConfig{
 
-public PasswordEncoder passwordEncoder() {
-	return new BCryptPasswordEncoder();
-}
+	@Bean
+	public UserDetailsService userDetailsService() {
 
-@Bean 
-public AuthenticationProvider authenticationProvider() {
-	DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-	authenticationProvider.setUserDetailsService(userDetailsService());
-	authenticationProvider.setPasswordEncoder(passwordEncoder());
-   return authenticationProvider;
-}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		return new UserServiceImpl();
+	}
+
+	@SuppressWarnings("deprecation")
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	    http.csrf(csrf -> csrf.disable()) // Disabling CSRF for simplicity, enable it in production
+	            .authorizeRequests(authorizeRequests -> authorizeRequests
+	                    .requestMatchers(new AntPathRequestMatcher("/user/login")).permitAll()
+	                    .requestMatchers(new AntPathRequestMatcher("/user/updateemp/{gmail}")).permitAll()
+	                    .requestMatchers(new AntPathRequestMatcher("/user/applyLeave/{guid}")).permitAll()
+	                    .requestMatchers(new AntPathRequestMatcher("/user/**")).authenticated())
+	            .formLogin(withDefaults());
+
+	    return http.build();
+	}
+
+
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public AuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(userDetailsService());
+		authenticationProvider.setPasswordEncoder(passwordEncoder());
+		return authenticationProvider;
+	}
+
 }
 
 //    @Autowired

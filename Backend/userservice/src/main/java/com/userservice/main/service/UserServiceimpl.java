@@ -1,13 +1,14 @@
 package com.userservice.main.service;
 
+
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.NonUniqueResultException;
-
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.userservice.main.entity.Employee;
 import com.userservice.main.entity.EmployeeLeave;
 import com.userservice.main.entity.UserEntity;
+import com.userservice.main.exception.ErrorMessage;
 import com.userservice.main.registration.dto.EmailUtils;
 import com.userservice.main.registration.dto.EmployeeLeaveDto;
 import com.userservice.main.registration.dto.LoginForm;
@@ -28,12 +30,15 @@ import com.userservice.main.repository.EmployeeLeaveRepository;
 import com.userservice.main.repository.EmployeeRepo;
 import com.userservice.main.repository.UserRepository;
 
+//import jakarta.persistence.NonUniqueResultException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @NoArgsConstructor
 @AllArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
@@ -47,6 +52,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private EmailUtils emailutils;
+
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
+
+//	@Autowired
+//	private Queue userQueue; // Assuming you have a user-specific queue
 
 //    @Override
 //	public UserEntity save(RegistrationDto registrationDto) {
@@ -80,6 +91,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 
 		UserEntity user = userrepo.findByGmail(loginform.getGmail());
+       
+		log.info("Employee Loging... method running. ");
 
 		if (user != null && bcrypt.matches(loginform.getPassword(), user.getPassword())) {
 			if (user.isAdminStatus() == true) {
@@ -142,16 +155,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			body.append("<h1>'Otp For Verifying Your Account.</h1>' ");
 
 			body.append("<h3>" + temppwd + "</h3>");
-
+			
+			log.info("Employee Forgot Password Message Sending To Mail ... Method Running.");
 			emailutils.sendmail(to, subject, body.toString());
 //			return true;
 			return temppwd;
 
-		} catch (Exception er) {
-			return er.toString();
+		} catch (Exception e) {
+			// Handle the exception appropriately (log, throw, etc.) using exception class.
+			throw new ErrorMessage(e);
+		}
 
 		}
-	}
+	
 
 	@Override
 	public boolean getOtp(String gmail, String otp) {
@@ -171,7 +187,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 					byte[] encryptpwd = digest.digest();
 					String encodedpwd = Base64.getEncoder().encodeToString(encryptpwd);
-
+					log.info("Employee getotp ... Method Running.");
 					if (encodedpwd.equals(pwd) && !"".equals(encodedpwd)) {
 						user.setAccStatus("UNLOKED");
 						userrepo.save(user);
@@ -181,9 +197,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 					er.printStackTrace();
 				}
 			}
-		} catch (NonUniqueResultException e) {
-			// Handle multiple matching records
-			e.printStackTrace();
+		} catch (Exception e) {
+			// Handle the exception appropriately (log, throw, etc.) using exception class.
+			throw new ErrorMessage(e);
 		}
 		return false;
 	}
@@ -192,6 +208,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public String setpassword(String gmail, String password) {
 
 		UserEntity user = userrepo.findByGmail(gmail);
+		log.info("Employee Re-Setting Password... Method Running.");
 
 		if (user != null) {
 			MessageDigest digist;
@@ -220,14 +237,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public ResponseMsg updateEmp(String guid, RegistrationDto registerEmp) {
+	public ResponseMsg updateEmp(String gmail, RegistrationDto registerEmp) {
 
-		Optional<Employee> empOptional = emprepo.findByGuid(guid);
+		Optional<Employee> empOptional = emprepo.findByGmail(gmail);
 
 		System.out.println("method checking:--------->" + empOptional != null);
+		
+		log.info("Updating Employee Details... Method Running.");
+		
 		if (empOptional.isPresent()) {
 
 			Employee emp = empOptional.get();
+
+			EmployeeLeave updatedata = new EmployeeLeave();
 
 			BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 			String encryptedPwd = bcrypt.encode(registerEmp.getPassword());
@@ -256,9 +278,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			emprepo.save(emp);
 
+			BeanUtils.copyProperties(emp, updatedata);
+
+			empleaverepo.save(updatedata);
+
 			return new ResponseMsg(true, emp.getFirstname(), "Employee updated successfully.");
 		} else {
-			return new ResponseMsg(false, "", "Employee with" + guid + "ID not found.");
+			return new ResponseMsg(false, "", "Employee with" + gmail + "ID not found.");
 		}
 	}
 
@@ -279,29 +305,49 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return "User Data Droped";
 	}
 
+//	@Override
+//	public void createEmployeeLeave(Employee employee) {
+//        // Create EmployeeLeave entity based on the provided Employee data
+//        EmployeeLeave employeeLeave = new EmployeeLeave();
+//        employeeLeave.setEmployeeId(employee.getId());
+//        // Set other fields as needed
+//        
+//        // Save EmployeeLeave entity to the database
+//        employeeLeaveRepository.save(employeeLeave);
+//    }
+
 	@Override
-	public ResponseMsg saveLeaveDetails(Long id, EmployeeLeaveDto empDto) {
-//	    ResponseMsg response = new ResponseMsg();
+	public ResponseMsg saveLeaveDetails(String guid, String admingmail, EmployeeLeaveDto empDto) {
+	    Optional<EmployeeLeave> employeeLeaveDataOptional = empleaverepo.findByGuid(guid);
 
-		Optional<EmployeeLeave> employeeLeaveData = empleaverepo.findById(id);
+	    log.info("Employee Leave Details Form Filling  ... Method Running.");
 
-		if (employeeLeaveData.isPresent()) {
-			EmployeeLeave employeeLeave = new EmployeeLeave();
-			employeeLeave.setType(empDto.getType());
-			employeeLeave.setFromDate(empDto.getFromDate());
-			employeeLeave.setFromShift(empDto.getFromShift());
-			employeeLeave.setToDate(empDto.getToDate());
-			employeeLeave.setToShift(empDto.getToShift());
-			employeeLeave.setReasonFor(empDto.getReasonFor());
+	    if (employeeLeaveDataOptional.isPresent()) {
+	        EmployeeLeave employeeLeave = employeeLeaveDataOptional.get();
 
-			employeeLeave = empleaverepo.save(employeeLeave);
+	        // Update the fields of the existing entity
+	        employeeLeave.setType(empDto.getType());
+	        employeeLeave.setFromDate(empDto.getFromDate());
+	        employeeLeave.setFromShift(empDto.getFromShift());
+	        employeeLeave.setToDate(empDto.getToDate());
+	        employeeLeave.setToShift(empDto.getToShift());
+	        employeeLeave.setReasonFor(empDto.getReasonFor());
+	        employeeLeave.setAdmingmail(admingmail);
+	        
+	        // Save the updated entity
+	        employeeLeave = empleaverepo.save(employeeLeave);
 
-			// adminService.notifyAdmin(employeeLeave);
+	        // Send approval notification to admin service
+	        empDto.setAdmingmail(admingmail);
+	        log.info("Employee Leave Details Data Sending to Perticular Admin  ... Method Running. Data is :"+employeeLeave.toString());
+	        // Ensure that employeeLeave is converted to JSON before sending
+	        rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, employeeLeave.toString());
 
-			return new ResponseMsg(true, employeeLeave.getGiud(), "Leave request submitted successfully");
-		} else {
-			return new ResponseMsg(false, " ", "Employee leave data not found for the provided " + id);
-		}
+	        System.out.println("Leave Request is sent Successfully.");
+
+	        return new ResponseMsg(true, employeeLeave.getGuid(), "Leave request updated successfully");
+	    } else {
+	        return new ResponseMsg(false, "", "Employee leave data not found for the provided GUID: " + guid);
+	    }
 	}
-
 }

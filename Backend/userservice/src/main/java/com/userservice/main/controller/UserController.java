@@ -2,6 +2,7 @@ package com.userservice.main.controller;
 
 import java.util.List;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+ 
 import com.userservice.main.entity.Employee;
-import com.userservice.main.entity.EmployeeLeave;
 import com.userservice.main.registration.dto.EmpResponse;
 import com.userservice.main.registration.dto.EmployeeLeaveDto;
 import com.userservice.main.registration.dto.LoginForm;
@@ -27,19 +27,25 @@ import com.userservice.main.registration.dto.RegistrationDto;
 import com.userservice.main.registration.dto.ResponseMsg;
 import com.userservice.main.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
+
 @CrossOrigin(origins = "http://127.0.0.1:5504", methods = { RequestMethod.POST, RequestMethod.OPTIONS })
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 
-	
 	private final UserService userService;
-	
-	public UserController (UserService userService) {
-		
-		this.userService= userService;
+
+	@Autowired
+	private RabbitTemplate template;
+
+	public UserController(UserService userService) {
+
+		this.userService = userService;
 	}
-	  
+
 	public RegistrationDto regitrationDto;
 
 //	@GetMapping
@@ -60,11 +66,20 @@ public class UserController {
 //		return ResponseEntity.ok("Employee added Succesfully");
 //	}
 
-	@PutMapping("/updateemp/{guid}")
-	public ResponseEntity<ResponseMsg> UpdatingUserAccount(@PathVariable("guid") String guid,
-			@RequestBody RegistrationDto registrationDTO) {
+//	@PostMapping
+//    public ResponseEntity<Void> createEmployeeLeave(@RequestBody Employee employee) {
+//        // Create EmployeeLeave record in user service database based on the provided Employee data
+//        // Example implementation:
+//           userService.createEmployeeLeave(employee);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).build();
+//    }
 
-		ResponseMsg body = userService.updateEmp(guid, registrationDTO);
+	@PutMapping("/updateemp/{gmail}")
+	public ResponseEntity<ResponseMsg> UpdatingUserAccount(@PathVariable("gmail") String gmail,
+			@RequestBody RegistrationDto registrationDTO) {
+          log.info("updating employee by ID method running. ");
+		ResponseMsg body = userService.updateEmp(gmail, registrationDTO);
 
 		return new ResponseEntity<>(body, HttpStatus.CREATED);
 	}
@@ -72,6 +87,7 @@ public class UserController {
 	@PostMapping("/login")
 	public String userlogin(@RequestBody LoginForm loginform) {
 		return userService.userLogin(loginform);
+		
 //		return ResponseEntity.ok(result);
 
 	}
@@ -109,8 +125,6 @@ public class UserController {
 
 	}
 
-
-
 	@GetMapping("/getemployees")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<List<Employee>> getAllEmployees() {
@@ -121,7 +135,8 @@ public class UserController {
 	@GetMapping("/getemployee/{id}")
 	@PreAuthorize("hasAuthority('USER')")
 	public ResponseEntity<Employee> getEmpById(@PathVariable Long id) {
-
+      
+		log.info("Getting employee by ID method running. ");
 		Employee emp = userService.getEmployeeById(id);
 
 		if (emp != null) {
@@ -130,32 +145,31 @@ public class UserController {
 			return new ResponseEntity<>(emp, HttpStatus.NOT_FOUND);
 		}
 	}
-	 @GetMapping("/logout")
-	    public String logout() {
-	        return "redirect:/SignIn?logout";
-	    }
-	 @GetMapping("/SignIn")
-	 public String logins() {
-	     return "SingIn.html"; // Assuming login.html is your login page
-	 }
-	 
-//	 @DeleteMapping("/DeleteEmp")
-//	 public String dropUser(@PathVariable String guid) {
-//		return userService.deleteemp(guid); 
-//	 }
-	 
-	 @DeleteMapping("/DropBy/{id}")
-		public String DropUserById(@PathVariable("id") long id){
-			String data = userService.DeleteUserById(id);
-			return data;
-		}
-	 
-	 
-	 
-	 @PostMapping("/applyLeave/{id}")
-		@PreAuthorize("hasAuthority('USER')")
-	 public ResponseEntity<ResponseMsg> applyEmployeeLeave(@PathVariable("id") Long id, @RequestBody EmployeeLeaveDto empDto) {
-	     ResponseMsg response = userService.saveLeaveDetails(id, empDto);
-	     return new ResponseEntity<>(response, HttpStatus.OK);
-	 }
+
+	@GetMapping("/logout")
+	public String logout(){   
+		log.warn("Employee Logout.");
+		return "redirect:/SignIn?logout";
+	}
+
+	@GetMapping("/SignIn")
+	public String logins() {
+		return "SingIn.html"; // Assuming login.html is your login page
+	}
+
+	@DeleteMapping("/DropBy/{id}")
+	public String DropUserById(@PathVariable("id") long id) {
+		String data = userService.DeleteUserById(id);
+		return data;
+	}
+
+	@PostMapping("/applyLeave/{guid}")
+//	@PreAuthorize("hasAuthority('USER')")
+	public ResponseEntity<ResponseMsg> applyEmployeeLeave(@PathVariable("guid") String guid,
+			String admingmail,  @RequestBody EmployeeLeaveDto empDto) {
+		
+        log.info("Employee Applying a Leave method running. ");
+		ResponseMsg response = userService.saveLeaveDetails(guid, admingmail, empDto);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 }

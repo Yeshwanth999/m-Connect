@@ -1,4 +1,4 @@
-package com.userservice.main.entity;
+package com.adminservice.main.entity;
 
 import java.time.LocalDate;
 
@@ -11,32 +11,33 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Table(name="employeeleaves")
-public class  EmployeeLeave{
+public class EmployeeLeaves {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String admingmail;
-	
+
 	private int annual_leave_balance;
 	private int annual_leaves_used;
 	private int monthly_leave_balance;
 	private int monthly_leaves_used;
+	
+	
 	private int no_of_days_approved;
+	
 	private String leaveStatus;
 	private String guid;
-    private String type;
-    private LocalDate fromDate;
-    private String fromShift;
-    private LocalDate toDate;
-    private String toShift;
-    private String reasonFor;
-    
-
- }
+    private String gmail;
+	private String type;
+	private LocalDate fromDate;
+	private String fromShift;
+	private LocalDate toDate;
+	private String toShift;
+	private String reasonFor;
+}

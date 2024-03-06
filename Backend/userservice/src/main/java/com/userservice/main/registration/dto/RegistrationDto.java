@@ -1,10 +1,11 @@
 package com.userservice.main.registration.dto;
 
+
+
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Lob;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

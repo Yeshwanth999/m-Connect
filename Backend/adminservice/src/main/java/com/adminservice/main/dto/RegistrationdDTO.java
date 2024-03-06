@@ -2,9 +2,8 @@ package com.adminservice.main.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Lob;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
