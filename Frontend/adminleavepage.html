@@ -1,34 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Leave Page</title>
-<link rel="stylesheet" href="./CSS/adminleavepage.css">
-</head>
-<body>
-<div class="container">
-    <div class="left-col">
-        <h2>Admin Leave Page</h2>
-        <table id="leaveTable">
-            <thead>
-                <tr>
-                    <th>User ID</th>
-                    <th>Leave Type</th>
-                    <th>Leave Reason</th>
-                    <th>Number of Days Applied</th>
-                    <th>Number of Days Approved</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                <!-- Leave data will be populated here -->
-            </tbody>
-        </table>
-        <button id="sendButton">Send</button>
-    </div>
-</div>
 
-<script src="./Js/adminleavepage.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Leave Page</title>
+    <link rel="stylesheet" href="./CSS/adminleavepage.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-col">
+            <h2>Admin Leave Page</h2>
+            <table id="leaveTable">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Leave Type</th>
+                        <th>Leave Reason</th>
+                        <th>Number of Days Applied</th>
+                        <th>Number of Days Approved</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Leave data will be populated here -->
+                </tbody>
+            </table>
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+
+    <script src="./Js/adminleavepage.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const sampleData = [
+                {
+                    "userId": "001",
+                    "leaveType": "Vacation",
+                    "leaveReason": "Family trip",
+                    "numDaysApplied": 5,
+                    "numDaysApproved": "",
+                    "status": ""
+                },
+                {
+                    "userId": "002",
+                    "leaveType": "Sick",
+                    "leaveReason": "Flu",
+                    "numDaysApplied": 3,
+                    "numDaysApproved": "",
+                    "status": ""
+                },
+                {
+                    "userId": "003",
+                    "leaveType": "Personal",
+                    "leaveReason": "Attending wedding",
+                    "numDaysApplied": 2,
+                    "numDaysApproved": "",
+                    "status": ""
+                }
+            ];
+            sampleData.forEach(item => {
+                const row = document.createElement('tr');
+                Object.values(item).forEach((value, index) => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    if (index === 0) {
+                        cell.style.cursor = 'pointer';
+                        cell.addEventListener('click', function () {
+                            handleUserIdClick(item.userId);
+                        });
+                    }
+                    if (index === 4) {
+                        const input = document.createElement('input');
+                        input.type = 'number';
+                        input.value = value;
+                        input.placeholder = 'Enter days approved';
+                        input.addEventListener('change', function () {
+                            item.numDaysApproved = parseInt(input.value);
+                        });
+                        cell.appendChild(input);
+                    }
+                    if (index === 5) {
+                        const select = document.createElement('select');
+                        ["Pending", "Approved", "Rejected"].forEach(option => {
+                            const optionElement = document.createElement('option');
+                            optionElement.textContent = option;
+                            select.appendChild(optionElement);
+                        });
+                        select.selectedIndex = 0;
+                        select.setAttribute("onchange", "changeLeaveStatus(this.selectedIndex)")
+                        select.addEventListener('change', function () {
+                            item.status = select.value;
+                        });
+                        cell.appendChild(select);
+                    }
+                    row.appendChild(cell);
+                });
+                tableBody.appendChild(row);
+            });
+        });
+        function changeLeaveStatus(status){
+            let leavestatus;
+            if(status === 0){
+                leavestatus = "Pending";
+            }
+            else if(status === 1){
+                leavestatus = "Approved";
+            }
+            else if(status === 2){
+                leavestatus = "Rejected";
+            }
+            
+        }
+    </script>
 </body>
+
 </html>
