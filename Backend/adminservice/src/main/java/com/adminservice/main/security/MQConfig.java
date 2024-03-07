@@ -41,9 +41,9 @@ public class MQConfig {
 
     @Bean
     public MessageConverter messageConverter() {
-        return  new Jackson2JsonMessageConverter();
+        return new Jackson2JsonMessageConverter();
     }
-    
+   
     
     @Bean
     public AmqpTemplate template(ConnectionFactory connectionFactory){

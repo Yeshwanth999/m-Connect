@@ -169,6 +169,7 @@ public class UserController {
 			String admingmail,  @RequestBody EmployeeLeaveDto empDto) {
 		
         log.info("Employee Applying a Leave method running. ");
+        
 		ResponseMsg response = userService.saveLeaveDetails(guid, admingmail, empDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}

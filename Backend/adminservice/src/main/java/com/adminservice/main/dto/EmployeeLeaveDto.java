@@ -1,5 +1,6 @@
 package com.adminservice.main.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class EmployeeLeaveDto {
+public class EmployeeLeaveDto implements Serializable{
 
 	private String type;
 	private String guid;

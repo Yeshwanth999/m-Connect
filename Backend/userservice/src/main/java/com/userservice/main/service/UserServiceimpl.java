@@ -7,9 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,6 +27,18 @@ import com.userservice.main.registration.dto.ResponseMsg;
 import com.userservice.main.repository.EmployeeLeaveRepository;
 import com.userservice.main.repository.EmployeeRepo;
 import com.userservice.main.repository.UserRepository;
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
+import org.springframework.amqp.core.MessageProperties;
+import org.springframework.amqp.core.MessagePropertiesBuilder;
+import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.amqp.support.converter.MessageConversionException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 //import jakarta.persistence.NonUniqueResultException;
 import lombok.AllArgsConstructor;
@@ -55,6 +65,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
+	
+	@Autowired
+	private MessageConverter messageConverter;
 
 //	@Autowired
 //	private Queue userQueue; // Assuming you have a user-specific queue
@@ -332,7 +345,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	        employeeLeave.setToDate(empDto.getToDate());
 	        employeeLeave.setToShift(empDto.getToShift());
 	        employeeLeave.setReasonFor(empDto.getReasonFor());
-	        employeeLeave.setAdmingmail(admingmail);
+	        employeeLeave.setAdmingmail(empDto.getAdmingmail());
 	        
 	        // Save the updated entity
 	        employeeLeave = empleaverepo.save(employeeLeave);
@@ -341,13 +354,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	        empDto.setAdmingmail(admingmail);
 	        log.info("Employee Leave Details Data Sending to Perticular Admin  ... Method Running. Data is :"+employeeLeave.toString());
 	        // Ensure that employeeLeave is converted to JSON before sending
-	        rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, employeeLeave.toString());
+	        Message message = MessageBuilder
+	    	        .withBody(convertObjectToJsonBytes(employeeLeave.toString()))
+	    	        .andProperties(MessagePropertiesBuilder.newInstance().setContentType(MessageProperties.CONTENT_TYPE_JSON).build())
+	    	        .build();
+	    	    rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, message);
+//	        rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, employeeLeave.toString());
 
 	        System.out.println("Leave Request is sent Successfully.");
 
 	        return new ResponseMsg(true, employeeLeave.getGuid(), "Leave request updated successfully");
 	    } else {
 	        return new ResponseMsg(false, "", "Employee leave data not found for the provided GUID: " + guid);
+	    }
+	}
+
+	private byte[] convertObjectToJsonBytes(Object object) throws MessageConversionException {
+	    try {
+	        return messageConverter.toMessage(object, null).getBody();
+	    } catch (MessageConversionException e) {
+	        throw new RuntimeException("Failed to convert object to JSON bytes", e);
 	    }
 	}
 }
