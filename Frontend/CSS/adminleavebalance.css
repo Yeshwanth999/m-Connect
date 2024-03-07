@@ -1,0 +1,26 @@
+/* You can adjust styles as needed */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table-bordered {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: center;
+}
+
+.table-bordered th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}

@@ -28,16 +28,38 @@ function sendLeaveData(){
   const to = document.getElementById('to').value;
   const reasonFor = document.getElementById('reason-for').value;
 
+
+  fromdata = new Date(document.getElementById('from').value);
+  todata = new Date(document.getElementById('to').value);
+  var differenceMs = todata - fromdata;
+  var differenceDays = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
+
   leaveData.type = leaveType;
   leaveData.fromShift = fromShift;
-  leaveData.fromDate = from;
+  leaveData.fromDate = fromdata;
   leaveData.toShift = toShift;
-  leaveData.toDate = to;
+  leaveData.toDate = todata;
   leaveData.reasonFor = reasonFor;
+  leaveData.numberOfDays=differenceDays;
   console.log(leaveData);
   let URL ;
   let type ;
+
+   
+  
+//  console.log({ from: fromDate, to: toDate, numberOfDays: differenceDays });
+  
+      
+//  console.log( calculateDays().differenceDays);
 }
+// Function to calculate the number of days between two dates
+// function calculateDays() {
+  
+// }
+// function sendLeaveData() {
+//          calculateDays();
+
+// }
 
 // onclick display cancel leave section and others none
 function cancel(){
@@ -304,3 +326,5 @@ function balance(){
 
   renderGridView(data);
 }
+
+
