@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.adminservice.main.dto.RegistrationdDTO;
 import com.adminservice.main.entity.Employee;
+import com.adminservice.main.entity.EmployeeLeaves;
 import com.adminservice.main.helperclasses.ResponseMsg;
 
 public interface AdminService {
@@ -15,6 +16,8 @@ public interface AdminService {
 	 List<Employee> getAllEmployees();
 
 	 Employee getEmployeeById(Long id);
+
+	void receiveLeaveRequest(EmployeeLeaves empLeaveDto, String message);
 	 
 	 
 	 

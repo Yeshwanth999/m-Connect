@@ -6,6 +6,9 @@ import com.adminservice.main.entity.EmployeeLeaves;
 
 public interface EmployeeLeaveRepository extends JpaRepository<EmployeeLeaves, Long> {
 	
-	    Optional<EmployeeLeaves> findByGuid(String Guid);
-	
+//	    Optional<EmployeeLeaves> findByGuid(String Guid);
+	    Optional<EmployeeLeaves> findByGuid(String guid);
+
+
+	    
 }
