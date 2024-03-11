@@ -2,19 +2,18 @@ package com.adminservice.main.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class EmployeeLeaveDto implements Serializable{
-
+@Data
+@SuppressWarnings("serial")
+public class EmployeeLeaveDto implements Serializable {
+	
 	private String type;
 	private String guid;
 	private int no_of_days_approved;
@@ -31,5 +30,4 @@ public class EmployeeLeaveDto implements Serializable{
 	private String leaveStatus;
 	
 	
-	
-}
+   }
