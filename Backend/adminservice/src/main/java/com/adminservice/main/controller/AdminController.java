@@ -26,8 +26,9 @@ import com.adminservice.main.service.AdminService;
 @RequestMapping("/admin")
 public class AdminController {
 
+	
 	@Autowired
-	private AdminService adminService;
+	 private AdminService adminService;
 
 //    private final RestTemplate restTemplate;
 //
@@ -88,12 +89,18 @@ public class AdminController {
 		return data;
 	}
 
-	@PostMapping("/leaveRequest")
-	public void receiveLeaveRequest(@RequestBody EmployeeLeaves empLeaveDto, String message){
-		try {
-			adminService.receiveLeaveRequest(empLeaveDto, message);
-		} catch (Exception e) {
-			e.getMessage();
-		}
-	}
+//	@RabbitListener(queues = MQConfig.QUEUE)
+//    public void receiveLeaveRequest(EmployeeLeaveDto empDto) {
+//        adminService.processLeaveApproval(empDto);
+//    }
+//	
+//	
+//	@PostMapping("/leaveRequest")
+//	public void receiveLeaveRequest(@RequestBody EmployeeLeaves empLeaveDto, String message){
+//		try {
+//			adminService.receiveLeaveRequest(empLeaveDto, message);
+//		} catch (Exception e) {
+//			e.getMessage();
+//		}
+//	}
 }

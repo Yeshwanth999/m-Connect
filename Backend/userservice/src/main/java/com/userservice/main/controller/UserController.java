@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
- 
+
 import com.userservice.main.entity.Employee;
+import com.userservice.main.registration.dto.EmpAttandenceDto;
 import com.userservice.main.registration.dto.EmpResponse;
 import com.userservice.main.registration.dto.EmployeeLeaveDto;
 import com.userservice.main.registration.dto.LoginForm;
@@ -165,12 +166,21 @@ public class UserController {
 
 	@PostMapping("/applyLeave/{guid}")
 //	@PreAuthorize("hasAuthority('USER')")
-	public ResponseEntity<ResponseMsg> applyEmployeeLeave(@PathVariable("guid") String guid,
-			String admingmail,  @RequestBody EmployeeLeaveDto empDto) {
+	public ResponseEntity<ResponseMsg> applyEmployeeLeave(@PathVariable("guid") String guid, @RequestBody EmployeeLeaveDto empDto) {	
 		
-        log.info("Employee Applying a Leave method running. ");
+        log.info("Employee Applying a Leave method running. ");  
         
-		ResponseMsg response = userService.saveLeaveDetails(guid, admingmail, empDto);
+		ResponseMsg response = userService.saveLeaveDetails(guid, empDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	
+	@PostMapping("/EmpAttadenceData")
+	private ResponseEntity<ResponseMsg> EmpAttadenceData(@PathVariable("gmail") String gmail,@RequestBody EmpAttandenceDto empattandenceDto){
+	 log.info("Employe Attendence Data Storing In Database");
+	
+	 ResponseMsg response = userService.empAttandenceDataStoring(gmail, empattandenceDto);
+	 
+		return new ResponseEntity<>(response, HttpStatus.OK);
+		
 	}
 }

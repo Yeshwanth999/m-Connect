@@ -1,6 +1,5 @@
 package com.userservice.main.service;
 
-
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.Collections;
@@ -14,16 +13,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.userservice.main.entity.EmpAttandence;
 import com.userservice.main.entity.Employee;
 import com.userservice.main.entity.EmployeeLeave;
 import com.userservice.main.entity.UserEntity;
 import com.userservice.main.exception.ErrorMessage;
 import com.userservice.main.registration.dto.EmailUtils;
+import com.userservice.main.registration.dto.EmpAttandenceDto;
 import com.userservice.main.registration.dto.EmployeeLeaveDto;
 import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.PasswordUtils;
 import com.userservice.main.registration.dto.RegistrationDto;
 import com.userservice.main.registration.dto.ResponseMsg;
+import com.userservice.main.repository.EmpAttandenceRepo;
 import com.userservice.main.repository.EmployeeLeaveRepository;
 import com.userservice.main.repository.EmployeeRepo;
 import com.userservice.main.repository.UserRepository;
@@ -38,7 +40,6 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.amqp.support.converter.MessageConversionException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 
 //import jakarta.persistence.NonUniqueResultException;
 import lombok.AllArgsConstructor;
@@ -65,9 +66,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
-	
+
 	@Autowired
 	private MessageConverter messageConverter;
+	
+	@Autowired
+	private EmpAttandenceRepo empAttandencerepo;
 
 //	@Autowired
 //	private Queue userQueue; // Assuming you have a user-specific queue
@@ -104,7 +108,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 
 		UserEntity user = userrepo.findByGmail(loginform.getGmail());
-       
+
 		log.info("Employee Loging... method running. ");
 
 		if (user != null && bcrypt.matches(loginform.getPassword(), user.getPassword())) {
@@ -168,7 +172,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			body.append("<h1>'Otp For Verifying Your Account.</h1>' ");
 
 			body.append("<h3>" + temppwd + "</h3>");
-			
+
 			log.info("Employee Forgot Password Message Sending To Mail ... Method Running.");
 			emailutils.sendmail(to, subject, body.toString());
 //			return true;
@@ -179,8 +183,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			throw new ErrorMessage(e);
 		}
 
-		}
-	
+	}
 
 	@Override
 	public boolean getOtp(String gmail, String otp) {
@@ -255,9 +258,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		Optional<Employee> empOptional = emprepo.findByGmail(gmail);
 
 		System.out.println("method checking:--------->" + empOptional != null);
-		
+
 		log.info("Updating Employee Details... Method Running.");
-		
+
 		if (empOptional.isPresent()) {
 
 			Employee emp = empOptional.get();
@@ -292,10 +295,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			emprepo.save(emp);
 
 			BeanUtils.copyProperties(emp, updatedata);
-
 			empleaverepo.save(updatedata);
 
+			EmpAttandence uploadEmpId = new EmpAttandence();
+            BeanUtils.copyProperties(emp, uploadEmpId);
+            empAttandencerepo.save(uploadEmpId);
+            
 			return new ResponseMsg(true, emp.getFirstname(), "Employee updated successfully.");
+			
 		} else {
 			return new ResponseMsg(false, "", "Employee with" + gmail + "ID not found.");
 		}
@@ -330,50 +337,75 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //    }
 
 	@Override
-	public ResponseMsg saveLeaveDetails(String guid, String admingmail, EmployeeLeaveDto empDto) {
-	    Optional<EmployeeLeave> employeeLeaveDataOptional = empleaverepo.findByGuid(guid);
+	public ResponseMsg saveLeaveDetails(String guid, EmployeeLeaveDto empDto) {
+		Optional<EmployeeLeave> employeeLeaveDataOptional = empleaverepo.findByGuid(guid);
 
-	    log.info("Employee Leave Details Form Filling  ... Method Running.");
+		log.info("Employee Leave Details Form Filling  ....Method Running.");
 
-	    if (employeeLeaveDataOptional.isPresent()) {
-	        EmployeeLeave employeeLeave = employeeLeaveDataOptional.get();
+		if (employeeLeaveDataOptional.isPresent()) {
+			EmployeeLeave employeeLeave = employeeLeaveDataOptional.get();
 
-	        // Update the fields of the existing entity
-	        employeeLeave.setType(empDto.getType());
-	        employeeLeave.setFromDate(empDto.getFromDate());
-	        employeeLeave.setFromShift(empDto.getFromShift());
-	        employeeLeave.setToDate(empDto.getToDate());
-	        employeeLeave.setToShift(empDto.getToShift());
-	        employeeLeave.setReasonFor(empDto.getReasonFor());
-	        employeeLeave.setAdmingmail(empDto.getAdmingmail());
-	        
-	        // Save the updated entity
-	        employeeLeave = empleaverepo.save(employeeLeave);
+			// Update the fields of the existing entity
+			employeeLeave.setAdmingmail(empDto.getAdmingmail());
+			employeeLeave.setType(empDto.getType());
+			employeeLeave.setFromDate(empDto.getFromDate());
+			employeeLeave.setFromShift(empDto.getFromShift());
+			employeeLeave.setToDate(empDto.getToDate());
+			employeeLeave.setToShift(empDto.getToShift());
+			employeeLeave.setReasonFor(empDto.getReasonFor());
+			employeeLeave.setAdmingmail(empDto.getAdmingmail());
 
-	        // Send approval notification to admin service
-	        empDto.setAdmingmail(admingmail);
-	        log.info("Employee Leave Details Data Sending to Perticular Admin  ... Method Running. Data is :"+employeeLeave.toString());
-	        // Ensure that employeeLeave is converted to JSON before sending
-	        Message message = MessageBuilder
-	    	        .withBody(convertObjectToJsonBytes(employeeLeave.toString()))
-	    	        .andProperties(MessagePropertiesBuilder.newInstance().setContentType(MessageProperties.CONTENT_TYPE_JSON).build())
-	    	        .build();
-	    	    rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, message);
+			// Save the updated entity
+			employeeLeave = empleaverepo.save(employeeLeave);
+
+			// Send approval notification to admin service
+			log.info("Employee Leave Details Data Sending to Perticular Admin  ... Method Running. Data is :"
+					+ employeeLeave.toString());
+			// Ensure that employeeLeave is converted to JSON before sending
+			Message message = MessageBuilder.withBody(convertObjectToJsonBytes(employeeLeave.toString())).andProperties(
+					MessagePropertiesBuilder.newInstance().setContentType(MessageProperties.CONTENT_TYPE_JSON).build())
+					.build();
+			rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, message);
 //	        rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, employeeLeave.toString());
 
-	        System.out.println("Leave Request is sent Successfully.");
+			System.out.println("Leave Request is sent Successfully.");
 
-	        return new ResponseMsg(true, employeeLeave.getGuid(), "Leave request updated successfully");
-	    } else {
-	        return new ResponseMsg(false, "", "Employee leave data not found for the provided GUID: " + guid);
-	    }
+			return new ResponseMsg(true, employeeLeave.getGuid(), "Leave request updated successfully");
+		} else {
+			return new ResponseMsg(false, "", "Employee leave data not found for the provided GUID: " + guid);
+		}
 	}
 
 	private byte[] convertObjectToJsonBytes(Object object) throws MessageConversionException {
-	    try {
-	        return messageConverter.toMessage(object, null).getBody();
-	    } catch (MessageConversionException e) {
-	        throw new RuntimeException("Failed to convert object to JSON bytes", e);
-	    }
+		try {
+			return messageConverter.toMessage(object, null).getBody();
+		} catch (MessageConversionException e) {
+			throw new RuntimeException("Failed to convert object to JSON bytes", e);
+		}
 	}
-}
+
+	
+	
+	@Override
+	public ResponseMsg empAttandenceDataStoring(String guid, EmpAttandenceDto empattandenceDto) {
+
+		 
+		Optional<EmpAttandence> attandencedata = empAttandencerepo.findByGuid(guid);
+		
+		if(attandencedata.isPresent()) {
+			EmpAttandence empAttandence = attandencedata.get();
+			empAttandence.setDate(guid);
+			empAttandence.setClockInTime(guid);
+			empAttandence.setClockOutTime(guid);
+			empAttandence.setBreakHours(guid);
+			empAttandence.setAnomalous(guid);
+			empAttandence.setTotalHours(guid);
+			
+			empAttandencerepo.save(empAttandence);
+		return new ResponseMsg(true,empAttandence.getGuid(),"Employee Atteandence Stored Succesfully.");
+		}else {
+		   return new ResponseMsg(false," ","Error Occured Employee Atteandence Not Stored.");
+		}
+	}
+  }
+

@@ -129,9 +129,10 @@ public class AdminServiceImpl implements AdminService {
 		return emp;
 	}
 
+	
 	@Override
-	public Employee getEmployeeById(Long id) {
-
+	 public Employee getEmployeeById(Long id) {
+		
 		Optional<Employee> emp = adminrepo.findById(id);
 
 		if (emp.isPresent()) {
@@ -171,21 +172,21 @@ public class AdminServiceImpl implements AdminService {
     }
 	
 	@RabbitListener(queues = "${spring.rabbitmq.message_queue}")
-    public void receiveLeaveRequest(EmployeeLeaves empLeaveDto, String message) {
+	public void receiveLeaveRequest(EmployeeLeaveDto employeeLeaveDto, String message) {
       
 		try {
     	       System.out.println("Admin Service received message from user queue: " + message);
     
 
-        if (empLeaveDto != null) {
-            System.out.println("Admin Service received Leave Request from RabbitMQ: " + empLeaveDto.getGuid());
+        if (employeeLeaveDto != null) {
+            System.out.println("Admin Service received Leave Request from RabbitMQ: " + employeeLeaveDto.getGuid());
 
             // Assuming Employee class and related logic
             Employee employee = new Employee();
 
-            if (employee.getGmail().equals(empLeaveDto.getAdmingmail()) && employee.isAdminStatus()) {
-                receiveUserDetails(empLeaveDto.getGuid());
-                sendLeaveinfoStatus(empLeaveDto.getGuid());
+            if (employee.getGmail().equals(employeeLeaveDto.getAdmingmail()) && employee.isAdminStatus()) {
+                receiveUserDetails(employeeLeaveDto.getGuid());
+                sendLeaveinfoStatus(employeeLeaveDto.getGuid());
             }
         }
         
@@ -224,6 +225,8 @@ public class AdminServiceImpl implements AdminService {
         }
         
     }
+
+	
 }
 	
 
