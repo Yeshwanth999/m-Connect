@@ -1,6 +1,7 @@
 package com.userservice.main.service;
 
 import java.security.MessageDigest;
+import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
@@ -32,14 +33,14 @@ import com.userservice.main.repository.UserRepository;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageBuilder;
-import org.springframework.amqp.core.MessageProperties;
-import org.springframework.amqp.core.MessagePropertiesBuilder;
-import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.amqp.support.converter.MessageConversionException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import org.springframework.amqp.core.Message;
+//import org.springframework.amqp.core.MessageBuilder;
+//import org.springframework.amqp.core.MessageProperties;
+//import org.springframework.amqp.core.MessagePropertiesBuilder;
+//import org.springframework.amqp.support.converter.MessageConverter;
+//import org.springframework.amqp.support.converter.MessageConversionException;
+//import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
 //import jakarta.persistence.NonUniqueResultException;
 import lombok.AllArgsConstructor;
@@ -67,9 +68,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
-	@Autowired
-	private MessageConverter messageConverter;
-	
+//	@Autowired
+//	private MessageConverter messageConverter;
+//	
 	@Autowired
 	private EmpAttandenceRepo empAttandencerepo;
 
@@ -347,6 +348,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			// Update the fields of the existing entity
 			employeeLeave.setAdmingmail(empDto.getAdmingmail());
+			employeeLeave.setGuid(empDto.getGuid());
 			employeeLeave.setType(empDto.getType());
 			employeeLeave.setFromDate(empDto.getFromDate());
 			employeeLeave.setFromShift(empDto.getFromShift());
@@ -357,34 +359,50 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			// Save the updated entity
 			employeeLeave = empleaverepo.save(employeeLeave);
-
+			
+//			messagesend(guid);
+			
+			rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, employeeLeave.toString());
+			
 			// Send approval notification to admin service
-			log.info("Employee Leave Details Data Sending to Perticular Admin  ... Method Running. Data is :"
+			
+			log.info("Employee Leave Details Data Sending to Perticular Admin... Method Running. Data is :"
 					+ employeeLeave.toString());
-			// Ensure that employeeLeave is converted to JSON before sending
-			Message message = MessageBuilder.withBody(convertObjectToJsonBytes(employeeLeave.toString())).andProperties(
-					MessagePropertiesBuilder.newInstance().setContentType(MessageProperties.CONTENT_TYPE_JSON).build())
-					.build();
-			rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, message);
-//	        rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, employeeLeave.toString());
-
-			System.out.println("Leave Request is sent Successfully.");
-
+		
 			return new ResponseMsg(true, employeeLeave.getGuid(), "Leave request updated successfully");
 		} else {
-			return new ResponseMsg(false, "", "Employee leave data not found for the provided GUID: " + guid);
+			return new ResponseMsg(false, " ", "Employee leave data not found for the provided GUID: " + guid);
 		}
 	}
-
-	private byte[] convertObjectToJsonBytes(Object object) throws MessageConversionException {
-		try {
-			return messageConverter.toMessage(object, null).getBody();
-		} catch (MessageConversionException e) {
-			throw new RuntimeException("Failed to convert object to JSON bytes", e);
-		}
-	}
-
 	
+//	private String messagesend(String guid) {
+//		
+//		
+//			EmployeeLeave employeeLeave= new EmployeeLeave();
+//			
+//			0,employeeLeave.getAdmingmail(),0,0,0,0,0,null,employeeLeave.getType(),employeeLeave.getFromDate(),employeeLeave.getFromShift(),employeeLeave.getToDate()
+//					,employeeLeave.getToShift(),employeeLeave.getReasonFor()); 
+//			
+// 	Ensure that employeeLeave is converted to JSON before sending
+		
+//		Message message = MessageBuilder
+//				         .withBody(convertObjectToJsonBytes(employeeLeave.toString())).andProperties(
+//				MessagePropertiesBuilder.newInstance().setContentType(MessageProperties.CONTENT_TYPE_JSON).build())
+//				.build();
+
+//			System.out.println("Leave Request is sent Successfully.");
+//		
+//	  return "Leave Request is sent Successfully.";
+//	
+//	}
+
+//	private byte[] convertObjectToJsonBytes(Object object) throws MessageConversionException {
+//		try {
+//			return messageConverter.toMessage(object, null).getBody();
+//		} catch (MessageConversionException e) {
+//			throw new RuntimeException("Failed to convert object to JSON bytes", e);
+//		}
+//	}
 	
 	@Override
 	public ResponseMsg empAttandenceDataStoring(String guid, EmpAttandenceDto empattandenceDto) {
@@ -394,13 +412,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		
 		if(attandencedata.isPresent()) {
 			EmpAttandence empAttandence = attandencedata.get();
-			empAttandence.setDate(guid);
-			empAttandence.setClockInTime(guid);
-			empAttandence.setClockOutTime(guid);
-			empAttandence.setBreakHours(guid);
-			empAttandence.setAnomalous(guid);
-			empAttandence.setTotalHours(guid);
-			
+			empAttandence.setDate(empattandenceDto.getDate());
+			empAttandence.setClockInTime(empattandenceDto.getClockInTime());
+			empAttandence.setClockOutTime(empattandenceDto.getClockOutTime());
+			empAttandence.setBreakHours(empattandenceDto.getBreakHours());
+			empAttandence.setAnomalous(empattandenceDto.getAnomalous());
+			empAttandence.setTotalHours(empattandenceDto.getTotalHours());
+		
 			empAttandencerepo.save(empAttandence);
 		return new ResponseMsg(true,empAttandence.getGuid(),"Employee Atteandence Stored Succesfully.");
 		}else {
