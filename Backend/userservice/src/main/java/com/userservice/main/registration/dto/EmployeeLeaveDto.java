@@ -1,17 +1,14 @@
 package com.userservice.main.registration.dto;
 
 import java.time.LocalDate;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeLeaveDto {
-	
 	
     private String type;
     private String guid;
@@ -27,8 +24,8 @@ public class EmployeeLeaveDto {
 	private int monthly_leave_balance;
 	private int monthly_leaves_used;
 	private String leaveStatus;
-
-   
+	
+	
   }
 
 

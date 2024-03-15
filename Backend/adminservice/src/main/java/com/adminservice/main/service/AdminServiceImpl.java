@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
@@ -141,6 +142,7 @@ public class AdminServiceImpl implements AdminService {
 			return null;
 		}
 	}
+	
 
 	@Override
 	public String DeleteUserById(long id) {
@@ -171,8 +173,9 @@ public class AdminServiceImpl implements AdminService {
         return empleaveleaverepo.findByGuid(guid).orElse(null);
     }
 	
+	@Override
 	@RabbitListener(queues = "${spring.rabbitmq.message_queue}")
-	public void receiveLeaveRequest(EmployeeLeaveDto employeeLeaveDto, String message) {
+	public void receiveLeaveRequest(EmployeeLeaveDto employeeLeaveDto, Message message) {
       
 		try {
     	       System.out.println("Admin Service received message from user queue: " + message);
@@ -226,7 +229,7 @@ public class AdminServiceImpl implements AdminService {
         
     }
 
-	
+
 }
 	
 
