@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.userservice.main.entity.Employee;
 import com.userservice.main.entity.EmployeeLeave;
+import com.userservice.main.registration.dto.EmpAttandenceDto;
 import com.userservice.main.registration.dto.EmployeeLeaveDto;
 import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.RegistrationDto;
@@ -43,7 +44,10 @@ public interface UserService {
 //		String deleteemp(String guid);
 
 	String DeleteUserById(long id);
+
+	ResponseMsg saveLeaveDetails(String guid, EmployeeLeaveDto empDto);
+
+	ResponseMsg empAttandenceDataStoring(String guid, EmpAttandenceDto empattandenceDto);
 	
-	ResponseMsg saveLeaveDetails(String guid,String admingmail,EmployeeLeaveDto empDto);
 
 }

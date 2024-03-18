@@ -22,15 +22,11 @@ public class EmployeeLeaves {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String admingmail;
-
 	private int annual_leave_balance;
 	private int annual_leaves_used;
 	private int monthly_leave_balance;
 	private int monthly_leaves_used;
-	
-	
 	private int no_of_days_approved;
-	
 	private String leaveStatus;
 	private String guid;
     private String gmail;
@@ -40,4 +36,5 @@ public class EmployeeLeaves {
 	private LocalDate toDate;
 	private String toShift;
 	private String reasonFor;
-}
+
+ }
