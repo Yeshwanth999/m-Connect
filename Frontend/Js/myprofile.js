@@ -1,3 +1,86 @@
+
+var usermail = sessionStorage.getItem("usermail");
+
+console.log(usermail);
+
+if (usermail !== null && usermail !== "") {
+    geturlLink = 'http://localhost:8081/user/getemployee/' + usermail + '';
+    console.log(usermail + "usermail." + geturlLink);
+
+}
+else {
+    console.log("Mail unavailable");
+}
+
+$(document).ready(function () {
+
+
+    // Fetch data from the server when the page loads
+    $.ajax({
+        type: 'GET',
+        url: geturlLink, // Replace 'user/data' with your actual endpoint
+        success: function (responseData) {
+            // Populate the form fields with the retrieved data
+            $('#firstname').val(responseData.firstname);
+            $('#lastname').val(responseData.lastname);
+            $('#dob').val(responseData.dob);
+            $('#gender').val(responseData.gender);
+            $('#blood_group').val(responseData.blood_group);
+            $('#marital_status').val(responseData.marital_status);
+            $('#phonenumber').val(responseData.phonenumber);
+            $('#phonenumber1').val(responseData.phonenumber1);
+            $('#currentAddress').val(responseData.currentAddress);
+            $('#currentCountry').val(responseData.currentCountry);
+            $('#currentState').val(responseData.currentState);
+            $('#currentCity').val(responseData.currentCity);
+            $('#currentPincode').val(responseData.currentPincode);
+            $('#permanentAddress').val(responseData.permanentAddress);
+            $('#permanentCountry').val(responseData.permanentCountry);
+            $('#permanentState').val(responseData.permanentState);
+            $('#permanentCity').val(responseData.permanentCity);
+            $('#permanentPincode').val(responseData.permanentPincode);
+            $('#linkedin').val(responseData.linkedin);
+            $('#twitter').val(responseData.twitter);
+            $('#facebook').val(responseData.facebook);
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+
+    });
+    console.log(firstname);
+    console.log(lastname);
+    console.log(dob);
+    console.log(gender);
+    console.log(blood_group);
+    console.log(marital_status);
+    //personal info start
+    //console.log(gmail);
+    console.log(password);
+    console.log(phonenumber);
+    console.log(phonenumber1);
+    // Address info start
+    console.log(currentAddress);
+    console.log(currentCountry);
+    console.log(currentState);
+    console.log(currentCity);
+    console.log(currentPincode);
+    console.log(permanentAddress);
+    console.log(permanentCountry);
+    console.log(permanentState);
+    console.log(permanentCity);
+    console.log(permanentPincode);
+    // social info start
+    console.log(linkedin);
+    console.log(twitter);
+    console.log(facebook);
+
+
+});
+
+
+
+
 // personal info start //
 document.getElementById("firstname").disabled = true;
 document.getElementById("lastname").disabled = true;
@@ -8,20 +91,23 @@ document.getElementById("marital_status").disabled = true;
 
 
 function toggleEditMode() {
+
     var inputs = document.querySelectorAll('.input-underlined');
     var selects = document.querySelectorAll('select');
     var buttons = document.querySelector('.button-container');
 
     inputs.forEach(function (input) {
         input.disabled = !input.disabled;
+
     });
 
     selects.forEach(function (select) {
         select.disabled = !select.disabled;
+
     });
 
-
     buttons.style.display = 'block';
+
 }
 
 function cancelEdit() {
@@ -31,6 +117,7 @@ function cancelEdit() {
 
     inputs.forEach(function (input) {
         input.disabled = true;
+
     });
 
     selects.forEach(function (select) {
@@ -128,8 +215,6 @@ function cancelAddress() {
         input.disabled = true;
     });
 
-
-
     buttons.style.display = 'none';
 }
 
@@ -173,40 +258,6 @@ document.getElementById('permanentPincode').addEventListener('blur', function ()
     }
 });
 
-// show addressentire div after clickig pencil toggle // 
-
-// document.getElementById('addressOnclick').addEventListener('click', function() {
-//     var addressentire = document.getElementById('addressentire');
-//     addressentire.style.display = 'block'
-// })
-
-// logic to hide the divs //
-// function saveAddress(){
-//     var addressentire = document.getElementById('addressentire');
-//     addressentire.style.display = 'none'
-// }
-// function cancelAddress(){
-//     var addressentire = document.getElementById('addressentire');
-//     addressentire.style.display = 'none'
-// }
-
-
-// // on change current address to permanent address after clicking in check box //
-// function copyAddress() {
-//     var checkbox = document.getElementById("sameAddressCheckbox");
-//     var currentAddressFields = document.querySelectorAll(".currentaddress");
-//     var permanentAddressFields = document.querySelectorAll(".permanentaddress");
-
-//     if (checkbox.checked) {
-//         permanentAddressFields.forEach(function(permanentField, index) {
-//             permanentField.value = currentAddressFields[index].value;
-//         });
-//     } else {
-//         permanentAddressFields.forEach(function(permanentField) {
-//             permanentField.value = "";
-//         });
-//     }
-// }
 
 function socialOnclick() {
     var inputs = document.querySelectorAll('.input-underlined3');
@@ -281,7 +332,7 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
     var dob = $('#dob').val();
     var gender = $('#gender').val();
     var blood_group = $('#blood_group').val();
-    //var isAdmin = $('#adminStatus').is(':checked');
+    var marital_status = $('#marital_status').val();
 
     // contact info start
     // var email = $('#gmail').val();
@@ -309,11 +360,13 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
 
     const empObject = {
         // personal info start
-        firstname: firstname,
+        firstname: firstna = me,
         lastname: lastname,
         dob: dob,
         gender: gender,
         blood_group: blood_group,
+        marital_status: marital_status,
+
         //adminStatus: adminStatus,
         // personal info start
         // email: gmail,
@@ -342,9 +395,10 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
     console.log(dob);
     console.log(gender);
     console.log(blood_group);
-    //console.log(isAdmin);
-    // personal info start
-    // console.log(gmail);
+
+    console.log(marital_status);
+    //personal info start
+    //console.log(gmail);
     console.log(password);
     console.log(phonenumber);
     console.log(phonenumber1);
@@ -365,9 +419,17 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
     console.log(facebook);
 
 
-    const type = 'POST';
-
+    const type = 'PUT';
     // Call the updated function for AJAX communication
-    sendEmpData('http://localhost:8081/user/update', type, empObject, 'form');
+    var usermail = sessionStorage.getItem("usermail");
+
+    console.log(usermail);
+
+    if (usermail !== null && usermail !== "") {
+        sendEmpData('http://localhost:8081/user/updateemp/' + usermail + '', type, empObject, 'form');
+    }
+    else {
+        console.log("Mail unavailable");
+    }
 
 });

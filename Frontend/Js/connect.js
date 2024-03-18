@@ -156,7 +156,7 @@ function sendEmpData(url, type, data, elementID) {
 
         success: function (responseData, textStatus, xhr) {
             if (textStatus == 'success') {
-                window.location.href = "adminDashboard.html"
+                window.location.href = "employeeDashboard.html"
             } else {
                 console.log('response data:', responseData);
             }
