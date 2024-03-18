@@ -271,15 +271,15 @@
             document.getElementById('totalTimeValue').innerText = '00:00:00';
         }
 
-        function formatTime(seconds) {
-            const hours = Math.floor(seconds / 3600);
-            const minutes = Math.floor((seconds % 3600) / 60);
-            const remainingSeconds = seconds % 60;
-            const formattedHours = padZero(hours);
-            const formattedMinutes = padZero(minutes);
-            const formattedSeconds = padZero(remainingSeconds);
-            return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-        }
+    function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = seconds % 60;
+        const formattedHours = padZero(hours);
+        const formattedMinutes = padZero(minutes);
+        const formattedSeconds = padZero(remainingSeconds);
+        return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    }
 
         function padZero(value) {
             return value < 10 ? `0${value}` : value;
@@ -315,21 +315,20 @@
             console.log("Total Break Time: " + formatTime(calculateBreakTime()));
         }
 
-        window.onload = function () {
-            if (isMainTimerRunning) {
-                document.querySelector('.startTimer').style.display = 'none';
-                document.querySelector('.timerDiv').style.display = 'block';
-                document.querySelector('#timerValue').style.display = 'block';
-                mainTimerInterval = setInterval(updateMainTimer, 1000);
-                if (isBreakTime) {
-                    breakTimerInterval = setInterval(updateBreakTimer, 1000);
-                }
-                updateBreakTime();
-                updateTotalTime();
+    window.onload = function () {
+        if (isMainTimerRunning) {
+            document.querySelector('.startTimer').style.display = 'none';
+            document.querySelector('.timerDiv').style.display = 'block';
+            document.querySelector('#timerValue').style.display = 'block';
+            mainTimerInterval = setInterval(updateMainTimer, 1000);
+            if (isBreakTime) {
+                breakTimerInterval = setInterval(updateBreakTimer, 1000);
             }
+            updateBreakTime();
+            updateTotalTime();
         }
-    </script>
-    
+    }
+</script>
 </body>
 
 </html>
