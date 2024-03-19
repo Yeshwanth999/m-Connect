@@ -10,74 +10,8 @@
 <body>
     <main>
         <div class="row main-row px-2">
-            <div class="col-3 left-col b-col">
-                <div style="position: sticky;"> <h3 class="py-2 ps-2">Microden Rules</h3></div>
-                <div class="rules">
-                   
-                    <h6>Office Hours: </h6>
-                    <ul>
-                        <li>Regular office hours are from 08:00 AM to 05:00 PM. </li>
-                        <li>Punctuality is crucial. Arrive on time and inform your HR if you anticipate being late. 
-                            If you are late to office more than 10minutes then half day leave.
-                        </li>
-                    </ul>
-                    <h6>Dress Code:</h6>
-                    <ul>
-                        <li>Dress professionally in accordance with our company.</li>
-                        <li>If in case dress code, id card is missing then, 3days deduction from your pay.</li>
-                    </ul>
-                    <h6>Attendance:</h6>
-                    <ul>
-                        <li>Notify your HR as early as possible if you need to take a day off or if you'll be late.</li>
-                        <li>Follow the proper channels for requesting time off. </li>
-                        <li>IN time - out time if you are late for 10min accepted (1st day warning letter, 2nd day half day, 3rd day three days of deductions. </li>
-                        <li>Without information if you take leave then it caused to one week of your salary deductions.</li>
-                    </ul>
-                    <h6>Use of Company Resources:</h6>
-                    <ul>
-                        <li>Use company resources, including computers and internet, responsibly and solely for work-related purposes.</li>
-                        <li>Do not download or install software without Management approval.</li>
-                    </ul>
-                    <h6>Confidentiality:</h6>
-                    <ul>
-                        <li>Do not share sensitive like salary, information with unauthorized individuals.</li>
-                    </ul>
-                    <h6>Communication:</h6>
-                    <ul>
-                        <li>Use professional and respectful language in all communications.</li>
-                        <li>Avoid personal use of company communication channels during working hours.</li>
-                    </ul>
-                    <h6>Meeting Etiquette:</h6>
-                    <ul>
-                        <li>Be punctual for meetings and come prepared.</li>
-                        <li>Respect others' opinions and maintain a positive and constructive tone.</li>
-                    </ul>
-                    <h6>Leave Policies:</h6>
-                    <ul>
-                        <li>approval for leave then you have to take that leave (Only Loss of Pay).</li>
-                        <li>In case without approval or without Intimation then it will 3 days of deduction.</li>
-                    </ul>
-                    <h6>Breaks and Lunch:</h6>
-                    <ul>
-                        <li>Take breaks and lunch within the allocated times. If you are late then half day deduction.</li>
-                        <li>Keep common areas clean and organized.</li>
-                    </ul>
-                    <h6>Personal Belongings:</h6>
-                    <ul>
-                        <li>Keep personal items in designated areas.</li>
-                        <li>Do not disturb or take colleagues' belongings without permission.</li>
-                    </ul>
-                    <h6>Salary discussion, Rumors and Gossip's:</h6>
-                    <ul>
-                        <li>If management team comes to know that you are doing salary discussion or Rumors about company or Gossip's with other employees, then serious action will be taken and as well as 7 days of salary deductions.</li>
-                    </ul>
-                    <h6>Reports Update:</h6>
-                    <ul>
-                        <li>You have to maintain proper work reports and as well as need to update every day in google sheet, in case if you neglect it then sever action to be taken and 2 days of deduction from your pay.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-5 middle-col b-col">
+            
+            <div class="col-8 middle-col b-col">
                 <div id="applyLeave" class="leave-form " style="display: block;"><!-- leave request start -->
                     <div class="form">
                         <div style="position: sticky;"> <h3 class="py-2 ps-2">Leave Request</h3></div>
@@ -110,7 +44,7 @@
                             <textarea name="reason" id="reason-for" cols="6" rows="4"></textarea>
                             <label for="file">File Name</label>
                             <input type="file" id="file">
-                            <input type="button" value="Apply leave" onclick="sendLeaveData()">
+                            <input type="button" class="leaveBtn" value="Apply leave" onclick="sendLeaveData()">
                         </div>
                     </div>
                 </div><!-- leave request end -->
@@ -177,7 +111,7 @@
                             <textarea name="reason" id="applied-reason-for" cols="6" rows="4"></textarea>
                             <label for="comments">Comments</label>
                             <textarea name="comments" id="comments" cols="6" rows="2"></textarea>
-                            <input type="button" value="Cancel Leave" onclick="sendCancelLeaveData()">
+                            <input type="button" class="leaveBtn" value="Cancel Leave" onclick="sendCancelLeaveData()">
                         </div>
                     </div>
                 </div> <!--leave cancellation ends-->
@@ -191,10 +125,10 @@
                     <div class="action"><button onclick="cancel()">Cancel leave</button></div>
                     <div class="action"><button onclick="request()">My Requests</button></div>
                     <div class="action"><button onclick="history()">Leave History</button></div>
-                    <div class="apply-img">
-                        <img src="../Frontend/Assets/Leave Page Image.jpg" alt="apply-leave-image">
-                    </div>
+                    
                 </div>
+
+                
             </div>
         </div>
     </main>
