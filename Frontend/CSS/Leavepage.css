@@ -14,8 +14,6 @@ header{
 main{
     height: 70vh;
     /* margin-top: 100px; */
-    margin: 0 50px;
-    margin-top: 30px;
 
 }
 .main-row{
@@ -38,18 +36,12 @@ h3{
 }
 
 .actions{
-    display: flex;
-    flex-direction: column;
     text-align: center;
-    gap: 20px;
-    
 }
 
 .action button{
-    width: 80%;
-    height: 50px;
+    width: 100%;
     border: none;
-    border-radius: 10px;
 }
 .action:hover{
     font-size: 18px;
@@ -59,13 +51,10 @@ h3{
     flex-grow: 1;
     height: 100%;
 }
-.middle-col{
-    padding-left: 50px;
-}
 .right-col{
     padding: 0;
     flex-grow: 1;
-    height: auto;
+    height: 100%;
 }
 
 .form-grid{
@@ -73,14 +62,6 @@ h3{
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     gap: 5px;
-}
-.form-grid .leaveBtn{
-    width: 200px;
-    height: 50px;
-    margin-left: 50px;
-    margin-bottom: 30px;
-    border: none;
-    border-radius: 10px;
 }
 
 .apply-img img{
