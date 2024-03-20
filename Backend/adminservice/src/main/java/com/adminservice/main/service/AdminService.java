@@ -2,6 +2,8 @@ package com.adminservice.main.service;
 
 import java.util.List;
 
+import org.springframework.amqp.core.Message;
+
 import com.adminservice.main.dto.EmployeeLeaveDto;
 import com.adminservice.main.dto.RegistrationdDTO;
 import com.adminservice.main.entity.Employee;
@@ -17,7 +19,8 @@ public interface AdminService {
 
 	 Employee getEmployeeById(Long id);
 
-	void receiveLeaveRequest(EmployeeLeaveDto employeeLeaveDto, String message);
+	void receiveLeaveRequest(Message message);
+
 	 
 	 
 	 

@@ -34,10 +34,13 @@ public class SecurityConfig{
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http.csrf(csrf -> csrf.disable()) // Disabling CSRF for simplicity, enable it in production
 	            .authorizeRequests(authorizeRequests -> authorizeRequests
-	                    .requestMatchers(new AntPathRequestMatcher("/user/login")).permitAll()
-	                    .requestMatchers(new AntPathRequestMatcher("/user/updateemp/{gmail}")).permitAll()
-	                    .requestMatchers(new AntPathRequestMatcher("/user/applyLeave/{guid}")).permitAll()
-	                    .requestMatchers(new AntPathRequestMatcher("/user/**")).authenticated())
+//	                    .requestMatchers(new AntPathRequestMatcher("/user/login")).permitAll()
+//	                    .requestMatchers(new AntPathRequestMatcher("/user/getemployee/{gmail}")).permitAll()
+//	                    .requestMatchers(new AntPathRequestMatcher("/user/updateemp/{gmail}")).permitAll()
+//	                    .requestMatchers(new AntPathRequestMatcher("/user/applyLeave/{guid}")).permitAll()
+//	                    .requestMatchers(new AntPathRequestMatcher("/user/**")).authenticated())
+	                    .requestMatchers(new AntPathRequestMatcher("/user/**")).permitAll())
+
 	            .formLogin(withDefaults());
 
 	    return http.build();

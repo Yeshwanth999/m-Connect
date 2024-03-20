@@ -2,11 +2,9 @@ package com.userservice.main.controller;
 
 import java.util.List;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.userservice.main.entity.Employee;
 import com.userservice.main.registration.dto.EmpAttandenceDto;
@@ -39,8 +38,8 @@ public class UserController {
 
 	private final UserService userService;
 
-	@Autowired
-	private RabbitTemplate template;
+//	@Autowired
+//	private RabbitTemplate template;
 
 	public UserController(UserService userService) {
 
@@ -54,18 +53,6 @@ public class UserController {
 //		return "registration";
 //	}
 
-//	@PostMapping("register")
-//	public ResponseEntity<String> registerUserAccount(@RequestBody RegistrationDto registrationDTO) {
-//		userService.save(registrationDTO);
-//		return ResponseEntity.ok("User Created Succesfully.");
-//	}
-
-//	@PostMapping("adduser")
-//	public ResponseEntity<String> addUser(@RequestBody RegistrationDto user) {
-//		userService.addUser(user);
-//
-//		return ResponseEntity.ok("Employee added Succesfully");
-//	}
 
 //	@PostMapping
 //    public ResponseEntity<Void> createEmployeeLeave(@RequestBody Employee employee) {
@@ -127,18 +114,19 @@ public class UserController {
 	}
 
 	@GetMapping("/getemployees")
-	@PreAuthorize("hasAuthority('ADMIN')")
+//	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<List<Employee>> getAllEmployees() {
 		List<Employee> emp = userService.getAllEmployees();
 		return new ResponseEntity<>(emp, HttpStatus.OK);
 	}
 
-	@GetMapping("/getemployee/{id}")
-	@PreAuthorize("hasAuthority('USER')")
-	public ResponseEntity<Employee> getEmpById(@PathVariable Long id) {
+	@GetMapping("/getemployee/{gmail}")
+//	@PreAuthorize("hasAuthority('USER')")
+	public ResponseEntity<Employee> getEmpById(@PathVariable String gmail) {
       
 		log.info("Getting employee by ID method running. ");
-		Employee emp = userService.getEmployeeById(id);
+		
+		Employee emp = userService.getEmployeeById(gmail);
 
 		if (emp != null) {
 			return new ResponseEntity<>(emp, HttpStatus.OK);
@@ -163,6 +151,8 @@ public class UserController {
 		String data = userService.DeleteUserById(id);
 		return data;
 	}
+	
+	
 
 	@PostMapping("/applyLeave/{guid}")
 //	@PreAuthorize("hasAuthority('USER')")
@@ -173,6 +163,21 @@ public class UserController {
 		ResponseMsg response = userService.saveLeaveDetails(guid, empDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+	
+	@PostMapping("/addprofileimage/{gmail}")
+	private ResponseEntity<ResponseMsg> addprofileimage(@PathVariable String gmail, @RequestParam("file") MultipartFile file) {
+	    log.info("Profile Image adding..");
+	    ResponseMsg response = userService.addImage(gmail, file);
+	    return new ResponseEntity<>(response, HttpStatus.OK);
+	    
+	  }
+	
+	@GetMapping("/getprofileimage/{gmail}")
+	public ResponseEntity<Resource> getImage(@PathVariable String gmail) {
+		ResponseEntity<Resource> msg =userService.getProfileImage(gmail);
+		return msg;
+	}
+	
 	
 	@PostMapping("/EmpAttadenceData")
 	private ResponseEntity<ResponseMsg> EmpAttadenceData(@PathVariable("gmail") String gmail,@RequestBody EmpAttandenceDto empattandenceDto){

@@ -1,18 +1,31 @@
 package com.userservice.main.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.userservice.main.entity.EmpAttandence;
 import com.userservice.main.entity.Employee;
 import com.userservice.main.entity.EmployeeLeave;
@@ -29,18 +42,6 @@ import com.userservice.main.repository.EmpAttandenceRepo;
 import com.userservice.main.repository.EmployeeLeaveRepository;
 import com.userservice.main.repository.EmployeeRepo;
 import com.userservice.main.repository.UserRepository;
-
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageBuilder;
-import org.springframework.amqp.core.MessageProperties;
-import org.springframework.amqp.core.MessagePropertiesBuilder;
-import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.amqp.support.converter.MessageConversionException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 //import jakarta.persistence.NonUniqueResultException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -67,29 +68,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
-	@Autowired
-	private MessageConverter messageConverter;
-	
+//	@Autowired
+//	private MessageConverter messageConverter;
+//	
 	@Autowired
 	private EmpAttandenceRepo empAttandencerepo;
-
-//	@Autowired
-//	private Queue userQueue; // Assuming you have a user-specific queue
-
-//    @Override
-//	public UserEntity save(RegistrationDto registrationDto) {
-//		
-//		UserEntity userEntity = new UserEntity(
-//				registrationDto.getGuid(),
-//				registrationDto.getId(),
-//				registrationDto.getEmail(),
-//				passwordEncoder.encode(registrationDto.getPassword()),
-//				registrationDto.getRole()
-//				);
-//				
-//				return userrepo.save(userEntity);
-//		
-//	}
 
 	@Override
 	public UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException {
@@ -100,8 +83,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return new org.springframework.security.core.userdetails.User(user.getGmail(), user.getPassword(),
 				Collections.emptyList());
 	}
-
-	// Your other service methods here..
 
 	@Override
 	public String userLogin(LoginForm loginform) {
@@ -135,9 +116,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public Employee getEmployeeById(Long id) {
+	public Employee getEmployeeById(String gmail) {
 
-		Optional<Employee> emp = emprepo.findById(id);
+		Optional<Employee> emp = emprepo.findByGmail(gmail);
 
 		if (emp.isPresent()) {
 			return emp.get();
@@ -298,11 +279,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			empleaverepo.save(updatedata);
 
 			EmpAttandence uploadEmpId = new EmpAttandence();
-            BeanUtils.copyProperties(emp, uploadEmpId);
-            empAttandencerepo.save(uploadEmpId);
-            
+			BeanUtils.copyProperties(emp, uploadEmpId);
+			empAttandencerepo.save(uploadEmpId);
+
 			return new ResponseMsg(true, emp.getFirstname(), "Employee updated successfully.");
-			
+
 		} else {
 			return new ResponseMsg(false, "", "Employee with" + gmail + "ID not found.");
 		}
@@ -347,6 +328,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			// Update the fields of the existing entity
 			employeeLeave.setAdmingmail(empDto.getAdmingmail());
+			employeeLeave.setGuid(empDto.getGuid());
 			employeeLeave.setType(empDto.getType());
 			employeeLeave.setFromDate(empDto.getFromDate());
 			employeeLeave.setFromShift(empDto.getFromShift());
@@ -358,54 +340,182 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			// Save the updated entity
 			employeeLeave = empleaverepo.save(employeeLeave);
 
-			// Send approval notification to admin service
-			log.info("Employee Leave Details Data Sending to Perticular Admin  ... Method Running. Data is :"
-					+ employeeLeave.toString());
-			// Ensure that employeeLeave is converted to JSON before sending
-			Message message = MessageBuilder.withBody(convertObjectToJsonBytes(employeeLeave.toString())).andProperties(
-					MessagePropertiesBuilder.newInstance().setContentType(MessageProperties.CONTENT_TYPE_JSON).build())
-					.build();
-			rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, message);
-//	        rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, employeeLeave.toString());
+//			messagesend(guid);
 
-			System.out.println("Leave Request is sent Successfully.");
+			rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, employeeLeave.toString());
+
+			// Send approval notification to admin service
+
+			log.info("Employee Leave Details Data Sending to Perticular Admin... " + "Method Running. Data is :"
+					+ employeeLeave.toString());
 
 			return new ResponseMsg(true, employeeLeave.getGuid(), "Leave request updated successfully");
 		} else {
-			return new ResponseMsg(false, "", "Employee leave data not found for the provided GUID: " + guid);
+			return new ResponseMsg(false, " ", "Employee leave data not found for the provided GUID: " + guid);
 		}
 	}
 
-	private byte[] convertObjectToJsonBytes(Object object) throws MessageConversionException {
-		try {
-			return messageConverter.toMessage(object, null).getBody();
-		} catch (MessageConversionException e) {
-			throw new RuntimeException("Failed to convert object to JSON bytes", e);
-		}
-	}
+//	private String messagesend(String guid) {
+//		
+//		
+//			EmployeeLeave employeeLeave= new EmployeeLeave();
+//			
+//			0,employeeLeave.getAdmingmail(),0,0,0,0,0,null,employeeLeave.getType(),employeeLeave.getFromDate(),employeeLeave.getFromShift(),employeeLeave.getToDate()
+//					,employeeLeave.getToShift(),employeeLeave.getReasonFor()); 
+//			
+// 	Ensure that employeeLeave is converted to JSON before sending
 
-	
-	
+//		Message message = MessageBuilder
+//				         .withBody(convertObjectToJsonBytes(employeeLeave.toString())).andProperties(
+//				MessagePropertiesBuilder.newInstance().setContentType(MessageProperties.CONTENT_TYPE_JSON).build())
+//				.build();
+
+//			System.out.println("Leave Request is sent Successfully.");
+//		
+//	  return "Leave Request is sent Successfully.";
+//	
+//	}
+
+//	private byte[] convertObjectToJsonBytes(Object object) throws MessageConversionException {
+//		try {
+//			return messageConverter.toMessage(object, null).getBody();
+//		} catch (MessageConversionException e) {
+//			throw new RuntimeException("Failed to convert object to JSON bytes", e);
+//		}
+//	}
+
 	@Override
 	public ResponseMsg empAttandenceDataStoring(String guid, EmpAttandenceDto empattandenceDto) {
 
-		 
 		Optional<EmpAttandence> attandencedata = empAttandencerepo.findByGuid(guid);
-		
-		if(attandencedata.isPresent()) {
-			EmpAttandence empAttandence = attandencedata.get();
-			empAttandence.setDate(guid);
-			empAttandence.setClockInTime(guid);
-			empAttandence.setClockOutTime(guid);
-			empAttandence.setBreakHours(guid);
-			empAttandence.setAnomalous(guid);
-			empAttandence.setTotalHours(guid);
-			
-			empAttandencerepo.save(empAttandence);
-		return new ResponseMsg(true,empAttandence.getGuid(),"Employee Atteandence Stored Succesfully.");
-		}else {
-		   return new ResponseMsg(false," ","Error Occured Employee Atteandence Not Stored.");
-		}
-	}
-  }
 
+		if (attandencedata.isPresent()) {
+			EmpAttandence empAttandence = attandencedata.get();
+			empAttandence.setDate(empattandenceDto.getDate());
+			empAttandence.setClockInTime(empattandenceDto.getClockInTime());
+			empAttandence.setClockOutTime(empattandenceDto.getClockOutTime());
+			empAttandence.setBreakHours(empattandenceDto.getBreakHours());
+			empAttandence.setAnomalous(empattandenceDto.getAnomalous());
+			empAttandence.setTotalHours(empattandenceDto.getTotalHours());
+
+			empAttandencerepo.save(empAttandence);
+
+			return new ResponseMsg(true, empAttandence.getGuid(), "Employee Atteandence Stored Succesfully.");
+		} else {
+			return new ResponseMsg(false, " ", "Error Occured Employee Atteandence Not Stored.");
+		}
+
+	}
+
+	private static final String Upload_pathfile = "static/files";
+
+	@Override
+	public ResponseMsg addImage(String gmail, MultipartFile file) {
+		try {
+			if (file.isEmpty()) {
+				return new ResponseMsg(true, " ", "File is Empty");
+			}
+			Optional<Employee> optionalClass = emprepo.findByGmail(gmail);
+			if (optionalClass.isPresent()) {
+
+				Employee empdata = optionalClass.get();
+
+				String fileName = empdata.getGuid() + "_" + file.getOriginalFilename();
+				empdata.setImgName(fileName);
+
+				String fileType = getFileType(file.getOriginalFilename());
+                       empdata.setImgType(fileType);
+                       
+				Path uploadPath = Paths.get("src/main/resources/" + Upload_pathfile).toAbsolutePath().normalize();
+
+				File directory = new File(uploadPath.toString());
+
+				if (!directory.exists()) {
+					if (directory.mkdir()) {
+						System.out.println("directory Created Successfully.");
+					} else {
+
+						System.out.println("Failed to create Directory.");
+
+						return new ResponseMsg(true, " ", "directory to create FilePath.");
+
+					}
+				}
+
+				Path filePath = uploadPath.resolve(fileName).normalize();
+
+				file.transferTo(filePath.toFile());
+				System.out.println("File uploaded successfully. Path: " + filePath);
+
+				// Set the full file path in imgPath
+				empdata.setImgPath(filePath.toString());
+
+				// Save the changes to the UserDtls object
+				emprepo.save(empdata);
+
+				return new ResponseMsg(true, " ", "File uploaded successfully");
+
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+
+			return new ResponseMsg(true, " ", "Failed to upload file");
+		}
+
+		// Return an appropriate message if the user is not present
+		return new ResponseMsg(true, " ", "User not found");
+	}
+
+	// Helper method to extract file type from the filename
+	private String getFileType(String filename) {
+		int dotIndex = filename.lastIndexOf('.');
+		if (dotIndex > 0 && dotIndex < filename.length() - 1) {
+			return filename.substring(dotIndex + 1).toLowerCase();
+		}
+		return null;
+	}
+	
+	
+	@Override
+	public ResponseEntity<Resource> getProfileImage(String gmail){
+	    
+		try {
+	        Optional<Employee> optionalUser = emprepo.findByGmail(gmail);
+	        
+	         if (optionalUser.isPresent()) {
+		            Employee user = optionalUser.get();
+		            // Validate or sanitize the file name to prevent directory traversal attacks
+		            String fileName = user.getImgName();
+		            String sanitizedFileName = FilenameUtils.getName(fileName);
+		            Path filePath = Paths.get("src/main/resources/static/images").resolve(sanitizedFileName).normalize();
+		            
+		            // Use FileSystemResource instead of UrlResource
+		            Resource resource = new FileSystemResource(filePath.toFile());
+
+	            // Log the file path for debugging
+
+	            // Check if the file exists and is readable
+	            if (resource.exists() && resource.isReadable()) {
+	                // Dynamically determine content type based on file extension
+	                String contentType = Files.probeContentType(filePath);
+
+	                HttpHeaders headers = new HttpHeaders();
+	                headers.setContentType(MediaType.parseMediaType(contentType));
+
+	                return ResponseEntity.ok().headers(headers).body(resource);
+	            } else {
+	                return ResponseEntity.notFound().build();
+	            }
+	        } else {
+	            return ResponseEntity.notFound().build(); // Return 404 if the user is not found
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace(); // Log the error
+
+	        // Provide a more informative response for internal server errors
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body(null); // You may consider returning a specific Resource instance here
+	    }
+	}
+
+}

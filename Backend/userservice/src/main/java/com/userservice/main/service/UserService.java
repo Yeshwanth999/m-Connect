@@ -2,9 +2,12 @@ package com.userservice.main.service;
 
 import java.util.List;
 
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.userservice.main.entity.Employee;
 import com.userservice.main.entity.EmployeeLeave;
@@ -27,7 +30,7 @@ public interface UserService {
 
 	List<Employee> getAllEmployees();
 
-	Employee getEmployeeById(Long id);
+	Employee getEmployeeById(String gmail);
 
 	String forgotPassword(LoginForm loginform);
 
@@ -48,6 +51,11 @@ public interface UserService {
 	ResponseMsg saveLeaveDetails(String guid, EmployeeLeaveDto empDto);
 
 	ResponseMsg empAttandenceDataStoring(String guid, EmpAttandenceDto empattandenceDto);
+
+	ResponseMsg addImage(String gmail, MultipartFile file);
+
+	ResponseEntity<Resource> getProfileImage(String gmail);
+
 	
 
 }
