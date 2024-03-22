@@ -12,12 +12,15 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.userservice.main.entity.EmployeeLeave;
+import com.userservice.main.registration.dto.EmployeeLeaveDto;
+
 @Configuration
 public class MQConfig {
 
-    public static final String QUEUE = "message_queue";
-    public static final String EXCHANGE = "message_exchange";
-    public static final String ROUTING_KEY = "message_routingKey";
+    public static final String QUEUE = "apply_for_leave";
+    public static final String EXCHANGE = "leave_exchange";
+    public static final String ROUTING_KEY = "leave_routingKey";
 
     @Bean
     public Queue queue() {

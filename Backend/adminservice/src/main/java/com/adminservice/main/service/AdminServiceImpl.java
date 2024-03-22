@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.converter.MessageConversionException;
@@ -26,6 +28,8 @@ import com.adminservice.main.helperclasses.ResponseMsg;
 import com.adminservice.main.repository.AdminRepository;
 import com.adminservice.main.repository.EmployeeLeaveRepository;
 import com.adminservice.main.repository.UserRepo;
+import com.adminservice.main.security.RabbitMQListener;
+
 
 
 @Service
@@ -38,15 +42,10 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private UserRepo emprepo; // Employee login data
 
-	public AdminServiceImpl(AdminRepository adminrepo) {
-		this.adminrepo = adminrepo;
-	}
-
 	@Autowired
 	private EmployeeLeaveRepository empleaveleaverepo;
-
-	@Autowired
-	private RabbitTemplate rabbitTemplate;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQListener.class);
 
 	private static final String FILENAME = "src/main/resources/static/counter.txt";
 
@@ -141,6 +140,7 @@ public class AdminServiceImpl implements AdminService {
 			return null;
 		}
 	}
+	
 
 	@Override
 	public String DeleteUserById(long id) {
@@ -171,62 +171,80 @@ public class AdminServiceImpl implements AdminService {
         return empleaveleaverepo.findByGuid(guid).orElse(null);
     }
 	
-	@RabbitListener(queues = "${spring.rabbitmq.message_queue}")
-	public void receiveLeaveRequest(EmployeeLeaveDto employeeLeaveDto, String message) {
-      
-		try {
-    	       System.out.println("Admin Service received message from user queue: " + message);
-    
-
-        if (employeeLeaveDto != null) {
-            System.out.println("Admin Service received Leave Request from RabbitMQ: " + employeeLeaveDto.getGuid());
-
-            // Assuming Employee class and related logic
-            Employee employee = new Employee();
-
-            if (employee.getGmail().equals(employeeLeaveDto.getAdmingmail()) && employee.isAdminStatus()) {
-                receiveUserDetails(employeeLeaveDto.getGuid());
-                sendLeaveinfoStatus(employeeLeaveDto.getGuid());
-            }
-        }
-        
-		} catch (MessageConversionException ex) {
-	        System.err.println("Error converting message to EmployeeLeaves: " + ex.getMessage());
-	        ex.printStackTrace();
-	        // Handle the error gracefully
-	    }
-		
-    }
-
-//    @RabbitListener(queues = "${spring.rabbitmq.userDetailsQueue}")
-    public void receiveUserDetails(String guid) {
-        try {
-            System.out.println("Admin Service received User Details Request from RabbitMQ: " + guid);
-        
-            EmployeeLeaves empleaveDetails = getEmployeeDetailsWithLeaveInfo(guid);
-
-            // Assuming rabbitTemplate is properly configured and autowired
-            rabbitTemplate.convertAndSend("exchangeName", "user.details.routingKey", empleaveDetails);
-        } catch (Exception e) {
-            System.err.println("Error processing message from RabbitMQ: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-//    @RabbitListener(queues = "${spring.rabbitmq.approveQueue}")
-    private void sendLeaveinfoStatus(String guid) {
-        EmployeeLeaveDto empdto = new EmployeeLeaveDto();
-        Optional<EmployeeLeaves> employeeDetails = empleaveleaverepo.findByGuid(guid);
-        
-        if (employeeDetails.isPresent()) {
-            EmployeeLeaves employeeLeave = employeeDetails.get();
-            employeeLeave.setNo_of_days_approved(empdto.getNo_of_days_approved());
-            employeeLeave.setLeaveStatus(empdto.getLeaveStatus());
-        }
-        
-    }
-
 	
-}
+	@Override
+	@RabbitListener(queues = "${javainuse.rabbitmq.queue}")
+	public void receiveLeaveRequest(Message message) {
+	    try {
+	        String messageBody = new String(message.getBody());
+	        LOGGER.info("Received message: " + messageBody);
+	     
+	    } catch (Exception ex) {
+	        LOGGER.error("Error processing leave request: " + ex.getMessage());
+	        ex.printStackTrace();
+	    }
+	}
+	
+	
+	
+//	public void receiveLeaveRequest(Message message) {
+//		
+//		Optional<EmployeeLeaves> leavedata = empleaveleaverepo.findByGmail(message.getBody().getGmail());
+//	    try {
+//	    	EmployeeLeaveDto employeeLeaveDto= new EmployeeLeaveDto();
+//	    	
+//	    	employeeeLeaveDto.set
+//	    	System.out.println("Admin Service received message from user queue: " + message);
+//
+//	        if (employeeLeaveDto != null) {
+//	            System.out.println("Admin Service received Leave Request from RabbitMQ: " + employeeLeaveDto.getGuid());
+//
+//	            // Assuming Employee class and related logic
+//	            Employee employee = new Employee();
+//
+//	            if (employee.getGmail().equals(employeeLeaveDto.getAdmingmail()) && employee.isAdminStatus()) {
+//	                receiveUserDetails(employeeLeaveDto.getGuid());
+//	                sendLeaveInfoStatus(employeeLeaveDto);
+//	            }
+//	        }
+//	    } catch (Exception ex) {
+//	        System.err.println("Error processing leave request: " + ex.getMessage());
+//	        ex.printStackTrace();
+//	        // Handle the error gracefully or rethrow if necessary
+//	    }
+//	}
+//
+//	public void receiveUserDetails(String guid) {
+//	    try {
+//	        System.out.println("Admin Service received User Details Request from RabbitMQ: " + guid);
+//
+//	        EmployeeLeaves empleaveDetails = getEmployeeDetailsWithLeaveInfo(guid);
+//
+//	        // Assuming rabbitTemplate is properly configured and autowired
+//	        rabbitTemplate.convertAndSend("exchangeName", "user.details.routingKey", empleaveDetails);
+//	    } catch (Exception e) {
+//	        System.err.println("Error processing user details request: " + e.getMessage());
+//	        e.printStackTrace();
+//	        // Handle the error gracefully or rethrow if necessary
+//	    }
+//	}
+//
+//	private void sendLeaveInfoStatus(EmployeeLeaveDto employeeLeaveDto) {
+//	    try {
+//	        Optional<EmployeeLeaves> employeeDetails = empleaveleaverepo.findByGuid(employeeLeaveDto.getGuid());
+//
+//	        if (employeeDetails.isPresent()) {
+//	            EmployeeLeaves employeeLeave = employeeDetails.get();
+//	            employeeLeave.setNo_of_days_approved(employeeLeaveDto.getNo_of_days_approved());
+//	            employeeLeave.setLeaveStatus(employeeLeaveDto.getLeaveStatus());
+//	            empleaveleaverepo.save(employeeLeave); // Save the updated entity
+//	        }
+//	    } catch (Exception e) {
+//	        System.err.println("Error updating leave info status: " + e.getMessage());
+//	        e.printStackTrace();
+//	        // Handle the error gracefully or rethrow if necessary
+//	    }
+//	}
+       }
 	
 

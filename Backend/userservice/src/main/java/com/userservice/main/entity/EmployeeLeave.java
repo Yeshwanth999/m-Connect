@@ -18,19 +18,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="employeeleaves")
 public class  EmployeeLeave{
-	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	private String guid;
 	private String admingmail;
-	
 	private int annual_leave_balance;
 	private int annual_leaves_used;
 	private int monthly_leave_balance;
 	private int monthly_leaves_used;
 	private int no_of_days_approved;
 	private String leaveStatus;
-	private String guid;
     private String type;
     private LocalDate fromDate;
     private String fromShift;
@@ -38,5 +36,5 @@ public class  EmployeeLeave{
     private String toShift;
     private String reasonFor;
     
-
- }
+    
+    }
