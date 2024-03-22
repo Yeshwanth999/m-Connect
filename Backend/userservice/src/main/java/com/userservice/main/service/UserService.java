@@ -20,11 +20,11 @@ import com.userservice.main.registration.dto.ResponseMsg;
 @Service
 public interface UserService {
 
-//      UserEntity save(RegistrationDto registrationDTO);
+	// UserEntity save(RegistrationDto registrationDTO);
 
 	String userLogin(LoginForm loginForm);
 
-//	   String addUser(RegistrationDto user);
+	// String addUser(RegistrationDto user);
 
 	Employee saveEmployee(Employee employee);
 
@@ -44,7 +44,7 @@ public interface UserService {
 
 	UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException;
 
-//		String deleteemp(String guid);
+	// String deleteemp(String guid);
 
 	String DeleteUserById(long id);
 
@@ -55,5 +55,5 @@ public interface UserService {
 	String addImage(String gmail, MultipartFile file);
 
 	ResponseEntity<Resource> getProfileImage(String gmail);
-	
-    }
+
+}
