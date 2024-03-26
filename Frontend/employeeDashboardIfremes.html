@@ -16,6 +16,10 @@
         <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.js'></script>
         <script src="https://kit.fontawesome.com/fae9f5ea2f.js"
             crossorigin="anonymous"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script> -->
+
         <style>
             .startTimer {
                 display: block;
@@ -24,8 +28,8 @@
 
             .startTimer button {
                 cursor: pointer;
-                background-color: black;
-                color: white;
+                background-color: red;
+                color: black;
                 padding: 10px 20px;
                 border: none;
                 border-radius: 5px;
@@ -34,7 +38,7 @@
             }
 
             .startTimer button:hover {
-                background-color: red;
+                background-color: white;
             }
 
             .timerDiv {
@@ -64,8 +68,8 @@
 
             .timerButtons button {
                 cursor: pointer;
-                background-color: black;
-                color: white;
+                background-color: red;
+                color: black;
                 padding: 5px 10px;
                 border: none;
                 border-radius: 3px;
@@ -75,7 +79,7 @@
             }
 
             .timerButtons button:hover {
-                background-color: red;
+                background-color: rgb(255, 131, 131);
             }
 
             .timer {
@@ -86,8 +90,8 @@
             #timerValue {
                 display: none;
                 cursor: pointer;
-                background-color: black;
-                color: white;
+                background-color: white;
+                color: black;
                 padding: 5px 10px;
                 border: none;
                 border-radius: 3px;
@@ -103,19 +107,20 @@
 
 
         <script>
-            function loadPage(pageUrl) {
-                document.getElementById('iframe-content').src = pageUrl;
 
-                console.log(pageUrl)
-            }
+
+
+
+
         </script>
 
 
     </head>
 
-    <body onload="loadPage('/Frontend/employeeDashboard.html')">
+    <body>
         <!--navbar start-->
-        <nav class="navbar-main">
+        <nav class="navbar-main"
+            id="navbar-main">
             <div class="logo">
                 <img src="/Frontend/Assets/Microdenlogo.png"
                     alt="logo">
@@ -123,13 +128,18 @@
             <div class="navbar-items">
                 <div class="list-items">
                     <ul>
-                        <li class="item">
+                        <!-- <li class="item">
                             <a href="/Frontend/employeeDashboard.html">Dashboard</a>
+                        </li> -->
+                        <li class="item">
+                            <a href="/Frontend/employeeDashboard.html"
+                                id="dashboard"
+                                target="_self">Dashboard</a>
                         </li>
                         <li class="item">
                             <a href="#"
                                 id="calender"
-                                onclick="loadPage('/Frontend/calender.html')">Calendar</a>
+                                onclick="loadPage('/Frontend/myprofile.html')">My Profile</a>
                         </li>
                         <li class="item">
                             <a href="#"
@@ -138,23 +148,31 @@
                         </li>
                         <li class="item">
                             <a href="#"
-                                id="rewards"
-                                onclick="loadPage('/Frontend/rewards.html')">Rewards</a>
-                        </li>
-                        <li class="item">
-                            <a href="#"
                                 id="attendence"
                                 onclick="loadPage('/Frontend/attendence.html')">Attendence</a>
-                        </li>
-                        <li class="item">
-                            <a href="#"
-                                id="#">Any other</a>
                         </li>
                         <li class="item">
                             <a href="#"
                                 id="payroll"
                                 onclick="loadPage('/Frontend/payroll.html')">Payroll</a>
                         </li>
+                        <li class="item">
+                            <a href="#"
+                                id="calender"
+                                onclick="loadPage('/Frontend/calender.html')">Calendar</a>
+                        </li>
+                        
+                        <li class="item">
+                            <a href="#"
+                                id="rewards"
+                                onclick="loadPage('/Frontend/rewards.html')">Rewards</a>
+                        </li>
+                        
+                        <li class="item">
+                            <a href="#"
+                                id="#">Any other</a>
+                        </li>
+                        
                         <li class="item">
                             <a href="#"
                                 id="slips"
@@ -215,7 +233,7 @@
         <!--navbar-end-->
         <iframe class="i-frame"
             id="iframe-content"
-            src=" "
+            src=""
             title="description"></iframe>
         <!--script for web-clock -->
         <script>
@@ -365,6 +383,27 @@
                 }
             }
         </script>
+
+        <script>
+            function loadPage(pageUrl) {
+                document.getElementById('iframe-content').src = pageUrl;
+
+                console.log(pageUrl)
+
+                //clickLoad(pageUrl)  
+            }
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                let pageforIframe = localStorage.getItem("IframePageName");
+                localStorage.removeItem("IframePageName");
+                var iframe = document.getElementById("iframe-content");
+                iframe.src = '/Frontend/' + pageforIframe;
+            });
+        </script>
+
+
 
     </body>
 
