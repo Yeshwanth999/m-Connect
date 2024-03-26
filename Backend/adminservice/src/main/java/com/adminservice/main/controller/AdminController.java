@@ -27,7 +27,7 @@ import com.adminservice.main.service.AdminService;
 public class AdminController {
 
 	
-	@Autowired
+	@Autowired 
 	 private AdminService adminService;
 
 //    private final RestTemplate restTemplate;
