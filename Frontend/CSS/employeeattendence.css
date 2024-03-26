@@ -32,7 +32,6 @@ border: 2px solid black;
 
 }
 
-/* Styles for the table data */
 #student-table td {
 text-align: left;
 font-size: 19px;
@@ -40,10 +39,8 @@ border: 2px solid black;
 
 }
 
-/* Increase height of empty cells */
 #student-table td:empty {
 min-height: 50px; 
-/* Adjust the value as needed */
 }
 #aprove{
   background-color: green;
