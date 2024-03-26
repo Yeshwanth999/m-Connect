@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResponseMsg {
 	
+
 	private Boolean status;
 	private Object msg;
 	private String elsemsg;
