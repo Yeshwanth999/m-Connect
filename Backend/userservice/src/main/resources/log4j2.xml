@@ -3,13 +3,13 @@
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout
-				Pattern="%d{yyyy-MMM-HH:mm:ss}  [%t] %-5level %-50c{1.} - %msg %n " />
+            pattern="%highlight{%d{yyyy-MMM-HH:mm:ss} [%t] %-5level %-50c{1.} - %msg%n}" />
 		</Console>
 
 		<!-- creating a file to store the logging errors. logs/myapp.log -->
 		<File name="file" fileName="LogMsg.log">
 			<PatternLayout
-				Pattern="%d{yyyy-MMM-HH:mm:ss}  [%t] %-5level %-50c{1.} - %msg %n " />
+                pattern="%d{yyyy-MMM-HH:mm:ss} [%t] %-5level %-50c{1.} - %msg%n" />
 		</File>
 	</Appenders>
 	<Loggers>
@@ -18,4 +18,38 @@
 			<AppenderRef ref="file"/>
 		</Root>
 	</Loggers>
+	
+	<Plugins>
+        <Plugin nuame="highlight" class="org.apache.logging.log4j.core.layout.PatternLayout">
+            <Param name="pattern" value="%clr{%d{yyyy-MMM-HH:mm:ss} [%t] %-5level} %clr{%-50c{1.}}{cyan} - %clr{%msg%n}{blue}"/>
+        </Plugin>
+    </Plugins>
+    
+    
+ <!--    <?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{%d{yyyy-MMM-HH:mm:ss} [%t] %-5level %-50c{1.} - %msg%n}" />
+        </Console>
+
+        <File name="file" fileName="LogMsg.log">
+            <PatternLayout pattern="%d{yyyy-MMM-HH:mm:ss} [%t] %-5level %-50c{1.} - %msg%n" />
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="file"/>
+        </Root>
+    </Loggers>
+
+    Adding Colors
+    <Plugins>
+        <Plugin name="highlight" class="org.apache.logging.log4j.core.layout.PatternLayout">
+            <Param name="pattern" value="%clr{%d{yyyy-MMM-HH:mm:ss} [%t] %-5level} %clr{%-50c{1.}}{cyan} - %clr{%msg%n}{blue}"/>
+        </Plugin>
+    </Plugins>
+</Configuration> -->
+    
 </Configuration>

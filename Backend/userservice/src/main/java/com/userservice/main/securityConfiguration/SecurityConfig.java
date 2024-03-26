@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.userservice.main.service.UserServiceImpl;
@@ -21,45 +20,133 @@ import com.userservice.main.service.UserServiceImpl;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class SecurityConfig{
+public class SecurityConfig {
 
-	@Bean
-	public UserDetailsService userDetailsService() {
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserServiceImpl();
+    }
 
-		return new UserServiceImpl();
-	}
+    @SuppressWarnings("deprecation")
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable()) // Disabling CSRF for simplicity, enable it in production
+            .authorizeRequests(authorizeRequests -> authorizeRequests
+                .requestMatchers(new AntPathRequestMatcher("/user/login")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/user/register")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/user/updateemp/{gmail}")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/user/applyLeave/{guid}")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/user/")).authenticated())
+            .formLogin(withDefaults())
+            .logout(logout ->
+            logout.invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // Specify logout URL
+                .logoutSuccessUrl("/SignIn?logout") // Redirect to login page after logout
+                .deleteCookies("JSESSIONID")); // Remove session cookies
 
-	@SuppressWarnings("deprecation")
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	    http.csrf(csrf -> csrf.disable()) // Disabling CSRF for simplicity, enable it in production
-	            .authorizeRequests(authorizeRequests -> authorizeRequests
-//	                    .requestMatchers(new AntPathRequestMatcher("/user/login")).permitAll()
-//	                    .requestMatchers(new AntPathRequestMatcher("/user/getemployee/{gmail}")).permitAll()
-//	                    .requestMatchers(new AntPathRequestMatcher("/user/updateemp/{gmail}")).permitAll()
-//	                    .requestMatchers(new AntPathRequestMatcher("/user/applyLeave/{guid}")).permitAll()
-//	                    .requestMatchers(new AntPathRequestMatcher("/user/**")).authenticated())
-	                    .requestMatchers(new AntPathRequestMatcher("/user/**")).permitAll())
+        return http.build();
+    }
 
-	            .formLogin(withDefaults());
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-	    return http.build();
-	}
-
-
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
-	@Bean
+    @Bean
 	public AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 		authenticationProvider.setUserDetailsService(userDetailsService());
 		authenticationProvider.setPasswordEncoder(passwordEncoder());
 		return authenticationProvider;
 	}
-
 }
+
+
+
+
+//import static org.springframework.security.config.Customizer.withDefaults;
+//
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.security.authentication.AuthenticationProvider;
+//import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+//import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.web.SecurityFilterChain;
+//import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+//import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+//
+//import com.userservice.main.service.UserServiceImpl;
+//
+//@Configuration
+//@EnableWebSecurity
+//@EnableMethodSecurity
+//public class SecurityConfig {
+//
+//	@Bean
+//	public UserDetailsService userDetailsService() {
+//
+//		return new UserServiceImpl();
+//	}
+//
+////	@SuppressWarnings("deprecation")
+////	@Bean
+////	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+////	    http.csrf(csrf -> csrf.disable()) // Disabling CSRF for simplicity, enable it in production
+////	            .authorizeRequests(authorizeRequests -> authorizeRequests
+////	                    .requestMatchers(new AntPathRequestMatcher("/user/login")).permitAll()
+////	                    .requestMatchers(new AntPathRequestMatcher("/user/getemployee/{gmail}")).permitAll()
+////	                    .requestMatchers(new AntPathRequestMatcher("/user/updateemp/{gmail}")).permitAll()
+////	                    .requestMatchers(new AntPathRequestMatcher("/user/applyLeave/{guid}")).permitAll()
+////	                    .requestMatchers(new AntPathRequestMatcher("/user/**")).authenticated())
+////	                    .requestMatchers(new AntPathRequestMatcher("/user/**")).permitAll())
+////
+////	            .formLogin(withDefaults());
+////
+////	    return http.build();
+////	}
+//
+//	@SuppressWarnings("deprecation")
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http.csrf(csrf -> csrf.disable()) // Disabling CSRF for simplicity, enable it in production
+//            .authorizeRequests(authorizeRequests -> authorizeRequests
+//                .requestMatchers(new AntPathRequestMatcher("/user/login")).permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/user/register")).permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/user/updateemp/{gmail}")).permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/user/applyLeave/{guid}")).permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/user/")).authenticated())
+//            .formLogin(withDefaults())
+//            
+//            .logout(logout ->
+//                logout.invalidateHttpSession(true)
+//                    .clearAuthentication(true)
+//                    .invalidateHttpSession(false)
+//                    .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+//                    .logoutUrl("/logout") // Specify logout URL
+//                    .logoutSuccessUrl("/SignIn?logout") // Redirect to login page after logout
+//                    .deleteCookies("JSESSIONID")); // Remove session cookies
+//              
+//        return http.build();
+//    }
+//
+//	public PasswordEncoder passwordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
+//
+//	@Bean
+//	public AuthenticationProvider authenticationProvider() {
+//		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+//		authenticationProvider.setUserDetailsService(userDetailsService());
+//		authenticationProvider.setPasswordEncoder(passwordEncoder());
+//		return authenticationProvider;
+//	}
+//
+//}
 
 //    @Autowired
 //    private UserServiceImpl userService;
