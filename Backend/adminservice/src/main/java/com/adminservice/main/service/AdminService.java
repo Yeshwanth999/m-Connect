@@ -19,7 +19,8 @@ public interface AdminService {
 
 	 Employee getEmployeeById(Long id);
 
-	void receiveLeaveRequest(EmployeeLeaveDto employeeLeaveDto, Message message);
+	void receiveLeaveRequest(Message message);
+
 	 
 	 
 	 

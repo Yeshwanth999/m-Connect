@@ -2,11 +2,11 @@ package com.userservice.main.controller;
 
 import java.util.List;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.userservice.main.entity.Employee;
 import com.userservice.main.registration.dto.EmpAttandenceDto;
 import com.userservice.main.registration.dto.EmpResponse;
@@ -27,11 +27,10 @@ import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.RegistrationDto;
 import com.userservice.main.registration.dto.ResponseMsg;
 import com.userservice.main.service.UserService;
-
 import lombok.extern.slf4j.Slf4j;
 
 
-@CrossOrigin(origins = "http://127.0.0.1:5504", methods = { RequestMethod.POST, RequestMethod.OPTIONS })
+@CrossOrigin(origins = "http://127.0.0.1:5504", methods = {RequestMethod.POST, RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/user")
 @Slf4j
@@ -39,8 +38,8 @@ public class UserController {
 
 	private final UserService userService;
 
-	@Autowired
-	private RabbitTemplate template;
+//	@Autowired
+//	private RabbitTemplate template;
 
 	public UserController(UserService userService) {
 
@@ -54,18 +53,6 @@ public class UserController {
 //		return "registration";
 //	}
 
-//	@PostMapping("register")
-//	public ResponseEntity<String> registerUserAccount(@RequestBody RegistrationDto registrationDTO) {
-//		userService.save(registrationDTO);
-//		return ResponseEntity.ok("User Created Succesfully.");
-//	}
-
-//	@PostMapping("adduser")
-//	public ResponseEntity<String> addUser(@RequestBody RegistrationDto user) {
-//		userService.addUser(user);
-//
-//		return ResponseEntity.ok("Employee added Succesfully");
-//	}
 
 //	@PostMapping
 //    public ResponseEntity<Void> createEmployeeLeave(@RequestBody Employee employee) {
@@ -132,13 +119,13 @@ public class UserController {
 		List<Employee> emp = userService.getAllEmployees();
 		return new ResponseEntity<>(emp, HttpStatus.OK);
 	}
-
-	@GetMapping("/getemployee/{id}")
-	@PreAuthorize("hasAuthority('USER')")
-	public ResponseEntity<Employee> getEmpById(@PathVariable Long id) {
+	
+	@GetMapping("/getemployee/{gmail}")
+	public ResponseEntity<Employee> getEmpById(@PathVariable String gmail) {
       
 		log.info("Getting employee by ID method running. ");
-		Employee emp = userService.getEmployeeById(id);
+		
+		Employee emp = userService.getEmployeeById(gmail);
 
 		if (emp != null) {
 			return new ResponseEntity<>(emp, HttpStatus.OK);
@@ -150,9 +137,15 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logout(){   
 		log.warn("Employee Logout.");
+		
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            SecurityContextHolder.getContext().setAuthentication(null);
+        }
+
 		return "redirect:/SignIn?logout";
 	}
-
+	
 	@GetMapping("/SignIn")
 	public String logins() {
 		return "SingIn.html"; // Assuming login.html is your login page
@@ -162,6 +155,17 @@ public class UserController {
 	public String DropUserById(@PathVariable("id") long id) {
 		String data = userService.DeleteUserById(id);
 		return data;
+	}
+	
+	
+	@PostMapping("/EmpAttadenceData")
+	private ResponseEntity<ResponseMsg> EmpAttadenceData(@PathVariable("gmail") String gmail,@RequestBody EmpAttandenceDto empattandenceDto){
+	 log.info("Employe Attendence Data Storing In Database");
+	
+	 ResponseMsg response = userService.empAttandenceDataStoring(gmail, empattandenceDto);
+	 
+		return new ResponseEntity<>(response, HttpStatus.OK);
+		
 	}
 
 	@PostMapping("/applyLeave/{guid}")
@@ -174,13 +178,27 @@ public class UserController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
-	@PostMapping("/EmpAttadenceData")
-	private ResponseEntity<ResponseMsg> EmpAttadenceData(@PathVariable("gmail") String gmail,@RequestBody EmpAttandenceDto empattandenceDto){
-	 log.info("Employe Attendence Data Storing In Database");
+	@PostMapping("/addprofileimage/{gmail}")
+	private ResponseEntity<String> addprofileimage(@PathVariable String gmail, @RequestParam("file") MultipartFile file) {
+	    log.info("Profile Image adding..");
+	  
+	    if(file.isEmpty()) {
+			return new ResponseEntity<>("File is empty", HttpStatus.BAD_REQUEST);
+
+	    }
+	    String response = userService.addImage(gmail, file);
+	    return new ResponseEntity<>(response, HttpStatus.OK);
+	    
+	  }
 	
-	 ResponseMsg response = userService.empAttandenceDataStoring(gmail, empattandenceDto);
-	 
-		return new ResponseEntity<>(response, HttpStatus.OK);
-		
+	@GetMapping("/getprofileimage/{gmail}")
+	public ResponseEntity<Resource> getImage(@PathVariable String gmail) {
+		ResponseEntity<Resource> msg =userService.getProfileImage(gmail);
+	
+		return msg;
 	}
+	
+	
+	
+	
 }
