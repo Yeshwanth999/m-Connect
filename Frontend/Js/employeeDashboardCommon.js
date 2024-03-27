@@ -1,5 +1,5 @@
-function loadPage(pageUrl) {
-    //document.getElementById('iframe-content').src = pageUrl;
+// function loadPage(pageUrl) {
+//     //document.getElementById('iframe-content').src = pageUrl;
 
-    console.log(pageUrl)
-}
+//     console.log(pageUrl)
+// }
