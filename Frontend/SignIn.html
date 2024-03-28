@@ -65,6 +65,13 @@
 
         const type= 'POST';
         sessionStorage.setItem("usermail", gmail);
+        sessionStorage.setItem("password",password)
+       // var userMail=sessionStorage.getItem('usermail')
+       // var userMail=sessionStorage.getItem('password')
+       // console.log(userMail)
+       // console.log(password)
+
+       //window.location.href = "/Frontend/employeeDashboard.html";
       
         // Call the updated function for AJAX communication
         sendFormData('http://localhost:8081/user/login',type, formData, 'formBox2');
