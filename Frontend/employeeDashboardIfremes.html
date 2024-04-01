@@ -245,7 +245,7 @@
             let totalMainSeconds = parseInt(sessionStorage.getItem('totalMainSeconds')) || 0;
             let isMainTimerRunning = JSON.parse(sessionStorage.getItem('isMainTimerRunning')) || false;
             let isBreakTime = JSON.parse(sessionStorage.getItem('isBreakTime')) || false;
-
+    
             function startTimer() {
                 document.querySelector('.startTimer').style.display = 'none';
                 document.querySelector('.timerDiv').style.display = 'block';
@@ -257,9 +257,10 @@
                 }
                 const loginTime = new Date().toLocaleTimeString();
                 const loginDate = new Date().toLocaleDateString();
-                console.log("Logged in at: " + loginDate + ", " + loginTime);
+                console.log("logged in date: " + loginDate);
+                console.log("Logged in at: " + loginTime);
             }
-
+    
             function updateMainTimer() {
                 if (!isBreakTime) {
                     totalMainSeconds++;
@@ -269,11 +270,11 @@
                     updateTotalTime();
                 }
             }
-
+    
             function toggleBreak() {
                 if (!isMainTimerRunning)
                     return;
-
+    
                 if (!isBreakTime) {
                     if (breakStart.length < 3) {
                         isBreakTime = true;
@@ -281,23 +282,29 @@
                         breakStart.push(totalMainSeconds);
                         localStorage.setItem('breakStart', JSON.stringify(breakStart));
                         breakTimerInterval = setInterval(updateBreakTimer, 1000);
-
+    
                         console.log("Break " + breakStart.length + " started at: " + new Date().toLocaleTimeString());
+                       
+    
                     }
-                } else {
+                }
+                 else {
                     isBreakTime = false;
                     sessionStorage.setItem('isBreakTime', JSON.stringify(isBreakTime));
                     breakEnd.push(totalMainSeconds);
                     localStorage.setItem('breakEnd', JSON.stringify(breakEnd));
                     updateBreakTime();
-                    clearInterval(breakTimerInterval);
-                    updateTotalTime();
-                    mainTimerInterval = setInterval(updateMainTimer, 1000);
-
+                    // clearInterval(breakTimerInterval);
+                    // updateTotalTime();
+                    // mainTimerInterval = setInterval(updateMainTimer, 1000);
+    
                     console.log("Break " + breakEnd.length + " ended at: " + new Date().toLocaleTimeString());
+                    console.log("Break " + breakEnd.length + " timeout");
+    
+    
                 }
             }
-
+    
             function handleLogout() {
                 clearInterval(mainTimerInterval);
                 clearInterval(breakTimerInterval);
@@ -307,7 +314,7 @@
                 console.log("Total login time: " + formatTime(totalMainSeconds));
                 resetTimers();
             }
-
+    
             function resetTimers() {
                 totalMainSeconds = 0;
                 breakStart = [];
@@ -325,7 +332,7 @@
                 document.getElementById('break3Time').innerText = '00:00:00';
                 document.getElementById('totalTimeValue').innerText = '00:00:00';
             }
-
+    
             function formatTime(seconds) {
                 const hours = Math.floor(seconds / 3600);
                 const minutes = Math.floor((seconds % 3600) / 60);
@@ -335,24 +342,24 @@
                 const formattedSeconds = padZero(remainingSeconds);
                 return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
             }
-
+    
             function padZero(value) {
                 return value < 10 ? `0${value}` : value;
             }
-
+    
             function updateBreakTimer() {
                 if (isBreakTime) {
                     totalMainSeconds++;
                     updateTotalTime();
                 }
             }
-
+    
             function updateBreakTime() {
                 let totalBreakTime = calculateBreakTime();
                 sessionStorage.setItem('breakTime', JSON.stringify(totalBreakTime));
                 document.getElementById('totalBreakTime').innerText = formatTime(totalBreakTime);
             }
-
+    
             function calculateBreakTime() {
                 let totalBreakTime = 0;
                 for (let i = 0; i < breakStart.length; i++) {
@@ -360,16 +367,16 @@
                 }
                 return totalBreakTime;
             }
-
+    
             function updateTotalTime() {
                 let totalLoginTime = totalMainSeconds - calculateBreakTime();
                 document.getElementById('totalTimeValue').innerText = formatTime(totalLoginTime);
                 sessionStorage.setItem('totalLoginTime', formatTime(totalLoginTime));
-
-                console.log("Total Login Time: " + formatTime(totalLoginTime));
-                console.log("Total Break Time: " + formatTime(calculateBreakTime()));
+    
+                // console.log("Total Login Time: " + formatTime(totalLoginTime));
+                // console.log("Total Break Time: " + formatTime(calculateBreakTime()));
             }
-
+    
             window.onload = function () {
                 if (isMainTimerRunning) {
                     document.querySelector('.startTimer').style.display = 'none';
