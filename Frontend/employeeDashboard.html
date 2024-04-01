@@ -5,23 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Frontend/CSS/employeeDashboard.css">
-    
-    <script src="./Js/employeeDashboard.js"></script>
-    <script src="../Frontend/Js/connect.js" defer></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <title>Header Section</title>
-
-
-    
 </head>
 
 <body>
     <header>
         <div class="logo">
-            <img src="/Frontend/Assets/Microden (1) (1).png" alt="">
+    <img id="profileImage" alt="Profile Image">
         </div>
         <div class="search">
             <input type="text" placeholder="Search ">
@@ -36,7 +30,7 @@
                     <div class="dropdown-content">
                         <a href="#">Profile</a>
                         <a href="#">Settings</a>
-                       <!-- <a href="#">Logout</a>
+                        <!-- <a href="#">Logout</a>
                           <form action="/logout" method="post">
                             <button type="submit">Logout</button>
                         </form> 
@@ -51,8 +45,17 @@
     </header>
     <div class="container">
         <div class="employee-card">
-            <img src="/Frontend/Assets/WhatsApp Image 2024-02-05 at 16.43.50.jpeg" alt="Employee Photo">
-            <h3>nagaraju</h3>
+            <!-- <img src="/Frontend/Assets/WhatsApp Image 2024-02-05 at 16.43.50.jpeg" alt="Employee Photo"> -->
+            <!-- <h3>nagaraju</h3> -->
+
+            <div id="imageContainer">
+                <img id="profileImage" src="#" alt="Profile Image">
+            </div>
+
+            <div class="form-group-1">
+                <input type="text" id="firstname" name="name" class="input-underlined disabled" required>
+            </div>
+
         </div>
         <div class="employee-card1">
             <h3 class="heading">WELCOME BACK</h3>
@@ -63,38 +66,38 @@
         <div class="card-container1">
             <div class="card">
                 <div class="dashboard-icon1">
-                    <a href="employeeDashboard.html"> <i class="fas fa-tachometer-alt"></i></a>
+                    <a href="" target="_blank"> <i class="fas fa-tachometer-alt"></i></a>
                 </div>
                 <h3 class="head">Dashboard</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon2"  onclick="RedirectToIframe(this)">
-                    <a href="myprofile.html"  target="_blank"><i class="fas fa-user"></i></a>
+                <div class="dashboard-icon2">
+                    <a href="myprofile.html"><i class="fas fa-user"></i></a>
                 </div>
                 <h3 class="head">My Profile</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon3"  onclick="RedirectToIframe(this)">
-                    <a href="leavePage.html" target="_blank"><i class="fas fa-calendar-times"></i></a>
+                <div class="dashboard-icon3">
+                    <a href="./leavePage.html"><i class="fas fa-calendar-times"></i></a>
                 </div>
                 <h3 class="head">Leaves</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon4"   onclick="RedirectToIframe(this)">
-                    <a href="attendence.html" target="_blank"><i class="fas fa-calendar-check"></i></a>
+                <div class="dashboard-icon4">
+                    <a href=""><i class="fas fa-calendar-check"></i></a>
                 </div>
                 <h3 class="head">Attendance</h3>
             </div>
         </div>
         <div class="card-container1">
             <div class="card">
-                <div class="dashboard-icon5"   onclick="RedirectToIframe(this)">
-                    <a href="payroll.html" target="_blank"><i class="fas fa-money-check-alt"></i></a>
+                <div class="dashboard-icon5">
+                    <a href=""><i class="fas fa-money-check-alt"></i></a>
                 </div>
                 <h3 class="head">Payroll</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon6"   onclick="RedirectToIframe(this)">
+                <div class="dashboard-icon6">
                     <a href=""><i class="far fa-id-card"></i></a>
                 </div>
 
@@ -102,13 +105,13 @@
 
             </div>
             <div class="card">
-                <div class="dashboard-icon7"   onclick="RedirectToIframe(this)">
+                <div class="dashboard-icon7">
                     <a href=""> <i class="fas fa-receipt"></i></a>
                 </div>
                 <h3 class="head">Slips</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon8"  onclick="RedirectToIframe(this)">
+                <div class="dashboard-icon8">
                     <a href=""><i class="fas fa-trophy"></i></a>
                 </div>
                 <h3 class="head">Rewards</h3>
@@ -116,35 +119,36 @@
         </div>
         <div class="card-container1">
             <div class="card">
-                <div class="dashboard-icon9"  onclick="RedirectToIframe(this)">
+                <div class="dashboard-icon9">
                     <a href=""> <i class="fas fa-bell"></i></a>
                 </div>
                 <h3 class="head">Notifications</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon10"  onclick="RedirectToIframe(this)">
+                <div class="dashboard-icon10">
                     <a href=""><i class="fas fa-tachometer-alt"></i></a>
                 </div>
                 <h3 class="head">Any Other Option</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon11"  onclick="RedirectToIframe(this)">
+                <div class="dashboard-icon11">
                     <i class="fas fa-tachometer-alt"></i>
                 </div>
                 <h3 class="head">Any Other Option</h3>
 
             </div>
             <div class="card">
-                <div class="dashboard-icon12"  onclick="RedirectToIframe(this)">
+                <div class="dashboard-icon12">
                     <i class="fas fa-tachometer-alt"></i>
                 </div>
                 <h3 class="head">Any Other Option</h3>
             </div>
         </div>
-                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        
     </div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./Js/employeeDashboard.js"></script>
+    <script src="../Frontend/Js/connect.js" defer></script>
+   
 	<script>
 		$('#logoutButton').on('click', function() {
 
@@ -157,21 +161,6 @@
 
             sessionStorage.removeItem("password");
 		});
-
-        // $(document).ready(function () {
-        //      //var userId = "SP2515788-M1029";
-        //      //sessionStorage.setItem("userId", userId);
-        //     var user = sessionStorage.getItem("password");
-        //     if (user !== null) {
-        //         var x = "hi";
-        //         console.log(x);
-        //         console.log(user);
-        //     }
-        //     else {
-        //         alert("Please login first");
-        //         window.location.href = "SignIn.html";
-        //     }
-        // });
 	</script>
 
         <script>
