@@ -47,8 +47,10 @@ $(document).ready(function () {
     url: geturlLink1forName, // Replace 'user/data' with your actual endpoint
     success: function (responseData) {
       // Populate the form fields with the retrieved data
-      $('#firstname').val(responseData.firstname);
-      console.log(firstname);
+      //$('#firstname').val(responseData.firstname);
+      //console.log(firstname);
+
+      $('#firstnameDisplay').text(responseData.firstname);
     },
     error: function (error) {
       console.error('Error fetching data:', error);
