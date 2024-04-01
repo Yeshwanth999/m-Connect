@@ -145,26 +145,33 @@
             </div>
         </div>
     </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./Js/employeeDashboard.js"></script>
     <script src="../Frontend/Js/connect.js" defer></script>
-    
-    
-    <!-- <script >
-        sessionStorage.setItem("key",);
-        
-        </script>
-        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-          <script>
-            $(document).ready(function () {
-              var user = sessionStorage.getItem("key");
-              if(user !== null){
-                var x = "hi";
-                console.log(x);
-              }
-              else{
-                alert("please login first");
-                window.location.href = "SignIn.html";
+   
+	<script>
+		$('#logoutButton').on('click', function() {
+
+			const type = 'GET';
+			const url = 'http://localhost:8081/user/logout';
+
+			fetchLogout(url, type);
+
+            console.log("Hi this is log out...")
+
+            sessionStorage.removeItem("password");
+		});
+	</script>
+
+        <script>
+            // sessionStorage.setItem("key",);
+            function RedirectToIframe(e) {
+                let x = e.childNodes[1].attributes[0].nodeValue;
+                localStorage.setItem("IframePageName", x);
+                window.location.href = "/Frontend/employeeDashboardIfremes.html";
             }
-           
+        </script>
+
+</body>
+
+</html>
