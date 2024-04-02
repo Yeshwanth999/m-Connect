@@ -12,32 +12,42 @@ if (usermail != " " && usermail !== null) {
   console.log("gmail is not found.");
 }
 
-jQuery(document).ready(function () {
-  // Fetch data from the server when the page loads
+$(document).ready(function () {
+  // Fetch image data from the server when the page loads
   $.ajax({
-    type: 'GET',
+    type: "GET",
     url: geturlLink,
-    responseType: 'arraybuffer',
+    responseType: "arraybuffer",
     success: function (response) {
       if (response) {
         // Convert the binary data to base64 string
         var binaryData = new Uint8Array(response);
         var imageData = btoa(String.fromCharCode.apply(null, binaryData));
 
-        // Set the src attribute of the image element
-        var imageUrl = 'data:image/jpeg;base64,' + imageData;
-        $('#profileImage').attr('src', imageUrl);
+        // Set the src attribute of a new image element
+        var imageUrl = "data:image/jpeg;base64," + imageData;
+        var imageElement = $("<img>").attr("src", imageUrl);
 
-        console.log("Image added successfully.");
+        // Append the image element to the imageContainer
+        var $imageContainer = $("#imageContainer");
+        if ($imageContainer.length) {
+          $imageContainer.append(imageElement);
+          console.log("Image added successfully.");
+          console.log(imageUrl);
+          console.log(imageElement);
+        } else {
+          console.error("Image container element not found");
+        }
       } else {
-        console.error('No image data found in the response');
+        console.error("No image data found in the response");
       }
     },
     error: function (error) {
-      console.error('Error fetching profile image:', error);
-    }
+      console.error("Error fetching profile image:", error);
+    },
   });
 });
+
 
 
 $(document).ready(function () {
