@@ -6,6 +6,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="./CSS/Leavepage.css">
     <title>Leave Apply</title>
+
+    <!-- Script tag for seding mail by SMTP.js -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+
+
 </head>
 <body>
     <main>
@@ -82,35 +88,43 @@
                     <div class="form">
                         <div style="position: sticky;"> <h3 class="py-2 ps-2">Leave Request</h3></div>
                         <div class="form-grid">
+
                             <label for="leave-type">Leave Type</label>
-                            <select name="leave-type" id="leave-type">
-                                <option value="select">Select</option>
+                            <select name="leave-type" id="leave-type" required>
+                                <option value="select" >Select</option>
                                 <option value="emergency">Emergency </option>
                                 <option value="sick">Sick</option>
                                 <option value="Casual">Casual</option>
                                 <option value="paid-leave">Paid</option>
                             </select>
+
                             <label for="from">From</label>
                             <div class="from-sec">
                                 <select name="shift" id="from-shift">
                                     <option value="first-half">First Half</option>
                                     <option value="second-half">Second Half</option>
                                 </select>
-                                <input type="date" id="from">
+                                <input type="date" id="from-date">
                             </div>
+
                             <label for="to">To</label>
                             <div class="to-sec">
                                 <select name="shift" id="to-shift">
                                     <option value="first-half">First Half</option>
                                     <option value="second-half">Second Half</option>
                                 </select>
-                                <input type="date" id="to">
+                                <input type="date" id="to-date">
                             </div>
+
                             <label for="reason-for">Reason For Leave</label>
                             <textarea name="reason" id="reason-for" cols="6" rows="4"></textarea>
-                            <label for="file">File Name</label>
-                            <input type="file" id="file">
-                            <input type="button" value="Apply leave" onclick="sendLeaveData()">
+
+                            <!-- <label for="file">File Name</label>
+                            <input type="file" id="file"> -->
+                            <label for="adminEmail">Admin Email</label>
+                            <input type="email" name="adminEmail" id="adminEmail">
+
+                            <input type="button" value="Apply leave" onclick="applyLeave()">
                         </div>
                     </div>
                 </div><!-- leave request end -->
