@@ -54,3 +54,28 @@ $('#saveEdit').on('click', function (){
     document.write(str);
 
 });
+
+// profile section image code 
+document.querySelector('.pp').addEventListener('click', function(event) {
+    event.stopPropagation();
+    document.getElementById('fileInput').click();
+});
+document.getElementById("uploadLabel").addEventListener("click", function(e) {
+    e.preventDefault();
+})
+function displayPhoto(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var profileImage = document.getElementById('profileImage');
+            profileImage.style.backgroundImage = 'url(' + e.target.result + ')';
+            profileImage.style.border = "none";
+            document.getElementById("uploadLabel").style.display = "none";
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
