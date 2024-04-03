@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
    
 });
 
-//const applyLeave = document.getElementById("applyLeave");
+const applyLeave = document.getElementById("applyLeave");
 const leaveCancel = document.getElementById('leaveCancel');
 const leaveHistory = document.getElementById('leaveHistory');
 const myRequests = document.getElementById('myRequests');
@@ -17,41 +17,41 @@ function apply(){
     leaveBalance.style.display="none";
 }
 // saving apply leave data into json object and sending it to db
-// function sendLeaveData(){
-//   const leaveData ={
-//   }
+function sendLeaveData(){
+  const leaveData ={
+  }
 
-  // const leaveType = document.getElementById('leave-type').value;
-  // const fromShift = document.getElementById('from-shift').value;
-  // const from = document.getElementById('from').value;
-  // const toShift = document.getElementById('to-shift').value;
-  // const to = document.getElementById('to').value;
-  // const reasonFor = document.getElementById('reason-for').value;
+  const leaveType = document.getElementById('leave-type').value;
+  const fromShift = document.getElementById('from-shift').value;
+  const from = document.getElementById('from').value;
+  const toShift = document.getElementById('to-shift').value;
+  const to = document.getElementById('to').value;
+  const reasonFor = document.getElementById('reason-for').value;
 
 
-//   fromdata = new Date(document.getElementById('from').value);
-//   todata = new Date(document.getElementById('to').value);
-//   var differenceMs = todata - fromdata;
-//   var differenceDays = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
+  fromdata = new Date(document.getElementById('from').value);
+  todata = new Date(document.getElementById('to').value);
+  var differenceMs = todata - fromdata;
+  var differenceDays = Math.ceil(differenceMs / (1000 * 60 * 60 * 24));
 
-//   leaveData.type = leaveType;
-//   leaveData.fromShift = fromShift;
-//   leaveData.fromDate = fromdata;
-//   leaveData.toShift = toShift;
-//   leaveData.toDate = todata;
-//   leaveData.reasonFor = reasonFor;
-//   leaveData.numberOfDays=differenceDays;
-//   console.log(leaveData);
-//   let URL ;
-//   let type ;
+  leaveData.type = leaveType;
+  leaveData.fromShift = fromShift;
+  leaveData.fromDate = fromdata;
+  leaveData.toShift = toShift;
+  leaveData.toDate = todata;
+  leaveData.reasonFor = reasonFor;
+  leaveData.numberOfDays=differenceDays;
+  console.log(leaveData);
+  let URL ;
+  let type ;
 
    
   
-// //  console.log({ from: fromDate, to: toDate, numberOfDays: differenceDays });
+//  console.log({ from: fromDate, to: toDate, numberOfDays: differenceDays });
   
       
-// //  console.log( calculateDays().differenceDays);
-// }
+//  console.log( calculateDays().differenceDays);
+}
 // Function to calculate the number of days between two dates
 // function calculateDays() {
   
@@ -60,49 +60,6 @@ function apply(){
 //          calculateDays();
 
 // }
-
-
-//  Sending mail for Leave Start
-function applyLeave() {
-  const leaveType = document.getElementById('leave-type').value;
-  const fromShift = document.getElementById('from-shift').value;
-  const fromDate = document.getElementById('from-date').value;
-  const toShift = document.getElementById('to-shift').value;
-  const toDate = document.getElementById('to-date').value;
-  const reasonFor = document.getElementById('reason-for').value;
-  const adminEmail = document.getElementById('adminEmail').value;
-
-  // Basic email format validation
-  if (!validateEmail(adminEmail)) {
-      alert("Please enter a valid email address for Admin Email.");
-      return;
-  }
-
-  Email.send({
-      SecureToken: "39e044b8-67b1-466f-857f-aaf75585c9b3",
-      To: adminEmail,
-      From: "rajeshbalu.addala@gmail.com",
-      Subject: "Leave Form from MicroDen Employee",
-      Body: "Leave Type: " + leaveType +
-          "<br>From Shift: " + fromShift +
-          "<br>From Date: " + fromDate +
-          "<br>To Shift: " + toShift +
-          "<br>To Date: " + toDate +
-          "<br>Reason For: " + reasonFor
-  }).then(
-      message => {
-          alert("You have applied for leave successfully.");
-          console.log(message);
-      }
-  );
-}
-
-// Email validation function
-function validateEmail(email) {
-  const re = /\S+@\S+\.\S+/;
-  return re.test(email);
-}
-//  Sending mail for Leave End
 
 // onclick display cancel leave section and others none
 function cancel(){
