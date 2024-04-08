@@ -12,10 +12,7 @@
 
 <body>
     <section class="section">
-        <div class="profile">
-            <h2>This is Planing for profile content</h2>
-        </div>
-        <div id="form">
+        <div class="entire-sec" id="form">
 
             <!-- personal info start -->
             <div class="personal-info-div">
@@ -268,6 +265,25 @@
             <!-- social info end -->
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         </div>
+
+        <!-- profile-and-anchor-start -->
+        <div class="profile-and-anchor-div">
+            <div class="profile-and-anchor">
+                <div class="profile-container">
+                    <div class="profile-picture" id="profilePicture">
+                        <div id="profileImage" style="background-image: url('path_to_default_image.jpg')" class="img"></div>
+                        <label for="fileInput" id="uploadLabel" class="upload-label">Upload Profile Here</label>
+                        <i class="pp fa fa-pencil" style="font-size:30px"></i>
+                    </div>
+                </div>
+                <input type="file" id="fileInput" style="display: none;" accept="image/*" onchange="displayPhoto(this)">
+                <div class="links-anchor">
+                    <a href="../Frontend/mywork.html" class="mywork">My Work</a>
+                    <a href="../Frontend/myeducation.html" class="myeducation">My Education</a>
+                </div>
+            </div>
+        </div>
+        <!-- profile-and-anchor-end -->
     </section>
 
     <script src="./Js/myprofile.js"></script>

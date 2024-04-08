@@ -12,17 +12,53 @@ if (usermail != " " && usermail !== null) {
   console.log("gmail is not found.");
 }
 
+// $(document).ready(function () {
+//   // Fetch image data from the server when the page loads
+//   $.ajax({
+//     type: "GET",
+//     url: geturlLink,
+//     responseType: "arraybuffer",
+//     success: function (response) {
+//       if (response) {
+//         // Convert the binary data to base64 string
+//         var binaryData = new Uint8Array(response);
+//         var imageData = btoa(String.fromCharCode.apply(null, binaryData));
+
+//         // Set the src attribute of a new image element
+//         var imageUrl = "data:image/jpeg;base64," + imageData;
+//         var imageElement = $("<img>").attr("src", imageUrl);
+
+//         // Append the image element to the imageContainer
+//         var $imageContainer = $("#imageContainer");
+//         if ($imageContainer.length) {
+//           $imageContainer.append(imageElement);
+//           console.log("Image added successfully.");
+//           console.log(imageUrl);
+//           console.log(imageElement);
+//         } else {
+//           console.error("Image container element not found");
+//         }
+//       } else {
+//         console.error("No image data found in the response");
+//       }
+//     },
+//     error: function (error) {
+//       console.error("Error fetching profile image:", error);
+//     },
+//   });
+// });
+
+
 $(document).ready(function () {
   // Fetch image data from the server when the page loads
   $.ajax({
     type: "GET",
-    url: geturlLink,
-    responseType: "arraybuffer",
+    url: geturlLink, // Make sure this is the correct URL
+    // responseType: "arraybuffer", // Comment this line if not needed
     success: function (response) {
       if (response) {
         // Convert the binary data to base64 string
-        var binaryData = new Uint8Array(response);
-        var imageData = btoa(String.fromCharCode.apply(null, binaryData));
+        var imageData = response; // Assuming the server returns base64 directly
 
         // Set the src attribute of a new image element
         var imageUrl = "data:image/jpeg;base64," + imageData;
@@ -47,6 +83,7 @@ $(document).ready(function () {
     },
   });
 });
+
 
 
 
