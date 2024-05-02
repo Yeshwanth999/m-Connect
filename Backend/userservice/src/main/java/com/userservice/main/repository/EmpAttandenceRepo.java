@@ -6,9 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.userservice.main.entity.EmpAttandence;
 
+
+
 public interface EmpAttandenceRepo extends JpaRepository<EmpAttandence,Long> {
-
-	Optional<EmpAttandence> findByGuid(String guid);
-
-
+	
+	Optional<EmpAttandence> findByGmail(String gmail);
+	
+	  String deleteByGuid(String guid);
 }

@@ -30,12 +30,12 @@ public class RegistrationdDTO {
 	private String currentCountry;
 	private String currentState;
 	private String currentCity;
-	private long currentPincode;
+	private String currentPincode;
 	private String permanentAddress;
 	private String permanentCountry;
 	private String permanentState;
 	private String permanentCity;
-	private long permanentPincode;
+	private String permanentPincode;
 	private String stayingsince;
 	private String livingincurrent;
 

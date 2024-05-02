@@ -46,14 +46,19 @@ public interface UserService {
 
 //		String deleteemp(String guid);
 
-	String DeleteUserById(long id);
+	String DeleteUserById(String gmail);
 
-	ResponseMsg saveLeaveDetails(String guid, EmployeeLeaveDto empDto);
+	ResponseMsg saveLeaveDetails(String gmail, EmployeeLeaveDto empDto);
 
-	ResponseMsg empAttandenceDataStoring(String guid, EmpAttandenceDto empattandenceDto);
+	ResponseMsg saveattendence(String gmail, EmpAttandenceDto empattandenceDto);
 
 	String addImage(String gmail, MultipartFile file);
 
 	ResponseEntity<Resource> getProfileImage(String gmail);
+
+	String deleteRecord(String guid);
+
+
+	
 	
     }

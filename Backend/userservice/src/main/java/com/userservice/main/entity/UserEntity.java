@@ -1,6 +1,7 @@
 package com.userservice.main.entity;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,17 +18,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserEntity {
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 //	@OneToOne
 //    @JoinColumn(name="gmail", referencedColumnName="emp_gmail")
 //    @JoinColumn(name="guid", referencedColumnName="emp_guid")
 //	@JoinColumn(name = "gmail")
 //    private Employee employee;
 	
-	private String guid;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(unique = true, nullable = true, columnDefinition = "VARCHAR(65)")
     private String gmail;
+	private String guid;
 	private String password;
 	private boolean adminStatus;
     private String accStatus;

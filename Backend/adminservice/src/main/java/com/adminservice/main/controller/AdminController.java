@@ -70,10 +70,10 @@ public class AdminController {
 		return new ResponseEntity<>(emp, HttpStatus.OK);
 	}
 
-	@GetMapping("/getemployee/{id}")
-	public ResponseEntity<Employee> getEmpById(@PathVariable("id") Long id) {
+	@GetMapping("/getemployee/{gmail}")
+	public ResponseEntity<Employee> getEmpById(@PathVariable("gmail") String gmail) {
 
-		Employee emp = adminService.getEmployeeById(id);
+		Employee emp = adminService.getEmployeeByGmail(gmail);
 
 		if (emp != null) {
 			return new ResponseEntity<>(emp, HttpStatus.OK);
@@ -82,9 +82,9 @@ public class AdminController {
 		}
 	}
 
-	@DeleteMapping("/DropBy/{id}")
-	public String DropUserById(@PathVariable("id") long id) {
-		String data = adminService.DeleteUserById(id);
+	@DeleteMapping("/DropBy/{gmail}")
+	public String DropUserById(@PathVariable("gmail") String gmail) {
+		String data = adminService.DeleteUserById(gmail);
 
 		return data;
 	}

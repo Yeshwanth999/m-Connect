@@ -238,13 +238,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public ResponseMsg updateEmp(String gmail, RegistrationDto registerEmp) {
 
 		Optional<Employee> empOptional = emprepo.findByGmail(gmail);
-
 		System.out.println("method checking:--------->" + empOptional != null);
-
-		log.info("Updating Employee Details... Method Running.");
-
+		
 		if (empOptional.isPresent()) {
-
+			log.info("Updating Employee Details... Method Running.");
+			
 			Employee emp = empOptional.get();
 
 			EmployeeLeave updatedata = new EmployeeLeave();
@@ -301,8 +299,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //	}
 //	
 	@Override
-	public String DeleteUserById(long id) {
-		emprepo.deleteById(id);
+	public String DeleteUserById(String gmail) {
+		emprepo.deleteByGmail(gmail);
 //		userrepo.deleteAll();
 		return "User Data Droped";
 	}
@@ -319,8 +317,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //    }
 
 	@Override
-	public ResponseMsg saveLeaveDetails(String guid, EmployeeLeaveDto empDto) {
-		Optional<EmployeeLeave> employeeLeaveDataOptional = empleaverepo.findByGuid(guid);
+	public ResponseMsg saveLeaveDetails(String gmail, EmployeeLeaveDto empDto) {
+		Optional<EmployeeLeave> employeeLeaveDataOptional = empleaverepo.findByGmail(gmail);
 
 		log.info("Employee Leave Details Form Filling  ....Method Running.");
 
@@ -329,7 +327,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			// Update the fields of the existing entity
 			employeeLeave.setAdmingmail(empDto.getAdmingmail());
-			employeeLeave.setGuid(empDto.getGuid());
+			employeeLeave.setGmail(empDto.getGmail());
 			employeeLeave.setType(empDto.getType());
 			employeeLeave.setFromDate(empDto.getFromDate());
 			employeeLeave.setFromShift(empDto.getFromShift());
@@ -350,9 +348,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			log.info("Employee Leave Details Data Sending to Perticular Admin... " + "Method Running. Data is :"
 					+ employeeLeave.toString());
 
-			return new ResponseMsg(true, employeeLeave.getGuid(), "Leave request updated successfully");
+			return new ResponseMsg(true, employeeLeave.getGmail(), "Leave request updated successfully");
 		} else {
-			return new ResponseMsg(false, " ", "Employee leave data not found for the provided GUID: " + guid);
+			return new ResponseMsg(false, " ", "Employee leave data not found for the provided GUID: " + gmail);
 		}
 	}
 
@@ -384,12 +382,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //			throw new RuntimeException("Failed to convert object to JSON bytes", e);
 //		}
 //	}
-
 	
 	@Override
-	public ResponseMsg empAttandenceDataStoring(String guid, EmpAttandenceDto empattandenceDto) {
+	public ResponseMsg saveattendence(String gmail, EmpAttandenceDto empattandenceDto) {
 
-		Optional<EmpAttandence> attandencedata = empAttandencerepo.findByGuid(guid);
+		Optional<EmpAttandence> attandencedata = empAttandencerepo.findByGmail(gmail);
 
 		if (attandencedata.isPresent()) {
 			EmpAttandence empAttandence = attandencedata.get();
@@ -399,7 +396,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			empAttandence.setBreakHours(empattandenceDto.getBreakHours());
 			empAttandence.setAnomalous(empattandenceDto.getAnomalous());
 			empAttandence.setTotalHours(empattandenceDto.getTotalHours());
-
+			empAttandence.setFirstBreakStart(empattandenceDto.getFirstBreakStart());
+			empAttandence.setFirstBreakEnd(empattandenceDto.getFirstBreakEnd());
+			empAttandence.setSecondBreakStart(empattandenceDto.getSecondBreakStart());
+			empAttandence.setSecondBreakEnd(empattandenceDto.getSecondBreakEnd());
+			empAttandence.setThirdBreakStart(empattandenceDto.getThirdBreakStart());
+			empAttandence.setThirdBreakEnd(empattandenceDto.getThirdBreakEnd());
+			
 			empAttandencerepo.save(empAttandence);
 
 			return new ResponseMsg(true, empAttandence.getGuid(), "Employee Atteandence Stored Succesfully.");
@@ -513,7 +516,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	                .body(null); // You may consider returning a specific Resource instance here
 	    
 	    }
-		  
 	}
+
+
+	@Override
+	public String deleteRecord(String guid) {
+	    empAttandencerepo.deleteByGuid(guid);
+	    return "Deleted Successfully.";
+	}
+
+
+	
 
 }
