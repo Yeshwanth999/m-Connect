@@ -1,148 +1,121 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
     <title>employeeDashbord</title>
-    <link href="./CSS/payroll.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./CSS/payroll.css"
+      rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.css' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.css'
+      rel='stylesheet' />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.js'></script>
 
-    <script src="https://kit.fontawesome.com/fae9f5ea2f.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <!--navbar start-->
-    <nav class="navbar navbar-expand-lg  navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="Microdenlogo.png" alt="" width="150" height="120" class="d-inline-block align-text-top">
-        </a>
-      </div>
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#" onclick="loadPage('dashboard.html')">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('calendar.html')">Calendar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('leaves.html')">Leaves</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('rewards.html')">rewards</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('attendence.html')">Attendence</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('notifications.html')">Notifications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('payroll.html')">Payroll</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('slips.html')">Slips</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('exit.html')">Exit</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('#')">Any other</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="loadPage('punchin.html')">Login/Punchin</a>
-            </li>
-            
-          </ul>
-          
-        </div>
-      </div>
-    </nav>
+    <script src="https://kit.fontawesome.com/fae9f5ea2f.js"
+      crossorigin="anonymous"></script>
+  </head>
+
+  <body>
     
-   <!--navbar end-->
 
-     
 
-      <div class="container-fluid mt-5">
-        <div class="row">
+    <div class="container-fluid mt-5">
+      <div class="row">
 
-          <!---sidebar start-->
-          <nav id="sidebarMenu" class="col-md-6 mt-5 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="position-sticky pt-3">
-              <ul class="nav flex-column p-2">
-                <li class="profile-upload">
-                  <label for="profileImageInput" class="profile-upload-label">
-                    <img src="#" alt="Profile Image" id="profileImage" class="profile-image">
-                    <span class="upload-icon">+</span>
-                    <input type="file" id="profileImageInput" style="display: none;">
-                  </label>
-                </li>
-                
-                <li class="nav-item pt-3 px-5">
-                  <p>Name and designation</p>
-                </li> 
-              </ul>
-             
-  <div class="container">
-    <a href="payroll.html"><h1>Payslip</h1></a><br>
-   <a href="bank-account.html"> <h1>Bank account</h1></a><br>
-    <a href="salary.html"><h1>salery structure</h1></a>
-    </div>
-    </div>
-    </nav>
+        <!---sidebar start-->
+        <nav id="sidebarMenu"
+          class="col-md-6 mt-5 col-lg-2 d-md-block bg-light sidebar collapse">
+          <div class="position-sticky pt-3">
+            <ul class="nav flex-column p-2">
+              <li class="profile-upload">
+                <label for="profileImageInput"
+                  class="profile-upload-label">
+                  <img src="#"
+                    alt="Profile Image"
+                    id="profileImage"
+                    class="profile-image">
+                  <span class="upload-icon">+</span>
+                  <input type="file"
+                    id="profileImageInput"
+                    style="display: none;">
+                </label>
+              </li>
 
-    <div class="selection-container">
-        <h1>Payslip</h1>
-        <div class="payroll-container">
-        <label for="year">Select Year:</label>
-        <select id="year" onchange="updateDocument()">
-            <!-- Populate year options dynamically, e.g., from 2022 to 2030 -->
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-            <!-- Add more years as needed -->
-        </select>
+              <li class="nav-item pt-3 px-5">
+                <p>Name and designation</p>
+              </li>
+            </ul>
 
-        <label for="month">Select Month:</label>
-        <select id="month" onchange="updateDocument()">
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-        </select><br><br>
+            <div class="container">
+              <a href="payroll.html">
+                <h1>Payslip</h1>
+              </a><br>
+              <a href="bank-account.html">
+                <h1>Bank account</h1>
+              </a><br>
+              <a href="salary.html">
+                <h1>salery structure</h1>
+              </a>
+            </div>
+          </div>
+        </nav>
 
-        <div class="dummy-container" id="dummyContainer">
-            <!-- Display details about the selected document here -->
+        <div class="selection-container">
+          <h1>Payslip</h1>
+          <div class="payroll-container">
+            <label for="year">Select Year:</label>
+            <select id="year"
+              onchange="updateDocument()">
+              <!-- Populate year options dynamically, e.g., from 2022 to 2030 -->
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+              <!-- Add more years as needed -->
+            </select>
+
+            <label for="month">Select Month:</label>
+            <select id="month"
+              onchange="updateDocument()">
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select><br><br>
+
+            <div class="dummy-container"
+              id="dummyContainer">
+              <!-- Display details about the selected document here -->
+            </div>
+
+            <button id="downloadButton"
+              onclick="downloadDocument()">Download Document</button>
+          </div>
         </div>
 
-        <button id="downloadButton" onclick="downloadDocument()">Download Document</button>
-    </div>
-    </div>
 
 
-
+      </div>
     </div>
-    </div>
 
-    <script >
-      sessionStorage.setItem("key",);
-      </script>
-      <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-  
-    <script src="./Js/payroll.js"></script>
     <script>
+      sessionStorage.setItem("key",);
+    </script>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    <script src="./Js/payroll.js"></script>
+    <!-- <script>
       $(document).ready(function(){
       var user = sessionStorage.getItem("key")
       if (user!==null){
@@ -154,5 +127,6 @@
         window.location.href = "SignIn.html";
       }
       })
-    </script>
-    </body>
+    </script> -->
+  </body>
+</html>

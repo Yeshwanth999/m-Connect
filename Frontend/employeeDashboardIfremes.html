@@ -16,6 +16,10 @@
         <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.js'></script>
         <script src="https://kit.fontawesome.com/fae9f5ea2f.js"
             crossorigin="anonymous"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script> -->
+
         <style>
             .startTimer {
                 display: block;
@@ -24,17 +28,18 @@
 
             .startTimer button {
                 cursor: pointer;
-                background-color: black;
-                color: white;
-                padding: 10px 20px;
+                background-color: red;
+                color: black;
+                padding: 5px 15px;
                 border: none;
                 border-radius: 5px;
-                font-size: 16px;
+                font-size: 12px;
                 transition: background-color 0.3s, color 0.3s;
             }
 
             .startTimer button:hover {
-                background-color: red;
+                background-color: white;
+                color: #000;
             }
 
             .timerDiv {
@@ -64,18 +69,18 @@
 
             .timerButtons button {
                 cursor: pointer;
-                background-color: black;
-                color: white;
+                background-color: red;
+                color: #fff;
                 padding: 5px 10px;
                 border: none;
                 border-radius: 3px;
-                font-size: 14px;
+                font-size: 12px;
                 width: 100%;
                 transition: background-color 0.3s, color 0.3s;
             }
 
             .timerButtons button:hover {
-                background-color: red;
+                background-color: rgb(255, 131, 131);
             }
 
             .timer {
@@ -86,12 +91,12 @@
             #timerValue {
                 display: none;
                 cursor: pointer;
-                background-color: black;
+                background-color: red;
                 color: white;
                 padding: 5px 10px;
                 border: none;
                 border-radius: 3px;
-                font-size: 14px;
+                font-size: 12px;
                 margin-right: 10px;
                 transition: background-color 0.3s, color 0.3s;
             }
@@ -103,19 +108,20 @@
 
 
         <script>
-            function loadPage(pageUrl) {
-                document.getElementById('iframe-content').src = pageUrl;
 
-                console.log(pageUrl)
-            }
+
+
+
+
         </script>
 
 
     </head>
 
-    <body onload="loadPage('/Frontend/employeeDashboard.html')">
+    <body>
         <!--navbar start-->
-        <nav class="navbar-main">
+        <nav class="navbar-main"
+            id="navbar-main">
             <div class="logo">
                 <img src="/Frontend/Assets/Microdenlogo.png"
                     alt="logo">
@@ -123,13 +129,18 @@
             <div class="navbar-items">
                 <div class="list-items">
                     <ul>
-                        <li class="item">
+                        <!-- <li class="item">
                             <a href="/Frontend/employeeDashboard.html">Dashboard</a>
+                        </li> -->
+                        <li class="item">
+                            <a href="/Frontend/employeeDashboard.html"
+                                id="dashboard"
+                                target="_self">Dashboard</a>
                         </li>
                         <li class="item">
                             <a href="#"
                                 id="calender"
-                                onclick="loadPage('/Frontend/calender.html')">Calendar</a>
+                                onclick="loadPage('/Frontend/myprofile.html')">My Profile</a>
                         </li>
                         <li class="item">
                             <a href="#"
@@ -138,23 +149,31 @@
                         </li>
                         <li class="item">
                             <a href="#"
-                                id="rewards"
-                                onclick="loadPage('/Frontend/rewards.html')">Rewards</a>
-                        </li>
-                        <li class="item">
-                            <a href="#"
                                 id="attendence"
                                 onclick="loadPage('/Frontend/attendence.html')">Attendence</a>
-                        </li>
-                        <li class="item">
-                            <a href="#"
-                                id="#">Any other</a>
                         </li>
                         <li class="item">
                             <a href="#"
                                 id="payroll"
                                 onclick="loadPage('/Frontend/payroll.html')">Payroll</a>
                         </li>
+                        <li class="item">
+                            <a href="#"
+                                id="calender"
+                                onclick="loadPage('/Frontend/calender.html')">Calendar</a>
+                        </li>
+                        
+                        <li class="item">
+                            <a href="#"
+                                id="rewards"
+                                onclick="loadPage('/Frontend/rewards.html')">Rewards</a>
+                        </li>
+                        
+                        <li class="item">
+                            <a href="#"
+                                id="#">Any other</a>
+                        </li>
+                        
                         <li class="item">
                             <a href="#"
                                 id="slips"
@@ -215,7 +234,7 @@
         <!--navbar-end-->
         <iframe class="i-frame"
             id="iframe-content"
-            src=" "
+            src=""
             title="description"></iframe>
         <!--script for web-clock -->
         <script>
@@ -226,7 +245,7 @@
             let totalMainSeconds = parseInt(sessionStorage.getItem('totalMainSeconds')) || 0;
             let isMainTimerRunning = JSON.parse(sessionStorage.getItem('isMainTimerRunning')) || false;
             let isBreakTime = JSON.parse(sessionStorage.getItem('isBreakTime')) || false;
-
+    
             function startTimer() {
                 document.querySelector('.startTimer').style.display = 'none';
                 document.querySelector('.timerDiv').style.display = 'block';
@@ -238,9 +257,10 @@
                 }
                 const loginTime = new Date().toLocaleTimeString();
                 const loginDate = new Date().toLocaleDateString();
-                console.log("Logged in at: " + loginDate + ", " + loginTime);
+                console.log("logged in date: " + loginDate);
+                console.log("Logged in at: " + loginTime);
             }
-
+    
             function updateMainTimer() {
                 if (!isBreakTime) {
                     totalMainSeconds++;
@@ -250,11 +270,11 @@
                     updateTotalTime();
                 }
             }
-
+    
             function toggleBreak() {
                 if (!isMainTimerRunning)
                     return;
-
+    
                 if (!isBreakTime) {
                     if (breakStart.length < 3) {
                         isBreakTime = true;
@@ -262,23 +282,29 @@
                         breakStart.push(totalMainSeconds);
                         localStorage.setItem('breakStart', JSON.stringify(breakStart));
                         breakTimerInterval = setInterval(updateBreakTimer, 1000);
-
+    
                         console.log("Break " + breakStart.length + " started at: " + new Date().toLocaleTimeString());
+                       
+    
                     }
-                } else {
+                }
+                 else {
                     isBreakTime = false;
                     sessionStorage.setItem('isBreakTime', JSON.stringify(isBreakTime));
                     breakEnd.push(totalMainSeconds);
                     localStorage.setItem('breakEnd', JSON.stringify(breakEnd));
                     updateBreakTime();
-                    clearInterval(breakTimerInterval);
-                    updateTotalTime();
-                    mainTimerInterval = setInterval(updateMainTimer, 1000);
-
+                    // clearInterval(breakTimerInterval);
+                    // updateTotalTime();
+                    // mainTimerInterval = setInterval(updateMainTimer, 1000);
+    
                     console.log("Break " + breakEnd.length + " ended at: " + new Date().toLocaleTimeString());
+                    console.log("Break " + breakEnd.length + " timeout");
+    
+    
                 }
             }
-
+    
             function handleLogout() {
                 clearInterval(mainTimerInterval);
                 clearInterval(breakTimerInterval);
@@ -288,7 +314,7 @@
                 console.log("Total login time: " + formatTime(totalMainSeconds));
                 resetTimers();
             }
-
+    
             function resetTimers() {
                 totalMainSeconds = 0;
                 breakStart = [];
@@ -306,7 +332,7 @@
                 document.getElementById('break3Time').innerText = '00:00:00';
                 document.getElementById('totalTimeValue').innerText = '00:00:00';
             }
-
+    
             function formatTime(seconds) {
                 const hours = Math.floor(seconds / 3600);
                 const minutes = Math.floor((seconds % 3600) / 60);
@@ -316,24 +342,24 @@
                 const formattedSeconds = padZero(remainingSeconds);
                 return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
             }
-
+    
             function padZero(value) {
                 return value < 10 ? `0${value}` : value;
             }
-
+    
             function updateBreakTimer() {
                 if (isBreakTime) {
                     totalMainSeconds++;
                     updateTotalTime();
                 }
             }
-
+    
             function updateBreakTime() {
                 let totalBreakTime = calculateBreakTime();
                 sessionStorage.setItem('breakTime', JSON.stringify(totalBreakTime));
                 document.getElementById('totalBreakTime').innerText = formatTime(totalBreakTime);
             }
-
+    
             function calculateBreakTime() {
                 let totalBreakTime = 0;
                 for (let i = 0; i < breakStart.length; i++) {
@@ -341,16 +367,16 @@
                 }
                 return totalBreakTime;
             }
-
+    
             function updateTotalTime() {
                 let totalLoginTime = totalMainSeconds - calculateBreakTime();
                 document.getElementById('totalTimeValue').innerText = formatTime(totalLoginTime);
                 sessionStorage.setItem('totalLoginTime', formatTime(totalLoginTime));
-
-                console.log("Total Login Time: " + formatTime(totalLoginTime));
-                console.log("Total Break Time: " + formatTime(calculateBreakTime()));
+    
+                // console.log("Total Login Time: " + formatTime(totalLoginTime));
+                // console.log("Total Break Time: " + formatTime(calculateBreakTime()));
             }
-
+    
             window.onload = function () {
                 if (isMainTimerRunning) {
                     document.querySelector('.startTimer').style.display = 'none';
@@ -365,6 +391,27 @@
                 }
             }
         </script>
+
+        <script>
+            function loadPage(pageUrl) {
+                document.getElementById('iframe-content').src = pageUrl;
+
+                console.log(pageUrl)
+
+                //clickLoad(pageUrl)  
+            }
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                let pageforIframe = localStorage.getItem("IframePageName");
+                localStorage.removeItem("IframePageName");
+                var iframe = document.getElementById("iframe-content");
+                iframe.src = '/Frontend/' + pageforIframe;
+            });
+        </script>
+
+
 
     </body>
 
