@@ -27,7 +27,7 @@
                     <!-- Leave data will be populated here -->
                 </tbody>
             </table>
-            <button id="sendButton">Send</button>
+            <!-- <button id="sendButton">Send</button> -->
         </div>
     </div>
 
@@ -61,6 +61,9 @@
                     "status": ""
                 }
             ];
+
+            const tableBody = document.getElementById("tableBody");
+
             sampleData.forEach(item => {
                 const row = document.createElement('tr');
                 Object.values(item).forEach((value, index) => {
@@ -90,30 +93,48 @@
                             select.appendChild(optionElement);
                         });
                         select.selectedIndex = 0;
-                        select.setAttribute("onchange", "changeLeaveStatus(this.selectedIndex)")
+                        select.setAttribute("onchange", "changeLeaveStatus(this, " + item.userId + ")");
                         select.addEventListener('change', function () {
                             item.status = select.value;
                         });
                         cell.appendChild(select);
                     }
+                    if (index === 5) { 
+                        const sendButton = document.createElement('button');
+                        sendButton.textContent = 'Send';
+                        sendButton.classList.add('sendButton');
+                        sendButton.addEventListener('click', function () {
+                            sendLeave(item);
+                        });
+                        cell.appendChild(sendButton);
+                    }
                     row.appendChild(cell);
                 });
                 tableBody.appendChild(row);
             });
+
+            function changeLeaveStatus(selectElement, userId) {
+                const status = selectElement.selectedIndex;
+                let leavestatus;
+                if (status === 0) {
+                    leavestatus = "Pending";
+                } else if (status === 1) {
+                    leavestatus = "Approved";
+                } else if (status === 2) {
+                    leavestatus = "Rejected";
+                }
+            }
+
+            function sendLeave(employeeData) {
+                console.log("Sending data for user ID:", employeeData.userId);
+                console.log("Leave Type:", employeeData.leaveType);
+                console.log("Leave Reason:", employeeData.leaveReason);
+                console.log("Number of Days Applied:", employeeData.numDaysApplied);
+                console.log("Number of Days Approved:", employeeData.numDaysApproved);
+                console.log("Status:", employeeData.status);
+            }
         });
-        function changeLeaveStatus(status){
-            let leavestatus;
-            if(status === 0){
-                leavestatus = "Pending";
-            }
-            else if(status === 1){
-                leavestatus = "Approved";
-            }
-            else if(status === 2){
-                leavestatus = "Rejected";
-            }
-            
-        }
+
     </script>
 </body>
 

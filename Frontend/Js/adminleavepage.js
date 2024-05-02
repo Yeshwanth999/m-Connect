@@ -32,9 +32,9 @@ function logData() {
     console.log(sampleData);
 }
 
-document.getElementById('sendButton').addEventListener('click', function() {
-    logData(); 
-});
+// document.getElementById('sendButton').addEventListener('click', function() {
+//     logData(); 
+// });
 
 
 // sampleData.forEach(item => {
