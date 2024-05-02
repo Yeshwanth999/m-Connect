@@ -1,3 +1,4 @@
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -26,6 +27,7 @@ th {
     min-width: 160px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
+    padding: 5px 10px;
 }
 
 .dropdown-content button {
@@ -39,6 +41,18 @@ th {
     border: none;
     cursor: pointer;
 }
+select {
+    padding: 5px 10px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+select option {
+    padding: 5px 10px;
+}
+
 
 .dropdown-content button:hover {
     background-color: #f1f1f1;
@@ -49,21 +63,20 @@ th {
 }
 
 
-#sendButton {
+.sendButton {
     background-color: #4CAF50; 
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 5px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin-top: 20px;
-    margin-left: 20px;
+    font-size: 12px;
+    margin-left: 50px;
     cursor: pointer;
     border-radius: 5px;
 }
 
-#sendButton:hover {
+.sendButton:hover {
     background-color: #45a049; 
 }
