@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Leave Page</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="./CSS/adminleavepage.css">
 </head>
 
@@ -18,21 +19,24 @@
                         <th>User ID</th>
                         <th>Leave Type</th>
                         <th>Leave Reason</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
                         <th>Number of Days Applied</th>
                         <th>Number of Days Approved</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                     <!-- Leave data will be populated here -->
                 </tbody>
             </table>
-            <!-- <button id="sendButton">Send</button> -->
         </div>
     </div>
 
     <script src="./Js/adminleavepage.js"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
         $(document).ready(function () {
             const sampleData = [
@@ -40,25 +44,34 @@
                     "userId": "001",
                     "leaveType": "Vacation",
                     "leaveReason": "Family trip",
+                    "fromDate": "",
+                    "toDate": "",
                     "numDaysApplied": 5,
                     "numDaysApproved": "",
-                    "status": ""
+                    "status": "",
+                    "Action":""
                 },
                 {
                     "userId": "002",
                     "leaveType": "Sick",
                     "leaveReason": "Flu",
+                    "fromDate": "",
+                    "toDate": "",
                     "numDaysApplied": 3,
                     "numDaysApproved": "",
-                    "status": ""
+                    "status": "",
+                    "Action":""
                 },
                 {
                     "userId": "003",
                     "leaveType": "Personal",
                     "leaveReason": "Attending wedding",
+                    "fromDate": "",
+                    "toDate": "",
                     "numDaysApplied": 2,
                     "numDaysApproved": "",
-                    "status": ""
+                    "status": "",
+                    "Action":""
                 }
             ];
 
@@ -75,7 +88,14 @@
                             handleUserIdClick(item.userId);
                         });
                     }
-                    if (index === 4) {
+                    if (index === 3 || index === 4) { // for "From Date" and "To Date" cells
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.classList.add('datepicker');
+                        input.setAttribute('data-index', index); // Store index for identification
+                        cell.appendChild(input);
+                    }
+                    if (index === 6) {
                         const input = document.createElement('input');
                         input.type = 'number';
                         input.value = value;
@@ -85,7 +105,7 @@
                         });
                         cell.appendChild(input);
                     }
-                    if (index === 5) {
+                    if (index === 7) {
                         const select = document.createElement('select');
                         ["Pending", "Approved", "Rejected"].forEach(option => {
                             const optionElement = document.createElement('option');
@@ -99,7 +119,7 @@
                         });
                         cell.appendChild(select);
                     }
-                    if (index === 5) { 
+                    if (index === 8) {
                         const sendButton = document.createElement('button');
                         sendButton.textContent = 'Send';
                         sendButton.classList.add('sendButton');
@@ -111,6 +131,20 @@
                     row.appendChild(cell);
                 });
                 tableBody.appendChild(row);
+            });
+
+            // Initialize date picker
+            $(".datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                onSelect: function(dateText, inst) {
+                    const index = $(this).data('index'); // Retrieve index
+                    const rowIndex = $(this).closest('tr').index(); // Retrieve row index
+                    if (index === 3) { // From Date
+                        sampleData[rowIndex].fromDate = dateText;
+                    } else if (index === 4) { // To Date
+                        sampleData[rowIndex].toDate = dateText;
+                    }
+                }
             });
 
             function changeLeaveStatus(selectElement, userId) {
@@ -129,6 +163,8 @@
                 console.log("Sending data for user ID:", employeeData.userId);
                 console.log("Leave Type:", employeeData.leaveType);
                 console.log("Leave Reason:", employeeData.leaveReason);
+                console.log("From Date:", employeeData.fromDate);
+                console.log("To Date:", employeeData.toDate);
                 console.log("Number of Days Applied:", employeeData.numDaysApplied);
                 console.log("Number of Days Approved:", employeeData.numDaysApproved);
                 console.log("Status:", employeeData.status);
