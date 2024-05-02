@@ -2,10 +2,12 @@ package com.userservice.main.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,8 +22,12 @@ import lombok.NoArgsConstructor;
 public class  EmployeeLeave{
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String guid;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employeeleaves_seq")
+    @SequenceGenerator(name = "employeeleaves_seq", sequenceName = "employeeleaves_seq", allocationSize = 1)
+	private Long id;
+	
+	@Column(unique = true, nullable = true, columnDefinition = "VARCHAR(65)")
+    private String gmail;
 	private String admingmail;
 	private int annual_leave_balance;
 	private int annual_leaves_used;
@@ -35,6 +41,5 @@ public class  EmployeeLeave{
     private LocalDate toDate;
     private String toShift;
     private String reasonFor;
-    
-    
-    }
+ 
+}

@@ -13,11 +13,11 @@ public interface AdminService {
 
      ResponseMsg empregister(RegistrationdDTO registrationDTO);
 
-	 String DeleteUserById(long id);
+	 String DeleteUserById(String gmail);
 		
 	 List<Employee> getAllEmployees();
 
-	 Employee getEmployeeById(Long id);
+	 Employee getEmployeeByGmail(String gmail);
 
 	void receiveLeaveRequest(Message message);
 

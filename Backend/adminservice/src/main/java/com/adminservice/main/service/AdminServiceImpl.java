@@ -80,7 +80,12 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public ResponseMsg empregister(RegistrationdDTO registerEmp) {
-
+      
+		Optional<Employee> profileRegister = adminrepo.findByGmail(registerEmp.getGmail());
+		
+		if(profileRegister.isPresent()) {
+			return new ResponseMsg(false, registerEmp.getGmail(), "This Email We have in our DataBase.");  
+      }else {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 		String encrypetedPwd = bcrypt.encode(registerEmp.getPassword());
 		registerEmp.setPassword(encrypetedPwd);
@@ -120,6 +125,7 @@ public class AdminServiceImpl implements AdminService {
 		adminrepo.save(emp);
 
 		return new ResponseMsg(true, emp.getFirstname(), "Employee Added Succesfully.");
+	    }
 	}
 
 	@Override
@@ -130,9 +136,9 @@ public class AdminServiceImpl implements AdminService {
 
 	
 	@Override
-	 public Employee getEmployeeById(Long id) {
+	 public Employee getEmployeeByGmail(String gmail) {
 		
-		Optional<Employee> emp = adminrepo.findById(id);
+		Optional<Employee> emp = adminrepo.findByGmail(gmail);
 
 		if (emp.isPresent()) {
 			return emp.get();
@@ -143,8 +149,8 @@ public class AdminServiceImpl implements AdminService {
 	
 
 	@Override
-	public String DeleteUserById(long id) {
-		adminrepo.deleteById(id);
+	public String DeleteUserById(String gmail) {
+		adminrepo.deleteByGmail(gmail);
 //		userrepo.deleteAll();
 		return "User Data Droped";
 	}
@@ -167,8 +173,8 @@ public class AdminServiceImpl implements AdminService {
 //        // Process the received message as needed
 //    }
 	
-	public EmployeeLeaves getEmployeeDetailsWithLeaveInfo(String guid) {
-        return empleaveleaverepo.findByGuid(guid).orElse(null);
+	public EmployeeLeaves getEmployeeDetailsWithLeaveInfo(String gmail) {
+        return empleaveleaverepo.findByGmail(gmail).orElse(null);
     }
 	
 	
