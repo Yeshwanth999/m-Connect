@@ -34,24 +34,26 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
-//    private final RestTemplate restTemplate;
-//
-//    private final String userServiceUrl; // URL of user service
-//
-//    public AdminController(RestTemplate restTemplate, @Value("${userService.url}") String userServiceUrl) {
-//        this.restTemplate = restTemplate;
-//        this.userServiceUrl = userServiceUrl;
-//    }
-//	
-//    @PostMapping
-//    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-//        // Save Employee entity to admin service database
-//    	
-//        // Trigger creation of EmployeeLeave record in user service
-//        restTemplate.postForObject(userServiceUrl + "/employeeleave", employee, Void.class);
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).body(employee);
-//    }
+	// private final RestTemplate restTemplate;
+	//
+	// private final String userServiceUrl; // URL of user service
+	//
+	// public AdminController(RestTemplate restTemplate,
+	// @Value("${userService.url}") String userServiceUrl) {
+	// this.restTemplate = restTemplate;
+	// this.userServiceUrl = userServiceUrl;
+	// }
+	//
+	// @PostMapping
+	// public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+	// // Save Employee entity to admin service database
+	//
+	// // Trigger creation of EmployeeLeave record in user service
+	// restTemplate.postForObject(userServiceUrl + "/employeeleave", employee,
+	// Void.class);
+	//
+	// return ResponseEntity.status(HttpStatus.CREATED).body(employee);
+	// }
 
 	@PostMapping("/register")
 	public ResponseEntity<ResponseMsg> registerUserAccount(@RequestBody RegistrationdDTO registrationDTO) {
@@ -59,23 +61,22 @@ public class AdminController {
 		return new ResponseEntity<>(body, HttpStatus.CREATED);
 	}
 
-//	@PutMapping("/LeaveRequests/{admingmail}")
-//	public String leaveRequest(@PathVariable("admingmail")  @RequestBody EmployeeLeaves employeeleaves) {
-//	
-//	
-//	}
+	// @PutMapping("/LeaveRequests/{admingmail}")
+	// public String leaveRequest(@PathVariable("admingmail") @RequestBody
+	// EmployeeLeaves employeeleaves) {
+	//
+	//
+	// }
 	@PutMapping("/LeaveRequests/{admingmail}")
 	public String leaveRequest(@PathVariable("admingmail") String admingmail,
-	                           @RequestBody EmployeeLeaveDto employeeleaves) {
-	    log.info("Employee leaves Requests method running.");
+			@RequestBody EmployeeLeaveDto employeeleaves) {
+		log.info("Employee leaves Requests method running.");
 
-	    String body = adminService.leaveRequestService(admingmail, employeeleaves);
+		String body = adminService.leaveRequestService(admingmail, employeeleaves);
 
-	    return body;
+		return body;
 	}
-	
-	
-	
+
 	@GetMapping("/getemployees")
 	public ResponseEntity<List<Employee>> getAllEmployees() {
 
@@ -98,9 +99,9 @@ public class AdminController {
 
 	@GetMapping("/getempdata/{admingmail}")
 	public String getLeaveEmployeeDetails(@PathVariable("admingmail") String admingmail) {
-	    log.info("Getting Leave Employees Data in control.");
-	    EmployeeLeaves result = adminService.getLeaveEmployeeDetailsService(admingmail);
-	    return "Data Fetched: " + result;
+		log.info("Getting Leave Employees Data in control.");
+		EmployeeLeaves result = adminService.getLeaveEmployeeDetailsService(admingmail);
+		return "Data Fetched: " + result;
 	}
 
 	@Transactional
@@ -111,12 +112,11 @@ public class AdminController {
 		return data;
 	}
 
- }
+}
 
-//@PostMapping("/adduser")
-//public ResponseEntity<String> addUser(@RequestBody RegistrationDto user) {
-//	userService.addUser(user);
+// @PostMapping("/adduser")
+// public ResponseEntity<String> addUser(@RequestBody RegistrationDto user) {
+// userService.addUser(user);
 //
-//	return ResponseEntity.ok("Employee added Succesfully");
-//}
-
+// return ResponseEntity.ok("Employee added Succesfully");
+// }

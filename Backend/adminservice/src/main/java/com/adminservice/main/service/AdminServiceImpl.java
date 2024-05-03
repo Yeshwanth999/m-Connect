@@ -93,7 +93,7 @@ public class AdminServiceImpl implements AdminService {
 			emp.setGmail(registerEmp.getGmail());
 			emp.setPassword(encrypetedPwd);
 			emp.setBlood_group(registerEmp.getBlood_group());
-//		emp.setAdmin(true);
+			// emp.setAdmin(true);
 			emp.setAdminStatus(registerEmp.isAdminStatus());
 			emp.setCurrentPincode(registerEmp.getCurrentPincode());
 			emp.setCurrentAddress(registerEmp.getCurrentAddress());
@@ -124,6 +124,7 @@ public class AdminServiceImpl implements AdminService {
 
 			return new ResponseMsg(true, emp.getFirstname(), "Employee Added Succesfully.");
 		}
+
 	}
 
 	@Override
@@ -134,7 +135,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Employee getEmployeeByGmail(String gmail) {
-
 		Optional<Employee> emp = adminrepo.findByGmail(gmail);
 
 		if (emp.isPresent()) {
@@ -151,6 +151,7 @@ public class AdminServiceImpl implements AdminService {
 		empleaveleaverepo.deleteByGmail(gmail);
 		empattendencerepo.deleteByGmail(gmail);
 		return "Successfully Data Droped";
+		// userrepo.deleteAll();
 	}
 
 	public EmployeeLeaves getEmployeeDetailsWithLeaveInfo(String gmail) {

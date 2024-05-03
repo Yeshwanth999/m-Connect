@@ -82,6 +82,7 @@
                     <div class="form">
                         <div style="position: sticky;"> <h3 class="py-2 ps-2">Leave Request</h3></div>
                         <div class="form-grid">
+
                             <label for="leave-type">Leave Type</label>
                             <select name="leave-type" id="leave-type">
                                 <option value="select">Select</option>
@@ -90,29 +91,37 @@
                                 <option value="Casual">Casual</option>
                                 <option value="paid-leave">Paid</option>
                             </select>
+
                             <label for="from">From</label>
                             <div class="from-sec">
                                 <select name="shift" id="from-shift">
                                     <option value="first-half">First Half</option>
                                     <option value="second-half">Second Half</option>
                                 </select>
-                                <input type="date" id="from">
+                                <input type="date" id="from-date">
                             </div>
+
                             <label for="to">To</label>
                             <div class="to-sec">
                                 <select name="shift" id="to-shift">
                                     <option value="first-half">First Half</option>
                                     <option value="second-half">Second Half</option>
                                 </select>
-                                <input type="date" id="to">
+                                <input type="date" id="to-date">
                             </div>
+
                             <label for="reason-for">Reason For Leave</label>
                             <textarea name="reason" id="reason-for" cols="6" rows="4"></textarea>
-                            <label for="file">File Name</label>
-                            <input type="file" id="file">
-                            <input type="button" value="Apply leave" onclick="sendLeaveData()">
+
+                            <!-- <label for="file">File Name</label>
+                            <input type="file" id="file"> -->
+                            <label for="adminEmail">Admin Email</label>
+                            <input type="email" name="adminEmail" id="adminEmail">
+
+                            <input type="button" value="Apply leave" onclick="sendEmail()">
                         </div>
                     </div>
+
                 </div><!-- leave request end -->
 
                 <div id="leaveHistory" class="leave-history" style="display:none;"> <!-- leave history starts -->
@@ -202,6 +211,62 @@
 
 
      <script src="./Js/Leavepage.js"></script>
+
+
+     <!-- Email sending by SMTP.js code START -->
+     <!-- Script tag Link for seding mail by SMTP.js -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        function sendEmail() {
+            const leaveType = document.getElementById('leave-type').value;
+            const fromShift = document.getElementById('from-shift').value;
+            const fromDate = document.getElementById('from-date').value;
+            const toShift = document.getElementById('to-shift').value;
+            const toDate = document.getElementById('to-date').value;
+            const reasonFor = document.getElementById('reason-for').value;
+            const adminEmail = document.getElementById('adminEmail').value;
+
+            //console.log(leaveType);
+    
+            // Basic email format validation
+            if (!validateEmail(adminEmail)) {
+                alert("Please enter a valid email address for Admin Email.");
+                return;
+            }
+    
+            Email.send({
+                SecureToken: "39e044b8-67b1-466f-857f-aaf75585c9b3",
+                To: adminEmail,
+                From: "rajeshbalu.addala@gmail.com",
+                Subject: "Leave Form from MicroDen Employee",
+                Body: "Leave Type: " + leaveType +
+                    "<br>From Shift: " + fromShift +
+                    "<br>From Date: " + fromDate +
+                    "<br>To Shift: " + toShift +
+                    "<br>To Date: " + toDate +
+                    "<br>Reason For: " + reasonFor
+            }).then(
+                message => {
+                    alert("You have applied for leave successfully.");
+                    console.log(message);
+
+                    //  After sending the email reset the input fields
+                    document.getElementById('from-date').value='';
+                    document.getElementById('to-date').value='';
+                    document.getElementById('reason-for').value='';
+                    document.getElementById('adminEmail').value='';
+                }
+            );
+        }
+    
+        // Email validation function
+        function validateEmail(email) {
+            const re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+    </script>
+    <!-- Email sending by SMTP.js code END -->
+    
     <!--code for Reload direct to signin -->
    <!-- <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script>

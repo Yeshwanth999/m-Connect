@@ -5,23 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Frontend/CSS/employeeDashboard.css">
-    
-    <script src="./Js/employeeDashboard.js"></script>
-    <script src="../Frontend/Js/connect.js" defer></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <title>Header Section</title>
 
+    <!-- Dashboard Employee Image and Name CSS-->
+    <style>
+        #imageContainer {
+             max-width: 100%; 
+        }
+        
+        #imageContainer img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
 
-    
+        #firstnameDisplay{
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+    </style>
+
 </head>
 
 <body>
     <header>
         <div class="logo">
-            <img src="/Frontend/Assets/Microden (1) (1).png" alt="">
+    <img src="./Assets/Microden (1) (1).png" id="profileImage" alt="Profile Image">
         </div>
         <div class="search">
             <input type="text" placeholder="Search ">
@@ -36,7 +51,7 @@
                     <div class="dropdown-content">
                         <a href="#">Profile</a>
                         <a href="#">Settings</a>
-                       <!-- <a href="#">Logout</a>
+                        <!-- <a href="#">Logout</a>
                           <form action="/logout" method="post">
                             <button type="submit">Logout</button>
                         </form> 
@@ -51,8 +66,14 @@
     </header>
     <div class="container">
         <div class="employee-card">
-            <img src="/Frontend/Assets/WhatsApp Image 2024-02-05 at 16.43.50.jpeg" alt="Employee Photo">
-            <h3>nagaraju</h3>
+             <!-- <img src="/Frontend/Assets/WhatsApp Image 2024-02-05 at 16.43.50.jpeg" alt="Employee Photo">  -->
+             <!-- <h3>nagaraju</h3>  -->
+
+             <div id="imageContainer">
+                <!-- Image will be loaded here -->
+              </div>
+            <div id="firstnameDisplay">Emp Name </div>
+
         </div>
         <div class="employee-card1">
             <h3 class="heading">WELCOME BACK</h3>
@@ -63,38 +84,44 @@
         <div class="card-container1">
             <div class="card">
                 <div class="dashboard-icon1">
-                    <a href="#"> <i class="fas fa-tachometer-alt"></i></a>
+                    <a href="employeeDashboard.html"> <i class="fas fa-tachometer-alt"></i></a>
                 </div>
                 <h3 class="head">Dashboard</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon2">
-                    <a href="myprofile.html"><i class="fas fa-user"></i></a>
+                <div class="dashboard-icon2"  onclick="RedirectToIframe(this)">
+                    <a href="myprofile.html"  target="_blank"><i class="fas fa-user"></i></a>
                 </div>
                 <h3 class="head">My Profile</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon3">
-                    <a href="leavePage.html"><i class="fas fa-calendar-times"></i></a>
+                <div class="dashboard-icon3"  onclick="RedirectToIframe(this)">
+                    <a href="leavePage.html" target="_blank"><i class="fas fa-calendar-times"></i></a>
                 </div>
                 <h3 class="head">Leaves</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon4">
-                    <a href=""><i class="fas fa-calendar-check"></i></a>
+                <div class="dashboard-icon4"   onclick="RedirectToIframe(this)">
+                    <a href="employeeAttendence.html" target="_blank"><i class="fas fa-lightbulb"></i></a>
                 </div>
                 <h3 class="head">Attendance</h3>
             </div>
         </div>
         <div class="card-container1">
             <div class="card">
-                <div class="dashboard-icon5">
-                    <a href=""><i class="fas fa-money-check-alt"></i></a>
+                <div class="dashboard-icon5"   onclick="RedirectToIframe(this)">
+                    <a href="payroll.html" target="_blank"><i class="fas fa-money-check-alt"></i></a>
                 </div>
                 <h3 class="head">Payroll</h3>
             </div>
             <div class="card">
-                <div class="dashboard-icon6">
+                <div class="dashboard-icon10"  onclick="RedirectToIframe(this)">
+                    <a href="calendar.html" target="_blank"><i class="fas fa-calendar-check"></i></a>
+                </div>
+                <h3 class="head">Calendar</h3>
+            </div>
+            <div class="card">
+                <div class="dashboard-icon6"   onclick="RedirectToIframe(this)">
                     <a href=""><i class="far fa-id-card"></i></a>
                 </div>
 
@@ -102,49 +129,46 @@
 
             </div>
             <div class="card">
-                <div class="dashboard-icon7">
+                <div class="dashboard-icon7"   onclick="RedirectToIframe(this)">
                     <a href=""> <i class="fas fa-receipt"></i></a>
                 </div>
                 <h3 class="head">Slips</h3>
             </div>
+            
+        </div>
+        <div class="card-container1">
             <div class="card">
-                <div class="dashboard-icon8">
+                <div class="dashboard-icon8"  onclick="RedirectToIframe(this)">
                     <a href=""><i class="fas fa-trophy"></i></a>
                 </div>
                 <h3 class="head">Rewards</h3>
             </div>
-        </div>
-        <div class="card-container1">
             <div class="card">
-                <div class="dashboard-icon9">
+                <div class="dashboard-icon9"  onclick="RedirectToIframe(this)">
                     <a href=""> <i class="fas fa-bell"></i></a>
                 </div>
                 <h3 class="head">Notifications</h3>
             </div>
+            
             <div class="card">
-                <div class="dashboard-icon10">
-                    <a href=""><i class="fas fa-tachometer-alt"></i></a>
-                </div>
-                <h3 class="head">Any Other Option</h3>
-            </div>
-            <div class="card">
-                <div class="dashboard-icon11">
+                <div class="dashboard-icon11"  onclick="RedirectToIframe(this)">
                     <i class="fas fa-tachometer-alt"></i>
                 </div>
                 <h3 class="head">Any Other Option</h3>
 
             </div>
             <div class="card">
-                <div class="dashboard-icon12">
+                <div class="dashboard-icon12"  onclick="RedirectToIframe(this)">
                     <i class="fas fa-tachometer-alt"></i>
                 </div>
                 <h3 class="head">Any Other Option</h3>
             </div>
         </div>
-                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        
     </div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./Js/employeeDashboard.js"></script>
+    <script src="../Frontend/Js/connect.js" defer></script>
+   
 	<script>
 		$('#logoutButton').on('click', function() {
 
@@ -152,27 +176,21 @@
 			const url = 'http://localhost:8081/user/logout';
 
 			fetchLogout(url, type);
+
+            console.log("Hi this is log out...")
+
+            sessionStorage.removeItem("password");
 		});
 	</script>
-	<!-- <script >
-        sessionStorage.setItem("key",);
-        
-        </script>
-        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-          <script>
-            $(document).ready(function () {
-              var user = sessionStorage.getItem("key");
-              if(user !== null){
-                var x = "hi";
-                console.log(x);
-              }
-              else{
-                alert("please login first");
-                window.location.href = "SignIn.html";
+
+        <script>
+            // sessionStorage.setItem("key",);
+            function RedirectToIframe(e) {
+                let x = e.childNodes[1].attributes[0].nodeValue;
+                localStorage.setItem("IframePageName", x);
+                window.location.href = "/Frontend/employeeDashboardIfremes.html";
             }
-            });
-          </script>
-         -->
+        </script>
 
 </body>
 

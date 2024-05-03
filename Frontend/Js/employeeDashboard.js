@@ -1,54 +1,98 @@
+//  // sessionStorage.setItem("usermail","rajeshbalu.addala@gmail.com")
+// var usermail = sessionStorage.getItem("usermail");
+// console.log(usermail);
 
-document.getElementById('profileImageInput').addEventListener('change', function() {
-    var file = this.files[0];
-    var reader = new FileReader();
-  
-    reader.onload = function(e) {
-      document.getElementById('profileImage').setAttribute('src', e.target.result);
+// if (usermail != " " && usermail !== null) {
+//   //geturlLink = 'http://localhost:8081/user/getprofileimage/' + usermail + '';
+
+//   geturlLink1forName = 'http://localhost:8081/user/getemployee/' + usermail + '';
+
+//   console.log(usermail + "   : " + "Link :" + geturlLink);
+
+// } else {
+//   console.log("gmail is not found.");
+// }
+
+
+jQuery(document).ready(function () {
+  var geturlLink = "https://picsum.photos/seed/picsum/200/300";
+  // Fetch data from the server when the page loads
+  $.ajax({
+    type: 'GET',
+    url: geturlLink,
+    success: function (response) {
+      console.log("Response:", response);
+      var image=$("<img>").attr("src",geturlLink).attr("alt", "Dog Image");
+      $('#imageContainer').html(image);
+
+    },
+    error: function (error) {
+      console.error('Error fetching profile image:', error);
     }
-  
-    reader.readAsDataURL(file);
+  });
 });
 
 
-const month = new Date();
-const options = {
-  month: "long"
-};
 
-const year1 = new Date();
+// jQuery(document).ready(function () {
+//   // Fetch data from the server when the page loads
+//   $.ajax({
+//     type: 'GET',
+//     url: geturlLink,
+//     xhrFields: {
+//       responseType: 'arraybuffer'
+//     },
+//     success: function (response) {
+//       console.log("Response:", response);
 
-let year = year1.getFullYear();
+//       // Convert ArrayBuffer to Blob
+//       const blob = new Blob([response], { type: 'image/jpeg' });
 
-const date1 = new Date();
+//       // Create an object URL from the Blob
+//       const imageUrl = URL.createObjectURL(blob);
 
-let date = date1.getDate();
+//       // Display the image in an <img> element with id 'profileImage'
+//       $('#profileImage').attr('src', imageUrl);
 
-const day = new Date();
-
-const options2 = {
-  weekday: "long"
-};
-
-console.log(day.toLocaleString("en-IN", options2));
-
-function myFunction() {
-  document.getElementById("month").innerText = month.toLocaleString(
-    "en-IN",
-    options
-  );
-  document.getElementById("year").innerText = year;
-  document.getElementById("date").innerText = date;
-  document.getElementById("day").innerText = day.toLocaleString(
-    "en-IN",
-    options2
-  );
-}
-myFunction();
+//     },
+//     error: function (error) {
+//       console.error('Error fetching profile image:', error);
+//     }
+//   });
+// });
 
 
-function loadPage(pageUrl) {
-  document.getElementById('iframe-content').src = pageUrl;
-}
 
-  
+
+
+
+
+
+// $(document).ready(function () {
+//   // Fetch data from the server when the page loads
+//   $.ajax({
+//     type: 'GET',
+//     url: geturlLink1forName, // Replace 'user/data' with your actual endpoint
+//     success: function (responseData) {
+//       // Populate the form fields with the retrieved data
+//       //$('#firstname').val(responseData.firstname);
+//       //console.log(firstname);
+
+//       $('#firstnameDisplay').text(responseData.firstname);
+//     },
+//     error: function (error) {
+//       console.error('Error fetching data:', error);
+//     }
+//   });
+// });
+
+
+$('#logoutButton').on('click', function () {
+
+  const type = 'GET';
+  const url = 'http://localhost:8081/user/logout';
+
+  fetchLogout(url, type);
+});
+
+
