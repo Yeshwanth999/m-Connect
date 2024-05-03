@@ -112,21 +112,40 @@ header {
 .employee-card {
     background-color: #1a1a18;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: left;
+    text-align: center;
     border-radius: 8px;
+    width: 10%;
+    position: absolute;
+    left: 100px;
+
+    /* padding: 20px; */
     /* height: 80%; */
-    width: 20%;
-    margin: 10px;
+    /* margin: 10px; */ 
+}
+.employee-card #imageContainer{
+    width: 150px;
+    border: solid red 3px;
+    border-radius: 5px;
+    background-size: cover;
+}
+.employee-card #firstnameDisplay{
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: bold;
+   color: #fff;
 }
 
 .employee-card img {
     width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
+    height: 150px;
+    
     margin-bottom: 10px;
+    /* max-width: 150%; */
+   
+   display: block;
+   margin: 0 auto;
 }
+
 
 .employee-card h3 {
     margin: 0;
