@@ -72,7 +72,6 @@ select option {
     text-decoration: none;
     display: inline-block;
     font-size: 12px;
-    margin-left: 50px;
     cursor: pointer;
     border-radius: 5px;
 }
@@ -80,3 +79,4 @@ select option {
 .sendButton:hover {
     background-color: #45a049; 
 }
+
