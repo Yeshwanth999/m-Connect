@@ -16,7 +16,7 @@
             <table id="leaveTable">
                 <thead>
                     <tr>
-                        <th>User ID</th>
+                        <th>Email</th>
                         <th>Leave Type</th>
                         <th>Leave Reason</th>
                         <th>From Date</th>
@@ -41,7 +41,7 @@
         $(document).ready(function () {
             const sampleData = [
                 {
-                    "userId": "001",
+                    "Email": "Ram123@gmail.com",
                     "leaveType": "Vacation",
                     "leaveReason": "Family trip",
                     "fromDate": "",
@@ -52,7 +52,7 @@
                     "Action":""
                 },
                 {
-                    "userId": "002",
+                    "Email": "yeswanth123@gmail.com",
                     "leaveType": "Sick",
                     "leaveReason": "Flu",
                     "fromDate": "",
@@ -63,7 +63,7 @@
                     "Action":""
                 },
                 {
-                    "userId": "003",
+                    "Email": "Priya123@gmail.com",
                     "leaveType": "Personal",
                     "leaveReason": "Attending wedding",
                     "fromDate": "",
@@ -85,7 +85,7 @@
                     if (index === 0) {
                         cell.style.cursor = 'pointer';
                         cell.addEventListener('click', function () {
-                            handleUserIdClick(item.userId);
+                            handleUserIdClick(item.Email);
                         });
                     }
                     if (index === 3 || index === 4) { // for "From Date" and "To Date" cells
@@ -113,7 +113,7 @@
                             select.appendChild(optionElement);
                         });
                         select.selectedIndex = 0;
-                        select.setAttribute("onchange", "changeLeaveStatus(this, " + item.userId + ")");
+                        select.setAttribute("onchange", "changeLeaveStatus(this, " + item.Email + ")");
                         select.addEventListener('change', function () {
                             item.status = select.value;
                         });
@@ -147,7 +147,7 @@
                 }
             });
 
-            function changeLeaveStatus(selectElement, userId) {
+            function changeLeaveStatus(selectElement, Email) {
                 const status = selectElement.selectedIndex;
                 let leavestatus;
                 if (status === 0) {
@@ -160,7 +160,7 @@
             }
 
             function sendLeave(employeeData) {
-                console.log("Sending data for user ID:", employeeData.userId);
+                console.log("Sending data for Email:", employeeData.Email);
                 console.log("Leave Type:", employeeData.leaveType);
                 console.log("Leave Reason:", employeeData.leaveReason);
                 console.log("From Date:", employeeData.fromDate);

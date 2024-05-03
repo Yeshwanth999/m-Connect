@@ -1,35 +1,35 @@
 function balance() {
     const data = [
         {
-          "user id": "M-001",
+          "Email": "yeswanth@gmail.com",
           "Leave Type": "Sick",
           "Credited": 20,
           "Used": 1,
           "Balance": 19,
         },
         {
-            "user id": "M-002",
+            "Email": "priya@gmail.com",
             "Leave Type": "Paid",
             "Credited": 24,
             "Used": 5,
             "Balance": 19,
         },
         {
-            "user id": "M-003",
+            "Email": "Nagi@gmail.com",
             "Leave Type": "Sick",
             "Credited": 10,
             "Used": 1,
             "Balance": 9,
         },
         {
-            "user id": "M-004",
+            "Email": "omsai@gmail.com",
             "Leave Type": "Casual",
             "Credited": 12,
             "Used": 1,
             "Balance": 11,
         },
         {
-            "user id": "M-005",
+            "Email": "divya@gmail.com",
             "Leave Type": "Emergency",
             "Credited": 20,
             "Used": 1,
