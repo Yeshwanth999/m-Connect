@@ -151,30 +151,30 @@ public class UserController {
 		return "SingIn.html"; // Assuming login.html is your login page
 	}
 
-	@DeleteMapping("/DropBy/{id}")
-	public String DropUserById(@PathVariable("id") long id) {
-		String data = userService.DeleteUserById(id);
+	@DeleteMapping("/DropBy/{gmail}")
+	public String DropUserById(@PathVariable("id") String gmail) {
+		String data = userService.DeleteUserById(gmail);
 		return data;
 	}
 	
 	
-	@PostMapping("/EmpAttadenceData")
+	@PostMapping("/attandence")
 	private ResponseEntity<ResponseMsg> EmpAttadenceData(@PathVariable("gmail") String gmail,@RequestBody EmpAttandenceDto empattandenceDto){
 	 log.info("Employe Attendence Data Storing In Database");
 	
-	 ResponseMsg response = userService.empAttandenceDataStoring(gmail, empattandenceDto);
+	 ResponseMsg response = userService.saveattendence(gmail, empattandenceDto);
 	 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 		
 	}
 
-	@PostMapping("/applyLeave/{guid}")
+	@PostMapping("/applyLeave/{gmail}")
 //	@PreAuthorize("hasAuthority('USER')")
-	public ResponseEntity<ResponseMsg> applyEmployeeLeave(@PathVariable("guid") String guid, @RequestBody EmployeeLeaveDto empDto) {	
+	public ResponseEntity<ResponseMsg> applyEmployeeLeave(@PathVariable("gmail") String gmail, @RequestBody EmployeeLeaveDto empDto) {	
 		
         log.info("Employee Applying a Leave method running. ");  
         
-		ResponseMsg response = userService.saveLeaveDetails(guid, empDto);
+		ResponseMsg response = userService.saveLeaveDetails(gmail, empDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
@@ -199,6 +199,12 @@ public class UserController {
 	}
 	
 	
+	@DeleteMapping("/dRecord/{guid}")
+	public String deleteEmployeeAttendanceRecord(@PathVariable("guid") String guid) {
+	    String msg = userService.deleteRecord(guid);
+	    return msg;
+	}
+
 	
-	
+		
 }

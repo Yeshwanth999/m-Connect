@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.userservice.main.entity.EmployeeLeave;
 
 @Repository
-public interface EmployeeLeaveRepository extends JpaRepository<EmployeeLeave, String> {
+public interface EmployeeLeaveRepository extends JpaRepository<EmployeeLeave, Long> {
 	
-	    Optional<EmployeeLeave> findByGuid(String Guid);
+	    Optional<EmployeeLeave> findByGmail(String gmail);
+		
 	    
  }

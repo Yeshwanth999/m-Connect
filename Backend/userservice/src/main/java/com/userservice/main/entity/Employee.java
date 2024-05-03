@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,19 +22,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class Employee {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-//	@OneToOne(mappedBy = "employee",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-//	private User user;
-   
-	@Column(length = 36) 
-	private String guid;
+	
+	   @SequenceGenerator(name = "employee_seq", sequenceName = "employee_seq", allocationSize = 1)
 	@Column(unique = true, nullable = true, columnDefinition = "VARCHAR(65)")
 	private String gmail;
 
-
+	private String guid;
 	@Column(nullable = false, columnDefinition = "VARCHAR(40)")
 	private String firstname;
 
@@ -72,8 +70,8 @@ public class Employee {
 	private String currentState;
 	@Column(columnDefinition = "VARCHAR(40)")
 	private String currentCity;
-	@Column(columnDefinition = "NUMERIC(8,0)")
-	private Long currentPincode;
+	@Column(columnDefinition = "VARCHAR(10)")
+	private String currentPincode;
 
 	@Column(columnDefinition = "VARCHAR(100)")
 	private String permanentAddress;
@@ -83,8 +81,8 @@ public class Employee {
 	private String permanentState;
 	@Column(columnDefinition = "VARCHAR(40)")
 	private String permanentCity;
-	@Column(columnDefinition = "NUMERIC(8,0)")
-	private Long permanentPincode;
+	@Column(columnDefinition = "VARCHAR(40)")
+	private String permanentPincode;
 	@Column(columnDefinition = "VARCHAR(40)")
 	private String stayingsince;
 	@Column(columnDefinition = "VARCHAR(50)")

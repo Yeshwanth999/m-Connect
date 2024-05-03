@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class EmployeeLeaveDto {
 	
     private String type;
-    private String guid;
+    private String gmail;
     private String admingmail;
     private LocalDate fromDate;
     private String fromShift;
