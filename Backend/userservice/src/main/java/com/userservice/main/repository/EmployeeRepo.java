@@ -14,6 +14,8 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 
 		Optional<Employee> findByGmail(String gmail);
 
+		void deleteByGmail(String gmail);
+
 		 
 
 }

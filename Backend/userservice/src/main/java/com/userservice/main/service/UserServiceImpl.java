@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -65,12 +64,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Autowired
 	private EmailUtils emailutils;
 
-	@Autowired
-	private RabbitTemplate rabbitTemplate;
-
-//	@Autowired
-//	private MessageConverter messageConverter;
-//	
 	@Autowired
 	private EmpAttandenceRepo empAttandencerepo;
 
@@ -238,13 +231,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public ResponseMsg updateEmp(String gmail, RegistrationDto registerEmp) {
 
 		Optional<Employee> empOptional = emprepo.findByGmail(gmail);
-
 		System.out.println("method checking:--------->" + empOptional != null);
-
-		log.info("Updating Employee Details... Method Running.");
-
+		
 		if (empOptional.isPresent()) {
-
+			log.info("Updating Employee Details... Method Running.");
+			
 			Employee emp = empOptional.get();
 
 			EmployeeLeave updatedata = new EmployeeLeave();
@@ -291,36 +282,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public EmployeeLeave applyLeave(EmployeeLeave employeeLeave) {
-		return empleaverepo.save(employeeLeave);
-	}
-
-//	@Override
-//	public String deleteemp(String guid) {	     
-//		return emprepo.delete(guid);
-//	}
-//	
-	@Override
-	public String DeleteUserById(long id) {
-		emprepo.deleteById(id);
+	public String DeleteUserById(String gmail) {
+		emprepo.deleteByGmail(gmail);
 //		userrepo.deleteAll();
 		return "User Data Droped";
 	}
 
-//	@Override
-//	public void createEmployeeLeave(Employee employee) {
-//        // Create EmployeeLeave entity based on the provided Employee data
-//        EmployeeLeave employeeLeave = new EmployeeLeave();
-//        employeeLeave.setEmployeeId(employee.getId());
-//        // Set other fields as needed
-//        
-//        // Save EmployeeLeave entity to the database
-//        employeeLeaveRepository.save(employeeLeave);
-//    }
-
 	@Override
-	public ResponseMsg saveLeaveDetails(String guid, EmployeeLeaveDto empDto) {
-		Optional<EmployeeLeave> employeeLeaveDataOptional = empleaverepo.findByGuid(guid);
+	public ResponseMsg saveLeaveDetails(String gmail, EmployeeLeaveDto empDto) {
+		Optional<EmployeeLeave> employeeLeaveDataOptional = empleaverepo.findByGmail(gmail);
 
 		log.info("Employee Leave Details Form Filling  ....Method Running.");
 
@@ -329,67 +299,37 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			// Update the fields of the existing entity
 			employeeLeave.setAdmingmail(empDto.getAdmingmail());
-			employeeLeave.setGuid(empDto.getGuid());
+			employeeLeave.setGmail(empDto.getGmail());
 			employeeLeave.setType(empDto.getType());
 			employeeLeave.setFromDate(empDto.getFromDate());
 			employeeLeave.setFromShift(empDto.getFromShift());
+			employeeLeave.setLeaveStatus(empDto.getLeaveStatus());
 			employeeLeave.setToDate(empDto.getToDate());
 			employeeLeave.setToShift(empDto.getToShift());
 			employeeLeave.setReasonFor(empDto.getReasonFor());
 			employeeLeave.setAdmingmail(empDto.getAdmingmail());
+			employeeLeave.setAdminChecked(0);
 
 			// Save the updated entity
 			employeeLeave = empleaverepo.save(employeeLeave);
 
 //			messagesend(guid);
-
-			rabbitTemplate.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, employeeLeave.toString());
-
 			// Send approval notification to admin service
 
 			log.info("Employee Leave Details Data Sending to Perticular Admin... " + "Method Running. Data is :"
 					+ employeeLeave.toString());
 
-			return new ResponseMsg(true, employeeLeave.getGuid(), "Leave request updated successfully");
+			return new ResponseMsg(true, employeeLeave.getGmail(), "Leave request updated successfully");
 		} else {
-			return new ResponseMsg(false, " ", "Employee leave data not found for the provided GUID: " + guid);
+			return new ResponseMsg(false, " ", "Employee leave data not found for the provided Employee Gmail: " + gmail);
 		}
 	}
 
-//	private String messagesend(String guid) {
-//		
-//		
-//			EmployeeLeave employeeLeave= new EmployeeLeave();
-//			
-//			0,employeeLeave.getAdmingmail(),0,0,0,0,0,null,employeeLeave.getType(),employeeLeave.getFromDate(),employeeLeave.getFromShift(),employeeLeave.getToDate()
-//					,employeeLeave.getToShift(),employeeLeave.getReasonFor()); 
-//			
-// 	Ensure that employeeLeave is converted to JSON before sending
-
-//		Message message = MessageBuilder
-//				         .withBody(convertObjectToJsonBytes(employeeLeave.toString())).andProperties(
-//				MessagePropertiesBuilder.newInstance().setContentType(MessageProperties.CONTENT_TYPE_JSON).build())
-//				.build();
-
-//			System.out.println("Leave Request is sent Successfully.");
-//		
-//	  return "Leave Request is sent Successfully.";
-//	
-//	}
-
-//	private byte[] convertObjectToJsonBytes(Object object) throws MessageConversionException {
-//		try {
-//			return messageConverter.toMessage(object, null).getBody();
-//		} catch (MessageConversionException e) {
-//			throw new RuntimeException("Failed to convert object to JSON bytes", e);
-//		}
-//	}
-
 	
 	@Override
-	public ResponseMsg empAttandenceDataStoring(String guid, EmpAttandenceDto empattandenceDto) {
+	public ResponseMsg saveattendence(String gmail, EmpAttandenceDto empattandenceDto) {
 
-		Optional<EmpAttandence> attandencedata = empAttandencerepo.findByGuid(guid);
+		Optional<EmpAttandence> attandencedata = empAttandencerepo.findByGmail(gmail);
 
 		if (attandencedata.isPresent()) {
 			EmpAttandence empAttandence = attandencedata.get();
@@ -399,7 +339,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			empAttandence.setBreakHours(empattandenceDto.getBreakHours());
 			empAttandence.setAnomalous(empattandenceDto.getAnomalous());
 			empAttandence.setTotalHours(empattandenceDto.getTotalHours());
-
+			empAttandence.setFirstBreakStart(empattandenceDto.getFirstBreakStart());
+			empAttandence.setFirstBreakEnd(empattandenceDto.getFirstBreakEnd());
+			empAttandence.setSecondBreakStart(empattandenceDto.getSecondBreakStart());
+			empAttandence.setSecondBreakEnd(empattandenceDto.getSecondBreakEnd());
+			empAttandence.setThirdBreakStart(empattandenceDto.getThirdBreakStart());
+			empAttandence.setThirdBreakEnd(empattandenceDto.getThirdBreakEnd());
+			
 			empAttandencerepo.save(empAttandence);
 
 			return new ResponseMsg(true, empAttandence.getGuid(), "Employee Atteandence Stored Succesfully.");
@@ -513,7 +459,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	                .body(null); // You may consider returning a specific Resource instance here
 	    
 	    }
-		  
 	}
+	
+	@Override
+	public String deleteRecord(String gmail) {
+	    empAttandencerepo.deleteByGuid(gmail);
+	    return "Deleted Successfully.";
+	}
+
+
+
+	
 
 }

@@ -10,7 +10,7 @@ import com.userservice.main.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Long>{
 
 	UserEntity findByGmail(String email);
-
+	
 	Employee save(Employee employee);
 	
 }
