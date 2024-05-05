@@ -9,6 +9,8 @@ public interface EmployeeLeaveRepository extends JpaRepository<EmployeeLeaves,Lo
 //	    Optional<EmployeeLeaves> findByGuid(String Guid);
 	    Optional<EmployeeLeaves> findByGmail(String gmail);
 
+		void deleteByGmail(String gmail);
 
-	    
+		Optional<EmployeeLeaves> findByAdmingmail(String admingmail);
 }
+

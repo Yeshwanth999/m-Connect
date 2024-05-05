@@ -37,9 +37,7 @@ public interface UserService {
 	boolean getOtp(String gmail, String otp);
 
 	String setpassword(String gmail, String password);
-
-	EmployeeLeave applyLeave(EmployeeLeave employeeLeave);
-
+	
 	ResponseMsg updateEmp(String gmail, RegistrationDto registrationDTO);
 
 	UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException;

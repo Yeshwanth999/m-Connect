@@ -13,24 +13,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor 
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name="employeeleaves")
+@Table(name = "employeeleaves")
 public class EmployeeLeaves {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employeeleaves_seq")
-    @SequenceGenerator(name = "employeeleaves_seq", sequenceName = "employeeleaves_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employeeleaves_seq")
+	@SequenceGenerator(name = "employeeleaves_seq", sequenceName = "employeeleaves_seq", allocationSize = 1)
 	private Long id;
+
 	@Column(unique = true, nullable = true, columnDefinition = "VARCHAR(65)")
-    private String gmail;
+	private String gmail;
+
+	@Column(nullable = false)
 	private String admingmail;
+
 	private int annual_leave_balance;
 	private int annual_leaves_used;
 	private int monthly_leave_balance;
 	private int monthly_leaves_used;
+	private int no_of_days_applied;
 	private int no_of_days_approved;
 	private String leaveStatus;
 	private String type;
@@ -38,6 +43,8 @@ public class EmployeeLeaves {
 	private String fromShift;
 	private LocalDate toDate;
 	private String toShift;
+	private String leaveType;
 	private String reasonFor;
+	private int adminChecked;
 
- }
+}

@@ -23,7 +23,11 @@ public class EmployeeLeaveDto {
 	private int annual_leaves_used;
 	private int monthly_leave_balance;
 	private int monthly_leaves_used;
+	private int no_of_days_applied;
+	private String leaveType;
 	private String leaveStatus;
+    private int adminChecked;
+
 	
 	
   }
