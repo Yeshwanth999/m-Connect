@@ -17,6 +17,45 @@ $(document).ready(function () {
         },
         {
             "Date": "2024-02-15",
+            "ID": 1,
+            "Name": "John",
+            "InTime": "08:00",
+            "OutTime": "16:00",
+            "WorkingHours": "8 hours",
+            "Status": "Present",
+            "LateAnomolies": "20 min",
+            "Aprove": "Pending",
+            "Reject": "No"
+
+        },
+        {
+            "Date": "2024-02-15",
+            "ID": 1,
+            "Name": "John",
+            "InTime": "08:00",
+            "OutTime": "16:00",
+            "WorkingHours": "8 hours",
+            "Status": "Present",
+            "LateAnomolies": "20 min",
+            "Aprove": "Pending",
+            "Reject": "No"
+
+        },
+        {
+            "Date": "2024-02-15",
+            "ID": 1,
+            "Name": "John",
+            "InTime": "08:00",
+            "OutTime": "16:00",
+            "WorkingHours": "8 hours",
+            "Status": "Present",
+            "LateAnomolies": "20 min",
+            "Aprove": "Pending",
+            "Reject": "No"
+
+        },
+        {
+            "Date": "2024-02-15",
             "ID": 2,
             "Name": "Alice",
             "InTime": "08:30",
@@ -42,65 +81,104 @@ $(document).ready(function () {
 
         },
         {
-            "Date": "",
-            "ID": "",
-            "Name": "",
-            "InTime": "",
-            "OutTime": "",
-            "WorkingHours": "",
-            "Status": "",
-            "LateAnomolies": "",
-            "Aprove": "",
-            "Reject": ""
+            "Date": "2024-02-15",
+            "ID": 3,
+            "Name": "Bob",
+            "InTime": "09:00",
+            "OutTime": "17:30",
+            "WorkingHours": "8.5 hours",
+            "Status": "Present",
+            "LateAnomolies": "20 min",
+            "Aprove": "Pending",
+            "Reject": "No"
+
         },
         {
-            "Date": "",
-            "ID": "",
-            "Name": "",
-            "InTime": "",
-            "OutTime": "",
-            "WorkingHours": "",
-            "Status": "",
-            "LateAnomolies": "",
-            "Aprove": "",
-            "Reject": ""
+            "Date": "2024-02-15",
+            "ID": 3,
+            "Name": "Bob",
+            "InTime": "09:00",
+            "OutTime": "17:30",
+            "WorkingHours": "8.5 hours",
+            "Status": "Present",
+            "LateAnomolies": "20 min",
+            "Aprove": "Pending",
+            "Reject": "No"
+
         },
         {
-            "Date": "",
-            "ID": "",
-            "Name": "",
-            "InTime": "",
-            "OutTime": "",
-            "WorkingHours": "",
-            "Status": "",
-            "LateAnomolies": "",
-            "Aprove": "",
-            "Reject": ""
+            "Date": "2024-02-15",
+            "ID": 3,
+            "Name": "Bob",
+            "InTime": "09:00",
+            "OutTime": "17:30",
+            "WorkingHours": "8.5 hours",
+            "Status": "Present",
+            "LateAnomolies": "20 min",
+            "Aprove": "Pending",
+            "Reject": "No"
+
         },
-        {
-            "Date": "",
-            "ID": "",
-            "Name": "",
-            "InTime": "",
-            "OutTime": "",
-            "WorkingHours": "",
-            "Status": "",
-            "LateAnomolies": "",
-            "Aprove": "",
-            "Reject": ""
-        },
-        {
-            "Date": "",
-            "ID": "",
-            "Name": "",
-            "InTime": "",
-            "OutTime": "",
-            "WorkingHours": "",
-            "Status": "",
-            "LateAnomolies": "",
-            "Aprove": "",
-            "Reject": ""
-        }
+        // {
+        //     "Date": "",
+        //     "ID": "",
+        //     "Name": "",
+        //     "InTime": "",
+        //     "OutTime": "",
+        //     "WorkingHours": "",
+        //     "Status": "",
+        //     "LateAnomolies": "",
+        //     "Aprove": "",
+        //     "Reject": ""
+        // },
+        // {
+        //     "Date": "",
+        //     "ID": "",
+        //     "Name": "",
+        //     "InTime": "",
+        //     "OutTime": "",
+        //     "WorkingHours": "",
+        //     "Status": "",
+        //     "LateAnomolies": "",
+        //     "Aprove": "",
+        //     "Reject": ""
+        // },
+        // {
+        //     "Date": "",
+        //     "ID": "",
+        //     "Name": "",
+        //     "InTime": "",
+        //     "OutTime": "",
+        //     "WorkingHours": "",
+        //     "Status": "",
+        //     "LateAnomolies": "",
+        //     "Aprove": "",
+        //     "Reject": ""
+        // },
+        // {
+        //     "Date": "",
+        //     "ID": "",
+        //     "Name": "",
+        //     "InTime": "",
+        //     "OutTime": "",
+        //     "WorkingHours": "",
+        //     "Status": "",
+        //     "LateAnomolies": "",
+        //     "Aprove": "",
+        //     "Reject": ""
+        // },
+        // {
+        //     "Date": "",
+        //     "ID": "",
+        //     "Name": "",
+        //     "InTime": "",
+        //     "OutTime": "",
+        //     "WorkingHours": "",
+        //     "Status": "",
+        //     "LateAnomolies": "",
+        //     "Aprove": "",
+        //     "Reject": ""
+        // }
     ];
 
     var tableBody = $('#table-body');
