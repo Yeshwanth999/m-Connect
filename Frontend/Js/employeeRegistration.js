@@ -4,7 +4,7 @@ document.getElementById("lastname").disabled = true;
 document.getElementById("email").disabled = true;
 document.getElementById("password").disabled = true;
 document.getElementById("adminCheckbox").disabled = true;
-document.getElementById("secTokenBtn").disabled = true;
+//document.getElementById("secTokenBtn").disabled = true;
 
 
 function toggleEditMode() {
@@ -23,7 +23,7 @@ function toggleEditMode() {
     });
 
     adminCheckbox.disabled = !adminCheckbox.disabled;
-    secTokenBtn.disabled = !secTokenBtn.disabled;
+    //secTokenBtn.disabled = !secTokenBtn.disabled;
 
     buttons.style.display = 'block';
 }
@@ -74,7 +74,7 @@ $('#saveEdit').on('click', function () {
         email: email,
         password: password,
         is_Admin: is_Admin,
-        secTokenBtn: secTokenBtn,
+        //secTokenBtn: secTokenBtn,
     };
     // personal info start
     console.log(firstname);
@@ -82,7 +82,7 @@ $('#saveEdit').on('click', function () {
     console.log(email);
     console.log(password);
     console.log(is_Admin);
-    console.log(secTokenBtn);
+    //console.log(secTokenBtn);
 
     const type = 'POST';
 
@@ -93,22 +93,22 @@ $('#saveEdit').on('click', function () {
 });
 
 
-function generateRandomString(length) {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
+// function generateRandomString(length) {
+//     var result = '';
+//     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+//     var charactersLength = characters.length;
+//     for (var i = 0; i < length; i++) {
+//         result += characters.charAt(Math.floor(Math.random() * charactersLength));
+//     }
+//     return result;
+// }
 
-function genSecToken() {
-    console.log("Generate Security Token Function Called...")
+// function genSecToken() {
+//     console.log("Generate Security Token Function Called...")
 
-    var secTokenCont = document.querySelector(".secTokenCont");
-            var randomCode = generateRandomString(15); // Generate a 16-character random string
-            secTokenCont.innerHTML = randomCode;
+//     var secTokenCont = document.querySelector(".secTokenCont");
+//             var randomCode = generateRandomString(15); // Generate a 16-character random string
+//             secTokenCont.innerHTML = randomCode;
 
-    document.getElementById("secTokenBtn").disabled = true;
-}
+//     document.getElementById("secTokenBtn").disabled = true;
+// }
