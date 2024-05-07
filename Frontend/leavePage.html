@@ -82,8 +82,8 @@
                     <div class="form">
                         <div style="position: sticky;"> <h3 class="py-2 ps-2">Leave Request</h3></div>
                         <div class="form-grid">
-                            <label for="leave-status">Leave Status</label>
-                            <input type="text" placeholder="Leave Request" id="leaveRequest">
+                            <label for="leave-status" style="display: none;">Leave Status</label>
+                            <input type="text" value="LeaveRequest" id="leaveRequest"   style="display: none;">
                             <label for="leave-type">Leave Type</label>
                             <select name="leave-type" id="leave-type">
                                 <option value="select">Select</option>
@@ -213,11 +213,57 @@
 
      <script src="./Js/Leavepage.js"></script>
 
+     <script>
+        function sendEmail(){
+            const leaveRequest = document.getElementById('leaveRequest').value;
+            const leaveType = document.getElementById('leave-type').value;
+            //const fromShift = document.getElementById('from-shift').value;
+            const fromDate = document.getElementById('from-date').value;
+            //const toShift = document.getElementById('to-shift').value;
+            const toDate = document.getElementById('to-date').value;
+            const reasonFor = document.getElementById('reason-for').value;
+            const adminEmail = document.getElementById('adminEmail').value;
+
+            // Basic email format validation
+            if (!validateEmail(adminEmail)) {
+                alert("Please enter a valid email address for Admin Email.");
+                return;
+            }
+
+            //   This is AJAX Calling....
+            const emailFormData={
+                leaveRequest:leaveRequest,
+                leaveType:leaveType,
+                fromDate:fromDate,
+                toDate:toDate,
+                reasonFor:reasonFor,
+                adminEmail:adminEmail
+            }
+            console.log(leaveRequest);
+            console.log(leaveType);
+            console.log(fromDate);
+            console.log(toDate);
+            console.log(reasonFor);
+            console.log(adminEmail);
+
+            const type='POST';
+
+            // Call the updated function for AJAX communication
+            sendEmailFormData('',type, emailFormData);
+        }
+
+        // Email validation function
+        function validateEmail(email) {
+            const re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+     </script>
+
 
      <!-- Email sending by SMTP.js code START -->
      <!-- Script tag Link for seding mail by SMTP.js -->
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <script>
+    <!-- <script src="https://smtpjs.com/v3/smtp.js"></script> -->
+   <!-- <script>
         function sendEmail() {
             const leaveType = document.getElementById('leave-type').value;
             //const fromShift = document.getElementById('from-shift').value;
@@ -284,7 +330,7 @@
             const re = /\S+@\S+\.\S+/;
             return re.test(email);
         }
-    </script>
+    </script> -->
     <!-- Email sending by SMTP.js code END -->
     
     <!--code for Reload direct to signin -->
