@@ -31,7 +31,7 @@
             </div>
 
             <div class="btn-field">
-                <input type="button" id="verify" onclick="validateForm()" value="Verify">
+                <input type="button" id="verify" onclick="validateEmail()" value="Verify">
             </div>
         </div>
 
@@ -90,25 +90,24 @@
             } else {
                 removeErrorMessage('gmail-error');
                 showSuccessMessage('gmail-done');
+
+                // function for anabling OTP box
+                let gmail = document.getElementById('gmail').value;
+                const formData = {
+                   gmail: gmail
+                };
+                console.log(gmail);
+                const type = 'POST';
+                sendFormData1('http://localhost:8081/forgotPassword', type, formData, 'formBox2');
+                document.querySelector('#formBox3').style.display = 'block';
             }
             //return isValid;
         }
 
         // Attach event listeners to trigger validation on input/change
-        document.getElementById('gmail').addEventListener('input', validateEmail);
+        //document.getElementById('gmail').addEventListener('input', validateEmail);
 
-        // function for anabling OTP box
-        function validateForm() {
-            let gmail = document.getElementById('gmail').value;
-            const formData = {
-                gmail: gmail
-            };
-            console.log(gmail);
-            const type = 'POST';
-            sendFormData1('http://localhost:8081/forgotPassword', type, formData, 'formBox2');
-            document.querySelector('#formBox3').style.display = 'block';
-
-        }
+       
 
         // function for validating OTP
         function validateOTP() {

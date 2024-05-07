@@ -1,0 +1,221 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100vw;
+    background-color: #ffff;
+}
+
+.section {
+    background-color: #ffff;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.profile {
+    width: 25%;
+    height: 700px;
+    background-color: #0093ff;
+    margin: 20px;
+}
+
+.form {
+    width: 50%;
+    height: auto;
+}
+
+.profile-con {
+    display: flex;
+    flex-direction: row;
+}
+
+/*Personal Info Details */
+.personal-info-div {
+    background-color: transparent;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(27, 27, 27, 35%);
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+.per-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: -15px;
+}
+
+.hr {
+    height: 2px;
+    background-color: #000;
+    flex-grow: 1;
+}
+
+.personal-h {
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 12px;
+}
+
+.edit-icon {
+    padding: 13px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.personal-info-div:hover .edit-icon {
+    visibility: visible;
+}
+
+.input-underlined {
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+}
+
+.form-group .dob {
+    color: #5f5c5c;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group {
+    padding-left: 15px;
+}
+
+.form-group label {
+    font-family: sans-serif;
+    color: #5f5c5c;
+    font-weight: 500;
+}
+
+.form-group input {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 16px;
+    padding-bottom: 3px;
+    width: 90%;
+}
+
+.inputs-grid {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.form-group-2 {
+    display: flex;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.form-group-1 {
+    flex: 1 0 29%;
+    padding-right: 40px;
+}
+
+.form-group-1:last-child {
+    margin-right: 0;
+}
+
+.form-group-1 label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #5f5c5c;
+    font-weight: 500;
+    padding-left: 15px;
+    font-family: sans-serif;
+    padding-top: 7px;
+}
+
+.form-group-1 input,
+.form-group-1 select {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 16px;
+    padding-bottom: 5px;
+    margin-left: 12px;
+    margin-bottom: 8px;
+    width: 88%;
+    background-color: transparent;
+}
+
+.secTokenBtn {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    position: relative;
+    left: 20px;
+}
+.secTokenBtn:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.secTokenCont{
+    border: 2px solid grey;
+    width: 90%;
+    height: 35px;
+    position: relative;
+    bottom: 18px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* buttons style */
+.button-container {
+    text-align: end;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    margin-top: 25px;
+}
+.button-container button:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.btn {
+    background-color: white;
+    box-shadow: #000;
+    border-width: 0;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    color: #000;
+}
+
+.sbtn {
+    background-color: #0093ff;
+    box-shadow: #000;
+    border-width: 0;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    color: #f3eeee;
+}
+
