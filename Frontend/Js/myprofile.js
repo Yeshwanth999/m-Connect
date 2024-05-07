@@ -326,6 +326,7 @@ document.querySelectorAll('.currentaddress').forEach(function (input) {
 
 // tranfering data using json
 $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () {
+
     // personal info start
     var firstname = $('#firstname').val();
     var lastname = $('#lastname').val();
@@ -360,7 +361,8 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
 
     const empObject = {
         // personal info start
-        firstname: firstna = me,
+        profileImage: profileImage,
+        firstname: firstname,
         lastname: lastname,
         dob: dob,
         gender: gender,
@@ -391,6 +393,7 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
     };
     // personal info start
     console.log(firstname);
+    console.log(profileImage);
     console.log(lastname);
     console.log(dob);
     console.log(gender);
@@ -433,3 +436,27 @@ $('#saveEdit, #saveContact, #saveAddress, #savesocial').on('click', function () 
     }
 
 });
+
+
+// profile section image code 
+document.querySelector('.pp').addEventListener('click', function(event) {
+    event.stopPropagation();
+    document.getElementById('fileInput').click();
+});
+document.getElementById("uploadLabel").addEventListener("click", function(e) {
+    e.preventDefault();
+})
+function displayPhoto(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var profileImage = document.getElementById('profileImage');
+            profileImage.style.backgroundImage = 'url(' + e.target.result + ')';
+            profileImage.style.border = "none";
+            document.getElementById("uploadLabel").style.display = "none";
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}

@@ -1,0 +1,62 @@
+body {
+    overflow-x: hidden;
+    width: 90%;
+    margin: auto;
+}
+
+#student-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+
+
+#student-table th,
+#student-table td {
+    border: 1px solid #ddd;
+    padding: 18px;
+}
+
+
+#aprove {
+    background-color: green;
+}
+
+#reject {
+    background-color: red;
+}
+
+#student-table th {
+    text-align: left;
+    font-size: 20px;
+    border: 2px solid black;
+
+
+}
+
+#student-table td {
+    text-align: left;
+    font-size: 19px;
+    border: 2px solid black;
+
+}
+
+#student-table td:empty {
+    min-height: 50px;
+}
+
+#aprove {
+    background-color: green;
+    color: #fff;
+
+}
+
+#reject {
+    background-color: red;
+    color: #fff;
+}
+
+#th-data {
+    background-color: #f2f2f2;
+}

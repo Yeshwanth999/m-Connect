@@ -14,9 +14,19 @@ header {
     align-items: center;
     height: 58px;
 }
+
 .profile-icon {
-    color:white; /* Blue color for emphasis on the profile icon */
+    color: white;
+    /* Blue color for emphasis on the profile icon */
     font-size: 28px;
+}
+
+#firstname {
+    background-color: #1a1a18;
+    box-shadow: none;
+    text-align: right;
+    color: white;
+    padding-left: -10px;
 }
 
 
@@ -41,7 +51,8 @@ header {
     display: flex;
     gap: 50px;
 }
-.notification a i{
+
+.notification a i {
     color: white;
 }
 
@@ -49,7 +60,7 @@ header {
     position: relative;
     display: inline-block;
     padding-right: 20px;
-   
+
 }
 
 .dropbtn {
@@ -67,7 +78,7 @@ header {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     right: 0;
 }
@@ -86,6 +97,7 @@ header {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
 /* body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -98,32 +110,52 @@ header {
 } */
 
 .employee-card {
-    background-color:#1a1a18;
+    background-color: #1a1a18;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: left;
+    text-align: center;
     border-radius: 8px;
-    height: 80%;
-    width: 20%;
-    margin: 10px;
+    width: 10%;
+    position: absolute;
+    left: 100px;
+
+    /* padding: 20px; */
+    /* height: 80%; */
+    /* margin: 10px; */ 
+}
+.employee-card #imageContainer{
+    width: 150px;
+    border: solid red 3px;
+    border-radius: 5px;
+    background-size: cover;
+}
+.employee-card #firstnameDisplay{
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: bold;
+   color: #fff;
 }
 
 .employee-card img {
     width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
+    height: 150px;
+    
     margin-bottom: 10px;
+    /* max-width: 150%; */
+   
+   display: block;
+   margin: 0 auto;
 }
+
 
 .employee-card h3 {
     margin: 0;
-    color:white;
+    color: white;
 }
-.container{
+
+.container {
     display: flex;
     justify-content: space-between;
-    height: 200px;
+    height: 180px;
     background-image: url(/Frontend/Assets/imgpsh_fullsize_anim.png);
     justify-content: space-between;
     padding: 10px;
@@ -131,10 +163,12 @@ header {
     background-size: cover;
 
 }
-.heading{
+
+.heading {
     color: white;
     font-size: 40px;
 }
+
 .employee-card1 {
 
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
@@ -145,77 +179,89 @@ header {
     width: 80%;
     margin: 10px;
 }
+
 .card-container1 {
     display: flex;
     /* grid-template-columns: repeat(4, 1fr); */
-    gap: 40px;
+    /* gap: 40px; */
     /* max-width: 1000px; */
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     /* margin-left: 200px; */
 }
+/* 
+.dashboard-icon1 a i:hover {
+    font-size: 70px;
+    height: 90px;
+    width: 120px;
+}
 
-.dashboard-icon1 a i:hover{
+.dashboard-icon2 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
 }
-.dashboard-icon2 a i:hover{
+
+.dashboard-icon3 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
 }
-.dashboard-icon3 a i:hover{
+
+.dashboard-icon4 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
 }
-.dashboard-icon4 a i:hover{
+
+.dashboard-icon5 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
 }
-.dashboard-icon5 a i:hover{
+
+.dashboard-icon6 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
 }
-.dashboard-icon6 a i:hover{
+
+.dashboard-icon7 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
 }
-.dashboard-icon7 a i:hover{
+
+.dashboard-icon8 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
 }
-.dashboard-icon8 a i:hover{
+
+.dashboard-icon9 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
 }
-.dashboard-icon9 a i:hover{
+
+.dashboard-icon10 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
 }
-.dashboard-icon10 a i:hover{
+
+.dashboard-icon11 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
 }
-.dashboard-icon11 a i:hover{
+
+.dashboard-icon12 a i:hover {
     font-size: 70px;
     height: 90px;
     width: 120px;
-}
-.dashboard-icon12 a i:hover{
-    font-size: 70px;
-    height: 90px;
-    width: 120px;
-}
+} */
 
 
 .card {
@@ -226,73 +272,85 @@ header {
     border-radius: 8px;
     height: 120px;
     width: 150px;
-    
+
 }
+
 .dashboard-icon1 {
-    color:antiquewhite;
+    color: antiquewhite;
     font-size: 50px;
     padding-bottom: 20px;
 }
+
 .dashboard-icon2 {
     color: #333;
     font-size: 50px;
     padding-bottom: 20px;
 
 }
+
 .dashboard-icon3 {
     color: #333;
     font-size: 50px;
     padding-bottom: 20px;
 
 }
+
 .dashboard-icon4 {
     color: #333;
     font-size: 50px;
     padding-bottom: 20px;
 
 }
+
 .dashboard-icon5 {
     color: #333;
     font-size: 50px;
     padding-bottom: 20px;
 
 }
+
 .dashboard-icon6 {
     color: #333;
     font-size: 50px;
     padding-bottom: 20px;
 
 }
+
 .dashboard-icon7 {
     color: #333;
     font-size: 50px;
     padding-bottom: 20px;
 
 }
+
 .dashboard-icon8 {
     color: #333;
     font-size: 50px;
     padding-bottom: 20px;
 
 }
+
 .dashboard-icon9 {
     color: #333;
     font-size: 50px;
     padding-bottom: 20px;
 
 }
+
 .dashboard-icon10 {
     color: #333;
     font-size: 50px;
     padding-bottom: 20px;
 
 }
+
 .dashboard-icon11 {
     color: #333;
     font-size: 50px;
     padding-bottom: 20px;
 
 }
+
 .dashboard-icon12 {
     color: #333;
     font-size: 50px;
@@ -303,42 +361,53 @@ header {
 
 .card h3 {
     margin: 0;
-    color:black;
-}
-.dashboard-icon1 a i {
-    color:#1E1E1E;
-}
-.dashboard-icon2 a i {
-    color:#5B3000;
-}
-.dashboard-icon3 a i {
-    color:#DD6031;
-}
-.dashboard-icon4 a i {
-    color:#E59500;
-}
-.dashboard-icon5 a i {
-    color:#33CAFF;
-}
-.dashboard-icon6 a i {
-    color:#3352FF;
-}
-.dashboard-icon7 a i {
-    color:#8633FF;
-}
-.dashboard-icon8 a i {
-    color:#F033FF;
-}
-.dashboard-icon9 a i {
-    color:#FF334C;
-}
-.dashboard-icon10 a i {
-    color:cadetblue;
-}
-.dashboard-icon11 a i {
-    color:#5B3000;
-}
-.dashboard-icon12 a i {
-    color:#373D20;
+    color: black;
 }
 
+.dashboard-icon1 a i {
+    color: #1E1E1E;
+}
+
+.dashboard-icon2 a i {
+    color: #5B3000;
+}
+
+.dashboard-icon3 a i {
+    color: #DD6031;
+}
+
+.dashboard-icon4 a i {
+    color: #E59500;
+}
+
+.dashboard-icon5 a i {
+    color: #33CAFF;
+}
+
+.dashboard-icon6 a i {
+    color: #3352FF;
+}
+
+.dashboard-icon7 a i {
+    color: #8633FF;
+}
+
+.dashboard-icon8 a i {
+    color: #F033FF;
+}
+
+.dashboard-icon9 a i {
+    color: #FF334C;
+}
+
+.dashboard-icon10 a i {
+    color: cadetblue;
+}
+
+.dashboard-icon11 a i {
+    color: #5B3000;
+}
+
+.dashboard-icon12 a i {
+    color: #373D20;
+}

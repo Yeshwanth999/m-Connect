@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -85,6 +87,7 @@ public class AdminServiceImpl implements AdminService {
 		log.info("Empployee Registering");
 
 		Optional<Employee> profileRegister = adminrepo.findByGmail(registerEmp.getGmail());
+<<<<<<< HEAD
 
 		if (profileRegister.isPresent()) {
 			return new ResponseMsg(false, registerEmp.getGmail(), "This Email We have in our DataBase.");
@@ -122,13 +125,59 @@ public class AdminServiceImpl implements AdminService {
 			emp.setRole(registerEmp.getRole());
 			emp.setStayingsince(registerEmp.getStayingsince());
 
+=======
+
+		if (profileRegister.isPresent()) {
+			return new ResponseMsg(false, registerEmp.getGmail(), "This Email We have in our DataBase.");
+		} else {
+			BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+			String encrypetedPwd = bcrypt.encode(registerEmp.getPassword());
+			registerEmp.setPassword(encrypetedPwd);
+
+			Employee emp = new Employee();
+			emp.setGuid(generateID());
+			emp.setGmail(registerEmp.getGmail());
+			emp.setPassword(encrypetedPwd);
+			emp.setBlood_group(registerEmp.getBlood_group());
+			// emp.setAdmin(true);
+			emp.setAdminStatus(registerEmp.isAdminStatus());
+			emp.setCurrentPincode(registerEmp.getCurrentPincode());
+			emp.setCurrentAddress(registerEmp.getCurrentAddress());
+			emp.setCurrentCity(registerEmp.getCurrentCity());
+			emp.setCurrentCountry(registerEmp.getCurrentCountry());
+			emp.setCurrentPincode(registerEmp.getCurrentPincode());
+			emp.setCurrentState(registerEmp.getCurrentState());
+			emp.setDob(registerEmp.getDob());
+			emp.setFirstname(registerEmp.getFirstname());
+			emp.setLastname(registerEmp.getLastname());
+			emp.setGender(registerEmp.getGender());
+			emp.setLivingincurrent(registerEmp.getLivingincurrent());
+			emp.setMarital_status(registerEmp.getMarital_status());
+			emp.setStayingsince(registerEmp.getStayingsince());
+			emp.setPermanentAddress(registerEmp.getPermanentAddress());
+			emp.setPermanentCity(registerEmp.getPermanentCity());
+			emp.setPermanentCountry(registerEmp.getPermanentCountry());
+			emp.setPermanentPincode(registerEmp.getPermanentPincode());
+			emp.setPermanentState(registerEmp.getPermanentState());
+			emp.setPhonenumber(registerEmp.getPhonenumber());
+			emp.setRole(registerEmp.getRole());
+			emp.setStayingsince(registerEmp.getStayingsince());
+
+>>>>>>> fa8386315ad548bd1ca710a372f66df574d7057b
 			User user = new User();
 			BeanUtils.copyProperties(emp, user);
 			emprepo.save(user);
 			adminrepo.save(emp);
+<<<<<<< HEAD
 
 			return new ResponseMsg(true, emp.getFirstname(), "Employee Added Succesfully.");
 		}
+=======
+
+			return new ResponseMsg(true, emp.getFirstname(), "Employee Added Succesfully.");
+		}
+
+>>>>>>> fa8386315ad548bd1ca710a372f66df574d7057b
 	}
 
 	@Override
@@ -139,7 +188,10 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Employee getEmployeeByGmail(String gmail) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> fa8386315ad548bd1ca710a372f66df574d7057b
 		Optional<Employee> emp = adminrepo.findByGmail(gmail);
 
 		if (emp.isPresent()) {
@@ -156,54 +208,60 @@ public class AdminServiceImpl implements AdminService {
 		empleaveleaverepo.deleteByGmail(gmail);
 		empattendencerepo.deleteByGmail(gmail);
 		return "Successfully Data Droped";
+<<<<<<< HEAD
 	}
 
 	public EmployeeLeaves getEmployeeDetailsWithLeaveInfo(String gmail) {
 		return empleaveleaverepo.findByGmail(gmail).orElse(null);
 	}
 
-//	@Override
-//	public String leaveRequestService(String admingmail, EmployeeLeaveDto employeeleaves) {
-//		Optional<EmployeeLeaves> employeeLeaveDataOptional = empleaveleaverepo.findAllByAdmingmail(admingmail);
-//		System.out.println("Employee Leaves Cheacking--------->");
-//
-//		if (employeeLeaveDataOptional.isPresent()) {
-//			log.info("Updating Employee Leaves Details... Method Running.");
-//
-//			EmployeeLeaves employeeLeave = employeeLeaveDataOptional.get();
-//
-//			employeeLeave.setFromDate(employeeleaves.getFromDate());
-//			employeeLeave.setFromShift(employeeleaves.getFromShift());
-//			employeeLeave.setLeaveStatus(employeeleaves.getLeaveStatus());
-//			employeeLeave.setToDate(employeeleaves.getToDate());
-//			employeeLeave.setToShift(employeeleaves.getToShift());
-//
-//			empleaveleaverepo.save(employeeLeave);
-//
-//			log.info("Leave Status Updated in Service impl class");
-//
-//			return "Leave request updated successfully";
-//		} else {
-//			return ("Employee leave data not found for the provided Employee AdminGmail: " + admingmail);
-//		}
-//	}
+	// @Override
+	// public String leaveRequestService(String admingmail, EmployeeLeaveDto
+	// employeeleaves) {
+	// Optional<EmployeeLeaves> employeeLeaveDataOptional =
+	// empleaveleaverepo.findAllByAdmingmail(admingmail);
+	// System.out.println("Employee Leaves Cheacking--------->");
+	//
+	// if (employeeLeaveDataOptional.isPresent()) {
+	// log.info("Updating Employee Leaves Details... Method Running.");
+	//
+	// EmployeeLeaves employeeLeave = employeeLeaveDataOptional.get();
+	//
+	// employeeLeave.setFromDate(employeeleaves.getFromDate());
+	// employeeLeave.setFromShift(employeeleaves.getFromShift());
+	// employeeLeave.setLeaveStatus(employeeleaves.getLeaveStatus());
+	// employeeLeave.setToDate(employeeleaves.getToDate());
+	// employeeLeave.setToShift(employeeleaves.getToShift());
+	//
+	// empleaveleaverepo.save(employeeLeave);
+	//
+	// log.info("Leave Status Updated in Service impl class");
+	//
+	// return "Leave request updated successfully";
+	// } else {
+	// return ("Employee leave data not found for the provided Employee AdminGmail:
+	// " + admingmail);
+	// }
+	// }
 
-//	}
-//	@Override
-//	public List<EmployeeLeaves> getLeaveEmployeeDetailsService(String admingmail) {
-//	    List<EmployeeLeaves> empLeavesList = empleaveleaverepo.findAllByAdmingmail(admingmail);
-//	    
-//	    List<EmployeeLeaves> validLeaves = new ArrayList<>();
-//
-//	    for (EmployeeLeaves empdata : empLeavesList) {
-//	        String leaveStatus = empdata.getLeaveStatus();
-//	        System.out.println(leaveStatus);
-//	        if ("LeaveRequest".equals(leaveStatus)) {
-//	            validLeaves.add(empdata);
-//	        }
-//	    }
-//
-//	    return validLeaves;
+	// }
+	// @Override
+	// public List<EmployeeLeaves> getLeaveEmployeeDetailsService(String admingmail)
+	// {
+	// List<EmployeeLeaves> empLeavesList =
+	// empleaveleaverepo.findAllByAdmingmail(admingmail);
+	//
+	// List<EmployeeLeaves> validLeaves = new ArrayList<>();
+	//
+	// for (EmployeeLeaves empdata : empLeavesList) {
+	// String leaveStatus = empdata.getLeaveStatus();
+	// System.out.println(leaveStatus);
+	// if ("LeaveRequest".equals(leaveStatus)) {
+	// validLeaves.add(empdata);
+	// }
+	// }
+	//
+	// return validLeaves;
 
 	@Override
 	public List<EmployeeLeaves> getLeaveEmployeeDetailsService(String admingmail, String leaveStatus) {
@@ -227,6 +285,62 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		return "Leave Status Updated Successfully";
+=======
+		// userrepo.deleteAll();
+	}
+
+	public EmployeeLeaves getEmployeeDetailsWithLeaveInfo(String gmail) {
+		return empleaveleaverepo.findByGmail(gmail).orElse(null);
+	}
+
+	@Override
+	public String leaveRequestService(String admingmail, EmployeeLeaveDto employeeleaves) {
+		Optional<EmployeeLeaves> employeeLeaveDataOptional = empleaveleaverepo.findByAdmingmail(admingmail);
+		System.out.println("Employee Leaves Cheacking--------->");
+
+		if (employeeLeaveDataOptional.isPresent()) {
+			log.info("Updating Employee Leaves Details... Method Running.");
+
+			EmployeeLeaves employeeLeave = employeeLeaveDataOptional.get();
+
+			employeeLeave.setFromDate(employeeleaves.getFromDate());
+			employeeLeave.setFromShift(employeeleaves.getFromShift());
+			employeeLeave.setLeaveStatus(employeeleaves.getLeaveStatus());
+			employeeLeave.setToDate(employeeleaves.getToDate());
+			employeeLeave.setToShift(employeeleaves.getToShift());
+
+			empleaveleaverepo.save(employeeLeave);
+
+			log.info("Leave Status Updated in Service impl class");
+
+			return "Leave request updated successfully";
+		} else {
+			return ("Employee leave data not found for the provided Employee AdminGmail: " + admingmail);
+		}
+	}
+
+	@Override
+	public EmployeeLeaves getLeaveEmployeeDetailsService(String admingmail) {
+		Optional<EmployeeLeaves> empleavesOpt = empleaveleaverepo.findByAdmingmail(admingmail);
+		if (empleavesOpt.isPresent()) {
+			EmployeeLeaves empdata = empleavesOpt.get();
+			String leaveStatus = empdata.getLeaveStatus();
+			System.out.println(leaveStatus);
+			if ("LeaveRequest".equals(leaveStatus)) {
+				empdata.getId();
+				empdata.getGmail();
+				empdata.getLeaveType();
+				empdata.getNo_of_days_applied();
+				empdata.getLeaveStatus();
+				empdata.getReasonFor();
+				return empdata;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+>>>>>>> fa8386315ad548bd1ca710a372f66df574d7057b
 	}
 
 }

@@ -22,6 +22,8 @@ import com.adminservice.main.entity.Employee;
 import com.adminservice.main.entity.EmployeeLeaves;
 import com.adminservice.main.helperclasses.ResponseMsg;
 import com.adminservice.main.service.AdminService;
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -35,29 +37,27 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
-
 	@PostMapping("/register")
 	public ResponseEntity<ResponseMsg> registerUserAccount(@RequestBody RegistrationdDTO registrationDTO) {
 		ResponseMsg body = adminService.empregister(registrationDTO);
 		return new ResponseEntity<>(body, HttpStatus.CREATED);
 	}
 
-	
-//	}
-//	@PutMapping("/LeaveRequests/{admingmail}")
-//	public String leaveRequest(@PathVariable("admingmail") String admingmail, @RequestBody EmployeeLeaveDto employeeleaves) {
-//	    log.info("Employee leaves Requests method running.");
-//	    String body = adminService.leaveRequestService(admingmail, employeeleaves);
-//	    return body;
-//	}
-//	
-	
-	
+	// }
+	// @PutMapping("/LeaveRequests/{admingmail}")
+	// public String leaveRequest(@PathVariable("admingmail") String admingmail,
+	// @RequestBody EmployeeLeaveDto employeeleaves) {
+	// log.info("Employee leaves Requests method running.");
+	// String body = adminService.leaveRequestService(admingmail, employeeleaves);
+	// return body;
+	// }
+	//
+
 	@GetMapping("/getemployees")
 	public ResponseEntity<List<Employee>> getAllEmployees() {
-		
+
 		List<Employee> emp = adminService.getAllEmployees();
-		
+
 		return new ResponseEntity<>(emp, HttpStatus.OK);
 	}
 
@@ -74,32 +74,28 @@ public class AdminController {
 	}
 
 	@GetMapping("/getempdata/{admingmail}/{leaveStatus}")
-	public ResponseEntity<List<EmployeeLeaves>>  getLeaveEmployeeDetails(@PathVariable("admingmail") String admingmail,  @PathVariable("leaveStatus") String leaveStatus,@RequestBody EmployeeLeaveDto empleavedto ) {
-        log.info("Getting Leave Employees Data in control for leaveStatus: {}", leaveStatus);
-	    List<EmployeeLeaves> result = adminService.getLeaveEmployeeDetailsService(admingmail,leaveStatus);
-	    
-        adminService.updateLeaveStatus(result, empleavedto);
+	public ResponseEntity<List<EmployeeLeaves>> getLeaveEmployeeDetails(@PathVariable("admingmail") String admingmail,
+			@PathVariable("leaveStatus") String leaveStatus, @RequestBody EmployeeLeaveDto empleavedto) {
+		log.info("Getting Leave Employees Data in control for leaveStatus: {}", leaveStatus);
+		List<EmployeeLeaves> result = adminService.getLeaveEmployeeDetailsService(admingmail, leaveStatus);
 
-//      return new ResponseEntity<>(result, HttpStatus.OK);
-        return ResponseEntity.ok(result);
+		adminService.updateLeaveStatus(result, empleavedto);
 	}
-	
-	
 
-	
 	@Transactional
 	@DeleteMapping("/DropBy/{gmail}")
 	public String DropUserById(@PathVariable("gmail") String gmail) {
 		String data = adminService.DeleteUserById(gmail);
-		return data;
+
+		// return new ResponseEntity<>(result, HttpStatus.OK);
+		return ResponseEntity.ok(result);
 	}
 
- }
+}
 
-//@PostMapping("/adduser")
-//public ResponseEntity<String> addUser(@RequestBody RegistrationDto user) {
-//	userService.addUser(user);
+// @PostMapping("/adduser")
+// public ResponseEntity<String> addUser(@RequestBody RegistrationDto user) {
+// userService.addUser(user);
 //
-//	return ResponseEntity.ok("Employee added Succesfully");
-//}
-
+// return ResponseEntity.ok("Employee added Succesfully");
+// }

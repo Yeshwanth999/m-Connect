@@ -7,6 +7,10 @@
 /* .logo{
     margin-left: 10px;
 } */
+
+body{
+    margin-top: 10px;
+}
 header{
     height: 10.7vh;
 }

@@ -76,8 +76,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return new org.springframework.security.core.userdetails.User(user.getGmail(), user.getPassword(),
 				Collections.emptyList());
 	}
-	
-	
+
 	@Override
 	public String userLogin(LoginForm loginform) {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
@@ -150,7 +149,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			log.info("Employee Forgot Password Message Sending To Mail ... Method Running.");
 			emailutils.sendmail(to, subject, body.toString());
-//			return true;
+			// return true;
 			return temppwd;
 
 		} catch (Exception e) {
@@ -159,7 +158,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		}
 	}
 
-	
 	@Override
 	public boolean getOtp(String gmail, String otp) {
 
@@ -232,10 +230,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 		Optional<Employee> empOptional = emprepo.findByGmail(gmail);
 		System.out.println("method checking:--------->" + empOptional != null);
-		
+
 		if (empOptional.isPresent()) {
 			log.info("Updating Employee Details... Method Running.");
-			
+
 			Employee emp = empOptional.get();
 
 			EmployeeLeave updatedata = new EmployeeLeave();
@@ -284,10 +282,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public String DeleteUserById(String gmail) {
 		emprepo.deleteByGmail(gmail);
-//		userrepo.deleteAll();
+
+		// userrepo.deleteAll();
 		return "User Data Droped";
 	}
- 
+
 	@Override
 	public ResponseMsg saveLeaveDetails(String gmail, EmployeeLeaveDto empDto) {
 		Optional<EmployeeLeave> employeeLeaveDataOptional = empleaverepo.findByGmail(gmail);
@@ -304,12 +303,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			employeeLeave.setLeaveStatus(empDto.getLeaveStatus());
 			employeeLeave.setToDate(empDto.getToDate());
 			employeeLeave.setReasonFor(empDto.getReasonFor());
-			employeeLeave.setAdminChecked(0);
 
 			// Save the updated entity
 			employeeLeave = empleaverepo.save(employeeLeave);
 
-//			messagesend(guid);
 			// Send approval notification to admin service
 
 			log.info("Employee Leave Details Data Sending to Perticular Admin... " + "Method Running. Data is :"
@@ -317,11 +314,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			return new ResponseMsg(true, employeeLeave.getGmail(), "Leave request updated successfully");
 		} else {
-			return new ResponseMsg(false, " ", "Employee leave data not found for the provided Employee Gmail: " + gmail);
+			return new ResponseMsg(false, " ",
+					"Employee leave data not found for the provided Employee Gmail: " + gmail);
 		}
 	}
 
-	
 	@Override
 	public ResponseMsg saveattendence(String gmail, EmpAttandenceDto empattandenceDto) {
 
@@ -341,7 +338,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			empAttandence.setSecondBreakEnd(empattandenceDto.getSecondBreakEnd());
 			empAttandence.setThirdBreakStart(empattandenceDto.getThirdBreakStart());
 			empAttandence.setThirdBreakEnd(empattandenceDto.getThirdBreakEnd());
-			
 			empAttandencerepo.save(empAttandence);
 
 			return new ResponseMsg(true, empAttandence.getGuid(), "Employee Atteandence Stored Succesfully.");
@@ -355,55 +351,55 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public String addImage(String gmail, MultipartFile file) {
-	    try {
-	        if (file.isEmpty()) {
-	            return "File is Empty";
-	        }
-	        
-	        Optional<Employee> optionalClass = emprepo.findByGmail(gmail);
-	        if (optionalClass.isPresent()) {
-	            Employee empdata = optionalClass.get();
-	            
-	            String fileName = empdata.getGuid() + "_" + file.getOriginalFilename();
-	            empdata.setImgName(fileName);
+		try {
+			if (file.isEmpty()) {
+				return "File is Empty";
+			}
 
-	            String fileType = getFileType(file.getOriginalFilename());
-	            empdata.setImgType(fileType);
-	            
-	            Path uploadPath = Paths.get("src/main/resources/" + Upload_pathfile).toAbsolutePath().normalize();
-	            System.out.println("Upload Path: " + uploadPath);
-	            
-	            File directory = new File(uploadPath.toString());
-	            if (!directory.exists()) {
-	                if (directory.mkdirs()) { // Use mkdirs() to create parent directories if they don't exist
-	                    System.out.println("Directory Created Successfully.");
-	                } else {
-	                    System.out.println("Failed to create Directory.");
-	                    return "Failed to create directory for file upload.";
-	                }
-	            }
+			Optional<Employee> optionalClass = emprepo.findByGmail(gmail);
+			if (optionalClass.isPresent()) {
+				Employee empdata = optionalClass.get();
 
-	            Path filePath = uploadPath.resolve(fileName).normalize();
-	            System.out.println("File Path: " + filePath);
-	            
-	            file.transferTo(filePath.toFile());
-	            System.out.println("File uploaded successfully. Path: " + filePath);
+				String fileName = empdata.getGuid() + "_" + file.getOriginalFilename();
+				empdata.setImgName(fileName);
 
-	            // Set the full file path in imgPath
-	            empdata.setImgPath(filePath.toString());
+				String fileType = getFileType(file.getOriginalFilename());
+				empdata.setImgType(fileType);
 
-	            // Save the changes to the UserDtls object
-	            emprepo.save(empdata);
+				Path uploadPath = Paths.get("src/main/resources/" + Upload_pathfile).toAbsolutePath().normalize();
+				System.out.println("Upload Path: " + uploadPath);
 
-	            return "File uploaded successfully";
-	        }
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return "Failed to upload file: " + e.getMessage();
-	    }
-	    
-	    // Return an appropriate message if the user is not present
-	    return "User not found";
+				File directory = new File(uploadPath.toString());
+				if (!directory.exists()) {
+					if (directory.mkdirs()) { // Use mkdirs() to create parent directories if they don't exist
+						System.out.println("Directory Created Successfully.");
+					} else {
+						System.out.println("Failed to create Directory.");
+						return "Failed to create directory for file upload.";
+					}
+				}
+
+				Path filePath = uploadPath.resolve(fileName).normalize();
+				System.out.println("File Path: " + filePath);
+
+				file.transferTo(filePath.toFile());
+				System.out.println("File uploaded successfully. Path: " + filePath);
+
+				// Set the full file path in imgPath
+				empdata.setImgPath(filePath.toString());
+
+				// Save the changes to the UserDtls object
+				emprepo.save(empdata);
+
+				return "File uploaded successfully";
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "Failed to upload file: " + e.getMessage();
+		}
+
+		// Return an appropriate message if the user is not present
+		return "User not found";
 	}
 
 	private String getFileType(String filename) {
@@ -412,59 +408,34 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			return filename.substring(dotIndex + 1).toLowerCase();
 		}
 		return null;
-	} 
-	
+	}
+
 	@Override
-	public ResponseEntity<Resource> getProfileImage(String gmail){
-		
+	public ResponseEntity<Resource> getProfileImage(String gmail) {
+
 		try {
-	        Optional<Employee> optionalUser = emprepo.findByGmail(gmail);
-	        
-	         if (optionalUser.isPresent()) {
-		            Employee user = optionalUser.get();
-		            // Validate or sanitize the file name to prevent directory traversal attacks
-		            String fileName = user.getImgName();
-		            String sanitizedFileName = FilenameUtils.getName(fileName);
-		            Path filePath = Paths.get("src/main/resources/static/files").resolve(sanitizedFileName).normalize();
-		            
-		        // Use FileSystemResource instead of UrlResource
-		            Resource resource = new FileSystemResource(filePath.toFile());
+			Optional<Employee> optionalUser = emprepo.findByGmail(gmail);
 
-	            // Log the file path for debugging
+			if (optionalUser.isPresent()) {
+				Employee user = optionalUser.get();
+				// Validate or sanitize the file name to prevent directory traversal attacks
+				String fileName = user.getImgName();
+				String sanitizedFileName = FilenameUtils.getName(fileName);
+				Path filePath = Paths.get("src/main/resources/static/files").resolve(sanitizedFileName).normalize();
 
-	            // Check if the file exists and is readable
-		            
-	            if (resource.exists() && resource.isReadable()) {
-	                // Dynamically determine content type based on file extension
-	                String contentType = Files.probeContentType(filePath);
-	                
-	                HttpHeaders headers = new HttpHeaders();
-	                headers.setContentType(MediaType.parseMediaType(contentType));
-	                return ResponseEntity.ok().headers(headers).body(resource);
-	            } else {
-	                return ResponseEntity.notFound().build();
-	            }
-	        } else {
-	            return ResponseEntity.notFound().build(); // Return 404 if the user is not found
-	        }
-	    } catch (IOException e) {
-	        e.printStackTrace(); // Log the error
-
+				// Use FileSystemResource instead of UrlResource
+				Resource resource = new FileSystemResource(filePath.toFile());
 	        // Provide a more informative response for internal server errors
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 	                .body(null); // You may consider returning a specific Resource instance here
 	    
 	    }
 	}
-	
+
 	@Override
 	public String deleteRecord(String gmail) {
-	    empAttandencerepo.deleteByGuid(gmail);
-	    return "Deleted Successfully.";
+		empAttandencerepo.deleteByGuid(gmail);
+		return "Deleted Successfully.";
 	}
-
-
-
-	
 
 }
