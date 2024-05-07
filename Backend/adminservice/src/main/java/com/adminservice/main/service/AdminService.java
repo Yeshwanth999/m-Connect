@@ -2,26 +2,26 @@ package com.adminservice.main.service;
 
 import java.util.List;
 
-import org.springframework.amqp.core.Message;
+import org.springframework.http.ResponseEntity;
 
 import com.adminservice.main.dto.EmployeeLeaveDto;
 import com.adminservice.main.dto.RegistrationdDTO;
 import com.adminservice.main.entity.Employee;
+import com.adminservice.main.entity.EmployeeLeaves;
 import com.adminservice.main.helperclasses.ResponseMsg;
 
 public interface AdminService {
 
-     ResponseMsg empregister(RegistrationdDTO registrationDTO);
+	ResponseMsg empregister(RegistrationdDTO registrationDTO);
 
-	 String DeleteUserById(long id);
-		
-	 List<Employee> getAllEmployees();
+	String DeleteUserById(String gmail);
 
-	 Employee getEmployeeById(Long id);
+	List<Employee> getAllEmployees();
 
-	void receiveLeaveRequest(Message message);
+	Employee getEmployeeByGmail(String gmail);
 
-	 
-	 
-	 
+	List<EmployeeLeaves> getLeaveEmployeeDetailsService(String admingmail, String leaveStatus);
+
+	String updateLeaveStatus(List<EmployeeLeaves> employees, EmployeeLeaveDto employeeleaves);
+
 }

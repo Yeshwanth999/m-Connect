@@ -7,16 +7,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 public class EmpAttandenceDto{
 
-	private long id;
+
 	private String guid;
 	private String gmail;
 	private String  clockInTime;
+	private String  date;
+	
+	private String firstBreakStart;
+	private String firstBreakEnd;
+	private String secondBreakStart;
+	private String secondBreakEnd;
+	private String thirdBreakStart;
+	
+	private String thirdBreakEnd;
 	private String clockOutTime;
 	private String totalHours;
-	private String  date;
 	private String breakHours;
 	private String anomalous;
 	

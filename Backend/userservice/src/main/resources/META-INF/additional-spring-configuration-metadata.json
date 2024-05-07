@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "rabbitmq.queue.json.name",
-  "type": "java.lang.String",
-  "description": "A description for 'rabbitmq.queue.json.name'"
-}]}
+{"properties": [
+  {
+    "name": "rabbitmq.queue.json.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.queue.json.name'"
+  },
+  {
+    "name": "rabbitmq.queue.json.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.queue.json.name'"
+  }
+]}

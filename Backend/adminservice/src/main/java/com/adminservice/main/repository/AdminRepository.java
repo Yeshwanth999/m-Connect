@@ -9,7 +9,9 @@ import com.adminservice.main.entity.Employee;
 @Repository
 public interface AdminRepository extends JpaRepository<Employee, Long> {
 
-	Optional<Employee> findBygmail(String gmail);
+	Optional<Employee> findByGmail(String gmail);
+
+	void deleteByGmail(String gmail);
 
 //	 void save(Employee emp);
 

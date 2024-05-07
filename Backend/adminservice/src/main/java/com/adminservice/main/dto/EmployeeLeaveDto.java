@@ -20,7 +20,7 @@ import lombok.ToString;
 public class EmployeeLeaveDto implements Serializable {
 	
 	private String type;
-	private String guid;
+	private String gmail;
 	private int no_of_days_approved;
 	private String admingmail;	
 	@JsonFormat(pattern = "yyyy-MM-dd")
@@ -33,7 +33,11 @@ public class EmployeeLeaveDto implements Serializable {
 	private int annual_leave_balance;
 	private int annual_leaves_used;
 	private int monthly_leave_balance;
+	private int no_of_days_applied;
 	private int monthly_leaves_used;
+	private String leaveType;
 	private String leaveStatus;
+    private int adminChecked;
+
 	
    }

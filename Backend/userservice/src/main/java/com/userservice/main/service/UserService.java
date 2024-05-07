@@ -17,7 +17,7 @@ import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.RegistrationDto;
 import com.userservice.main.registration.dto.ResponseMsg;
 
-@Service
+
 public interface UserService {
 
 //      UserEntity save(RegistrationDto registrationDTO);
@@ -37,23 +37,26 @@ public interface UserService {
 	boolean getOtp(String gmail, String otp);
 
 	String setpassword(String gmail, String password);
-
-	EmployeeLeave applyLeave(EmployeeLeave employeeLeave);
-
+	
 	ResponseMsg updateEmp(String gmail, RegistrationDto registrationDTO);
 
 	UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException;
 
 //		String deleteemp(String guid);
 
-	String DeleteUserById(long id);
+	String DeleteUserById(String gmail);
 
-	ResponseMsg saveLeaveDetails(String guid, EmployeeLeaveDto empDto);
+	ResponseMsg saveLeaveDetails(String gmail, EmployeeLeaveDto empDto);
 
-	ResponseMsg empAttandenceDataStoring(String guid, EmpAttandenceDto empattandenceDto);
+	ResponseMsg saveattendence(String gmail, EmpAttandenceDto empattandenceDto);
 
 	String addImage(String gmail, MultipartFile file);
 
 	ResponseEntity<Resource> getProfileImage(String gmail);
+
+	String deleteRecord(String guid);
+
+
+	
 	
     }
