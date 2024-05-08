@@ -25,6 +25,9 @@ import com.adminservice.main.service.AdminService;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
+
 @CrossOrigin(origins = "http://127.0.0.1:5504", methods = { RequestMethod.POST, RequestMethod.OPTIONS })
 @RestController
 @RequestMapping("/admin")
@@ -34,48 +37,21 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
-	// private final RestTemplate restTemplate;
-	//
-	// private final String userServiceUrl; // URL of user service
-	//
-	// public AdminController(RestTemplate restTemplate,
-	// @Value("${userService.url}") String userServiceUrl) {
-	// this.restTemplate = restTemplate;
-	// this.userServiceUrl = userServiceUrl;
-	// }
-	//
-	// @PostMapping
-	// public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-	// // Save Employee entity to admin service database
-	//
-	// // Trigger creation of EmployeeLeave record in user service
-	// restTemplate.postForObject(userServiceUrl + "/employeeleave", employee,
-	// Void.class);
-	//
-	// return ResponseEntity.status(HttpStatus.CREATED).body(employee);
-	// }
-
 	@PostMapping("/register")
 	public ResponseEntity<ResponseMsg> registerUserAccount(@RequestBody RegistrationdDTO registrationDTO) {
 		ResponseMsg body = adminService.empregister(registrationDTO);
 		return new ResponseEntity<>(body, HttpStatus.CREATED);
 	}
 
-	// @PutMapping("/LeaveRequests/{admingmail}")
-	// public String leaveRequest(@PathVariable("admingmail") @RequestBody
-	// EmployeeLeaves employeeleaves) {
-	//
-	//
 	// }
-	@PutMapping("/LeaveRequests/{admingmail}")
-	public String leaveRequest(@PathVariable("admingmail") String admingmail,
-			@RequestBody EmployeeLeaveDto employeeleaves) {
-		log.info("Employee leaves Requests method running.");
-
-		String body = adminService.leaveRequestService(admingmail, employeeleaves);
-
-		return body;
-	}
+	// @PutMapping("/LeaveRequests/{admingmail}")
+	// public String leaveRequest(@PathVariable("admingmail") String admingmail,
+	// @RequestBody EmployeeLeaveDto employeeleaves) {
+	// log.info("Employee leaves Requests method running.");
+	// String body = adminService.leaveRequestService(admingmail, employeeleaves);
+	// return body;
+	// }
+	//
 
 	@GetMapping("/getemployees")
 	public ResponseEntity<List<Employee>> getAllEmployees() {
@@ -97,11 +73,13 @@ public class AdminController {
 		}
 	}
 
-	@GetMapping("/getempdata/{admingmail}")
-	public String getLeaveEmployeeDetails(@PathVariable("admingmail") String admingmail) {
-		log.info("Getting Leave Employees Data in control.");
-		EmployeeLeaves result = adminService.getLeaveEmployeeDetailsService(admingmail);
-		return "Data Fetched: " + result;
+	@GetMapping("/getempdata/{admingmail}/{leaveStatus}")
+	public ResponseEntity<List<EmployeeLeaves>> getLeaveEmployeeDetails(@PathVariable("admingmail") String admingmail,
+			@PathVariable("leaveStatus") String leaveStatus, @RequestBody EmployeeLeaveDto empleavedto) {
+		log.info("Getting Leave Employees Data in control for leaveStatus: {}", leaveStatus);
+		List<EmployeeLeaves> result = adminService.getLeaveEmployeeDetailsService(admingmail, leaveStatus);
+
+		adminService.updateLeaveStatus(result, empleavedto);
 	}
 
 	@Transactional
@@ -109,7 +87,8 @@ public class AdminController {
 	public String DropUserById(@PathVariable("gmail") String gmail) {
 		String data = adminService.DeleteUserById(gmail);
 
-		return data;
+		// return new ResponseEntity<>(result, HttpStatus.OK);
+		return ResponseEntity.ok(result);
 	}
 
 }

@@ -25,10 +25,10 @@ public class EmployeeLeaves {
 	@SequenceGenerator(name = "employeeleaves_seq", sequenceName = "employeeleaves_seq", allocationSize = 1)
 	private Long id;
 
-	@Column(unique = true, nullable = true, columnDefinition = "VARCHAR(65)")
+	@Column(nullable = true, columnDefinition = "VARCHAR(65)")
 	private String gmail;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String admingmail;
 
 	private int annual_leave_balance;

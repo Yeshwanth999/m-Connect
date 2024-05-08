@@ -282,6 +282,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public String DeleteUserById(String gmail) {
 		emprepo.deleteByGmail(gmail);
+
 		// userrepo.deleteAll();
 		return "User Data Droped";
 	}
@@ -297,21 +298,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			// Update the fields of the existing entity
 			employeeLeave.setAdmingmail(empDto.getAdmingmail());
-			employeeLeave.setGmail(empDto.getGmail());
 			employeeLeave.setType(empDto.getType());
 			employeeLeave.setFromDate(empDto.getFromDate());
-			employeeLeave.setFromShift(empDto.getFromShift());
 			employeeLeave.setLeaveStatus(empDto.getLeaveStatus());
 			employeeLeave.setToDate(empDto.getToDate());
-			employeeLeave.setToShift(empDto.getToShift());
 			employeeLeave.setReasonFor(empDto.getReasonFor());
-			employeeLeave.setAdmingmail(empDto.getAdmingmail());
-			employeeLeave.setAdminChecked(0);
 
 			// Save the updated entity
 			employeeLeave = empleaverepo.save(employeeLeave);
 
-			// messagesend(guid);
 			// Send approval notification to admin service
 
 			log.info("Employee Leave Details Data Sending to Perticular Admin... " + "Method Running. Data is :"
@@ -343,7 +338,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			empAttandence.setSecondBreakEnd(empattandenceDto.getSecondBreakEnd());
 			empAttandence.setThirdBreakStart(empattandenceDto.getThirdBreakStart());
 			empAttandence.setThirdBreakEnd(empattandenceDto.getThirdBreakEnd());
-
 			empAttandencerepo.save(empAttandence);
 
 			return new ResponseMsg(true, empAttandence.getGuid(), "Employee Atteandence Stored Succesfully.");
@@ -431,32 +425,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 				// Use FileSystemResource instead of UrlResource
 				Resource resource = new FileSystemResource(filePath.toFile());
-
-				// Log the file path for debugging
-
-				// Check if the file exists and is readable
-
-				if (resource.exists() && resource.isReadable()) {
-					// Dynamically determine content type based on file extension
-					String contentType = Files.probeContentType(filePath);
-
-					HttpHeaders headers = new HttpHeaders();
-					headers.setContentType(MediaType.parseMediaType(contentType));
-					return ResponseEntity.ok().headers(headers).body(resource);
-				} else {
-					return ResponseEntity.notFound().build();
-				}
-			} else {
-				return ResponseEntity.notFound().build(); // Return 404 if the user is not found
-			}
-		} catch (IOException e) {
-			e.printStackTrace(); // Log the error
-
-			// Provide a more informative response for internal server errors
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(null); // You may consider returning a specific Resource instance here
-
-		}
+	        // Provide a more informative response for internal server errors
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body(null); // You may consider returning a specific Resource instance here
+	    
+	    }
 	}
 
 	@Override

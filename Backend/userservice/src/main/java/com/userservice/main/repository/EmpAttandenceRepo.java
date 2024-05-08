@@ -11,5 +11,4 @@ public interface EmpAttandenceRepo extends JpaRepository<EmpAttandence, Long> {
 	Optional<EmpAttandence> findByGmail(String gmail);
 
 	String deleteByGuid(String gmail);
-
 }
