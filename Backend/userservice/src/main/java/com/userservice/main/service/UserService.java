@@ -17,7 +17,7 @@ import com.userservice.main.registration.dto.LoginForm;
 import com.userservice.main.registration.dto.RegistrationDto;
 import com.userservice.main.registration.dto.ResponseMsg;
 
-@Service
+
 public interface UserService {
 
 //      UserEntity save(RegistrationDto registrationDTO);

@@ -165,18 +165,17 @@ public class UserController {
 		log.info("Employe Attendence Data Storing In Database");
 
 		ResponseMsg response = userService.saveattendence(gmail, empattandenceDto);
-
 		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
 
 	@PostMapping("/applyLeave/{gmail}")
+
 	// @PreAuthorize("hasAuthority('USER')")
 	public ResponseEntity<ResponseMsg> applyEmployeeLeave(@PathVariable("gmail") String gmail,
 			@RequestBody EmployeeLeaveDto empDto) {
 
 		log.info("Employee Applying a Leave method running. ");
-
 		ResponseMsg response = userService.saveLeaveDetails(gmail, empDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
@@ -197,7 +196,8 @@ public class UserController {
 
 	@GetMapping("/getprofileimage/{gmail}")
 	public ResponseEntity<Resource> getImage(@PathVariable String gmail) {
-		ResponseEntity<Resource> msg = userService.getProfileImage(gmail);
+<<<<<<< HEAD
+		ResponseEntity<Resource> msg =userService.getProfileImage(gmail);
 		return msg;
 	}
 
@@ -207,5 +207,4 @@ public class UserController {
 		String msg = userService.deleteRecord(gmail);
 		return msg;
 	}
-
 }
