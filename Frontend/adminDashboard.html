@@ -132,31 +132,29 @@
                         <a href="#" id="leaves" onclick="loadPage('/Frontend/adminleavepage.html')">Leaves</a>
                     </li>
                     <li class="item">
-                        <a href="#" id="rewards" onclick="loadPage('/Frontend/rewards.html')">Rewards</a>
+                        <a href="#" id="rewards" onclick="loadPage('/Frontend/notfound.html')">Rewards</a>
                     </li>
                     <li class="item">
                         <a href="#" id="attendence"
                             onclick="loadPage('/Frontend/employeeattendence.html')">Attendence</a>
                     </li>
                     <li class="item">
-                        <a href="#" id="#">Any other</a>
+                        <a href="#" id="Registration"
+                        onclick="loadPage('/Frontend/EmployeeRegister.html')">Employee Registration</a>
                     </li>
                     <li class="item">
                         <a href="#" id="payroll" onclick="loadPage('/Frontend/payroll.html')">Payroll</a>
                     </li>
                     <li class="item">
-                        <a href="#" id="slips" onclick="loadPage('/Frontend/slips.html')">Slips</a>
+                        <a href="#" id="exit" onclick="loadPage('/Frontend/notfound.html')">LogOut</a>
                     </li>
                     <li class="item">
-                        <a href="#" id="exit" onclick="loadPage('/Frontend/exit.html')">LogOut</a>
-                    </li>
-                    <li class="item">
-                        <a href="#" id="icon" onclick="loadPage('/Frontend/notifications.html')"><i class="fa fa-bell-o"
+                        <a href="#" id="icon" onclick="loadPage('/Frontend/notfound.html')"><i class="fa fa-bell-o"
                                 aria-hidden="true"></i></a>
                     </li>
                     <li class="item">
                         <div class="startTimer" onclick="startTimer()">
-                            <button>Login</button>
+                            <button>Clock-in</button>
                         </div>
                         <div class="timerDiv">
                             <p id="timerValue" onclick="hideButtons()">00:00:00</p>
@@ -165,7 +163,7 @@
                                     <button onclick="toggleBreak()">Breakin/out</button>
                                 </div>
                                 <div>
-                                    <button id="exit" onclick="handleLogout()">Exit</button>
+                                    <button id="exit" onclick="handleLogout()">Clock-out</button>
                                 </div>
                             </div>
                         </div>
