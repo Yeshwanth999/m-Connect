@@ -149,17 +149,24 @@
     <script src="../Frontend/Js/connect.js" defer></script>
    
 	<script>
-		$('#logoutButton').on('click', function() {
+		
 
-			const type = 'GET';
-			const url = 'http://localhost:8081/user/logout';
+        //code for Reload direct to signin
+        $(document).ready(function () {
+             //var userId = "SP2515788-M1029";
+             //sessionStorage.setItem("userId", userId);
+            var user = sessionStorage.getItem("usermail");
+            if (user !== null) {
+                var x = "hi";
+                console.log(x);
+                console.log(user);
+            }
+            else {
+                alert("Please login first");
+                window.location.href = "SignIn.html";
+            }
+        });
 
-			fetchLogout(url, type);
-
-            console.log("Hi this is log out...")
-
-            sessionStorage.removeItem("password");
-		});
 	</script>
 
         <script>

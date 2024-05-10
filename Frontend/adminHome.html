@@ -25,7 +25,7 @@
         <div class="dropdown-content">
             <a href="#">Profile</a>
             <a href="#">Settings</a>
-            <a href="#">Log Out</a>
+            <a href="#"  id="logoutBtn">Log Out</a>
         </div>
     </div>
     </div>
@@ -120,6 +120,12 @@
                 </div>
             </div>
         </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./Js/adminHome.js"></script>
+    <script src="../Frontend/Js/connect.js" defer></script>
+  
         
 <script >
 // sessionStorage.setItem("key",);
@@ -130,10 +136,10 @@ function RedirectToIframe(e){
 }
 </script>
 
-<!--<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script>
     $(document).ready(function () {
-      var user = sessionStorage.getItem("key");
+      var user = sessionStorage.getItem("usermail");
       if(user !== null){
         var x = "hi";
         console.log(x);
@@ -144,7 +150,7 @@ function RedirectToIframe(e){
       }
     });
   </script> 
-  -->
+ 
     
 </body>
 </html>
