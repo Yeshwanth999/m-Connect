@@ -87,12 +87,29 @@ jQuery(document).ready(function () {
 // });
 
 
-$('#logoutButton').on('click', function () {
+// $('#logoutButton').on('click', function () {
+
+//   const type = 'GET';
+//   const url = 'http://localhost:8081/user/logout';
+
+//   fetchLogout(url, type);
+// });
+
+
+// Logout Functionality Start
+$('#logoutButton').on('click', function() {
 
   const type = 'GET';
   const url = 'http://localhost:8081/user/logout';
 
   fetchLogout(url, type);
+
+        console.log("Hi This is Employee log out...")
+
+        sessionStorage.removeItem("usermail");
+        sessionStorage.removeItem("password");
+        window.location.href = "SignIn.html";
 });
+// Logout Functionality End
 
 

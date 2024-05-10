@@ -49,6 +49,8 @@
 
 
 <script>
+
+    // Signin & AJAX calling Start
     $('#signinBtn').on('click', function () {
         const gmail = $('#gmail').val();
         const password = $('#password').val();
@@ -61,6 +63,7 @@
         };
         console.log(gmail);
         console.log(password);
+        console.log(isAdmin);
 
         const type= 'POST';
         sessionStorage.setItem("usermail", gmail);
@@ -70,11 +73,17 @@
        // console.log(userMail)
        // console.log(password)
 
-       //window.location.href = "/Frontend/employeeDashboard.html";
+    //    if(isAdmin){
+    //     window.location.href = "/Frontend/adminHome.html";
+    //    }
+    //    else{
+    //     window.location.href = "/Frontend/employeeDashboard.html";
+    //    }
       
         // Call the updated function for AJAX communication
         sendFormData('http://localhost:8081/user/login',type, formData, 'formBox2');
     });
+    // Signin & AJAX calling End
     
 </script>
    

@@ -1,0 +1,567 @@
+body{
+    margin: 0px;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100vw;
+    background-color: #ffff;
+}
+.entire-sec{
+    margin-left: 10%;
+}
+.section{
+    background-color: #ffff;
+    width: 100%;
+    display: flex;
+    margin-top: 50px;
+}
+.profile{
+    width: 25%;
+    height: 700px;
+    background-color: #0093ff;
+    margin: 20px;
+}
+.form{
+    width: 50%;
+    height: auto;
+}
+.profile-con{
+    display: flex;
+    flex-direction: row;
+}
+.personal-info-div{
+    background-color: transparent;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(27, 27, 27, 35%);
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-top: 10px;
+}
+.per-icon{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: -15px;
+}
+.hr{
+    height: 2px;
+    background-color: #000;
+    flex-grow: 1;
+}
+
+.personal-h{
+    font-family: sans-serif;
+    font-size: 16px;
+    padding: 12px;
+}
+.edit-icon{
+    padding: 13px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.personal-info-div:hover .edit-icon {
+    visibility: visible;
+}
+
+.input-underlined {
+    border: none;
+    border-bottom: 1px solid black; 
+    outline: none;
+  }
+.form-group .dob{
+    color: #5f5c5c;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-group{
+    padding-left: 15px;
+}
+.form-group label{
+    font-family: sans-serif;
+    color: #5f5c5c;
+    font-weight: 500;
+}
+.form-group input {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 16px;
+    padding-bottom: 3px;
+    width: 90%;
+}
+.inputs-grid{
+    display: flex;
+    margin-bottom: 20px;
+}
+.form-group-2{
+    display: flex;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+.form-group-1 {
+    flex: 1 0 29%;
+    padding-right: 40px;
+}
+.form-group-1:last-child {
+    margin-right: 0;
+}
+.form-group-1 label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #5f5c5c;
+    font-weight: 500;
+    padding-left: 15px;
+    font-family: sans-serif;
+    padding-top: 7px;
+}
+.form-group-1 input,
+.form-group-1 select {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 16px;
+    padding-bottom: 5px;
+    margin-left: 12px;
+    margin-bottom: 8px;
+    width: 88%;
+    background-color: transparent;
+}
+/* buttons style */
+.button-container{
+    text-align: end;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    margin-top: 25px;
+}
+.button-container button:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.btn{
+    background-color: white;
+    box-shadow: #000;
+    border-width: 0;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    color: #000;
+}
+.sbtn{
+    background-color: #0093ff;
+    box-shadow: #000;
+    border-width: 0;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    color: #f3eeee;
+}
+
+/*contact details */
+.contact-info-div{
+    background-color: transparent;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(27, 27, 27, 35%);
+    margin: 20px;
+    margin-top: 35px;
+}
+.contact-inner{
+    display: flex;
+    margin-bottom: 20px;
+}
+.edit-icon-1{
+ 
+    cursor: pointer;
+    visibility: hidden;
+}
+.contact-info-div:hover .edit-icon-1 {
+    visibility: visible;
+}
+.input-underlined1 {
+    border: none;
+    border-bottom: 1px solid black; 
+    outline: none;
+}
+.button-container1{
+    text-align: end;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-top: 25px;
+}
+.button-container1 button:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.contact-info-btn{
+    background-color: white;
+    box-shadow: #000;
+    border-width: 0;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    color: #000;
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+.contact-info-sbtn{
+    background-color: #0093ff;
+    box-shadow: #000;
+    border-width: 0;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    color: #f3eeee;
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+
+/* address info */
+
+.address-info-div{
+    background-color: transparent;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(27, 27, 27, 35%);
+    margin: 0 auto;
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    margin: 20px;
+    margin-top: 45px;
+}
+.current-div{
+    padding-left: 13px;
+    padding-right: 24%;
+}
+.address-inner-div{
+    display: flex;
+    flex-direction: row;
+}
+.ca-heading{
+    font-family: sans-serif;
+    color: #5f5c5c;
+}
+.pa-heading{
+    font-family: sans-serif;
+    color: #5f5c5c;
+}
+.address-inputs label{
+    font-family: sans-serif;
+}
+.address-inputs input {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 16px;
+    padding-bottom: 3px;
+    width: 150%;
+    background-color: transparent !important;
+}
+
+.edit-icon-2{
+    cursor: pointer;
+    visibility: hidden;
+    padding: 13px;
+}
+.address-info-div:hover .edit-icon-2 {
+    visibility: visible;
+}
+.button-container2{
+    text-align: end;
+    margin-right: 10px;
+    margin-top: 25px;
+}
+.button-container2 button:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.address-info-btn{
+    background-color: white;
+    box-shadow: #000;
+    border-width: 0;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    color: #000;
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+.address-info-sbtn{
+    background-color: #0093ff;
+    box-shadow: #000;
+    border-width: 0;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    color: #f3eeee;
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+
+.house-type-dd {
+    display: flex;
+    flex-direction: row;
+}
+
+.house-type-dd > * {
+    flex: 1 1 50%;
+}
+
+.house-type-dd label {
+
+    margin-bottom: 5px;
+    padding-left: 13px;
+    margin-top: 10px;
+    font-family: sans-serif;
+}
+
+.house-type-dd select, .house-type-dd input {
+    width: 79%;
+    border: none;
+    border-bottom: 1px solid #000000;
+    padding: 5px 0;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    padding-left: 0px;
+    margin-left: 10px;
+    background-color: transparent;
+}
+
+.staying-since {
+    margin-left: 10px;
+}
+.living-in-current{
+    display: flex;
+    flex-direction: column;
+}
+.living-in-current label{
+    padding-left: 13px;
+    font-family: sans-serif;
+    margin-top: 10px;
+    width: 40%;
+}
+.living-in-current input{
+    padding-left: 0px;
+    margin-left: 12px;
+    outline: none;
+    background-color: transparent;
+}
+.input-underlined2 {
+    border: none;
+    border-bottom: 1px solid #010000;
+    padding: 5px 0;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none; 
+    border-radius: 0; 
+    width: 40%;
+}
+
+.input-with-outline {
+    border: 2px solid #0e0d0d;
+}
+
+/* hide the div */ 
+/* .addressentire{
+    display: none;
+} */
+
+.checkbox-container {
+    display: flex;
+    align-items: center; 
+    margin-top: 20px;
+    padding-left: 15px;
+}
+.checkbox-container input[type="checkbox"] {
+    width: 15px;
+    height: 14px 
+}
+.checkbox-container label {
+    margin-left: 0px; 
+    font-size: 17px;
+    font-family: sans-serif;
+}
+
+
+/* social profiles */
+.social-info-div{
+    background-color: transparent;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(27, 27, 27, 35%);
+    margin: 0 auto;
+    margin: 20px;
+    margin-top: 35px;
+}
+.edit-icon-3{
+    cursor: pointer;
+    visibility: hidden;
+}
+.social-info-div:hover .edit-icon-3 {
+    visibility: visible;
+}
+.fa {
+    padding: 20px;
+    font-size: 20px;
+    width: 20px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 30px;
+  }
+
+  .input-with-icon {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    padding-left: 13px;
+}
+
+.input-with-icon input[type="text"] {
+    flex: 1;
+    margin-left: 10px; 
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid #ccc; 
+    box-sizing: border-box;
+    font-size: 16px;
+    outline: none;
+    background-color: transparent;
+}
+
+.input-with-icon .fa-instagram .fa-facebook .fa-linkedin {
+    font-size: 18px; 
+    color: #333; 
+    background: #125688;
+    color: white;
+}
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+  .fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+  .fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  .button-container3{
+    text-align: end;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-top: 25px;
+}
+.button-container3 button:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* profile-and-anchor  */
+.profile-and-anchor-div{
+    width: 30%;
+}
+.profile-and-anchor {
+    margin-left: 10%;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+}
+.profile-picture {
+    position: relative; 
+}
+
+.profile-picture .pp {
+    position: absolute;
+    bottom: -15px; 
+    left: 85%;
+    transform: translateX(-50%); 
+    display: none;
+    cursor: pointer;
+}
+
+.profile-picture:hover .pp {
+    display: inline-block;
+    color: rgb(72, 172, 86);
+    
+}
+.profile-container {
+    padding-top: 2%; 
+    padding-left: 30%;
+}
+.profile-picture {
+    width: 170px;
+    height: 170px;
+    border: 2px solid #ccc;
+    border-radius: 10%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+.upload-label {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+}
+
+#profileImage {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.profile-details h1 {
+    margin-top: 0;
+}
+.profile-details p {
+    margin: 5px 0;
+}
+.links-anchor{
+    display: flex;
+    flex-direction: column;
+    padding-left: 30%;
+    padding-top: 20%;
+}
+.mywork{
+    font-family: sans-serif;
+    text-decoration: none;
+    padding-bottom: 10px;
+    width: 170px;
+}
+.myeducation{
+    font-family: sans-serif;
+    text-decoration: none;
+    width: 170px;
+}
+.myeducation:hover{
+    font-size: 18px;
+}
+.mywork:hover{
+    font-size: 18px;
+}
+#upload-label{
+    display: block;
+}
