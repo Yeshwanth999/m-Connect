@@ -1,177 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Leave Page</title>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="./CSS/adminleavepage.css">
-</head>
-
-<body>
-    <div class="container">
-        <div class="left-col">
-            <h2>Admin Leave Page</h2>
-            <table id="leaveTable">
-                <thead>
-                    <tr>
-                        <th>Email</th>
-                        <th>Leave Type</th>
-                        <th>Leave Reason</th>
-                        <th>From Date</th>
-                        <th>To Date</th>
-                        <th>Number of Days Applied</th>
-                        <th>Number of Days Approved</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <!-- Leave data will be populated here -->
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="./CSS/adminleavepage.css" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
     <script src="./Js/adminleavepage.js"></script>
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            const sampleData = [
-                {
-                    "Email": "Ram123@gmail.com",
-                    "leaveType": "Vacation",
-                    "leaveReason": "Family trip",
-                    "fromDate": "",
-                    "toDate": "",
-                    "numDaysApplied": 5,
-                    "numDaysApproved": "",
-                    "status": "",
-                    "Action":""
-                },
-                {
-                    "Email": "yeswanth123@gmail.com",
-                    "leaveType": "Sick",
-                    "leaveReason": "Flu",
-                    "fromDate": "",
-                    "toDate": "",
-                    "numDaysApplied": 3,
-                    "numDaysApproved": "",
-                    "status": "",
-                    "Action":""
-                },
-                {
-                    "Email": "Priya123@gmail.com",
-                    "leaveType": "Personal",
-                    "leaveReason": "Attending wedding",
-                    "fromDate": "",
-                    "toDate": "",
-                    "numDaysApplied": 2,
-                    "numDaysApproved": "",
-                    "status": "",
-                    "Action":""
-                }
-            ];
+  </head>
 
-            const tableBody = document.getElementById("tableBody");
-
-            sampleData.forEach(item => {
-                const row = document.createElement('tr');
-                Object.values(item).forEach((value, index) => {
-                    const cell = document.createElement('td');
-                    cell.textContent = value;
-                    if (index === 0) {
-                        cell.style.cursor = 'pointer';
-                        cell.addEventListener('click', function () {
-                            handleUserIdClick(item.Email);
-                        });
-                    }
-                    if (index === 3 || index === 4) { // for "From Date" and "To Date" cells
-                        const input = document.createElement('input');
-                        input.type = 'text';
-                        input.classList.add('datepicker');
-                        input.setAttribute('data-index', index); // Store index for identification
-                        cell.appendChild(input);
-                    }
-                    if (index === 6) {
-                        const input = document.createElement('input');
-                        input.type = 'number';
-                        input.value = value;
-                        input.placeholder = 'Enter days approved';
-                        input.addEventListener('change', function () {
-                            item.numDaysApproved = parseInt(input.value);
-                        });
-                        cell.appendChild(input);
-                    }
-                    if (index === 7) {
-                        const select = document.createElement('select');
-                        ["Pending", "Approved", "Rejected"].forEach(option => {
-                            const optionElement = document.createElement('option');
-                            optionElement.textContent = option;
-                            select.appendChild(optionElement);
-                        });
-                        select.selectedIndex = 0;
-                        select.setAttribute("onchange", "changeLeaveStatus(this, " + item.Email + ")");
-                        select.addEventListener('change', function () {
-                            item.status = select.value;
-                        });
-                        cell.appendChild(select);
-                    }
-                    if (index === 8) {
-                        const sendButton = document.createElement('button');
-                        sendButton.textContent = 'Send';
-                        sendButton.classList.add('sendButton');
-                        sendButton.addEventListener('click', function () {
-                            sendLeave(item);
-                        });
-                        cell.appendChild(sendButton);
-                    }
-                    row.appendChild(cell);
-                });
-                tableBody.appendChild(row);
-            });
-
-            // Initialize date picker
-            $(".datepicker").datepicker({
-                dateFormat: "yy-mm-dd",
-                onSelect: function(dateText, inst) {
-                    const index = $(this).data('index'); // Retrieve index
-                    const rowIndex = $(this).closest('tr').index(); // Retrieve row index
-                    if (index === 3) { // From Date
-                        sampleData[rowIndex].fromDate = dateText;
-                    } else if (index === 4) { // To Date
-                        sampleData[rowIndex].toDate = dateText;
-                    }
-                }
-            });
-
-            function changeLeaveStatus(selectElement, Email) {
-                const status = selectElement.selectedIndex;
-                let leavestatus;
-                if (status === 0) {
-                    leavestatus = "Pending";
-                } else if (status === 1) {
-                    leavestatus = "Approved";
-                } else if (status === 2) {
-                    leavestatus = "Rejected";
-                }
-            }
-
-            function sendLeave(employeeData) {
-                console.log("Sending data for Email:", employeeData.Email);
-                console.log("Leave Type:", employeeData.leaveType);
-                console.log("Leave Reason:", employeeData.leaveReason);
-                console.log("From Date:", employeeData.fromDate);
-                console.log("To Date:", employeeData.toDate);
-                console.log("Number of Days Applied:", employeeData.numDaysApplied);
-                console.log("Number of Days Approved:", employeeData.numDaysApproved);
-                console.log("Status:", employeeData.status);
-            }
-        });
-
-    </script>
-</body>
-
+  <body>
+    <div class="container">
+      <div class="left-col">
+        <h2>Admin Leave Page</h2>
+        <table id="leaveTable">
+          <thead>
+            <tr>
+              <th id="gmail">Email</th>
+              <th id="leaveType">Leave Type</th>
+              <th id="reasonFor">Leave Reason</th>
+              <th id="fromDate">From Date</th>
+              <th id="toDate">To Date</th>
+              <th id="no_of_days_applied">Number of Days Applied</th>
+              <th id="no_of_days_approved">Number of Days Approved</th>
+              <th id="leaveStatus">Status</th>
+              <th id="">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Table rows will be dynamically populated here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
 </html>

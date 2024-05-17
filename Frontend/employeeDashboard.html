@@ -1,183 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/Frontend/CSS/employeeDashboard.css" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Frontend/CSS/employeeDashboard.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
 
     <title>Employee Dash Board</title>
+  </head>
 
-    
-
-</head>
-
-<body>
+  <body>
     <header>
-        <div class="logo">
-    <img src="./Assets/Microden (1) (1).png" id="profileImage" alt="Profile Image">
-        </div>
-        <div class="search">
-            <input type="text" placeholder="Search ">
-        </div>
-        <div class="notification">
-            <a href=""><i class="fas fa-bell"></i>
-            </a>
-            <div class="dropdown">
-                <!-- <button class="dropbtn">User</button> -->
-                <div class="profile-icon">
-                    <i class="fas fa-user"></i>
-                    <div class="dropdown-content">
-                        <a href="#">Profile</a>
-                        <a href="#">Settings</a>
-                        <a href="#" id="logoutButton">Logout</a>
-                       
-                        <!-- <div class="btn-field">
+      <div class="logo">
+        <img
+          src="./Assets/Microden (1) (1).png"
+          id="profileImage"
+          alt="Profile Image"
+        />
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Search " />
+      </div>
+      <div class="notification">
+        <a href=""><i class="fas fa-bell"></i> </a>
+        <div class="dropdown">
+          <!-- <button class="dropbtn">User</button> -->
+          <div class="profile-icon">
+            <i class="fas fa-user"></i>
+            <div class="dropdown-content">
+              <a href="#">Profile</a>
+              <a href="#">Settings</a>
+              <a href="#" id="logoutButton">Logout</a>
+
+              <!-- <div class="btn-field">
                             <input type="button" id="logoutButton" value="Logout">
                         </div> -->
-                    </div>
-                </div>
             </div>
+          </div>
         </div>
+      </div>
     </header>
     <div class="container">
-        <div class="employee-card">
-             <!-- <img src="/Frontend/Assets/WhatsApp Image 2024-02-05 at 16.43.50.jpeg" alt="Employee Photo">  -->
-             <!-- <h3>nagaraju</h3>  -->
+      <div class="employee-card">
+        <!-- <img src="/Frontend/Assets/WhatsApp Image 2024-02-05 at 16.43.50.jpeg" alt="Employee Photo">  -->
+        <!-- <h3>nagaraju</h3>  -->
 
-             <div id="imageContainer">
-                <!-- Image will be loaded here -->
-              </div>
-            <div id="firstnameDisplay">Emp Name </div>
-
+        <div id="imageContainer">
+          <!-- Image will be loaded here -->
         </div>
-        <div class="employee-card1">
-            <h3 class="heading">WELCOME BACK</h3>
-        </div>
-
+        <div id="firstnameDisplay">Emp Name</div>
+      </div>
+      <div class="employee-card1">
+        <h3 class="heading">WELCOME BACK</h3>
+      </div>
     </div>
     <div class="card-container">
-        <div class="card-container1">
-            <div class="card">
-                <div class="dashboard-icon1">
-                    <a href="employeeDashboard.html"> <i class="fas fa-tachometer-alt"></i></a>
-                </div>
-                <h3 class="head">Dashboard</h3>
-            </div>
-            <div class="card">
-                <div class="dashboard-icon2"  onclick="RedirectToIframe(this)">
-                    <a href="employeeProfile.html"  target="_blank"><i class="fas fa-user"></i></a>
-                </div>
-                <h3 class="head">My Profile</h3>
-            </div>
-            <div class="card">
-                <div class="dashboard-icon3"  onclick="RedirectToIframe(this)">
-                    <a href="leavePage.html" target="_blank"><i class="fas fa-calendar-times"></i></a>
-                </div>
-                <h3 class="head">Leaves</h3>
-            </div>
-            <div class="card">
-                <div class="dashboard-icon4"   onclick="RedirectToIframe(this)">
-                    <a href="employeeAttendence.html" target="_blank"><i class="fas fa-lightbulb"></i></a>
-                </div>
-                <h3 class="head">Attendance</h3>
-            </div>
+      <div class="card-container1">
+        <div class="card">
+          <div class="dashboard-icon1">
+            <a href="employeeDashboard.html">
+              <i class="fas fa-tachometer-alt"></i
+            ></a>
+          </div>
+          <h3 class="head">Dashboard</h3>
         </div>
-        <div class="card-container1">
-            <div class="card">
-                <div class="dashboard-icon5"   onclick="RedirectToIframe(this)">
-                    <a href="payroll.html" target="_blank"><i class="fas fa-money-check-alt"></i></a>
-                </div>
-                <h3 class="head">Payroll</h3>
-            </div>
-            <div class="card">
-                <div class="dashboard-icon10"  onclick="RedirectToIframe(this)">
-                    <a href="calendar.html" target="_blank"><i class="fas fa-calendar-check"></i></a>
-                </div>
-                <h3 class="head">Calendar</h3>
-            </div>
-            <div class="card">
-                <div class="dashboard-icon6"   onclick="RedirectToIframe(this)">
-                    <a href="notfound.html" target="_blank"><i class="far fa-id-card"></i></a>
-                </div>
-
-                <h3 class="head">ID Card</h3>
-
-            </div>
-            <div class="card">
-                <div class="dashboard-icon7"   onclick="RedirectToIframe(this)">
-                    <a href="notfound.html" target="_blank"> <i class="fas fa-receipt"></i></a>
-                </div>
-                <h3 class="head">Slips</h3>
-            </div>
-            
+        <div class="card">
+          <div class="dashboard-icon2" onclick="RedirectToIframe(this)">
+            <a href="employeeProfile.html" target="_blank"
+              ><i class="fas fa-user"></i
+            ></a>
+          </div>
+          <h3 class="head">My Profile</h3>
         </div>
-        <div class="card-container1">
-            <div class="card">
-                <div class="dashboard-icon8"  onclick="RedirectToIframe(this)">
-                    <a href="notfound.html" target="_blank"><i class="fas fa-trophy"></i></a>
-                </div>
-                <h3 class="head">Rewards</h3>
-            </div>
-            <div class="card">
-                <div class="dashboard-icon9"  onclick="RedirectToIframe(this)">
-                    <a href="notfound.html" target="_blank"> <i class="fas fa-bell"></i></a>
-                </div>
-                <h3 class="head">Notifications</h3>
-            </div>
-            
-            <div class="card">
-                <div class="dashboard-icon11"  onclick="RedirectToIframe(this)">
-                    <a href="notfound.html" target="_blank"> </a><i class="fas fa-tachometer-alt"></i>
-                </div>
-                <h3 class="head">Any Other Option</h3>
-
-            </div>
-            <div class="card">
-                <div class="dashboard-icon12"  onclick="RedirectToIframe(this)">
-                    <a href="notfound.html" target="_blank"></a> <i class="fas fa-tachometer-alt"></i>
-                </div>
-                <h3 class="head">Any Other Option</h3>
-            </div>
+        <div class="card">
+          <div class="dashboard-icon3" onclick="RedirectToIframe(this)">
+            <a href="leavePage.html" target="_blank"
+              ><i class="fas fa-calendar-times"></i
+            ></a>
+          </div>
+          <h3 class="head">Leaves</h3>
         </div>
+        <div class="card">
+          <div class="dashboard-icon4" onclick="RedirectToIframe(this)">
+            <a href="employeeAttendence.html" target="_blank"
+              ><i class="fas fa-lightbulb"></i
+            ></a>
+          </div>
+          <h3 class="head">Attendance</h3>
+        </div>
+      </div>
+      <div class="card-container1">
+        <div class="card">
+          <div class="dashboard-icon5" onclick="RedirectToIframe(this)">
+            <a href="payroll.html" target="_blank"
+              ><i class="fas fa-money-check-alt"></i
+            ></a>
+          </div>
+          <h3 class="head">Payroll</h3>
+        </div>
+        <div class="card">
+          <div class="dashboard-icon10" onclick="RedirectToIframe(this)">
+            <a href="calendar.html" target="_blank"
+              ><i class="fas fa-calendar-check"></i
+            ></a>
+          </div>
+          <h3 class="head">Calendar</h3>
+        </div>
+        <div class="card">
+          <div class="dashboard-icon6" onclick="RedirectToIframe(this)">
+            <a href="notfound.html" target="_blank"
+              ><i class="far fa-id-card"></i
+            ></a>
+          </div>
+
+          <h3 class="head">ID Card</h3>
+        </div>
+        <div class="card">
+          <div class="dashboard-icon7" onclick="RedirectToIframe(this)">
+            <a href="notfound.html" target="_blank">
+              <i class="fas fa-receipt"></i
+            ></a>
+          </div>
+          <h3 class="head">Slips</h3>
+        </div>
+      </div>
+      <div class="card-container1">
+        <div class="card">
+          <div class="dashboard-icon8" onclick="RedirectToIframe(this)">
+            <a href="notfound.html" target="_blank"
+              ><i class="fas fa-trophy"></i
+            ></a>
+          </div>
+          <h3 class="head">Rewards</h3>
+        </div>
+        <div class="card">
+          <div class="dashboard-icon9" onclick="RedirectToIframe(this)">
+            <a href="notfound.html" target="_blank">
+              <i class="fas fa-bell"></i
+            ></a>
+          </div>
+          <h3 class="head">Notifications</h3>
+        </div>
+
+        <div class="card">
+          <div class="dashboard-icon11" onclick="RedirectToIframe(this)">
+            <a href="notfound.html" target="_blank"> </a
+            ><i class="fas fa-tachometer-alt"></i>
+          </div>
+          <h3 class="head">Any Other Option</h3>
+        </div>
+        <div class="card">
+          <div class="dashboard-icon12" onclick="RedirectToIframe(this)">
+            <a href="notfound.html" target="_blank"></a>
+            <i class="fas fa-tachometer-alt"></i>
+          </div>
+          <h3 class="head">Any Other Option</h3>
+        </div>
+      </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./Js/employeeDashboard.js"></script>
     <script src="../Frontend/Js/connect.js" defer></script>
-   
-	<script>
-		
 
-        //code for Reload direct to signin
-        $(document).ready(function () {
-             //var userId = "SP2515788-M1029";
-             //sessionStorage.setItem("userId", userId);
-            var user = sessionStorage.getItem("usermail");
-            if (user !== null) {
-                var x = "hi";
-                console.log(x);
-                console.log(user);
-            }
-            else {
-                alert("Please login first");
-                window.location.href = "SignIn.html";
-            }
-        });
+    <script>
+      //code for Reload direct to signin
+      $(document).ready(function () {
+        //var userId = "SP2515788-M1029";
+        //sessionStorage.setItem("userId", userId);
+        var user = sessionStorage.getItem("usermail");
+        if (user !== null) {
+          var x = "hi";
+          console.log(x);
+          console.log(user);
+        } else {
+          alert("Please login first");
+          window.location.href = "SignIn.html";
+        }
+      });
+    </script>
 
-	</script>
-
-        <script>
-            // sessionStorage.setItem("key",);
-            function RedirectToIframe(e) {
-                let x = e.childNodes[1].attributes[0].nodeValue;
-                localStorage.setItem("IframePageName", x);
-                window.location.href = "/Frontend/employeeDashboardIfremes.html";
-            }
-        </script>
-
-</body>
-
+    <script>
+      // sessionStorage.setItem("key",);
+      function RedirectToIframe(e) {
+        let x = e.childNodes[1].attributes[0].nodeValue;
+        localStorage.setItem("IframePageName", x);
+        window.location.href = "/Frontend/employeeDashboardIfremes.html";
+      }
+    </script>
+  </body>
 </html>

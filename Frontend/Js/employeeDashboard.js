@@ -1,28 +1,27 @@
-//  // sessionStorage.setItem("usermail","rajeshbalu.addala@gmail.com")
-// var usermail = sessionStorage.getItem("usermail");
-// console.log(usermail);
+// sessionStorage.setItem("usermail","rajeshbalu.addala@gmail.com")
+var usermail = sessionStorage.getItem("usermail");
+console.log(usermail);
 
-// if (usermail != " " && usermail !== null) {
-//   //geturlLink = 'http://localhost:8081/user/getprofileimage/' + usermail + '';
+if (usermail != " " && usermail !== null) {
 
-//   geturlLink1forName = 'http://localhost:8081/user/getemployee/' + usermail + '';
+  let geturlLink1forName = 'http://localhost:8081/user/getemployee/' + usermail
 
-//   console.log(usermail + "   : " + "Link :" + geturlLink);
+  console.log(usermail + "   : " + "Link :" + geturlLink1forName);
 
-// } else {
-//   console.log("gmail is not found.");
-// }
+} else {
+  console.log("gmail is not found.");
+}
 
 
 jQuery(document).ready(function () {
-  var geturlLink = "https://picsum.photos/seed/picsum/200/300";
+  var geturlLink = 'http://localhost:8081/user/getprofileimage/' + usermail;
   // Fetch data from the server when the page loads
   $.ajax({
     type: 'GET',
     url: geturlLink,
     success: function (response) {
       console.log("Response:", response);
-      var image=$("<img>").attr("src",geturlLink).attr("alt", "Dog Image");
+      var image = $("<img>").attr("src", geturlLink).attr("alt", "Dog Image");
       $('#imageContainer').html(image);
 
     },
@@ -62,29 +61,23 @@ jQuery(document).ready(function () {
 // });
 
 
+$(document).ready(function () {
+  // Fetch data from the server when the page loads
+  $.ajax({
+    type: 'GET',
+    url: 'http://localhost:8081/user/getemployee/' + usermail, // Replace 'user/data' with your actual endpoint
+    success: function (responseData) {
+      // Populate the form fields with the retrieved data
+      //$('#firstname').val(responseData.firstname);
+      //console.log(firstname);
 
-
-
-
-
-
-// $(document).ready(function () {
-//   // Fetch data from the server when the page loads
-//   $.ajax({
-//     type: 'GET',
-//     url: geturlLink1forName, // Replace 'user/data' with your actual endpoint
-//     success: function (responseData) {
-//       // Populate the form fields with the retrieved data
-//       //$('#firstname').val(responseData.firstname);
-//       //console.log(firstname);
-
-//       $('#firstnameDisplay').text(responseData.firstname);
-//     },
-//     error: function (error) {
-//       console.error('Error fetching data:', error);
-//     }
-//   });
-// });
+      $('#firstnameDisplay').text(responseData.firstname);
+    },
+    error: function (error) {
+      console.error('Error fetching data:', error);
+    }
+  });
+});
 
 
 // $('#logoutButton').on('click', function () {
@@ -97,19 +90,23 @@ jQuery(document).ready(function () {
 
 
 // Logout Functionality Start
-$('#logoutButton').on('click', function() {
+$('#logoutButton').on('click', function () {
 
   const type = 'GET';
   const url = 'http://localhost:8081/user/logout';
 
   fetchLogout(url, type);
 
-        console.log("Hi This is Employee log out...")
+  console.log("Hi This is Employee log out...")
 
-        sessionStorage.removeItem("usermail");
-        sessionStorage.removeItem("password");
-        window.location.href = "SignIn.html";
+  sessionStorage.removeItem("usermail");
+  sessionStorage.removeItem("password");
+  window.location.href = "SignIn.html";
 });
 // Logout Functionality End
 
 
+// org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@3903b521
+
+
+// org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@3903b521
