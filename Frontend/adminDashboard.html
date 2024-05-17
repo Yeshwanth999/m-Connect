@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Dashboard</title>
+    <!-- <link rel="stylesheet" href="./CSS/adminDashboardiframes.css" /> -->
+    <link rel="stylesheet" href="./CSS/adminDashboard.css" type="text/css" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Iframes Dashboard</title>
-    <link rel="stylesheet" href="./CSS/adminDashboardiframes.css">
-    <link rel="stylesheet" href="./CSS/adminDashboard.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.js"></script>
+    <script
+      src="https://kit.fontawesome.com/fae9f5ea2f.js"
+      crossorigin="anonymous"
+    ></script>
+
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.css' rel='stylesheet' />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.7.2/main.js'></script>
     <script src="https://kit.fontawesome.com/fae9f5ea2f.js" crossorigin="anonymous"></script>
@@ -17,107 +31,341 @@
     </style>
 
 
+
     <script>
-        function loadPage(pageUrl) {
-            document.getElementById('iframe-content').src = pageUrl;
-            // console.log(pageUrl)
-        }
+      function loadPage(pageUrl) {
+        document.getElementById("iframe-content").src = pageUrl;
+        // console.log(pageUrl)
+      }
 
-
-        // Call loadPage on page load with the dashboard URL
-        // window.onload = function() {
-        //     loadPage('/Frontend/adminHome.html');
-        // };
+      // Call loadPage on page load with the dashboard URL
+      // window.onload = function() {
+      //     loadPage('/Frontend/adminHome.html');
+      // };
     </script>
-</head>
+  </head>
 
-<body onload="loadPage('/Frontend/employeeDashboard.html')">
+  <body onload="loadPage('/Frontend/employeeDashboard.html')">
     <!--navbar start-->
     <nav class="navbar-main">
-        <div class="logo">
-            <img src="/Frontend/Assets/Microdenlogo.png" alt="logo">
+      <div class="logo">
+        <img src="/Frontend/Assets/Microdenlogo.png" alt="logo" />
+      </div>
+      <div class="navbar-items">
+        <div class="list-items">
+          <ul>
+            <li class="item">
+              <a href="./adminHome.html" target="_self">Dashboard</a>
+            </li>
+            <li class="item">
+              <a
+                href="#"
+                id="calender"
+                onclick="loadPage('/Frontend/Calendar.html')"
+                >Calendar</a
+              >
+            </li>
+            <li class="item">
+              <a
+                href="#"
+                id="leaves"
+                onclick="loadPage('/Frontend/adminleavepage.html')"
+                >Leaves</a
+              >
+            </li>
+            <li class="item">
+              <a
+                href="#"
+                id="rewards"
+                onclick="loadPage('/Frontend/rewards.html')"
+                >Rewards</a
+              >
+            </li>
+            <li class="item">
+              <a
+                href="#"
+                id="attendence"
+                onclick="loadPage('/Frontend/employeeattendence.html')"
+                >Attendence</a
+              >
+            </li>
+            <li class="item">
+              <a href="#" id="#">Any other</a>
+            </li>
+            <li class="item">
+              <a
+                href="#"
+                id="payroll"
+                onclick="loadPage('/Frontend/payroll.html')"
+                >Payroll</a
+              >
+            </li>
+            <li class="item">
+              <a href="#" id="slips" onclick="loadPage('/Frontend/slips.html')"
+                >Slips</a
+              >
+            </li>
+            <li class="item">
+              <a href="#" id="exit" onclick="loadPage('/Frontend/exit.html')"
+                >LogOut</a
+              >
+            </li>
+            <li class="item">
+              <a
+                href="#"
+                id="icon"
+                onclick="loadPage('/Frontend/notifications.html')"
+                ><i class="fa fa-bell-o" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li class="item">
+              <div class="startTimer" onclick="startTimer()">
+                <button>Login</button>
+              </div>
+              <div class="timerDiv">
+                <p id="timerValue" onclick="hideButtons()">00:00:00</p>
+                <div class="timerButtons">
+                  <div>
+                    <button onclick="toggleBreak()">Breakin/out</button>
+                  </div>
+                  <div>
+                    <button id="exit" onclick="handleLogout()">Exit</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="timer" id="break1">
+                <p>Break 1: <span id="break1Time">00:00:00</span></p>
+              </div>
+              <div class="timer" id="break2">
+                <p>Break 2: <span id="break2Time">00:00:00</span></p>
+              </div>
+              <div class="timer" id="break3">
+                <p>Break 3: <span id="break3Time">00:00:00</span></p>
+              </div>
+              <div class="timer" id="totalTime">
+                <p>
+                  Total Login Time: <span id="totalTimeValue">00:00:00</span>
+                </p>
+              </div>
+            </li>
+          </ul>
         </div>
-        <div class="navbar-items">
-            <div class="list-items">
-                <ul>
-                    <li class="item">
-                        <a href="./adminHome.html" target="_self">Dashboard</a>
-                    </li>
-                    <li class="item">
-                        <a href="#" id="calender" onclick="loadPage('/Frontend/Calendar.html')">Calendar</a>
-                    </li>
-                    <li class="item">
-                        <a href="#" id="leaves" onclick="loadPage('/Frontend/adminleavepage.html')">Leaves</a>
-                    </li>
-                    <li class="item">
-                        <a href="#" id="rewards" onclick="loadPage('/Frontend/notfound.html')">Rewards</a>
-                    </li>
-                    <li class="item">
-                        <a href="#" id="attendence"
-                            onclick="loadPage('/Frontend/employeeattendence.html')">Attendence</a>
-                    </li>
-                    <li class="item">
-                        <a href="#" id="Registration"
-                        onclick="loadPage('/Frontend/EmployeeRegistration.html')">Employee Registration</a>
-                    </li>
-                    <li class="item">
-                        <a href="#" id="payroll" onclick="loadPage('/Frontend/payroll.html')">Payroll</a>
-                    </li>
-                    <li class="item">
-                        <a href="#" id="exit" onclick="loadPage('/Frontend/notfound.html')">LogOut</a>
-                    </li>
-                    <li class="item">
-                        <a href="#" id="icon" onclick="loadPage('/Frontend/notfound.html')"><i class="fa fa-bell-o"
-                                aria-hidden="true"></i></a>
-                    </li>
-                    <li class="item">
-                        <div class="startTimer" onclick="startTimer()">
-                            <button>Clock-in</button>
-                        </div>
-                        <div class="timerDiv">
-                            <p id="timerValue" onclick="hideButtons()">00:00:00</p>
-                            <div class="timerButtons">
-                                <div>
-                                    <button onclick="toggleBreak()">Breakin/out</button>
-                                </div>
-                                <div>
-                                    <button id="exit" onclick="handleLogout()">Clock-out</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="timer" id="break1">
-                            <p>Break 1: <span id="break1Time">00:00:00</span></p>
-                        </div>
-                        <div class="timer" id="break2">
-                            <p>Break 2: <span id="break2Time">00:00:00</span></p>
-                        </div>
-                        <div class="timer" id="break3">
-                            <p>Break 3: <span id="break3Time">00:00:00</span></p>
-                        </div>
-                        <div class="timer" id="totalTime">
-                            <p>Total Login Time: <span id="totalTimeValue">00:00:00</span></p>
-                        </div>
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
+      </div>
     </nav>
     <!--navbar-end-->
-    <iframe class="i-frame" id="iframe-content" src="" title="description"></iframe>
+    <iframe
+      class="i-frame"
+      id="iframe-content"
+      src=""
+      title="description"
+    ></iframe>
     <!--script for web-clock -->
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script>
-        $(document).ready(function () {
-            let pageforIframe = localStorage.getItem("IframePageName");
-            localStorage.removeItem("IframePageName");
-            var iframe = document.getElementById("iframe-content");
-            iframe.src = '/Frontend/' + pageforIframe;
-        });
+      $(document).ready(function () {
+        let pageforIframe = localStorage.getItem("IframePageName");
+        localStorage.removeItem("IframePageName");
+        var iframe = document.getElementById("iframe-content");
+        iframe.src = "/Frontend/" + pageforIframe;
+      });
     </script>
+
+    <script>
+      let mainTimerInterval;
+      let breakTimerInterval;
+      let breakStart = JSON.parse(localStorage.getItem("breakStart")) || [];
+      let breakEnd = JSON.parse(localStorage.getItem("breakEnd")) || [];
+      let totalMainSeconds =
+        parseInt(sessionStorage.getItem("totalMainSeconds")) || 0;
+      let isMainTimerRunning =
+        JSON.parse(sessionStorage.getItem("isMainTimerRunning")) || false;
+      let isBreakTime =
+        JSON.parse(sessionStorage.getItem("isBreakTime")) || false;
+
+      function startTimer() {
+        document.querySelector(".startTimer").style.display = "none";
+        document.querySelector(".timerDiv").style.display = "block";
+        document.querySelector("#timerValue").style.display = "block";
+        if (!isMainTimerRunning) {
+          mainTimerInterval = setInterval(updateMainTimer, 1000);
+          isMainTimerRunning = true;
+          sessionStorage.setItem(
+            "isMainTimerRunning",
+            JSON.stringify(isMainTimerRunning)
+          );
+        }
+        const loginTime = new Date().toLocaleTimeString();
+        const loginDate = new Date().toLocaleDateString();
+        console.log("logged in date: " + loginDate);
+        console.log("Logged in at: " + loginTime);
+      }
+
+      function updateMainTimer() {
+        if (!isBreakTime) {
+          totalMainSeconds++;
+          sessionStorage.setItem("totalMainSeconds", totalMainSeconds);
+          const formattedTime = formatTime(totalMainSeconds);
+          document.getElementById("timerValue").innerText = formattedTime;
+          updateTotalTime();
+        }
+      }
+
+      function toggleBreak() {
+        if (!isMainTimerRunning) return;
+
+        if (!isBreakTime) {
+          if (breakStart.length < 3) {
+            isBreakTime = true;
+            sessionStorage.setItem("isBreakTime", JSON.stringify(isBreakTime));
+            breakStart.push(totalMainSeconds);
+            localStorage.setItem("breakStart", JSON.stringify(breakStart));
+            breakTimerInterval = setInterval(updateBreakTimer, 1000);
+
+            // console.log("Break " + breakStart.length + " started at: " + new Date().toLocaleTimeString());
+            if (1 == breakStart.length) {
+              const firstBreak = new Date().toLocaleTimeString();
+              console.log(firstBreak + " : firstbreak in");
+            }
+            if (2 == breakStart.length) {
+              const secondBreak = new Date().toLocaleTimeString();
+              console.log(secondBreak + " : secondbreak in");
+            }
+            if (3 == breakStart.length) {
+              const thirdBreak = new Date().toLocaleTimeString();
+              console.log(thirdBreak + " : thirdbreak in");
+            }
+          }
+        } else {
+          isBreakTime = false;
+          sessionStorage.setItem("isBreakTime", JSON.stringify(isBreakTime));
+          breakEnd.push(totalMainSeconds);
+          localStorage.setItem("breakEnd", JSON.stringify(breakEnd));
+          // console.log("Break " + breakEnd.length + " ended at: " + new Date().toLocaleTimeString());
+          if (1 == breakEnd.length) {
+            const firstBreakout = new Date().toLocaleTimeString();
+            console.log(firstBreakout + " : firstbreakout");
+          }
+          if (2 == breakEnd.length) {
+            const secondBreakout = new Date().toLocaleTimeString();
+            console.log(secondBreakout + " : secondbreakout");
+          }
+          if (3 == breakEnd.length) {
+            const thirdBreakout = new Date().toLocaleTimeString();
+            console.log(thirdBreakout + " : thirdbreakout");
+          }
+          updateBreakTime();
+        }
+      }
+
+      function handleLogout() {
+        clearInterval(mainTimerInterval);
+        clearInterval(breakTimerInterval);
+        updateTotalTime();
+        alert("Logged out!\nTotal login time: " + formatTime(totalMainSeconds));
+        console.log("Logged out at: " + new Date().toLocaleTimeString());
+        console.log("Total login time: " + formatTime(totalMainSeconds));
+        resetTimers();
+      }
+
+      function resetTimers() {
+        totalMainSeconds = 0;
+        breakStart = [];
+        breakEnd = [];
+        isMainTimerRunning = false;
+        isBreakTime = false;
+        sessionStorage.removeItem("totalMainSeconds");
+        sessionStorage.removeItem("isMainTimerRunning");
+        sessionStorage.removeItem("isBreakTime");
+        document.querySelector(".startTimer").style.display = "block";
+        document.querySelector(".timerDiv").style.display = "none";
+        document.getElementById("timerValue").innerText = "00:00:00";
+        document.getElementById("break1Time").innerText = "00:00:00";
+        document.getElementById("break2Time").innerText = "00:00:00";
+        document.getElementById("break3Time").innerText = "00:00:00";
+        document.getElementById("totalTimeValue").innerText = "00:00:00";
+      }
+
+      function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = seconds % 60;
+        const formattedHours = padZero(hours);
+        const formattedMinutes = padZero(minutes);
+        const formattedSeconds = padZero(remainingSeconds);
+        return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+      }
+
+      function padZero(value) {
+        return value < 10 ? `0${value}` : value;
+      }
+
+      function updateBreakTimer() {
+        if (isBreakTime) {
+          totalMainSeconds++;
+          updateTotalTime();
+        }
+      }
+
+      function updateBreakTime() {
+        let totalBreakTime = calculateBreakTime();
+        sessionStorage.setItem("breakTime", JSON.stringify(totalBreakTime));
+        document.getElementById("totalBreakTime").innerText =
+          formatTime(totalBreakTime);
+      }
+
+      function calculateBreakTime() {
+        let totalBreakTime = 0;
+        for (let i = 0; i < breakStart.length; i++) {
+          totalBreakTime += breakEnd[i] - breakStart[i];
+        }
+        return totalBreakTime;
+      }
+
+      function updateTotalTime() {
+        let totalLoginTime = totalMainSeconds - calculateBreakTime();
+        document.getElementById("totalTimeValue").innerText =
+          formatTime(totalLoginTime);
+        sessionStorage.setItem("totalLoginTime", formatTime(totalLoginTime));
+
+        // console.log("Total Login Time: " + formatTime(totalLoginTime));
+        // console.log("Total Break Time: " + formatTime(calculateBreakTime()));
+      }
+
+      window.onload = function () {
+        totalMainSeconds =
+          parseInt(localStorage.getItem("totalMainSeconds")) || 0;
+        isMainTimerRunning =
+          JSON.parse(localStorage.getItem("isMainTimerRunning")) || false;
+        isBreakTime = JSON.parse(localStorage.getItem("isBreakTime")) || false;
+        breakStart = JSON.parse(localStorage.getItem("breakStart")) || [];
+        breakEnd = JSON.parse(localStorage.getItem("breakEnd")) || [];
+
+        if (isMainTimerRunning) {
+          document.querySelector(".startTimer").style.display = "none";
+          document.querySelector(".timerDiv").style.display = "block";
+          document.querySelector("#timerValue").style.display = "block";
+          mainTimerInterval = setInterval(updateMainTimer, 1000);
+          if (isBreakTime) {
+            breakTimerInterval = setInterval(updateBreakTimer, 1000);
+          }
+          updateBreakTime();
+          updateTotalTime();
+        }
+      };
+      window.addEventListener("beforeunload", function (event) {
+        localStorage.setItem("totalMainSeconds", totalMainSeconds);
+        localStorage.setItem("isMainTimerRunning", isMainTimerRunning);
+        localStorage.setItem("isBreakTime", isBreakTime);
+        localStorage.setItem("breakStart", JSON.stringify(breakStart));
+        localStorage.setItem("breakEnd", JSON.stringify(breakEnd));
+      });
+    </script>
+  </body>
+</html>
+
     
 </body>
 
 </html>
+

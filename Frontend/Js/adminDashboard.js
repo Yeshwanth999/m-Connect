@@ -52,6 +52,7 @@ function loadPage(pageUrl) {
 }
 
 
+
 let mainTimerInterval;
 let breakTimerInterval;
 let breakStart = JSON.parse(localStorage.getItem('breakStart')) || [];
@@ -235,3 +236,4 @@ window.addEventListener('beforeunload', function (event) {
   localStorage.setItem('breakStart', JSON.stringify(breakStart));
   localStorage.setItem('breakEnd', JSON.stringify(breakEnd));
 });
+

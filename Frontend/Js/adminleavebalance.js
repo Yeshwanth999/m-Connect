@@ -1,11 +1,11 @@
 function balance() {
     const data = [
         {
-          "Email": "yeswanth@gmail.com",
-          "Leave Type": "Sick",
-          "Credited": 20,
-          "Used": 1,
-          "Balance": 19,
+            "Email": "yeswanth@gmail.com",
+            "Leave Type": "Sick",
+            "Credited": 20,
+            "Used": 1,
+            "Balance": 19,
         },
         {
             "Email": "priya@gmail.com",
@@ -35,7 +35,7 @@ function balance() {
             "Used": 1,
             "Balance": 19,
         }
-    ];  
+    ];
 
     const gridView = document.getElementById('balance-grid-view');
 

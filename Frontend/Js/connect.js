@@ -35,7 +35,6 @@ function sendFormData(url, type, data, elementId) {
 }
 
 
-
 function sendFormData1(url, type, data, elementId) {
     console.log("Flow ok");
     // console.log('Sending request to :', url)
@@ -188,6 +187,28 @@ function fetchLogout(url, type) {
             console.log(xhr.status);
             console.log(textStatus);
             console.error('Logout request failed:', error);
+        }
+    });
+}
+
+function sendleaveData(url, type, data) {
+    console.log("Flow OK");
+    $.ajax({
+        type: type,
+        url: url,
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (responseData, textStatus, xhr) {
+            console.log('Response received:', responseData);
+            if (xhr.status == 200) {
+                console.log('successfully Leave Request Sended to Admin', responseData);
+
+            } else {
+                // Handle other cases if needed
+                console.log('Response data --else method:', responseData);
+            }
+        }, error: function (error) {
+            console.error('Error sending data:', error);
         }
     });
 }

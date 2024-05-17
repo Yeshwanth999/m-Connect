@@ -1,11 +1,11 @@
-
 table {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid #ccc;
 }
 
-th, td {
+th,
+td {
     padding: 8px;
     border: 1px solid #ccc;
     text-align: left;
@@ -14,6 +14,7 @@ th, td {
 th {
     background-color: #f2f2f2;
 }
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -25,7 +26,7 @@ th {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1;
     padding: 5px 10px;
 }
@@ -41,6 +42,7 @@ th {
     border: none;
     cursor: pointer;
 }
+
 select {
     padding: 5px 10px;
     font-size: 12px;
@@ -49,6 +51,7 @@ select {
     background-color: #fff;
     cursor: pointer;
 }
+
 select option {
     padding: 5px 10px;
 }
@@ -64,7 +67,7 @@ select option {
 
 
 .sendButton {
-    background-color: #4CAF50; 
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 5px 15px;
@@ -77,6 +80,5 @@ select option {
 }
 
 .sendButton:hover {
-    background-color: #45a049; 
+    background-color: #45a049;
 }
-
